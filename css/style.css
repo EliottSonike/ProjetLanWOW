@@ -1949,20 +1949,29 @@ a:hover { color: var(--gold-light); }
 }
 
 /* ===== RAID MAP ===== */
+
+/* Outer wrapper — clique la hauteur à 62vh */
 .raid-map-container {
   position: relative;
   width: 100%;
-  max-width: 100%;
-  margin: 0 auto;
-  aspect-ratio: 16 / 9;
-  background: #0a0818;
+  max-height: 62vh;
   overflow: hidden;
+  background: #0a0818;
+}
+
+/* Ratio-box : garde le ratio exact de la carte Northrend (3840×2560 = 3:2) */
+/* Les pins sont positionnés en % de ce div = % de l'image → positions toujours correctes */
+.raid-map-ratio {
+  position: relative;
+  width: 100%;
+  padding-bottom: 66.67%; /* 2560/3840 */
+  height: 0;
 }
 
 .raid-map-overlay {
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 10, 0.28);
+  background: rgba(0, 0, 10, 0.3);
   z-index: 1;
   pointer-events: none;
 }
@@ -1973,7 +1982,8 @@ a:hover { color: var(--gold-light); }
   width: 100%;
   height: 100%;
   object-fit: cover;
-  opacity: 0.65;
+  opacity: 0.72;
+  object-fit: fill; /* aspect ratio matches ratio-box — pas de déformation */
   display: block;
 }
 
@@ -2144,10 +2154,9 @@ a:hover { color: var(--gold-light); }
   opacity: 0.7;
 }
 
+/* .raid-map-fullpage : plus utilisé, max-height géré sur .raid-map-container */
 .raid-map-fullpage {
-  max-width: 100%;
-  height: calc(100vh - 112px);
-  aspect-ratio: unset;
+  max-height: 62vh;
 }
 
 /* Onyxia inset (Kalimdor) */
