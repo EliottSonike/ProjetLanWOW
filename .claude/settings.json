@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Edit(c:\\laragon\\www\\projetWOW\\**)",
+      "Write(c:\\laragon\\www\\projetWOW\\**)",
+      "MultiEdit(c:\\laragon\\www\\projetWOW\\**)",
+      "PowerShell(cmd /c \"dir *)",
+      "PowerShell(Get-ChildItem *)",
+      "PowerShell(Test-Path *)",
+      "PowerShell(Invoke-WebRequest *)",
+      "PowerShell(Start-Process *)"
+    ]
+  }
+}

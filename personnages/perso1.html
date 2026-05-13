@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alban — Démoniste Affliction · LAN Du Swag</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="../acceuil.html" class="header-brand">
+        <div class="header-logo"><img src="../assets/img/icons8-world-of-warcraft-48.png" alt="LOGO" class="site-logo"></div>
+        <h1 class="site-title">
+          <img src="../assets/img/LanDuSwag.png" alt="LAN Du Swag" class="site-name">
+        </h1>
+      </a>
+      <nav class="main-nav">
+        <a href="../acceuil.html" class="active">Swaggeurs</a>
+        <a href="../strategies/index.html">Stratégies</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <p class="breadcrumb">
+      <a href="../acceuil.html">Swaggeurs</a> › <span>Alban</span>
+    </p>
+
+    <div class="char-page-header">
+      <div class="char-page-icon">
+        <img src="../assets/img/classes-warlock-affliction.webp" alt="Démoniste Affliction" style="width:100%;height:100%;object-fit:cover;border-radius:8px;">
+      </div>
+      <div class="char-page-title">
+        <h1>Alban</h1>
+        <div class="class-label warlock">Démoniste</div>
+        <div class="spec-label">Affliction · Niveau 80</div>
+      </div>
+    </div>
+
+    <nav class="tabs-nav">
+      <button class="tab-btn active" data-tab="armory">Armory</button>
+      <button class="tab-btn" data-tab="bis">BiS List</button>
+      <button class="tab-btn" data-tab="talents">Talents</button>
+      <button class="tab-btn" data-tab="rotation">Rotation</button>
+    </nav>
+
+    <!-- ====== TALENTS ====== -->
+    <section id="talents" class="tab-panel">
+
+      <div class="content-card">
+        <h3>Build — Affliction 56/0/15</h3>
+        <a class="talent-link" href="https://wotlk.evowow.com/?talent#IZhbqszAcbdxfhxZZVocoM" target="_blank" rel="noopener">
+          🔗 Voir le build sur Evowow
+        </a>
+        <div class="talent-tree-img">
+          <img src="../assets/img/talent-alban.png" alt="Arbre de talents Affliction 56/0/15"
+               onerror="this.parentElement.style.display='none'">
+        </div>
+        <p class="talent-points">Points : 56 Affliction · 0 Démonologie · 15 Destruction</p>
+        <div class="talent-note">
+          Build standard Démoniste Affliction PvE. Les 15 points en Destruction servent uniquement à obtenir <strong>Suppression</strong> et le bonus de hit. Le Felhunter est la monture recommandée pour le buff intellect.
+        </div>
+      </div>
+
+      <div class="content-card">
+        <h3>Talents clés</h3>
+        <ul style="padding-left:1.2rem; display:flex; flex-direction:column; gap:0.5rem; font-size:0.88rem; color:var(--text-muted);">
+          <li><strong style="color:var(--gold-light)">Haunt</strong> — Debuff qui amplifie tous vos DoTs de 20%. À maintenir absolument, c'est votre sort le plus important.</li>
+          <li><strong style="color:var(--gold-light)">Unstable Affliction</strong> — DoT puissant. Interrompre UA = silence 3s sur le caster — utile en PvP aussi.</li>
+          <li><strong style="color:var(--gold-light)">Pandemic</strong> — Vos DoTs peuvent crit. Multiplie l'efficacité du crit pour l'Affliction.</li>
+          <li><strong style="color:var(--gold-light)">Everlasting Affliction</strong> — Shadow Bolt refresh Corruption. Permet de ne jamais réappliquer Corruption manuellement.</li>
+          <li><strong style="color:var(--gold-light)">Siphon Life</strong> — Corruption soigne en passif. Survie et DPS combinés.</li>
+        </ul>
+      </div>
+
+      <div class="content-card">
+        <h3>Glyphes</h3>
+        <ul style="padding-left:1.2rem; display:flex; flex-direction:column; gap:0.4rem; font-size:0.88rem; color:var(--text-muted);">
+          <li><strong style="color:var(--gold-light)">Glyphe de Vie rapide</strong> — Quick Decay : augmente la vitesse de tick de Corruption.</li>
+          <li><strong style="color:var(--gold-light)">Glyphe d'Affliction instable</strong> — +10% dégâts UA.</li>
+          <li><strong style="color:var(--gold-light)">Glyphe de Haunt</strong> — +3% dégâts sur Haunt.</li>
+          <li><strong style="color:var(--gold-light)">Glyphe mineur — Unending Breath</strong> — Qualité de vie en monde ouvert.</li>
+        </ul>
+      </div>
+
+    </section>
+
+    <!-- ====== BiS ====== -->
+    <section id="bis" class="tab-panel">
+
+      <div class="content-card">
+        <h3>Stats cibles — Phase 4</h3>
+        <div class="stats-grid">
+          <div class="stat-item">
+            <span class="stat-label">Hit sort</span>
+            <span class="stat-value">446</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-label">Spell Power</span>
+            <span class="stat-value">>4 000</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-label">Haste</span>
+            <span class="stat-value">importante</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-label">Crit</span>
+            <span class="stat-value">secondaire</span>
+          </div>
+        </div>
+        <div class="talent-note" style="margin-top:0.8rem;">
+          Hit cap 446 priorité absolue. Après : <strong>Spell Power > Haste > Crit</strong>. Le set 4p T10 (Dark Coven) est indispensable pour le bonus Haunt. La haste accélère les ticks de DoTs.
+        </div>
+      </div>
+
+      <div class="content-card">
+        <h3>Best in Slot — Phase 4 (Icecrown Citadel 25 HM)</h3>
+        <div class="wow-paperdoll">
+          <div class="paperdoll-main">
+
+            <!-- GAUCHE -->
+            <div class="paperdoll-col">
+              <div class="equip-slot epic">
+                <div class="equip-slot-icon"><a class="slot-link" href="https://www.wowhead.com/wotlk/item=51231">Sanctified Dark Coven Hood</a></div>
+                <span class="equip-slot-label">Tête</span>
+              </div>
+              <div class="equip-slot epic">
+                <div class="equip-slot-icon"><a class="slot-link" href="https://www.wowhead.com/wotlk/item=50724">Blood Queen's Crimson Choker</a></div>
+                <span class="equip-slot-label">Cou</span>
+              </div>
+              <div class="equip-slot epic">
+                <div class="equip-slot-icon"><a class="slot-link" href="https://www.wowhead.com/wotlk/item=51232">Sanctified Dark Coven Shoulderpads</a></div>
+                <span class="equip-slot-label">Épaules</span>
+              </div>
+              <div class="equip-slot epic">
+                <div class="equip-slot-icon"><a class="slot-link" href="https://www.wowhead.com/wotlk/item=54583">Cloak of Burning Dusk</a></div>
+                <span class="equip-slot-label">Cape</span>
+              </div>
+              <div class="equip-slot epic">
+                <div class="equip-slot-icon"><a class="slot-link" href="https://www.wowhead.com/wotlk/item=51233">Sanctified Dark Coven Robe</a></div>
+                <span class="equip-slot-label">Torse</span>
+              </div>
+              <div class="equip-slot empty">
+                <div class="equip-slot-icon"></div>
+                <span class="equip-slot-label">Chemise</span>
+              </div>
+              <div class="equip-slot epic">
+                <div class="equip-slot-icon"><a class="slot-link" href="https://www.wowhead.com/wotlk/item=53486">Bracers of Fiery Night</a></div>
+                <span class="equip-slot-label">Brassards</span>
+              </div>
+              <div class="equip-slot empty">
+                <div class="equip-slot-icon"></div>
+                <span class="equip-slot-label">Tabard</span>
+              </div>
+            </div>
+
+            <!-- CENTRE : Portrait -->
+            <div class="paperdoll-center">
+              <div class="paperdoll-char">
+                <img class="paperdoll-char-portrait" src="../assets/img/classes-warlock-affliction.webp" alt="Alban">
+                <span class="paperdoll-char-name">Alban</span>
+                <span class="paperdoll-char-spec warlock">Démoniste · Affli</span>
+                <span class="paperdoll-char-phase">Phase 4 BiS</span>
+              </div>
+            </div>
+
+            <!-- DROITE -->
+            <div class="paperdoll-col">
+              <div class="equip-slot epic">
+                <div class="equip-slot-icon"><a class="slot-link" href="https://www.wowhead.com/wotlk/item=51230">Sanctified Dark Coven Gloves</a></div>
+                <span class="equip-slot-label">Gantelets</span>
+              </div>
+              <div class="equip-slot epic">
+                <div class="equip-slot-icon"><a class="slot-link" href="https://www.wowhead.com/wotlk/item=50613">Crushing Coldwraith Belt</a></div>
+                <span class="equip-slot-label">Ceinture</span>
+              </div>
+              <div class="equip-slot epic">
+                <div class="equip-slot-icon"><a class="slot-link" href="https://www.wowhead.com/wotlk/item=50694">Plaguebringer's Stained Pants</a></div>
+                <span class="equip-slot-label">Jambes</span>
+              </div>
+              <div class="equip-slot epic">
+                <div class="equip-slot-icon"><a class="slot-link" href="https://www.wowhead.com/wotlk/item=50699">Plague Scientist's Boots</a></div>
+                <span class="equip-slot-label">Bottes</span>
+              </div>
+              <div class="equip-slot epic">
+                <div class="equip-slot-icon"><a class="slot-link" href="https://www.wowhead.com/wotlk/item=50398">Ashen Band of Endless Destruction</a></div>
+                <span class="equip-slot-label">Anneau 1</span>
+              </div>
+              <div class="equip-slot epic">
+                <div class="equip-slot-icon"><a class="slot-link" href="https://www.wowhead.com/wotlk/item=50664">Ring of Rapid Ascent</a></div>
+                <span class="equip-slot-label">Anneau 2</span>
+              </div>
+              <div class="equip-slot epic">
+                <div class="equip-slot-icon"><a class="slot-link" href="https://www.wowhead.com/wotlk/item=50365">Phylactery of the Nameless Lich</a></div>
+                <span class="equip-slot-label">Trinket 1</span>
+              </div>
+              <div class="equip-slot epic">
+                <div class="equip-slot-icon"><a class="slot-link" href="https://www.wowhead.com/wotlk/item=50348">Dislodged Foreign Object</a></div>
+                <span class="equip-slot-label">Trinket 2</span>
+              </div>
+              <div class="equip-slot empty">
+                <div class="equip-slot-icon"></div>
+                <span class="equip-slot-label">—</span>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- ARMES -->
+          <div class="paperdoll-bottom">
+            <div class="equip-slot epic">
+              <div class="equip-slot-icon"><a class="slot-link" href="https://www.wowhead.com/wotlk/item=50732">Bloodsurge, Kel'Thuzad's Blade of Agony</a></div>
+              <span class="equip-slot-label">Main droite</span>
+            </div>
+            <div class="equip-slot epic">
+              <div class="equip-slot-icon"><a class="slot-link" href="https://www.wowhead.com/wotlk/item=50719">Shadow Silk Spindle</a></div>
+              <span class="equip-slot-label">Off-hand</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ====== ROTATION ====== -->
+    <section id="rotation" class="tab-panel">
+
+      <div class="content-card">
+        <h3>Ouverture</h3>
+        <div class="rotation-list">
+          <div class="rotation-step">
+            <span class="step-num">1.</span>
+            <span class="step-skill">Curse of Elements</span>
+            <span class="step-desc">— Debuff raid -13% résistances magiques. 1 seul warlock l'applique.</span>
+          </div>
+          <div class="rotation-step">
+            <span class="step-num">2.</span>
+            <span class="step-skill">Corruption</span>
+            <span class="step-desc">— Appliquer immédiatement, auto-refreshé par Shadow Bolt via Everlasting Affliction.</span>
+          </div>
+          <div class="rotation-step">
+            <span class="step-num">3.</span>
+            <span class="step-skill">Haunt</span>
+            <span class="step-desc">— Priorité absolue. +20% dégâts sur tous vos DoTs. À maintenir en permanence.</span>
+          </div>
+          <div class="rotation-step">
+            <span class="step-num">4.</span>
+            <span class="step-skill">Unstable Affliction</span>
+            <span class="step-desc">— DoT puissant, maintenir actif.</span>
+          </div>
+          <div class="rotation-step">
+            <span class="step-num">5.</span>
+            <span class="step-skill">Shadow Bolt</span>
+            <span class="step-desc">— Filler. Refresh Corruption via Everlasting Affliction. Spam entre les CDs.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="content-card">
+        <h3>Priorités continues</h3>
+        <div class="rotation-list">
+          <div class="rotation-step">
+            <span class="step-num">!</span>
+            <span class="step-skill">Haunt</span>
+            <span class="step-desc">— Réappliquer dès expiration (durée 12s, CD 8s). GCD le plus prioritaire.</span>
+          </div>
+          <div class="rotation-step">
+            <span class="step-num">!</span>
+            <span class="step-skill">Unstable Affliction</span>
+            <span class="step-desc">— Réappliquer avant expiration (durée 15s).</span>
+          </div>
+          <div class="rotation-step">
+            <span class="step-num">!</span>
+            <span class="step-skill">Life Tap</span>
+            <span class="step-desc">— À faire régulièrement même si vous avez du mana — le <strong>Glyphe de Life Tap</strong> donne +20% Spell Power pendant 40s après chaque Life Tap. Maintenez ce buff en permanence.</span>
+          </div>
+          <div class="rotation-step">
+            <span class="step-num">!</span>
+            <span class="step-skill">Curse of Agony</span>
+            <span class="step-desc">— Si un autre Warlock gère Curse of Elements, remplacez-la par CoA pour votre DPS personnel.</span>
+          </div>
+        </div>
+        <div class="rotation-note">
+          🧿 Corruption n'a <strong>pas besoin d'être réappliquée</strong> manuellement — chaque Shadow Bolt la refresh via Everlasting Affliction. Concentrez-vous sur Haunt + UA + Life Tap buff + Shadow Bolt spam.
+        </div>
+      </div>
+
+      <div class="content-card">
+        <h3>Cooldowns</h3>
+        <div class="rotation-list">
+          <div class="rotation-step">
+            <span class="step-num">CD</span>
+            <span class="step-skill">Doomguard</span>
+            <span class="step-desc">— CD 30 min. DPS pet le plus puissant — réserver aux boss enrageables.</span>
+          </div>
+          <div class="rotation-step">
+            <span class="step-num">CD</span>
+            <span class="step-skill">Trinket on-use</span>
+            <span class="step-desc">— Synchroniser avec Haunt actif + Life Tap buff pour maximiser le burst.</span>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ====== ARMORY ====== -->
+    <section id="armory" class="tab-panel active"
+      data-char=""
+      data-realm="WotLK5man - Season1"
+      data-portrait="../assets/img/classes-warlock-affliction.webp"
+      data-specclass="warlock">
+      <div class="content-card" style="text-align:center;padding:2rem;">
+        <p style="color:var(--text-muted);">Cliquez sur l'onglet pour charger les données en direct depuis wotlk5.com.</p>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <p>LAN Du Swag · Juillet 2026 · <em>Vive les gobelins et les gnomes!</em></p>
+  </footer>
+
+  <script src="../js/main.js"></script>
+  <script>const whTooltips = {colorLinks: true, iconizeLinks: true, iconSize: 'large', hide: {sellprice: true, ddmoreinfo: true}};</script>
+  <script src="https://wow.zamimg.com/widgets/power.js"></script>
+</body>
+</html>
