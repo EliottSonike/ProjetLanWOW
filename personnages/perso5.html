@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tristan – Paladin Holy · LAN Du Swag</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <script src="../js/layout.js"></script>
+</head>
+<body>
+<script>Layout.header({ baseUrl: '../', activeNav: 'swaggeurs' });</script>
+
+<main class="container">
+
+  <p class="breadcrumb">
+    <a href="../swaggeurs.html">Swaggeurs</a> › <span>Tristan</span>
+  </p>
+
+  <div class="char-page-header">
+    <div class="char-page-icon">
+      <img src="../assets/img/classes-paladin-holy.webp" alt="Paladin Holy" style="width:100%;height:100%;object-fit:cover;border-radius:8px;">
+    </div>
+    <div class="char-page-title">
+      <h1>Tristan</h1>
+      <div class="class-label paladin">Paladin</div>
+      <div class="spec-label">Holy · Niveau 80</div>
+    </div>
+  </div>
+
+  <nav class="tabs-nav">
+    <button class="tab-btn active" data-tab="armory">Armory</button>
+    <button class="tab-btn" data-tab="bis">BiS List</button>
+    <button class="tab-btn" data-tab="talents">Talents</button>
+    <button class="tab-btn" data-tab="rotation">Rotation</button>
+  </nav>
+
+  <!-- ====== ARMORY ====== -->
+  <section id="armory" class="tab-panel active"
+    data-char=""
+    data-realm="WotLK5man - Season1"
+    data-portrait="../assets/img/classes-paladin-holy.webp"
+    data-specclass="paladin">
+    <div class="content-card" style="text-align:center;padding:2rem;">
+      <p style="color:var(--text-muted);">Cliquez sur l'onglet pour charger les données depuis wotlk5.com.</p>
+    </div>
+  </section>
+
+  <!-- ====== TALENTS ====== -->
+  <section id="talents" class="tab-panel">
+
+    <div class="content-card">
+      <h3>Build – Holy 51/5/15</h3>
+      <a class="talent-link" href="https://wotlk.evowow.com/?talent#scbdZhxxxcbIczbdcVozzh" target="_blank" rel="noopener">
+        🔗 Voir le build sur Evowow
+      </a>
+      <div class="talent-tree-img">
+        <img src="../assets/img/talent-tristan.png" alt="Arbre de talents Holy"
+             onerror="this.parentElement.style.display='none'">
+      </div>
+      <p class="talent-points">Points : 51 Sacré · 5 Protection · 15 Vindicte</p>
+      <div class="talent-note">
+        Build standard Holy Paladin axé sur le heal de tank via Flash of Light + Beacon of Light. Le build FoL est plus économique en mana que le HL pour les petits groupes. Judgements of the Pure (+15% haste) est la clé de voûte.
+      </div>
+    </div>
+
+    <div class="content-card">
+      <h3>Talents clés</h3>
+      <ul style="padding-left:1.2rem; display:flex; flex-direction:column; gap:0.5rem; font-size:0.88rem; color:var(--text-muted);">
+        <li><strong style="color:var(--gold-light)">Beacon of Light</strong> – Vos soins sur n'importe quelle cible soignent aussi le beacon. Mettez-le sur le tank, soignez le reste.</li>
+        <li><strong style="color:var(--gold-light)">Sacred Shield</strong> – Bouclier d'absorption qui proc un FoL réduit en cast time. À maintenir sur la cible la plus à risque.</li>
+        <li><strong style="color:var(--gold-light)">Judgements of the Pure</strong> – Vos jugements donnent +15% haste. À maintenir en permanence (juger toutes les 60s).</li>
+        <li><strong style="color:var(--gold-light)">Divine Illumination</strong> – -50% coût en mana pendant 15s. CD à utiliser lors des phases intensives.</li>
+        <li><strong style="color:var(--gold-light)">Infusion of Light</strong> – Holy Shock crit = prochain FoL instantané. Combo puissant pour les urgences.</li>
+      </ul>
+    </div>
+
+    <div class="content-card">
+      <h3>Glyphes</h3>
+      <ul style="padding-left:1.2rem; display:flex; flex-direction:column; gap:0.4rem; font-size:0.88rem; color:var(--text-muted);">
+        <li><strong style="color:var(--gold-light)">Glyphe de Flash of Light</strong> – FoL applique un HoT de 5s après le soin.</li>
+        <li><strong style="color:var(--gold-light)">Glyphe de Holy Light</strong> – HL soigne aussi les alliés proches de la cible (splash heal).</li>
+        <li><strong style="color:var(--gold-light)">Glyphe de Beacon of Light</strong> – +30s de durée sur Beacon.</li>
+        <li><strong style="color:var(--gold-light)">Glyphe mineur – Blessing of Kings</strong> – Réduit le coût en mana de BoK.</li>
+      </ul>
+    </div>
+
+  </section>
+
+  <!-- ====== BiS ====== -->
+  <section id="bis" class="tab-panel">
+
+    <div class="content-card">
+      <h3>Stats cibles – Phase 4</h3>
+      <div class="stats-grid">
+        <div class="stat-item"><span class="stat-label">Spell Power</span><span class="stat-value">&gt;3 500</span></div>
+        <div class="stat-item"><span class="stat-label">Crit</span><span class="stat-value">&gt;40%</span></div>
+        <div class="stat-item"><span class="stat-label">Haste</span><span class="stat-value">importante</span></div>
+        <div class="stat-item"><span class="stat-label">MP5</span><span class="stat-value">confort</span></div>
+      </div>
+      <div class="talent-note" style="margin-top:0.8rem;">
+        Prioritisez <strong>Spell Power &gt; Crit &gt; Haste</strong>. Le 4p T10 (Lightsworn) booste Sacred Shield. Val'anyr reste le graal – sans lui, prenez la meilleure masse ICC disponible.
+      </div>
+    </div>
+
+    <div class="content-card">
+      <h3>Best in Slot – Phase 4 (Icecrown Citadel 25 HM)</h3>
+      <div class="wow-paperdoll">
+        <div class="paperdoll-main">
+
+          <div class="paperdoll-col">
+            <div class="equip-slot epic">
+              <div class="equip-slot-icon"><a class="slot-link" href="https://www.wowhead.com/wotlk/item=51272">Sanctified Lightsworn Headpiece</a></div>
+              <span class="equip-slot-label">Tête</span>
+            </div>
+            <div class="equip-slot epic">
+              <div class="equip-slot-icon"><a class="slot-link" href="https://www.wowhead.com/wotlk/item=50724">Blood Queen's Crimson Choker</a></div>
+              <span class="equip-slot-label">Cou</span>
+            </div>
+            <div class="equip-slot epic">
+              <div class="equip-slot-icon"><a class="slot-link" href="https://www.wowhead.com/wotlk/item=51273">Sanctified Lightsworn Spaulders</a></div>
+              <span class="equip-slot-label">Épaules</span>
+            </div>
+            <div class="equip-slot epic">
+              <div class="equip-slot-icon"><a class="slot-link" href="https://www.wowhead.com/wotlk/item=50628">Frostbinder's Shredded Cape</a></div>
+              <span class="equip-slot-label">Cape</span>
+            </div>
+            <div class="equip-slot epic">
+              <div class="equip-slot-icon"><a class="slot-link" href="https://www.wowhead.com/wotlk/item=50680">Rot-Resistant Breastplate</a></div>
+              <span class="equip-slot-label">Torse</span>
+            </div>
+            <div class="equip-slot empty">
+              <div class="equip-slot-icon"></div>
+              <span class="equip-slot-label">Chemise</span>
+            </div>
+            <div class="equip-slot epic">
+              <div class="equip-slot-icon"><a class="slot-link" href="https://www.wowhead.com/wotlk/item=50721">Crypt Keeper's Bracers</a></div>
+              <span class="equip-slot-label">Brassards</span>
+            </div>
+            <div class="equip-slot empty">
+              <div class="equip-slot-icon"></div>
+              <span class="equip-slot-label">Tabard</span>
+            </div>
+          </div>
+
+          <div class="paperdoll-center">
+            <div class="paperdoll-char">
+              <img class="paperdoll-char-portrait" src="../assets/img/classes-paladin-holy.webp" alt="Tristan">
+              <span class="paperdoll-char-name">Tristan</span>
+              <span class="paperdoll-char-spec paladin">Paladin · Holy</span>
+              <span class="paperdoll-char-phase">Phase 4 BiS</span>
+            </div>
+          </div>
+
+          <div class="paperdoll-col">
+            <div class="equip-slot epic">
+              <div class="equip-slot-icon"><a class="slot-link" href="https://www.wowhead.com/wotlk/item=50650">Fallen Lord's Handguards</a></div>
+              <span class="equip-slot-label">Gantelets</span>
+            </div>
+            <div class="equip-slot epic">
+              <div class="equip-slot-icon"><a class="slot-link" href="https://www.wowhead.com/wotlk/item=50613">Crushing Coldwraith Belt</a></div>
+              <span class="equip-slot-label">Ceinture</span>
+            </div>
+            <div class="equip-slot epic">
+              <div class="equip-slot-icon"><a class="slot-link" href="https://www.wowhead.com/wotlk/item=51928">Corrupted Silverplate Leggings</a></div>
+              <span class="equip-slot-label">Jambes</span>
+            </div>
+            <div class="equip-slot epic">
+              <div class="equip-slot-icon"><a class="slot-link" href="https://www.wowhead.com/wotlk/item=50699">Plague Scientist's Boots</a></div>
+              <span class="equip-slot-label">Bottes</span>
+            </div>
+            <div class="equip-slot epic">
+              <div class="equip-slot-icon"><a class="slot-link" href="https://www.wowhead.com/wotlk/item=50400">Ashen Band of Endless Wisdom</a></div>
+              <span class="equip-slot-label">Anneau 1</span>
+            </div>
+            <div class="equip-slot epic">
+              <div class="equip-slot-icon"><a class="slot-link" href="https://www.wowhead.com/wotlk/item=50664">Ring of Rapid Ascent</a></div>
+              <span class="equip-slot-label">Anneau 2</span>
+            </div>
+            <div class="equip-slot epic">
+              <div class="equip-slot-icon"><a class="slot-link" href="https://www.wowhead.com/wotlk/item=37111">Soul Preserver</a></div>
+              <span class="equip-slot-label">Trinket 1</span>
+            </div>
+            <div class="equip-slot epic">
+              <div class="equip-slot-icon"><a class="slot-link" href="https://www.wowhead.com/wotlk/item=46051">Meteorite Crystal</a></div>
+              <span class="equip-slot-label">Trinket 2</span>
+            </div>
+            <div class="equip-slot empty">
+              <div class="equip-slot-icon"></div>
+              <span class="equip-slot-label">–</span>
+            </div>
+          </div>
+
+        </div>
+        <div class="paperdoll-bottom">
+          <div class="equip-slot epic">
+            <div class="equip-slot-icon"><a class="slot-link" href="https://www.wowhead.com/wotlk/item=46017">Val'anyr, Hammer of Ancient Kings</a></div>
+            <span class="equip-slot-label">Arme</span>
+          </div>
+          <div class="equip-slot epic">
+            <div class="equip-slot-icon"><a class="slot-link" href="https://www.wowhead.com/wotlk/item=50616">Bulwark of Smouldering Steel</a></div>
+            <span class="equip-slot-label">Bouclier</span>
+          </div>
+          <div class="equip-slot epic">
+            <div class="equip-slot-icon"><a class="slot-link" href="https://www.wowhead.com/wotlk/item=40705">Libram of Renewal</a></div>
+            <span class="equip-slot-label">Libram</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ====== ROTATION ====== -->
+  <section id="rotation" class="tab-panel">
+
+    <div class="content-card">
+      <h3>Setup pré-combat</h3>
+      <div class="rotation-list">
+        <div class="rotation-step">
+          <span class="step-num">Pre</span>
+          <span class="step-skill">Beacon of Light</span>
+          <span class="step-desc">– Sur le tank principal, toujours actif avant le pull</span>
+        </div>
+        <div class="rotation-step">
+          <span class="step-num">Pre</span>
+          <span class="step-skill">Sacred Shield</span>
+          <span class="step-desc">– Sur la cible la plus à risque (tank ou vous-même)</span>
+        </div>
+        <div class="rotation-step">
+          <span class="step-num">Pre</span>
+          <span class="step-skill">Bénédictions</span>
+          <span class="step-desc">– Blessing of Kings sur tout le groupe · Blessing of Wisdom sur vous-même</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="content-card">
+      <h3>Priorités en combat</h3>
+      <div class="rotation-list">
+        <div class="rotation-step">
+          <span class="step-num">1.</span>
+          <span class="step-skill">Jugement</span>
+          <span class="step-desc">– Toutes les 60s pour maintenir Judgements of the Pure (+15% haste)</span>
+        </div>
+        <div class="rotation-step">
+          <span class="step-num">2.</span>
+          <span class="step-skill">Holy Shock</span>
+          <span class="step-desc">– Sur cooldown (6s), génère Infusion of Light (prochain FoL instantané si crit)</span>
+        </div>
+        <div class="rotation-step">
+          <span class="step-num">3.</span>
+          <span class="step-skill">Flash of Light (instantané)</span>
+          <span class="step-desc">– Si Infusion of Light proc (FoL gratuit et instant) · Priorité absolue</span>
+        </div>
+        <div class="rotation-step">
+          <span class="step-num">4.</span>
+          <span class="step-skill">Holy Light</span>
+          <span class="step-desc">– Si la cible est en danger critique · Gros heal mais coûteux en mana</span>
+        </div>
+        <div class="rotation-step">
+          <span class="step-num">5.</span>
+          <span class="step-skill">Flash of Light</span>
+          <span class="step-desc">– Spam de base, rapide et économique en mana</span>
+        </div>
+      </div>
+      <div class="rotation-note">
+        💚 Règle d'or : Beacon sur le tank, vous soignez le reste du raid – le Beacon reçoit les soins en double. Ne jamais laisser Judgements of the Pure expirer.
+      </div>
+    </div>
+
+    <div class="content-card">
+      <h3>Cooldowns</h3>
+      <div class="rotation-list">
+        <div class="rotation-step">
+          <span class="step-num">CD</span>
+          <span class="step-skill">Divine Favor</span>
+          <span class="step-desc">– Prochain sort = crit garanti · Combiner avec Holy Light pour un mega-heal</span>
+        </div>
+        <div class="rotation-step">
+          <span class="step-num">CD</span>
+          <span class="step-skill">Divine Illumination</span>
+          <span class="step-desc">– -50% coût en mana pendant 15s (3 min) · Utiliser pendant les phases de spike dégâts</span>
+        </div>
+        <div class="rotation-step">
+          <span class="step-num">CD</span>
+          <span class="step-skill">Aura Mastery</span>
+          <span class="step-desc">– Double l'effet de votre aura pendant 6s · Aura Résistance = immunité totale au silence</span>
+        </div>
+        <div class="rotation-step">
+          <span class="step-num">CD</span>
+          <span class="step-skill">Divine Shield</span>
+          <span class="step-desc">– Immunité totale 8s · Vous pouvez continuer à soigner pendant l'immunité</span>
+        </div>
+        <div class="rotation-step">
+          <span class="step-num">Util</span>
+          <span class="step-skill">Hand of Protection / Sacrifice</span>
+          <span class="step-desc">– Sauver un DPS en danger · Sacrifier HP pour protéger un allié</span>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+</main>
+
+<script>Layout.footer({ baseUrl: '../' });</script>
+</body>
+</html>

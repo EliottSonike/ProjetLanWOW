@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ruby Sanctum — LAN Du Swag</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <script src="../js/layout.js"></script>
+</head>
+<body>
+<script>Layout.header({ baseUrl: '../', activeNav: 'strategies' });</script>
+
+<main class="container">
+
+  <p class="breadcrumb"><a href="index.html">Stratégies</a> › <span>Ruby Sanctum</span></p>
+
+  <section class="section-title">
+    <h2>🔴 Ruby Sanctum</h2>
+    <p>Sanctuaire de Rubis · 4 boss · Phase 4 · Prélude au Dragon Soul — Halion le Boss final de WotLK</p>
+  </section>
+
+  <div class="strat-wing">
+    <div class="wing-header">🔴 Les Mini-Bosses (Gardiens du Sanctuaire)</div>
+
+    <div class="boss-card">
+      <div class="boss-card-header">
+        <h3>🌋 Saviana Ragefire <span class="difficulty-badge diff-easy">Facile</span></h3>
+        <span class="boss-collapse-arrow">▼</span>
+      </div>
+      <div class="boss-card-body">
+        <div class="boss-phases">
+          <div class="phase">
+            <h4>Mécaniques</h4>
+            <ul>
+              <li><strong>Enrage</strong> — Saviana s'enrage périodiquement · DPS burst ou interrompre</li>
+              <li><strong>Flame Breath</strong> — Cône de feu frontal · Rester derrière</li>
+              <li><strong>Conflagration</strong> — Marque 2 joueurs qui explosent en AoE de feu · Ces joueurs doivent s'éloigner du raid immédiatement · Ne pas rester au milieu</li>
+            </ul>
+          </div>
+          <div class="phase">
+            <h4>Rôles</h4>
+            <ul>
+              <li>🛡️ <strong>Tank</strong> — Garder Saviana face au bord</li>
+              <li>💚 <strong>Heal</strong> — Soins sur les joueurs marqués Conflagration</li>
+              <li>⚔️ <strong>DPS</strong> — S'écarter si marqué Conflagration · Interrompre Enrage si possible</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="boss-card">
+      <div class="boss-card-header">
+        <h3>⚔️ Baltharus the Warborn <span class="difficulty-badge diff-easy">Facile</span></h3>
+        <span class="boss-collapse-arrow">▼</span>
+      </div>
+      <div class="boss-card-body">
+        <div class="boss-phases">
+          <div class="phase">
+            <h4>Mécaniques</h4>
+            <ul>
+              <li><strong>Enervating Brand</strong> — Debuff sur un joueur · Les dégâts infligés par ce joueur soignent Baltharus · Ce joueur NE DOIT PAS attaquer pendant la durée du debuff</li>
+              <li><strong>Blade Tempest</strong> — AoE melee autour de Baltharus · S'écarter</li>
+              <li><strong>Clone</strong> — À 50%, Baltharus se clone en un double identique · Les deux doivent mourir ensemble</li>
+            </ul>
+          </div>
+          <div class="phase">
+            <h4>Rôles</h4>
+            <ul>
+              <li>🛡️ <strong>Tank</strong> — À 50% : séparer le clone et l'original · Un tank par cible</li>
+              <li>💚 <strong>Heal</strong> — Surveiller Enervating Brand pour informer le joueur ciblé</li>
+              <li>⚔️ <strong>DPS</strong> — Stop DPS si Enervating Brand · À 50% : DPS en split pour mort simultanée</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="boss-card">
+      <div class="boss-card-header">
+        <h3>🦎 General Zarithrian <span class="difficulty-badge diff-easy">Facile</span></h3>
+        <span class="boss-collapse-arrow">▼</span>
+      </div>
+      <div class="boss-card-body">
+        <div class="boss-phases">
+          <div class="phase">
+            <h4>Mécaniques</h4>
+            <ul>
+              <li><strong>Onyx Flame</strong> — Debuff de feu sur le tank · Swap à 2 stacks</li>
+              <li><strong>Cleave</strong> — Coup en cône frontal · Rester sur les côtés ou derrière</li>
+              <li><strong>Invocation des Flamescale Broodlings</strong> — Invoque des adds toutes les 30 secondes · AoE / tuer immédiatement avant qu'ils rejoignent Zarithrian (ils lui donnent un buff)</li>
+            </ul>
+          </div>
+          <div class="phase">
+            <h4>Rôles</h4>
+            <ul>
+              <li>🛡️ <strong>Tank</strong> — Swap à 2 stacks · Intercepter les adds avant qu'ils buffent Zarithrian</li>
+              <li>💚 <strong>Heal</strong> — Soins tank sur Onyx Flame</li>
+              <li>⚔️ <strong>DPS</strong> — Priorité absolue aux adds · Puis DPS Zarithrian</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="strat-wing">
+    <div class="wing-header">🔥 Boss Final</div>
+
+    <div class="boss-card">
+      <div class="boss-card-header">
+        <h3>🔥 Halion le Seigneur Crépusculaire <span class="difficulty-badge diff-hard">Difficile</span></h3>
+        <span class="boss-collapse-arrow">▼</span>
+      </div>
+      <div class="boss-card-body">
+        <div class="boss-phases">
+          <div class="phase">
+            <h4>🔥 Phase 1 — Monde physique (100% → 75%)</h4>
+            <ul>
+              <li><strong>Fiery Combustion</strong> — Marque un joueur qui explose en zone de feu · Ce joueur court s'isoler · Laisse une zone de feu permanente au sol</li>
+              <li><strong>Tail Sweep</strong> — Coup de queue · Ne pas se mettre derrière</li>
+              <li><strong>Flame Breath</strong> — Cône frontal · Rester derrière</li>
+              <li>Les zones de feu s'accumulent · Gérer le placement pour garder de l'espace libre</li>
+            </ul>
+          </div>
+          <div class="phase">
+            <h4>🌑 Phase 2 — Monde crépusculaire (75% → 50%)</h4>
+            <ul>
+              <li>Halion passe dans le Sanctum crépusculaire (sous-plan) · Une copie reste dans le monde physique</li>
+              <li>Le raid se split : 3 joueurs restent en Ph1, les autres vont en Ph2</li>
+              <li><strong>Meteor Strike</strong> — Cible un joueur avec des rayons de feu · Éviter les rayons · Puis zone d'impact</li>
+              <li><strong>Twilight Cutter</strong> — Rayon de feu rotatif entre Halion et son orbe · Sauter par-dessus le rayon</li>
+              <li>Les deux copies d'Halion partagent les HP · DPS en simultané pour les maintenir au même %</li>
+            </ul>
+          </div>
+          <div class="phase">
+            <h4>⚡ Phase 3 — Double monde (50% → 0%)</h4>
+            <ul>
+              <li>Le raid reste splitté · 2-3 en monde physique / reste en crépusculaire</li>
+              <li>Toutes les mécaniques des deux phases restent actives simultanément</li>
+              <li><strong>Corporeality</strong> — Si un monde prend trop de dégâts vs l'autre, Halion gagne un buff de 10% dégâts dans l'autre monde · Communication essentielle pour synchroniser le DPS</li>
+              <li>Les healers doivent couvrir les deux mondes</li>
+            </ul>
+          </div>
+          <div class="phase">
+            <h4>Rôles</h4>
+            <ul>
+              <li>🛡️ <strong>Tank</strong> — Un tank par monde · Gérer les positions identiques (Flame Breath / Tail Sweep)</li>
+              <li>💚 <strong>Heal</strong> — Un healer par monde en Ph3 · Synchroniser les bursts</li>
+              <li>⚔️ <strong>DPS</strong> — Split équilibré · Communiquer les % pour égaliser · Éviter Twilight Cutter</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</main>
+
+<script>Layout.footer({ baseUrl: '../' });</script>
+</body>
+</html>

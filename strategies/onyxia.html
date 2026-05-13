@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Onyxia's Lair — LAN Du Swag</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <script src="../js/layout.js"></script>
+</head>
+<body>
+<script>Layout.header({ baseUrl: '../', activeNav: 'strategies' });</script>
+
+<main class="container">
+
+  <p class="breadcrumb"><a href="index.html">Stratégies</a> › <span>Onyxia's Lair</span></p>
+
+  <section class="section-title">
+    <h2>🐉 Onyxia's Lair</h2>
+    <p>Repaire d'Onyxia · 1 boss · Phase 2 · Le classique de WoW — 3 phases</p>
+  </section>
+
+  <div class="strat-wing">
+    <div class="wing-header">🐉 Le Repaire</div>
+
+    <div class="boss-card">
+      <div class="boss-card-header">
+        <h3>🐉 Onyxia la Dévorante <span class="difficulty-badge diff-medium">Moyen</span></h3>
+        <span class="boss-collapse-arrow">▼</span>
+      </div>
+      <div class="boss-card-body">
+        <div class="boss-phases">
+          <div class="phase">
+            <h4>🔥 Phase 1 — Au sol (100% → 65%)</h4>
+            <ul>
+              <li><strong>Flame Breath</strong> — Cône de feu frontal massif · Le tank positionne Onyxia face au fond de la grotte, dos au raid · Ne JAMAIS être devant</li>
+              <li><strong>Tail Sweep</strong> — Coup de queue knockback · Ne pas se placer dans les 45° derrière elle</li>
+              <li><strong>Whelps</strong> — Des whelpling émergent des œufs sur les côtés · Un DPS/tank les intercepte</li>
+              <li>Le raid se place sur les côtés, jamais devant ni derrière</li>
+            </ul>
+          </div>
+          <div class="phase">
+            <h4>🌪️ Phase 2 — En vol (65% → 40%)</h4>
+            <ul>
+              <li>Onyxia s'envole et devient inattaquable au corps à corps · Seuls les casters/archers DPS</li>
+              <li><strong>Fireball</strong> — Boules de feu sur des cibles aléatoires · Se disperser</li>
+              <li><strong>Deep Breath</strong> — Onyxia survole la grotte et souffle · COURIR vers la tête ou la queue pour éviter · "Onyxia est en train d'utiliser Deep Breath !"</li>
+              <li><strong>Onyxia's Whelps</strong> — Masse de whelps qui apparaissent · AoE</li>
+              <li>Attention aux puits de lave sur le sol · Ne pas y tomber</li>
+            </ul>
+          </div>
+          <div class="phase">
+            <h4>🔥 Phase 3 — Retour au sol (40% → 0%)</h4>
+            <ul>
+              <li>Onyxia atterrit · Mêmes mécaniques que Phase 1 mais plus intensives</li>
+              <li><strong>Flame Breath renforcé</strong> — Plus de dégâts · Toujours rester sur les côtés</li>
+              <li><strong>Conflagration</strong> — Boules de feu qui atterrissent et laissent des zones de feu · Éviter</li>
+              <li>Les whelps continuent d'apparaître · AoE / cleave</li>
+              <li>Burn phase — tout le monde DPS à fond</li>
+            </ul>
+          </div>
+          <div class="phase">
+            <h4>Rôles</h4>
+            <ul>
+              <li>🛡️ <strong>Tank</strong> — Ph1/3 : Onyxia face au fond, position statique · Ph1 : Gérer les whelps</li>
+              <li>💚 <strong>Heal</strong> — Ph2 : Soins sur les Fireball · Ph3 : Burst tank + raid</li>
+              <li>⚔️ <strong>DPS</strong> — Se placer sur les flancs · Ph2 : Range DPS · Anticiper Deep Breath</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="strat-wing">
+    <div class="wing-header">💡 Astuces</div>
+    <div style="padding: 1rem 1.25rem; color: var(--text-secondary); font-size: 0.9rem; line-height: 1.6;">
+      <p>⚠️ <strong>"Onyxia est en train d'utiliser Deep Breath !"</strong> — Un des memes les plus célèbres de WoW. Quand vous entendez cette phrase, courez immédiatement vers la tête ou la queue d'Onyxia pour éviter le souffle.</p>
+      <p>🎯 La position du tank est critique en Phase 1 et 3. Onyxia doit faire face au mur du fond. Un seul Flame Breath mal orienté peut wiper tout le raid.</p>
+    </div>
+  </div>
+
+</main>
+
+<script>Layout.footer({ baseUrl: '../' });</script>
+</body>
+</html>

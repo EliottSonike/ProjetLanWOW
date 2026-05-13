@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Les Swaggeurs — LAN Du Swag</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/layout.js"></script>
+</head>
+<body>
+<script>Layout.header({ baseUrl: '', activeNav: 'swaggeurs' });</script>
+
+<main class="container">
+
+  <section class="section-title">
+    <h2>Les 5 Swaggeurs</h2>
+    <p>Cliquez sur un swaggeur pour voir son personnage, ses talents, son stuff et sa rotation.</p>
+  </section>
+
+  <div class="roles-layout">
+
+    <div class="role-row">
+      <div class="role-label role-dps">⚔️ DPS</div>
+      <div class="role-cards">
+        <a href="personnages/perso1.html" class="char-card">
+          <div class="char-icon classes-warlock-affliction"><img src="assets/img/classes-warlock-affliction.webp" alt="Démoniste Affliction"></div>
+          <div class="char-info">
+            <span class="char-name">Alban</span>
+            <span class="char-class warlock">Démoniste</span>
+            <span class="char-spec">Affliction</span>
+          </div>
+        </a>
+        <a href="personnages/perso2.html" class="char-card">
+          <div class="char-icon classes-mage-fire"><img src="assets/img/classes-mage-fire.webp" alt="Mage Feu"></div>
+          <div class="char-info">
+            <span class="char-name">Eliott</span>
+            <span class="char-class mage">Mage</span>
+            <span class="char-spec">Feu</span>
+          </div>
+        </a>
+        <a href="personnages/perso3.html" class="char-card">
+          <div class="char-icon classes-hunter-mm"><img src="assets/img/classes-hunter-marksmanship.webp" alt="Chasseur Précision" onerror="this.parentElement.innerHTML='🏹'"></div>
+          <div class="char-info">
+            <span class="char-name">Fabien</span>
+            <span class="char-class hunter">Chasseur</span>
+            <span class="char-spec">Précision</span>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <div class="role-row">
+      <div class="role-label role-tank">🛡️ TANK</div>
+      <div class="role-cards">
+        <a href="personnages/perso4.html" class="char-card">
+          <div class="char-icon classes-paladin-protection"><img src="assets/img/classes-paladin-protection.webp" alt="Paladin Protection"></div>
+          <div class="char-info">
+            <span class="char-name">Maël</span>
+            <span class="char-class paladin">Paladin</span>
+            <span class="char-spec">Protection</span>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <div class="role-row">
+      <div class="role-label role-heal">💚 HEAL</div>
+      <div class="role-cards">
+        <a href="personnages/perso5.html" class="char-card">
+          <div class="char-icon classes-paladin-holy"><img src="assets/img/classes-paladin-holy.webp" alt="Paladin Holy"></div>
+          <div class="char-info">
+            <span class="char-name">Tristan</span>
+            <span class="char-class paladin">Paladin</span>
+            <span class="char-spec">Holy</span>
+          </div>
+        </a>
+      </div>
+    </div>
+
+  </div>
+
+</main>
+
+<script>Layout.footer({ baseUrl: '' });</script>
+</body>
+</html>

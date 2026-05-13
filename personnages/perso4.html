@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Maël – Paladin Protection · LAN Du Swag</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <script src="../js/layout.js"></script>
+</head>
+<body>
+<script>Layout.header({ baseUrl: '../', activeNav: 'swaggeurs' });</script>
+
+<main class="container">
+
+  <p class="breadcrumb">
+    <a href="../swaggeurs.html">Swaggeurs</a> › <span>Maël</span>
+  </p>
+
+  <div class="char-page-header">
+    <div class="char-page-icon">
+      <img src="../assets/img/classes-paladin-protection.webp" alt="Paladin Protection" style="width:100%;height:100%;object-fit:cover;border-radius:8px;">
+    </div>
+    <div class="char-page-title">
+      <h1>Maël</h1>
+      <div class="class-label paladin">Paladin</div>
+      <div class="spec-label">Protection · Niveau 80</div>
+    </div>
+  </div>
+
+  <nav class="tabs-nav">
+    <button class="tab-btn active" data-tab="armory">Armory</button>
+    <button class="tab-btn" data-tab="bis">BiS List</button>
+    <button class="tab-btn" data-tab="talents">Talents</button>
+    <button class="tab-btn" data-tab="rotation">Rotation</button>
+  </nav>
+
+  <!-- ====== ARMORY ====== -->
+  <section id="armory" class="tab-panel active"
+    data-char=""
+    data-realm="WotLK5man - Season1"
+    data-portrait="../assets/img/classes-paladin-protection.webp"
+    data-specclass="paladin">
+    <div class="content-card" style="text-align:center;padding:2rem;">
+      <p style="color:var(--text-muted);">Cliquez sur l'onglet pour charger les données depuis wotlk5.com.</p>
+    </div>
+  </section>
+
+  <!-- ====== TALENTS ====== -->
+  <section id="talents" class="tab-panel">
+
+    <div class="content-card">
+      <h3>Build – Protection 0/53/18</h3>
+      <a class="talent-link" href="https://wotlk.evowow.com/?talent#sZVZhcbdIzsGcbdcobozt" target="_blank" rel="noopener">
+        🔗 Voir le build sur Evowow
+      </a>
+      <div class="talent-tree-img">
+        <img src="../assets/img/talent-mael.png" alt="Arbre de talents Protection"
+             onerror="this.parentElement.style.display='none'">
+      </div>
+      <p class="talent-points">Points : 0 Sacré · 53 Protection · 18 Vindicte</p>
+      <div class="talent-note">
+        Build standard Paladin Tank PvE. Les points en Vindicte donnent accès à <strong>Seal of Command</strong> et améliorent la génération de menace. Priorité absolue : atteindre le cap de défense (540) avant tout autre stat.
+      </div>
+    </div>
+
+    <div class="content-card">
+      <h3>Talents clés</h3>
+      <ul style="padding-left:1.2rem; display:flex; flex-direction:column; gap:0.5rem; font-size:0.88rem; color:var(--text-muted);">
+        <li><strong style="color:var(--gold-light)">Righteous Fury</strong> – Augmente la menace générée par vos sorts sacrés de 90%. À activer en permanence.</li>
+        <li><strong style="color:var(--gold-light)">Shield of Righteousness</strong> – Sort de dégâts basé sur le Block Value. Outil de menace le plus puissant.</li>
+        <li><strong style="color:var(--gold-light)">Hammer of the Righteous</strong> – AoE à 3 cibles, clé pour maintenir la menace sur les packs.</li>
+        <li><strong style="color:var(--gold-light)">Divine Guardian</strong> – Réduit les dégâts subis par le raid de 30% pendant 6s. CD de raid précieux.</li>
+        <li><strong style="color:var(--gold-light)">Judgements of the Just</strong> – Debuff -20% vitesse d'attaque sur l'ennemi. Réduction de dégâts passive.</li>
+      </ul>
+    </div>
+
+    <div class="content-card">
+      <h3>Glyphes</h3>
+      <ul style="padding-left:1.2rem; display:flex; flex-direction:column; gap:0.4rem; font-size:0.88rem; color:var(--text-muted);">
+        <li><strong style="color:var(--gold-light)">Glyphe de Bouclier de la Justice</strong> – +5% dégâts sur Shield of Righteousness.</li>
+        <li><strong style="color:var(--gold-light)">Glyphe de Jugement</strong> – +10% dégâts sur Judgment.</li>
+        <li><strong style="color:var(--gold-light)">Glyphe de Consécration</strong> – +2s de durée sur Consecration.</li>
+        <li><strong style="color:var(--gold-light)">Glyphe mineur – Sense Undead</strong> – Utile dans Naxxramas contre les morts-vivants.</li>
+      </ul>
+    </div>
+
+  </section>
+
+  <!-- ====== BiS ====== -->
+  <section id="bis" class="tab-panel">
+
+    <div class="content-card">
+      <h3>Stats cibles – Phase 4</h3>
+      <div class="stats-grid">
+        <div class="stat-item"><span class="stat-label">Défense</span><span class="stat-value">540</span></div>
+        <div class="stat-item"><span class="stat-label">Stamina</span><span class="stat-value">max</span></div>
+        <div class="stat-item"><span class="stat-label">Avoidance</span><span class="stat-value">&gt;50%</span></div>
+        <div class="stat-item"><span class="stat-label">Block Value</span><span class="stat-value">&gt;2 000</span></div>
+      </div>
+      <div class="talent-note" style="margin-top:0.8rem;">
+        <strong>540 défense obligatoire</strong> – immunité aux critical strikes. Le 4p T10 (Lightsworn) booste Holy Shield. Priorisez Stamina &gt; Avoidance &gt; Block Value après le cap.
+      </div>
+    </div>
+
+    <div class="content-card">
+      <h3>Best in Slot – Phase 4 (Icecrown Citadel 25 HM)</h3>
+      <div class="wow-paperdoll">
+        <div class="paperdoll-main">
+
+          <div class="paperdoll-col">
+            <div class="equip-slot epic">
+              <div class="equip-slot-icon"><a class="slot-link" href="https://www.wowhead.com/wotlk/item=51266">Sanctified Lightsworn Faceguard</a></div>
+              <span class="equip-slot-label">Tête</span>
+            </div>
+            <div class="equip-slot epic">
+              <div class="equip-slot-icon"><a class="slot-link" href="https://www.wowhead.com/wotlk/item=50682">Bile-Encrusted Medallion</a></div>
+              <span class="equip-slot-label">Cou</span>
+            </div>
+            <div class="equip-slot epic">
+              <div class="equip-slot-icon"><a class="slot-link" href="https://www.wowhead.com/wotlk/item=51270">Sanctified Lightsworn Shoulderguards</a></div>
+              <span class="equip-slot-label">Épaules</span>
+            </div>
+            <div class="equip-slot epic">
+              <div class="equip-slot-icon"><a class="slot-link" href="https://www.wowhead.com/wotlk/item=50718">Royal Crimson Cloak</a></div>
+              <span class="equip-slot-label">Cape</span>
+            </div>
+            <div class="equip-slot epic">
+              <div class="equip-slot-icon"><a class="slot-link" href="https://www.wowhead.com/wotlk/item=51265">Sanctified Lightsworn Chestguard</a></div>
+              <span class="equip-slot-label">Torse</span>
+            </div>
+            <div class="equip-slot empty">
+              <div class="equip-slot-icon"></div>
+              <span class="equip-slot-label">Chemise</span>
+            </div>
+            <div class="equip-slot epic">
+              <div class="equip-slot-icon"><a class="slot-link" href="https://www.wowhead.com/wotlk/item=50611">Bracers of Dark Reckoning</a></div>
+              <span class="equip-slot-label">Brassards</span>
+            </div>
+            <div class="equip-slot empty">
+              <div class="equip-slot-icon"></div>
+              <span class="equip-slot-label">Tabard</span>
+            </div>
+          </div>
+
+          <div class="paperdoll-center">
+            <div class="paperdoll-char">
+              <img class="paperdoll-char-portrait" src="../assets/img/classes-paladin-protection.webp" alt="Maël">
+              <span class="paperdoll-char-name">Maël</span>
+              <span class="paperdoll-char-spec paladin">Paladin · Protection</span>
+              <span class="paperdoll-char-phase">Phase 4 BiS</span>
+            </div>
+          </div>
+
+          <div class="paperdoll-col">
+            <div class="equip-slot epic">
+              <div class="equip-slot-icon"><a class="slot-link" href="https://www.wowhead.com/wotlk/item=51267">Sanctified Lightsworn Handguards</a></div>
+              <span class="equip-slot-label">Gantelets</span>
+            </div>
+            <div class="equip-slot epic">
+              <div class="equip-slot-icon"><a class="slot-link" href="https://www.wowhead.com/wotlk/item=50691">Belt of Broken Bones</a></div>
+              <span class="equip-slot-label">Ceinture</span>
+            </div>
+            <div class="equip-slot epic">
+              <div class="equip-slot-icon"><a class="slot-link" href="https://www.wowhead.com/wotlk/item=51268">Sanctified Lightsworn Legguards</a></div>
+              <span class="equip-slot-label">Jambes</span>
+            </div>
+            <div class="equip-slot epic">
+              <div class="equip-slot-icon"><a class="slot-link" href="https://www.wowhead.com/wotlk/item=50625">Grinning Skull Greatboots</a></div>
+              <span class="equip-slot-label">Bottes</span>
+            </div>
+            <div class="equip-slot epic">
+              <div class="equip-slot-icon"><a class="slot-link" href="https://www.wowhead.com/wotlk/item=50622">Devium's Eternally Cold Ring</a></div>
+              <span class="equip-slot-label">Anneau 1</span>
+            </div>
+            <div class="equip-slot epic">
+              <div class="equip-slot-icon"><a class="slot-link" href="https://www.wowhead.com/wotlk/item=50642">Juggernaut Band</a></div>
+              <span class="equip-slot-label">Anneau 2</span>
+            </div>
+            <div class="equip-slot epic">
+              <div class="equip-slot-icon"><a class="slot-link" href="https://www.wowhead.com/wotlk/item=50356">Corroded Skeleton Key</a></div>
+              <span class="equip-slot-label">Trinket 1</span>
+            </div>
+            <div class="equip-slot epic">
+              <div class="equip-slot-icon"><a class="slot-link" href="https://www.wowhead.com/wotlk/item=50364">Sindragosa's Flawless Fang</a></div>
+              <span class="equip-slot-label">Trinket 2</span>
+            </div>
+            <div class="equip-slot empty">
+              <div class="equip-slot-icon"></div>
+              <span class="equip-slot-label">–</span>
+            </div>
+          </div>
+
+        </div>
+        <div class="paperdoll-bottom">
+          <div class="equip-slot epic">
+            <div class="equip-slot-icon"><a class="slot-link" href="https://www.wowhead.com/wotlk/item=50672">Bloodvenom Blade</a></div>
+            <span class="equip-slot-label">Main droite</span>
+          </div>
+          <div class="equip-slot epic">
+            <div class="equip-slot-icon"><a class="slot-link" href="https://www.wowhead.com/wotlk/item=50729">Icecrown Glacial Wall</a></div>
+            <span class="equip-slot-label">Bouclier</span>
+          </div>
+          <div class="equip-slot epic">
+            <div class="equip-slot-icon"><a class="slot-link" href="https://www.wowhead.com/wotlk/item=47661">Libram of Valiance</a></div>
+            <span class="equip-slot-label">Libram</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ====== ROTATION ====== -->
+  <section id="rotation" class="tab-panel">
+
+    <div class="content-card">
+      <h3>La rotation 969</h3>
+      <p style="font-size:0.82rem;color:var(--text-muted);margin-bottom:1rem;">
+        La rotation "969" alterne les sorts à 9s de CD et les sorts à 6s de CD pour un uptime maximal et zéro GCD perdu.
+      </p>
+      <div class="rotation-list">
+        <div class="rotation-step">
+          <span class="step-num">9s</span>
+          <span class="step-skill">Jugement</span>
+          <span class="step-desc">– Maintient Judgements of the Just (-20% vitesse d'attaque ennemi)</span>
+        </div>
+        <div class="rotation-step">
+          <span class="step-num">6s</span>
+          <span class="step-skill">Bouclier de la Justice</span>
+          <span class="step-desc">– Votre sort de menace le plus puissant, basé sur le Block Value</span>
+        </div>
+        <div class="rotation-step">
+          <span class="step-num">9s</span>
+          <span class="step-skill">Consécration</span>
+          <span class="step-desc">– AoE permanente sous le boss, menace de zone</span>
+        </div>
+        <div class="rotation-step">
+          <span class="step-num">6s</span>
+          <span class="step-skill">Marteau du Juste</span>
+          <span class="step-desc">– AoE sur 3 cibles, indispensable sur les packs</span>
+        </div>
+        <div class="rotation-step">
+          <span class="step-num">9s</span>
+          <span class="step-skill">Bouclier Sacré</span>
+          <span class="step-desc">– +30% chance de bloquer pendant 10s, toujours actif</span>
+        </div>
+        <div class="rotation-step">
+          <span class="step-num">6s</span>
+          <span class="step-skill">Bouclier de la Justice</span>
+          <span class="step-desc">– Retour au début du cycle</span>
+        </div>
+      </div>
+      <div class="rotation-note">
+        🛡️ Séquence type : <strong>ShoR → HotR → Juge → ShoR → Conséc → Bouclier Sacré → recommencer</strong>. Ne jamais laisser Righteous Fury s'éteindre.
+      </div>
+    </div>
+
+    <div class="content-card">
+      <h3>Cooldowns défensifs</h3>
+      <div class="rotation-list">
+        <div class="rotation-step">
+          <span class="step-num">CD</span>
+          <span class="step-skill">Divine Guardian</span>
+          <span class="step-desc">– Réduit les dégâts du raid de 30% pendant 6s (1 min) · Utiliser sur les grosses AoE raid</span>
+        </div>
+        <div class="rotation-step">
+          <span class="step-num">CD</span>
+          <span class="step-skill">Ardent Defender</span>
+          <span class="step-desc">– Si vous tombez sous 35% HP, réduit les dégâts subis · Cheat death si pris dans le talent</span>
+        </div>
+        <div class="rotation-step">
+          <span class="step-num">CD</span>
+          <span class="step-skill">Bouclier Divin</span>
+          <span class="step-desc">– Immunité totale 8s (15 min) · À réserver pour les situations désespérées · Annule la menace</span>
+        </div>
+        <div class="rotation-step">
+          <span class="step-num">Aura</span>
+          <span class="step-skill">Aura de Dévotion</span>
+          <span class="step-desc">– Résistance physique passive pour tout le groupe · Garder active en permanence</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="content-card">
+      <h3>Positionnement et consignes</h3>
+      <div class="rotation-list">
+        <div class="rotation-step">
+          <span class="step-num">📍</span>
+          <span class="step-skill">Face au bord ou au mur</span>
+          <span class="step-desc">– Le boss doit toujours faire dos au raid pour éviter les cleaves sur les DPS</span>
+        </div>
+        <div class="rotation-step">
+          <span class="step-num">📍</span>
+          <span class="step-skill">Swap de tank</span>
+          <span class="step-desc">– Communiquer avec les healers avant le swap · Prévenir quand les stacks montent</span>
+        </div>
+        <div class="rotation-step">
+          <span class="step-num">📍</span>
+          <span class="step-skill">Blessing of Kings</span>
+          <span class="step-desc">– À maintenir sur tous les membres du groupe (passif en dehors du combat)</span>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+</main>
+
+<script>Layout.footer({ baseUrl: '../' });</script>
+</body>
+</html>

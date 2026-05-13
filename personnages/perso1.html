@@ -1,0 +1,321 @@
+﻿<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alban â€” DÃ©moniste Affliction Â· LAN Du Swag</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <script src="../js/layout.js"></script>
+</head>
+<body>
+<script>Layout.header({ baseUrl: '../', activeNav: 'swaggeurs' });</script>
+
+<main class="container">
+
+  <p class="breadcrumb">
+    <a href="../swaggeurs.html">Swaggeurs</a> â€º <span>Alban</span>
+  </p>
+
+  <div class="char-page-header">
+    <div class="char-page-icon">
+      <img src="../assets/img/classes-warlock-affliction.webp" alt="DÃ©moniste Affliction" style="width:100%;height:100%;object-fit:cover;border-radius:8px;">
+    </div>
+    <div class="char-page-title">
+      <h1>Alban</h1>
+      <div class="class-label warlock">DÃ©moniste</div>
+      <div class="spec-label">Affliction Â· Niveau 80</div>
+    </div>
+  </div>
+
+  <nav class="tabs-nav">
+    <button class="tab-btn active" data-tab="armory">Armory</button>
+    <button class="tab-btn" data-tab="bis">BiS List</button>
+    <button class="tab-btn" data-tab="talents">Talents</button>
+    <button class="tab-btn" data-tab="rotation">Rotation</button>
+  </nav>
+
+  <!-- ====== ARMORY ====== -->
+  <section id="armory" class="tab-panel active"
+    data-char=""
+    data-realm="WotLK5man - Season1"
+    data-portrait="../assets/img/classes-warlock-affliction.webp"
+    data-specclass="warlock">
+    <div class="content-card" style="text-align:center;padding:2rem;">
+      <p style="color:var(--text-muted);">Cliquez sur l'onglet pour charger les donnÃ©es depuis wotlk5.com.</p>
+    </div>
+  </section>
+
+  <!-- ====== TALENTS ====== -->
+  <section id="talents" class="tab-panel">
+
+    <div class="content-card">
+      <h3>Build â€” Affliction 56/0/15</h3>
+      <a class="talent-link" href="https://wotlk.evowow.com/?talent#IZhbqszAcbdxfhxZZVocoM" target="_blank" rel="noopener">
+        ðŸ”— Voir le build sur Evowow
+      </a>
+      <div class="talent-tree-img">
+        <img src="../assets/img/talent-alban.png" alt="Arbre de talents Affliction 56/0/15"
+             onerror="this.parentElement.style.display='none'">
+      </div>
+      <p class="talent-points">Points : 56 Affliction Â· 0 DÃ©monologie Â· 15 Destruction</p>
+      <div class="talent-note">
+        Build standard DÃ©moniste Affliction PvE. Les 15 points en Destruction servent uniquement Ã  obtenir <strong>Suppression</strong> et le bonus de hit. Le Felhunter est la monture recommandÃ©e pour le buff intellect.
+      </div>
+    </div>
+
+    <div class="content-card">
+      <h3>Talents clÃ©s</h3>
+      <ul style="padding-left:1.2rem; display:flex; flex-direction:column; gap:0.5rem; font-size:0.88rem; color:var(--text-muted);">
+        <li><strong style="color:var(--gold-light)">Haunt</strong> â€” Debuff qui amplifie tous vos DoTs de 20%. Ã€ maintenir absolument, c'est votre sort le plus important.</li>
+        <li><strong style="color:var(--gold-light)">Unstable Affliction</strong> â€” DoT puissant. Interrompre UA = silence 3s sur le caster.</li>
+        <li><strong style="color:var(--gold-light)">Pandemic</strong> â€” Vos DoTs peuvent crit. Multiplie l'efficacitÃ© du crit pour l'Affliction.</li>
+        <li><strong style="color:var(--gold-light)">Everlasting Affliction</strong> â€” Shadow Bolt refresh Corruption. Ne jamais rÃ©appliquer Corruption manuellement.</li>
+        <li><strong style="color:var(--gold-light)">Siphon Life</strong> â€” Corruption soigne en passif. Survie et DPS combinÃ©s.</li>
+      </ul>
+    </div>
+
+    <div class="content-card">
+      <h3>Glyphes</h3>
+      <ul style="padding-left:1.2rem; display:flex; flex-direction:column; gap:0.4rem; font-size:0.88rem; color:var(--text-muted);">
+        <li><strong style="color:var(--gold-light)">Glyphe de Vie rapide</strong> â€” Quick Decay : augmente la vitesse de tick de Corruption.</li>
+        <li><strong style="color:var(--gold-light)">Glyphe d'Affliction instable</strong> â€” +10% dÃ©gÃ¢ts UA.</li>
+        <li><strong style="color:var(--gold-light)">Glyphe de Haunt</strong> â€” +3% dÃ©gÃ¢ts sur Haunt.</li>
+        <li><strong style="color:var(--gold-light)">Glyphe mineur â€” Unending Breath</strong> â€” QualitÃ© de vie en monde ouvert.</li>
+      </ul>
+    </div>
+
+  </section>
+
+  <!-- ====== BiS ====== -->
+  <section id="bis" class="tab-panel">
+
+    <div class="content-card">
+      <h3>Stats cibles â€” Phase 4</h3>
+      <div class="stats-grid">
+        <div class="stat-item"><span class="stat-label">Hit sort</span><span class="stat-value">446</span></div>
+        <div class="stat-item"><span class="stat-label">Spell Power</span><span class="stat-value">&gt;4 000</span></div>
+        <div class="stat-item"><span class="stat-label">Haste</span><span class="stat-value">importante</span></div>
+        <div class="stat-item"><span class="stat-label">Crit</span><span class="stat-value">secondaire</span></div>
+      </div>
+      <div class="talent-note" style="margin-top:0.8rem;">
+        Hit cap 446 prioritÃ© absolue. AprÃ¨s : <strong>Spell Power > Haste > Crit</strong>. Le set 4p T10 (Dark Coven) est indispensable pour le bonus Haunt.
+      </div>
+    </div>
+
+    <div class="content-card">
+      <h3>Best in Slot â€” Phase 4 (Icecrown Citadel 25 HM)</h3>
+      <div class="wow-paperdoll">
+        <div class="paperdoll-main">
+
+          <div class="paperdoll-col">
+            <div class="equip-slot epic">
+              <div class="equip-slot-icon"><a class="slot-link" href="https://www.wowhead.com/wotlk/item=51231">Sanctified Dark Coven Hood</a></div>
+              <span class="equip-slot-label">TÃªte</span>
+            </div>
+            <div class="equip-slot epic">
+              <div class="equip-slot-icon"><a class="slot-link" href="https://www.wowhead.com/wotlk/item=50724">Blood Queen's Crimson Choker</a></div>
+              <span class="equip-slot-label">Cou</span>
+            </div>
+            <div class="equip-slot epic">
+              <div class="equip-slot-icon"><a class="slot-link" href="https://www.wowhead.com/wotlk/item=51232">Sanctified Dark Coven Shoulderpads</a></div>
+              <span class="equip-slot-label">Ã‰paules</span>
+            </div>
+            <div class="equip-slot epic">
+              <div class="equip-slot-icon"><a class="slot-link" href="https://www.wowhead.com/wotlk/item=54583">Cloak of Burning Dusk</a></div>
+              <span class="equip-slot-label">Cape</span>
+            </div>
+            <div class="equip-slot epic">
+              <div class="equip-slot-icon"><a class="slot-link" href="https://www.wowhead.com/wotlk/item=51233">Sanctified Dark Coven Robe</a></div>
+              <span class="equip-slot-label">Torse</span>
+            </div>
+            <div class="equip-slot empty">
+              <div class="equip-slot-icon"></div>
+              <span class="equip-slot-label">Chemise</span>
+            </div>
+            <div class="equip-slot epic">
+              <div class="equip-slot-icon"><a class="slot-link" href="https://www.wowhead.com/wotlk/item=53486">Bracers of Fiery Night</a></div>
+              <span class="equip-slot-label">Brassards</span>
+            </div>
+            <div class="equip-slot empty">
+              <div class="equip-slot-icon"></div>
+              <span class="equip-slot-label">Tabard</span>
+            </div>
+          </div>
+
+          <div class="paperdoll-center">
+            <div class="paperdoll-char">
+              <img class="paperdoll-char-portrait" src="../assets/img/classes-warlock-affliction.webp" alt="Alban">
+              <span class="paperdoll-char-name">Alban</span>
+              <span class="paperdoll-char-spec warlock">DÃ©moniste Â· Affliction</span>
+              <span class="paperdoll-char-phase">Phase 4 BiS</span>
+            </div>
+          </div>
+
+          <div class="paperdoll-col">
+            <div class="equip-slot epic">
+              <div class="equip-slot-icon"><a class="slot-link" href="https://www.wowhead.com/wotlk/item=51230">Sanctified Dark Coven Gloves</a></div>
+              <span class="equip-slot-label">Gantelets</span>
+            </div>
+            <div class="equip-slot epic">
+              <div class="equip-slot-icon"><a class="slot-link" href="https://www.wowhead.com/wotlk/item=50613">Crushing Coldwraith Belt</a></div>
+              <span class="equip-slot-label">Ceinture</span>
+            </div>
+            <div class="equip-slot epic">
+              <div class="equip-slot-icon"><a class="slot-link" href="https://www.wowhead.com/wotlk/item=50694">Plaguebringer's Stained Pants</a></div>
+              <span class="equip-slot-label">Jambes</span>
+            </div>
+            <div class="equip-slot epic">
+              <div class="equip-slot-icon"><a class="slot-link" href="https://www.wowhead.com/wotlk/item=50699">Plague Scientist's Boots</a></div>
+              <span class="equip-slot-label">Bottes</span>
+            </div>
+            <div class="equip-slot epic">
+              <div class="equip-slot-icon"><a class="slot-link" href="https://www.wowhead.com/wotlk/item=50398">Ashen Band of Endless Destruction</a></div>
+              <span class="equip-slot-label">Anneau 1</span>
+            </div>
+            <div class="equip-slot epic">
+              <div class="equip-slot-icon"><a class="slot-link" href="https://www.wowhead.com/wotlk/item=50664">Ring of Rapid Ascent</a></div>
+              <span class="equip-slot-label">Anneau 2</span>
+            </div>
+            <div class="equip-slot epic">
+              <div class="equip-slot-icon"><a class="slot-link" href="https://www.wowhead.com/wotlk/item=50365">Phylactery of the Nameless Lich</a></div>
+              <span class="equip-slot-label">Trinket 1</span>
+            </div>
+            <div class="equip-slot epic">
+              <div class="equip-slot-icon"><a class="slot-link" href="https://www.wowhead.com/wotlk/item=50348">Dislodged Foreign Object</a></div>
+              <span class="equip-slot-label">Trinket 2</span>
+            </div>
+            <div class="equip-slot empty">
+              <div class="equip-slot-icon"></div>
+              <span class="equip-slot-label">â€”</span>
+            </div>
+          </div>
+
+        </div>
+        <div class="paperdoll-bottom">
+          <div class="equip-slot epic">
+            <div class="equip-slot-icon"><a class="slot-link" href="https://www.wowhead.com/wotlk/item=50732">Bloodsurge, Kel'Thuzad's Blade of Agony</a></div>
+            <span class="equip-slot-label">Main droite</span>
+          </div>
+          <div class="equip-slot epic">
+            <div class="equip-slot-icon"><a class="slot-link" href="https://www.wowhead.com/wotlk/item=50719">Shadow Silk Spindle</a></div>
+            <span class="equip-slot-label">Off-hand</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ====== ROTATION ====== -->
+  <section id="rotation" class="tab-panel">
+
+    <div class="content-card">
+      <h3>Opener</h3>
+      <div class="rotation-list">
+        <div class="rotation-step">
+          <span class="step-num">1.</span>
+          <span class="step-skill">Corruption</span>
+          <span class="step-desc">â€” Appliquer immÃ©diatement (Everlasting Affliction le maintient via Shadow Bolt)</span>
+        </div>
+        <div class="rotation-step">
+          <span class="step-num">2.</span>
+          <span class="step-skill">Haunt</span>
+          <span class="step-desc">â€” DÃ¨s que Corruption est posÃ©, +20% dÃ©gÃ¢ts sur tous vos DoTs</span>
+        </div>
+        <div class="rotation-step">
+          <span class="step-num">3.</span>
+          <span class="step-skill">Unstable Affliction</span>
+          <span class="step-desc">â€” DoT puissant, maintenir en permanence</span>
+        </div>
+        <div class="rotation-step">
+          <span class="step-num">4.</span>
+          <span class="step-skill">Curse of Agony</span>
+          <span class="step-desc">â€” MalÃ©diction principale, maintenir en permanence</span>
+        </div>
+        <div class="rotation-step">
+          <span class="step-num">5.</span>
+          <span class="step-skill">Shadow Bolt</span>
+          <span class="step-desc">â€” Filler, refresh Corruption via Everlasting Affliction</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="content-card">
+      <h3>Rotation en combat (PrioritÃ©)</h3>
+      <div class="rotation-list">
+        <div class="rotation-step">
+          <span class="step-num">1.</span>
+          <span class="step-skill">Haunt</span>
+          <span class="step-desc">â€” Sur cooldown (15s), prioritÃ© absolue â€” c'est votre plus gros DPS</span>
+        </div>
+        <div class="rotation-step">
+          <span class="step-num">2.</span>
+          <span class="step-skill">Unstable Affliction</span>
+          <span class="step-desc">â€” Maintenir, ne jamais laisser expirer</span>
+        </div>
+        <div class="rotation-step">
+          <span class="step-num">3.</span>
+          <span class="step-skill">Curse of Agony</span>
+          <span class="step-desc">â€” Maintenir, ne jamais laisser expirer</span>
+        </div>
+        <div class="rotation-step">
+          <span class="step-num">4.</span>
+          <span class="step-skill">Shadow Bolt</span>
+          <span class="step-desc">â€” Spam filler entre les DoTs (maintient Corruption via Everlasting)</span>
+        </div>
+        <div class="rotation-step">
+          <span class="step-num">5.</span>
+          <span class="step-skill">Life Tap</span>
+          <span class="step-desc">â€” DÃ¨s que le mana baisse, donne un buff +Spell Power via Glyph</span>
+        </div>
+      </div>
+      <div class="rotation-note">
+        ðŸ”® Ne jamais rÃ©appliquer Corruption manuellement â€” Shadow Bolt le refresh via Everlasting Affliction. VÃ©rifier que Haunt est toujours actif avant de cast UA ou CoA.
+      </div>
+    </div>
+
+    <div class="content-card">
+      <h3>Multi-cibles (AoE)</h3>
+      <div class="rotation-list">
+        <div class="rotation-step">
+          <span class="step-num">1.</span>
+          <span class="step-skill">Seed of Corruption</span>
+          <span class="step-desc">â€” Sur chaque cible si le groupe est groupÃ© (explosion en AoE)</span>
+        </div>
+        <div class="rotation-step">
+          <span class="step-num">2.</span>
+          <span class="step-skill">DoTs individuels</span>
+          <span class="step-desc">â€” Si seulement 2-3 cibles, DoTs sur chaque est plus rentable</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="content-card">
+      <h3>Pet et CDs</h3>
+      <div class="rotation-list">
+        <div class="rotation-step">
+          <span class="step-num">Pet</span>
+          <span class="step-skill">Felhunter</span>
+          <span class="step-desc">â€” Buff Spell Power intellect passif Â· Interrupt en cas d'urgence</span>
+        </div>
+        <div class="rotation-step">
+          <span class="step-num">CD</span>
+          <span class="step-skill">Metamorphosis</span>
+          <span class="step-desc">â€” Non utilisÃ© en Affliction (spÃ© DÃ©mo). Pas dans ce build.</span>
+        </div>
+        <div class="rotation-step">
+          <span class="step-num">CD</span>
+          <span class="step-skill">Trinkets actifs</span>
+          <span class="step-desc">â€” Sur pull avec Haunt pour la fenÃªtre de burst maximale</span>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+</main>
+
+<script>Layout.footer({ baseUrl: '../' });</script>
+</body>
+</html>
+

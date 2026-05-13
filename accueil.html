@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LAN Du Swag</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/layout.js"></script>
+</head>
+<body>
+<script>Layout.header({ baseUrl: '', activeNav: '' });</script>
+
+<section class="hero-landing">
+  <img class="hero-map-bg" src="assets/img/map-azeroth.jpg" alt="" aria-hidden="true">
+  <canvas id="hero-canvas"></canvas>
+  <div class="hero-nebula hero-nebula-1"></div>
+  <div class="hero-nebula hero-nebula-2"></div>
+  <div class="hero-nebula hero-nebula-3"></div>
+  <div class="hero-overlay"></div>
+
+  <div class="hero-content">
+    <img src="assets/img/LanDuSwag.png" class="hero-logo" alt="LAN Du Swag">
+    <p class="hero-tagline">Wrath of the Lich King &middot; 5 Aventuriers &middot; Juillet 2026</p>
+
+    <div class="hero-nav-cards">
+      <a href="swaggeurs.html" class="hero-nav-card">
+        <span class="hnc-icon">⚔️</span>
+        <span class="hnc-title">Les Swaggeurs</span>
+        <span class="hnc-sub">5 aventuriers</span>
+      </a>
+      <a href="progression.html" class="hero-nav-card">
+        <span class="hnc-icon">📊</span>
+        <span class="hnc-title">Progression</span>
+        <span class="hnc-sub">9 raids · 16 donjons</span>
+      </a>
+      <a href="carte.html" class="hero-nav-card">
+        <span class="hnc-icon">🗺️</span>
+        <span class="hnc-title">Carte des Raids</span>
+        <span class="hnc-sub">Azeroth interactive</span>
+      </a>
+      <a href="strategies/index.html" class="hero-nav-card">
+        <span class="hnc-icon">📖</span>
+        <span class="hnc-title">Stratégies</span>
+        <span class="hnc-sub">Tous les boss</span>
+      </a>
+      <a href="hall-of-shame.html" class="hero-nav-card">
+        <span class="hnc-icon">💀</span>
+        <span class="hnc-title">Hall of Shame</span>
+        <span class="hnc-sub">Nos fails légendaires</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<script>
+(function () {
+  const canvas = document.getElementById('hero-canvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const COLORS = ['#c59b3b', '#7eb8f7', '#b07dd8', '#e8a040', '#a8d8f0'];
+  let particles = [];
+
+  function resize() { canvas.width = canvas.offsetWidth; canvas.height = canvas.offsetHeight; }
+
+  function makeParticle(randomY) {
+    return {
+      x: Math.random() * canvas.width,
+      y: randomY ? Math.random() * canvas.height : canvas.height + 10,
+      r: Math.random() * 1.6 + 0.4,
+      color: COLORS[Math.floor(Math.random() * COLORS.length)],
+      speed: Math.random() * 0.45 + 0.12,
+      opacity: Math.random() * 0.6 + 0.1,
+      opacityDir: Math.random() < 0.5 ? 1 : -1,
+      opacitySpeed: Math.random() * 0.007 + 0.002,
+      drift: (Math.random() - 0.5) * 0.22,
+    };
+  }
+
+  function init() { resize(); particles = []; for (let i = 0; i < 90; i++) particles.push(makeParticle(true)); }
+
+  function toHex(v) { return Math.round(Math.max(0, Math.min(1, v)) * 255).toString(16).padStart(2, '0'); }
+
+  function tick() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    for (let i = 0; i < particles.length; i++) {
+      const p = particles[i];
+      p.y -= p.speed; p.x += p.drift;
+      p.opacity += p.opacitySpeed * p.opacityDir;
+      if (p.opacity >= 0.85) p.opacityDir = -1;
+      if (p.opacity <= 0.05) p.opacityDir = 1;
+      if (p.y < -12) particles[i] = makeParticle(false);
+      const grad = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r * 6);
+      grad.addColorStop(0, p.color + toHex(p.opacity * 0.4));
+      grad.addColorStop(1, p.color + '00');
+      ctx.beginPath(); ctx.arc(p.x, p.y, p.r * 6, 0, Math.PI * 2); ctx.fillStyle = grad; ctx.fill();
+      ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2); ctx.fillStyle = p.color + toHex(p.opacity); ctx.fill();
+    }
+    requestAnimationFrame(tick);
+  }
+
+  window.addEventListener('resize', init);
+  init(); tick();
+})();
+</script>
+
+<script>Layout.footer({ baseUrl: '' });</script>
+</body>
+</html>

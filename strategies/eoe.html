@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Eye of Eternity — LAN Du Swag</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <script src="../js/layout.js"></script>
+</head>
+<body>
+<script>Layout.header({ baseUrl: '../', activeNav: 'strategies' });</script>
+
+<main class="container">
+
+  <p class="breadcrumb"><a href="index.html">Stratégies</a> › <span>Eye of Eternity</span></p>
+
+  <section class="section-title">
+    <h2>🌌 Eye of Eternity</h2>
+    <p>Œil de l'Éternité · 1 boss · Phase 1 · Clé de la Chambre de Focalisation requise</p>
+  </section>
+
+  <div class="strat-wing">
+    <div class="wing-header">🌌 L'Arène Céleste</div>
+
+    <div class="boss-card">
+      <div class="boss-card-header">
+        <h3>🐉 Malygos le Seigneur de la Magie <span class="difficulty-badge diff-hard">Difficile</span></h3>
+        <span class="boss-collapse-arrow">▼</span>
+      </div>
+      <div class="boss-card-body">
+        <div class="boss-phases">
+          <div class="phase">
+            <h4>⚡ Phase 1 — Sur la plateforme (100% → 50%)</h4>
+            <ul>
+              <li><strong>Arcane Breath</strong> — Cône d'arcane frontal massif · Le tank tient Malygos face au bord, dos au raid</li>
+              <li><strong>Arcane Storm</strong> — Malygos s'envole et lance des éclairs AoE · Se regrouper sous lui · Les healers burst</li>
+              <li><strong>Vortex</strong> — Aspire tout le raid dans les airs · Subir des dégâts · Rien à faire, attendre la fin</li>
+              <li><strong>Power Sparks</strong> — Des orbes volent vers Malygos · Les intercepter = buff DPS pour le raid · Les laisser toucher Malygos = buff DPS pour lui (mauvais)</li>
+            </ul>
+          </div>
+          <div class="phase">
+            <h4>⚡ Phase 2 — Sur les disques (50% → 0%... ou pas)</h4>
+            <ul>
+              <li>Malygos atterrit sur une plateforme flottante · La plateforme principale s'effondre</li>
+              <li><strong>Des Nexus Lords</strong> apparaissent sur des disques volants · Les tanker et tuer</li>
+              <li><strong>Scion of Eternity</strong> — Casters volants · DPS prioritaire</li>
+              <li>En tuant les Nexus Lords, voler sur leurs disques pour accéder à Malygos</li>
+              <li>Chaque disque a 3 compétences : Arcane (dégâts), Arcane Shield (protection), Surge (boost de vitesse)</li>
+            </ul>
+          </div>
+          <div class="phase">
+            <h4>🐲 Phase 3 — Sur les drakes (Malygos à ~20%... en fait dès 50%)</h4>
+            <ul>
+              <li>La plateforme explose, tout le raid monte sur des <strong>Membres de l'Aile Létale (drakes)</strong></li>
+              <li>Chaque drake a 5 compétences numérotées 1-5 : dégâts, dégâts zone, stack de buff, AoE heal, combo finisher</li>
+              <li><strong>Rotation optimale</strong> : 1-1-1-2-3-4-5 (stack le buff, puis finisher)</li>
+              <li>Malygos a une aura qui inflige des dégâts continus · Tuer aussi vite que possible</li>
+              <li><strong>Engulf in Flames</strong> — Cible un drake avec un cercle de feu · S'éloigner</li>
+            </ul>
+          </div>
+          <div class="phase">
+            <h4>Rôles</h4>
+            <ul>
+              <li>🛡️ <strong>Tank</strong> — Ph1 : Tanker Malygos face au bord · Ph2 : Tanker Nexus Lords sur disques</li>
+              <li>💚 <strong>Heal</strong> — Ph1 : Burst pendant Arcane Storm · Ph3 : Compétence 4 du drake</li>
+              <li>⚔️ <strong>DPS</strong> — Intercepter les Power Sparks · Ph3 : Rotation 1-1-1-2-3-4-5</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</main>
+
+<script>Layout.footer({ baseUrl: '../' });</script>
+</body>
+</html>

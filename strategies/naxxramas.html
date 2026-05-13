@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Naxxramas — LAN Du Swag</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <script src="../js/layout.js"></script>
+</head>
+<body>
+<script>Layout.header({ baseUrl: '../', activeNav: 'strategies' });</script>
+
+<main class="container">
+
+  <p class="breadcrumb"><a href="index.html">Stratégies</a> › <span>Naxxramas</span></p>
+
+  <section class="section-title">
+    <h2>💀 Naxxramas</h2>
+    <p>Forteresse nécromantique de Kel'Thuzad · 15 boss · 5 ailes · Phase 1</p>
+  </section>
+
+  <!-- ARACHNID QUARTER -->
+  <div class="strat-wing">
+    <div class="wing-header">🕷️ Quartier des Araignées</div>
+
+    <div class="boss-card">
+      <div class="boss-card-header">
+        <h3>🕷️ Anub'Rekhan <span class="difficulty-badge diff-easy">Facile</span></h3>
+        <span class="boss-collapse-arrow">▼</span>
+      </div>
+      <div class="boss-card-body">
+        <div class="boss-phases">
+          <div class="phase">
+            <h4>Mécaniques</h4>
+            <ul>
+              <li><strong>Locust Swarm</strong> — Tank kite le boss lentement contre le mur, le reste DPS à distance</li>
+              <li><strong>Crypt Guards</strong> — Tuer les gardes avant d'engager Anub'Rekhan</li>
+              <li><strong>Phase scarabée</strong> — AoE les scarabées, ils soignent le boss s'ils l'atteignent</li>
+            </ul>
+          </div>
+          <div class="phase">
+            <h4>Rôles</h4>
+            <ul>
+              <li>🛡️ <strong>Tank</strong> — Kite pendant Locust Swarm, garder le boss au centre entre les phases</li>
+              <li>💚 <strong>Heal</strong> — Heal le tank en mouvement, attention aux ticks de dégâts</li>
+              <li>⚔️ <strong>DPS</strong> — Focus boss puis AoE scarabées au pop</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="boss-card">
+      <div class="boss-card-header">
+        <h3>🕸️ Grand Widow Faerlina <span class="difficulty-badge diff-easy">Facile</span></h3>
+        <span class="boss-collapse-arrow">▼</span>
+      </div>
+      <div class="boss-card-body">
+        <div class="boss-phases">
+          <div class="phase">
+            <h4>Mécaniques</h4>
+            <ul>
+              <li><strong>Frenzy</strong> — Tuer un Worshipper pour annuler l'enrage · Garder un adepte de côté</li>
+              <li><strong>Rain of Fire</strong> — Se disperser, sortir des zones au sol</li>
+              <li><strong>Poison Bolt Volley</strong> — Dispell poison en priorité sur le heal</li>
+            </ul>
+          </div>
+          <div class="phase">
+            <h4>Rôles</h4>
+            <ul>
+              <li>🛡️ <strong>Tank</strong> — Face au mur, maintenir Faerlina stable</li>
+              <li>💚 <strong>Heal</strong> — Dispell poison sur vous-même en priorité</li>
+              <li>⚔️ <strong>DPS</strong> — Sacrifier un Worshipper dès le Frenzy</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="boss-card">
+      <div class="boss-card-header">
+        <h3>🕸️ Maexxna <span class="difficulty-badge diff-medium">Moyen</span></h3>
+        <span class="boss-collapse-arrow">▼</span>
+      </div>
+      <div class="boss-card-body">
+        <div class="boss-phases">
+          <div class="phase">
+            <h4>Mécaniques</h4>
+            <ul>
+              <li><strong>Web Wrap</strong> — Libérer immédiatement le joueur emballé (focus le cocon)</li>
+              <li><strong>Web Spray</strong> — Stun 5 sec · Le heal doit top le groupe <em>avant</em> le prochain spray</li>
+              <li><strong>Frenzy à 30%</strong> — Héroïsme/Bloodlust immédiat, heal intensif</li>
+            </ul>
+          </div>
+          <div class="phase">
+            <h4>Rôles</h4>
+            <ul>
+              <li>🛡️ <strong>Tank</strong> — CD déf pendant la Frenzy</li>
+              <li>💚 <strong>Heal</strong> — Anticiper le Web Spray, burst heal à la Frenzy</li>
+              <li>⚔️ <strong>DPS</strong> — Briser les cocons en priorité absolue</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PLAGUE QUARTER -->
+  <div class="strat-wing">
+    <div class="wing-header">☣️ Quartier de la Peste</div>
+
+    <div class="boss-card">
+      <div class="boss-card-header">
+        <h3>🧟 Noth the Plaguebringer <span class="difficulty-badge diff-easy">Facile</span></h3>
+        <span class="boss-collapse-arrow">▼</span>
+      </div>
+      <div class="boss-card-body">
+        <div class="boss-phases">
+          <div class="phase">
+            <h4>Mécaniques</h4>
+            <ul>
+              <li><strong>Blink</strong> — Noth se téléporte · Repositionner le tank rapidement</li>
+              <li><strong>Skeletons</strong> — AoE au sol, ne pas laisser s'accumuler</li>
+              <li><strong>Phase balcon (70s)</strong> — Noth invulnérable · Gérer les vagues de squelettes</li>
+            </ul>
+          </div>
+          <div class="phase">
+            <h4>Rôles</h4>
+            <ul>
+              <li>🛡️ <strong>Tank</strong> — Grab les squelettes pendant la phase balcon</li>
+              <li>💚 <strong>Heal</strong> — Dispell Curse of the Plaguebringer</li>
+              <li>⚔️ <strong>DPS</strong> — Focus boss, AoE squelettes entre les phases</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="boss-card">
+      <div class="boss-card-header">
+        <h3>💃 Heigan the Unclean <span class="difficulty-badge diff-hard">Difficile</span></h3>
+        <span class="boss-collapse-arrow">▼</span>
+      </div>
+      <div class="boss-card-body">
+        <div class="boss-phases">
+          <div class="phase">
+            <h4>La Safety Dance — obligatoire</h4>
+            <ul>
+              <li>La salle est divisée en <strong>4 colonnes</strong> · Les éruptions balayent de droite à gauche</li>
+              <li>Rythme : partir en <strong>colonne 1</strong> (côté entrée), bouger vers la 2, 3, 4 puis revenir</li>
+              <li>Ne jamais s'arrêter pendant la danse · Mourir ici = honte éternelle au Hall of Shame</li>
+            </ul>
+          </div>
+          <div class="phase">
+            <h4>Rôles</h4>
+            <ul>
+              <li>🛡️ <strong>Tank</strong> — Maintenir Heigan en colonne 1, danser avec lui</li>
+              <li>💚 <strong>Heal</strong> — Danser ET soigner · Priorité : rester en vie</li>
+              <li>⚔️ <strong>DPS</strong> — Danser · Les casters tapent en se déplaçant</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="boss-card">
+      <div class="boss-card-header">
+        <h3>🍄 Loatheb <span class="difficulty-badge diff-medium">Moyen</span></h3>
+        <span class="boss-collapse-arrow">▼</span>
+      </div>
+      <div class="boss-card-body">
+        <div class="boss-phases">
+          <div class="phase">
+            <h4>Mécaniques</h4>
+            <ul>
+              <li><strong>Necrotic Aura</strong> — Heal interdit sauf pendant 3 secondes toutes les 20 sec (fenêtre Spore)</li>
+              <li><strong>Spore</strong> — Coller la spore pour le buff Fungal Creep (+50% crit heal) · Soigner en burst dans cette fenêtre uniquement</li>
+              <li><strong>Inevitable Doom</strong> — Dégâts croissants · DPS race</li>
+            </ul>
+          </div>
+          <div class="phase">
+            <h4>Rôles</h4>
+            <ul>
+              <li>🛡️ <strong>Tank</strong> — Survivre avec potions et CD déf</li>
+              <li>💚 <strong>Heal</strong> — Attendre la fenêtre spore, burst heal en crit</li>
+              <li>⚔️ <strong>DPS</strong> — DPS max, coller les spores</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MILITARY QUARTER -->
+  <div class="strat-wing">
+    <div class="wing-header">⚔️ Quartier Militaire</div>
+
+    <div class="boss-card">
+      <div class="boss-card-header">
+        <h3>🎓 Instructor Razuvious <span class="difficulty-badge diff-medium">Moyen</span></h3>
+        <span class="boss-collapse-arrow">▼</span>
+      </div>
+      <div class="boss-card-body">
+        <div class="boss-phases">
+          <div class="phase">
+            <h4>Mécaniques</h4>
+            <ul>
+              <li><strong>Understudy</strong> — Razuvious ne peut être tanké que par les Death Knight Understudies en Mind Control</li>
+              <li><strong>Rotation MC</strong> — 2 joueurs se relaient pour maintenir un Understudy MC en permanence</li>
+              <li><strong>Unbalancing Strike</strong> — Réduit la défense · Swapper l'Understudy actif à chaque charge</li>
+            </ul>
+          </div>
+          <div class="phase">
+            <h4>Rôles</h4>
+            <ul>
+              <li>🛡️ <strong>Tank</strong> — Mind Control un Understudy, le positionner face à Razuvious</li>
+              <li>💚 <strong>Heal</strong> — Soigner les Understudies MC en priorité</li>
+              <li>⚔️ <strong>DPS</strong> — Rotation MC, DPS boss en parallèle</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="boss-card">
+      <div class="boss-card-header">
+        <h3>⚗️ Gothik the Harvester <span class="difficulty-badge diff-medium">Moyen</span></h3>
+        <span class="boss-collapse-arrow">▼</span>
+      </div>
+      <div class="boss-card-body">
+        <div class="boss-phases">
+          <div class="phase">
+            <h4>Mécaniques</h4>
+            <ul>
+              <li><strong>Deux côtés</strong> — Côté vivant (adds humains) et côté mort (spectres) · Répartir le groupe</li>
+              <li><strong>Adds</strong> — Tuer rapidement · Chaque mort côté vivant renforce le côté mort</li>
+              <li><strong>Descente de Gothik</strong> — Devient attaquable · Tout le monde focus boss</li>
+            </ul>
+          </div>
+          <div class="phase">
+            <h4>Rôles</h4>
+            <ul>
+              <li>🛡️ <strong>Tank</strong> — Côté mort, tanker les spectres</li>
+              <li>💚 <strong>Heal</strong> — Couvrir les deux côtés</li>
+              <li>⚔️ <strong>DPS</strong> — Se répartir 2/3, tuer les adds vite</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="boss-card">
+      <div class="boss-card-header">
+        <h3>🏇 The Four Horsemen <span class="difficulty-badge diff-hard">Difficile</span></h3>
+        <span class="boss-collapse-arrow">▼</span>
+      </div>
+      <div class="boss-card-body">
+        <div class="boss-phases">
+          <div class="phase">
+            <h4>Mécaniques</h4>
+            <ul>
+              <li><strong>Marks</strong> — Chaque cavalier applique un debuff stackant · À 5 stacks = mort · Swap obligatoire</li>
+              <li><strong>Split</strong> — 2 joueurs à l'avant (Rivendare + Blaumeux), 2-3 à l'arrière (Korth'azz + Zeliek)</li>
+              <li><strong>Communication</strong> — Annoncer les stacks, swapper de façon coordonnée</li>
+            </ul>
+          </div>
+          <div class="phase">
+            <h4>Rôles</h4>
+            <ul>
+              <li>🛡️ <strong>Tank</strong> — Tenir Rivendare à l'avant, swapper avec un DPS</li>
+              <li>💚 <strong>Heal</strong> — Position centrale pour couvrir les deux côtés</li>
+              <li>⚔️ <strong>DPS</strong> — Gérer les swaps sur les cavaliers arrière</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONSTRUCT QUARTER -->
+  <div class="strat-wing">
+    <div class="wing-header">🧪 Quartier des Constructs</div>
+
+    <div class="boss-card">
+      <div class="boss-card-header">
+        <h3>🪓 Patchwerk <span class="difficulty-badge diff-easy">Facile</span></h3>
+        <span class="boss-collapse-arrow">▼</span>
+      </div>
+      <div class="boss-card-body">
+        <div class="boss-phases">
+          <div class="phase">
+            <h4>Mécaniques</h4>
+            <ul>
+              <li><strong>Hateful Strike</strong> — Frappe le joueur avec le plus de PV après le tank · Le heal doit rester au maximum de PV</li>
+              <li><strong>Enrage à 6 min</strong> — DPS race pure · Héroïsme dès le pull</li>
+            </ul>
+          </div>
+          <div class="phase">
+            <h4>Rôles</h4>
+            <ul>
+              <li>🛡️ <strong>Tank</strong> — Absorber, CD déf si nécessaire</li>
+              <li>💚 <strong>Heal</strong> — Maintenir le tank ET le heal au max de PV (Hateful Strike cible)</li>
+              <li>⚔️ <strong>DPS</strong> — Tout donner, Héroïsme au pull</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="boss-card">
+      <div class="boss-card-header">
+        <h3>🧫 Grobbulus <span class="difficulty-badge diff-medium">Moyen</span></h3>
+        <span class="boss-collapse-arrow">▼</span>
+      </div>
+      <div class="boss-card-body">
+        <div class="boss-phases">
+          <div class="phase">
+            <h4>Mécaniques</h4>
+            <ul>
+              <li><strong>Mutating Injection</strong> — Le joueur injecté sort immédiatement du groupe pour déposer le nuage de slime</li>
+              <li><strong>Slime Spray</strong> — Cône frontal · Rester derrière le boss en permanence</li>
+              <li><strong>Kite circulaire</strong> — Le tank kite Grobbulus en cercle pour ne pas marcher sur les nuages déposés</li>
+            </ul>
+          </div>
+          <div class="phase">
+            <h4>Rôles</h4>
+            <ul>
+              <li>🛡️ <strong>Tank</strong> — Kite continu en arc de cercle, ne jamais s'arrêter</li>
+              <li>💚 <strong>Heal</strong> — Soigner en mouvement · Sortir vite si injecté</li>
+              <li>⚔️ <strong>DPS</strong> — Taper le dos du boss · Sortir immédiatement si injecté</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="boss-card">
+      <div class="boss-card-header">
+        <h3>🐕 Gluth <span class="difficulty-badge diff-medium">Moyen</span></h3>
+        <span class="boss-collapse-arrow">▼</span>
+      </div>
+      <div class="boss-card-body">
+        <div class="boss-phases">
+          <div class="phase">
+            <h4>Mécaniques</h4>
+            <ul>
+              <li><strong>Decimate</strong> — Tout le monde à 5% PV · Heal en urgence absolue immédiatement après</li>
+              <li><strong>Zombie Chow</strong> — Les zombies soignent Gluth s'ils l'atteignent · Kiter ou tuer en priorité</li>
+              <li><strong>Enrage</strong> — Tranquilizing Shot (Hunter) pour annuler</li>
+            </ul>
+          </div>
+          <div class="phase">
+            <h4>Rôles</h4>
+            <ul>
+              <li>🛡️ <strong>Tank</strong> — Face au mur, absorber Gluth</li>
+              <li>💚 <strong>Heal</strong> — Burst heal immédiat post-Decimate</li>
+              <li>⚔️ <strong>DPS</strong> — Kiter/tuer les Zombie Chow pour bloquer le soin au boss</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="boss-card">
+      <div class="boss-card-header">
+        <h3>⚡ Thaddius <span class="difficulty-badge diff-medium">Moyen</span></h3>
+        <span class="boss-collapse-arrow">▼</span>
+      </div>
+      <div class="boss-card-body">
+        <div class="boss-phases">
+          <div class="phase">
+            <h4>Phase 1 — Stalagg &amp; Feugen</h4>
+            <ul>
+              <li>Tuer les deux adds <strong>simultanément</strong> (moins de 5% HP d'écart) · Sinon l'autre ressuscite</li>
+              <li>Un tank sur chaque add</li>
+            </ul>
+          </div>
+          <div class="phase">
+            <h4>Phase 2 — Thaddius</h4>
+            <ul>
+              <li><strong>Polarity Shift</strong> — Bouger immédiatement du côté + ou - selon votre debuff · Se tromper = explosion de raid</li>
+              <li><strong>Stacks</strong> — Rester collés aux joueurs de même polarité = bonus DPS massif</li>
+            </ul>
+          </div>
+          <div class="phase">
+            <h4>Rôles</h4>
+            <ul>
+              <li>🛡️ <strong>Tank</strong> — Un tank par add en P1, puis Thaddius en P2</li>
+              <li>💚 <strong>Heal</strong> — Vérifier son debuff au Polarity Shift immédiatement</li>
+              <li>⚔️ <strong>DPS</strong> — Équilibrer les deux adds, bouger vite au shift</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FROSTWYRM LAIR -->
+  <div class="strat-wing">
+    <div class="wing-header">❄️ Repaire des Wyrms de Givre</div>
+
+    <div class="boss-card">
+      <div class="boss-card-header">
+        <h3>🐉 Sapphiron <span class="difficulty-badge diff-medium">Moyen</span></h3>
+        <span class="boss-collapse-arrow">▼</span>
+      </div>
+      <div class="boss-card-body">
+        <div class="boss-phases">
+          <div class="phase">
+            <h4>Mécaniques</h4>
+            <ul>
+              <li><strong>Blizzard</strong> — Zones de glace au sol · Se déplacer constamment</li>
+              <li><strong>Phase aérienne</strong> — Sapphiron vole · Des blocs de glace apparaissent · Se cacher derrière un bloc contre le Frost Breath</li>
+              <li><strong>Icebolt</strong> — Libérer immédiatement le joueur gelé (focus le bloc)</li>
+            </ul>
+          </div>
+          <div class="phase">
+            <h4>Rôles</h4>
+            <ul>
+              <li>🛡️ <strong>Tank</strong> — Face au mur · Se cacher derrière un bloc en phase aérienne</li>
+              <li>💚 <strong>Heal</strong> — Soins continus (Frost Aura), burst en phase sol</li>
+              <li>⚔️ <strong>DPS</strong> — Se cacher derrière les iceblocks correctement · Libérer les gelés</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="boss-card">
+      <div class="boss-card-header">
+        <h3>💀 Kel'Thuzad <span class="difficulty-badge diff-hard">Difficile</span></h3>
+        <span class="boss-collapse-arrow">▼</span>
+      </div>
+      <div class="boss-card-body">
+        <div class="boss-phases">
+          <div class="phase">
+            <h4>Phase 1 — L'antichambre (3 min 30)</h4>
+            <ul>
+              <li>Tuer les Souls et Abominations · Ne pas approcher KT (déclenche la phase 2)</li>
+              <li>Nettoyer la salle entièrement avant d'engager</li>
+            </ul>
+          </div>
+          <div class="phase">
+            <h4>Phase 2 — Kel'Thuzad</h4>
+            <ul>
+              <li><strong>Frost Blast</strong> — Joueur gelé à 1 PV · Heal d'urgence absolu immédiat</li>
+              <li><strong>Chains of Kel'Thuzad</strong> — MC d'un joueur · Les autres le CC ou le tuent rapidement</li>
+              <li><strong>Guardians of Icecrown à 40%</strong> — Le tank grab immédiatement, DPS ignore</li>
+            </ul>
+          </div>
+          <div class="phase">
+            <h4>Rôles</h4>
+            <ul>
+              <li>🛡️ <strong>Tank</strong> — Grab les Guardians à l'apparition · Tenir KT stable</li>
+              <li>💚 <strong>Heal</strong> — Frost Blast = réaction immédiate · Soins de raid constants</li>
+              <li>⚔️ <strong>DPS</strong> — Focus KT · CC les joueurs MC · AoE les Guardians</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</main>
+
+<script>Layout.footer({ baseUrl: '../' });</script>
+</body>
+</html>

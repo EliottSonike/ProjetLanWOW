@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carte des Raids — LAN Du Swag</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/layout.js"></script>
+</head>
+<body>
+<script>Layout.header({ baseUrl: '', activeNav: 'carte' });</script>
+
+<main>
+
+  <section class="section-title container">
+    <h2>🗺️ Carte des Raids</h2>
+    <p>Northrend · Survolez un marqueur pour les détails</p>
+  </section>
+
+  <div class="raid-map-container raid-map-fullpage"
+       style="background-image:url('assets/img/map-northrend.jpg');background-size:cover;background-position:center top;background-color:#0a0818;">
+
+    <!-- Overlay sombre -->
+    <div class="raid-map-overlay"></div>
+
+    <!-- ===== NORTHREND ===== -->
+
+    <!-- Icecrown Citadel — nord d'Icecrown -->
+    <div class="raid-pin" style="left:27%;top:13%" data-raid="icc">
+      <div class="raid-pin-dot diff-hard"></div>
+      <div class="raid-pin-label">ICC</div>
+      <div class="raid-pin-popup">
+        <strong>❄️ Icecrown Citadel</strong>
+        <span>12 boss · Phase 4</span>
+        <span class="rpp-zone">Icecrown, Northrend</span>
+        <a href="strategies/icc.html" class="rpp-link">Voir la stratégie →</a>
+      </div>
+    </div>
+
+    <!-- Trial of the Crusader — Champ de l'Argent, nord-est Icecrown -->
+    <div class="raid-pin" style="left:37%;top:26%" data-raid="toc">
+      <div class="raid-pin-dot diff-medium"></div>
+      <div class="raid-pin-label">ToC</div>
+      <div class="raid-pin-popup">
+        <strong>⚔️ Trial of the Crusader</strong>
+        <span>5 encounters · Phase 3</span>
+        <span class="rpp-zone">Icecrown, Northrend</span>
+        <a href="strategies/toc.html" class="rpp-link">Voir la stratégie →</a>
+      </div>
+    </div>
+
+    <!-- Ulduar — Storm Peaks -->
+    <div class="raid-pin" style="left:67%;top:22%" data-raid="ulduar">
+      <div class="raid-pin-dot diff-hard"></div>
+      <div class="raid-pin-label">Ulduar</div>
+      <div class="raid-pin-popup">
+        <strong>⚙️ Ulduar</strong>
+        <span>14 boss + Algalon · Phase 2</span>
+        <span class="rpp-zone">Storm Peaks, Northrend</span>
+        <a href="strategies/ulduar.html" class="rpp-link">Voir la stratégie →</a>
+      </div>
+    </div>
+
+    <!-- Eye of Eternity — Coldarra, côte ouest Borean Tundra -->
+    <div class="raid-pin" style="left:5%;top:41%" data-raid="eoe">
+      <div class="raid-pin-dot diff-hard"></div>
+      <div class="raid-pin-label">EoE</div>
+      <div class="raid-pin-popup">
+        <strong>🌌 Eye of Eternity</strong>
+        <span>1 boss · 3 phases · Phase 1</span>
+        <span class="rpp-zone">Coldarra, Borean Tundra</span>
+        <a href="strategies/eoe.html" class="rpp-link">Voir la stratégie →</a>
+      </div>
+    </div>
+
+    <!-- Vault of Archavon — Forteresse de Joug-d'hiver -->
+    <div class="raid-pin" style="left:31%;top:51%" data-raid="voa">
+      <div class="raid-pin-dot diff-easy"></div>
+      <div class="raid-pin-label">VoA</div>
+      <div class="raid-pin-popup">
+        <strong>🏛️ Vault of Archavon</strong>
+        <span>4 boss · Phase 1</span>
+        <span class="rpp-zone">Joug-d'hiver, Northrend</span>
+        <a href="strategies/voa.html" class="rpp-link">Voir la stratégie →</a>
+      </div>
+    </div>
+
+    <!-- Naxxramas — Désolation des dragons, nord-est -->
+    <div class="raid-pin" style="left:58%;top:55%" data-raid="naxx">
+      <div class="raid-pin-dot diff-medium"></div>
+      <div class="raid-pin-label">Naxx</div>
+      <div class="raid-pin-popup">
+        <strong>💀 Naxxramas</strong>
+        <span>15 boss · 5 ailes · Phase 1</span>
+        <span class="rpp-zone">Désolation des dragons, Northrend</span>
+        <a href="strategies/naxxramas.html" class="rpp-link">Voir la stratégie →</a>
+      </div>
+    </div>
+
+    <!-- Obsidian Sanctum — Désolation des dragons -->
+    <div class="raid-pin" style="left:53%;top:63%" data-raid="os">
+      <div class="raid-pin-dot diff-medium"></div>
+      <div class="raid-pin-label">OS</div>
+      <div class="raid-pin-popup">
+        <strong>🔥 Obsidian Sanctum</strong>
+        <span>4 boss · Phase 1</span>
+        <span class="rpp-zone">Désolation des dragons, Northrend</span>
+        <a href="strategies/os.html" class="rpp-link">Voir la stratégie →</a>
+      </div>
+    </div>
+
+    <!-- Ruby Sanctum — Désolation des dragons -->
+    <div class="raid-pin" style="left:60%;top:60%" data-raid="ruby">
+      <div class="raid-pin-dot diff-hard"></div>
+      <div class="raid-pin-label">RS</div>
+      <div class="raid-pin-popup">
+        <strong>🔴 Ruby Sanctum</strong>
+        <span>4 boss · Phase 4</span>
+        <span class="rpp-zone">Désolation des dragons, Northrend</span>
+        <a href="strategies/ruby-sanctum.html" class="rpp-link">Voir la stratégie →</a>
+      </div>
+    </div>
+
+    <!-- Labels zones -->
+    <div class="map-region-label" style="left:27%;top:35%">Icecrown</div>
+    <div class="map-region-label" style="left:67%;top:12%">Storm Peaks</div>
+    <div class="map-region-label" style="left:55%;top:45%">Désolation des dragons</div>
+    <div class="map-region-label" style="left:14%;top:62%">Borean Tundra</div>
+    <div class="map-region-label" style="left:30%;top:42%">Joug-d'hiver</div>
+
+    <!-- Légende -->
+    <div class="raid-map-legend">
+      <div class="rml-item"><span class="rml-dot diff-easy"></span> Facile</div>
+      <div class="rml-item"><span class="rml-dot diff-medium"></span> Moyen</div>
+      <div class="rml-item"><span class="rml-dot diff-hard"></span> Difficile</div>
+    </div>
+
+    <!-- Inset Onyxia (Kalimdor) -->
+    <div class="onyxia-inset">
+      <div class="onyxia-inset-title">🌿 Kalimdor</div>
+      <div class="onyxia-inset-body">
+        <div class="raid-pin-inline" data-raid="onyxia">
+          <div class="raid-pin-dot diff-medium"></div>
+          <span class="raid-pin-label">Onyxia</span>
+          <div class="raid-pin-popup raid-pin-popup-right">
+            <strong>🐉 Onyxia's Lair</strong>
+            <span>1 boss · 3 phases · Phase 2</span>
+            <span class="rpp-zone">Dustwallow Marsh, Kalimdor</span>
+            <a href="strategies/onyxia.html" class="rpp-link">Voir la stratégie →</a>
+          </div>
+        </div>
+        <span class="onyxia-zone">Dustwallow Marsh</span>
+      </div>
+    </div>
+
+  </div>
+
+</main>
+
+<script>Layout.footer({ baseUrl: '' });</script>
+</body>
+</html>

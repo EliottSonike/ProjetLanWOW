@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ulduar — LAN Du Swag</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <script src="../js/layout.js"></script>
+</head>
+<body>
+<script>Layout.header({ baseUrl: '../', activeNav: 'strategies' });</script>
+
+<main class="container">
+
+  <p class="breadcrumb"><a href="index.html">Stratégies</a> › <span>Ulduar</span></p>
+
+  <section class="section-title">
+    <h2>⚙️ Ulduar</h2>
+    <p>Prison du dieu ancien Yogg-Saron · 14 boss + Algalon · Phase 2</p>
+  </section>
+
+  <!-- LE SIÈGE -->
+  <div class="strat-wing">
+    <div class="wing-header">🚗 Le Siège d'Ulduar</div>
+
+    <div class="boss-card">
+      <div class="boss-card-header">
+        <h3>🚂 Flame Leviathan <span class="difficulty-badge diff-easy">Facile</span></h3>
+        <span class="boss-collapse-arrow">▼</span>
+      </div>
+      <div class="boss-card-body">
+        <div class="boss-phases">
+          <div class="phase">
+            <h4>Mécaniques (combat en véhicule)</h4>
+            <ul>
+              <li><strong>Véhicules</strong> — Demolishers (2 places), motards, catapultes · Chaque rôle compte</li>
+              <li><strong>Overload Circuit</strong> — Catapulte lance un motard sur FL · Le motard détruit les tourelles sur le dos</li>
+              <li><strong>Pyrite</strong> — Recharger les véhicules avec les citernes de pyrite au sol</li>
+            </ul>
+          </div>
+          <div class="phase">
+            <h4>Rôles</h4>
+            <ul>
+              <li>🛡️ <strong>Tank (Demolisher)</strong> — Driver le demolisher, absorber l'aggro</li>
+              <li>💚 <strong>Heal (siège passager)</strong> — Réparer les véhicules alliés depuis le siège</li>
+              <li>⚔️ <strong>DPS</strong> — Motard sur les tourelles · Demolisher DPS FL</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="boss-card">
+      <div class="boss-card-header">
+        <h3>🔥 Ignis the Furnace Master <span class="difficulty-badge diff-medium">Moyen</span></h3>
+        <span class="boss-collapse-arrow">▼</span>
+      </div>
+      <div class="boss-card-body">
+        <div class="boss-phases">
+          <div class="phase">
+            <h4>Mécaniques</h4>
+            <ul>
+              <li><strong>Scorch</strong> — Ignis trace un sillage de feu · Le tank kite en évitant de repasser dessus</li>
+              <li><strong>Slag Pot</strong> — Joueur dans le chaudron · Les DPS burst heal ce joueur / le heal priorité absolue</li>
+              <li><strong>Iron Constructs</strong> — Kiter dans l'eau pour les rendre Brittle, puis briser d'un coup</li>
+            </ul>
+          </div>
+          <div class="phase">
+            <h4>Rôles</h4>
+            <ul>
+              <li>🛡️ <strong>Tank</strong> — Kite Ignis loin des sillages de feu</li>
+              <li>💚 <strong>Heal</strong> — Burst heal le joueur dans le Slag Pot</li>
+              <li>⚔️ <strong>DPS</strong> — Kiter les constructs dans l'eau, les briser en Brittle</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="boss-card">
+      <div class="boss-card-header">
+        <h3>🦅 Razorscale <span class="difficulty-badge diff-medium">Moyen</span></h3>
+        <span class="boss-collapse-arrow">▼</span>
+      </div>
+      <div class="boss-card-body">
+        <div class="boss-phases">
+          <div class="phase">
+            <h4>Mécaniques</h4>
+            <ul>
+              <li><strong>Phase aérienne</strong> — Activer les harpons (Expedition Engineers) pour clouer Razorscale au sol</li>
+              <li><strong>Devouring Flame</strong> — Éviter les zones de feu bleu au sol</li>
+              <li><strong>Phase sol</strong> — Une fois clouée, DPS burst · Recommence à s'envoler après</li>
+            </ul>
+          </div>
+          <div class="phase">
+            <h4>Rôles</h4>
+            <ul>
+              <li>🛡️ <strong>Tank</strong> — Tanker Razorscale quand elle est au sol + gérer les adds</li>
+              <li>💚 <strong>Heal</strong> — Soins de raid (Devouring Flame), burst quand elle est au sol</li>
+              <li>⚔️ <strong>DPS</strong> — Activer les harpons, DPS max au sol</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="boss-card">
+      <div class="boss-card-header">
+        <h3>🤖 XT-002 Deconstructor <span class="difficulty-badge diff-medium">Moyen</span></h3>
+        <span class="boss-collapse-arrow">▼</span>
+      </div>
+      <div class="boss-card-body">
+        <div class="boss-phases">
+          <div class="phase">
+            <h4>Mécaniques</h4>
+            <ul>
+              <li><strong>Tympanic Tantrum</strong> — Dégâts en % des PV max sur tout le raid · Heal intensif pendant 8 sec</li>
+              <li><strong>Gravity Bomb</strong> — Joueur marqué en or · Sortir du groupe immédiatement</li>
+              <li><strong>Light Bomb</strong> — Joueur marqué en blanc · Rester sur le groupe</li>
+              <li><strong>Phase cœur</strong> — Le cœur est exposé · DPS burst · (HM : ne pas le tuer = pas d'adds)</li>
+            </ul>
+          </div>
+          <div class="phase">
+            <h4>Rôles</h4>
+            <ul>
+              <li>🛡️ <strong>Tank</strong> — Tenir XT face au mur · Tanker les Pummelers pendant la phase cœur</li>
+              <li>💚 <strong>Heal</strong> — Burst raid pendant Tympanic Tantrum</li>
+              <li>⚔️ <strong>DPS</strong> — Réagir vite aux bombes · Burst cœur en phase</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- L'ANTICHAMBRE -->
+  <div class="strat-wing">
+    <div class="wing-header">🏛️ L'Antichambre</div>
+
+    <div class="boss-card">
+      <div class="boss-card-header">
+        <h3>⚙️ Assembly of Iron <span class="difficulty-badge diff-hard">Difficile</span></h3>
+        <span class="boss-collapse-arrow">▼</span>
+      </div>
+      <div class="boss-card-body">
+        <div class="boss-phases">
+          <div class="phase">
+            <h4>Mécaniques</h4>
+            <ul>
+              <li><strong>Ordre de mort</strong> — Tuer Brundir, puis Molgeim, Steelbreaker en dernier · Chaque mort buff le suivant</li>
+              <li><strong>Fusion Punch (Steelbreaker)</strong> — Interrupt obligatoire · Ignore sinon l'enrage est fatal</li>
+              <li><strong>Rune of Power</strong> — Ne jamais rester dans les runes de Molgeim</li>
+            </ul>
+          </div>
+          <div class="phase">
+            <h4>Rôles</h4>
+            <ul>
+              <li>🛡️ <strong>Tank</strong> — Séparer les trois bosses · Un tank par géant</li>
+              <li>💚 <strong>Heal</strong> — Soins intensifs quand Steelbreaker est seul (très dangereux)</li>
+              <li>⚔️ <strong>DPS</strong> — Brundir → Molgeim → Steelbreaker · Interrupt Fusion Punch</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="boss-card">
+      <div class="boss-card-header">
+        <h3>🗿 Kologarn <span class="difficulty-badge diff-medium">Moyen</span></h3>
+        <span class="boss-collapse-arrow">▼</span>
+      </div>
+      <div class="boss-card-body">
+        <div class="boss-phases">
+          <div class="phase">
+            <h4>Mécaniques</h4>
+            <ul>
+              <li><strong>Bras droit</strong> — Provoque Shockwave sur le raid si actif · Détruire en priorité</li>
+              <li><strong>Bras gauche</strong> — Grab aléatoire · Détruire pour libérer le joueur</li>
+              <li><strong>Focused Eyebeam</strong> — Laser sur un joueur · Courir en cercle pour ne pas le laisser traverser le raid</li>
+            </ul>
+          </div>
+          <div class="phase">
+            <h4>Rôles</h4>
+            <ul>
+              <li>🛡️ <strong>Tank</strong> — Face à Kologarn, dos au raid</li>
+              <li>💚 <strong>Heal</strong> — Heal le joueur grab · Soins de raid pendant l'Eyebeam</li>
+              <li>⚔️ <strong>DPS</strong> — Bras droit → bras gauche → boss</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="boss-card">
+      <div class="boss-card-header">
+        <h3>🐱 Auriaya <span class="difficulty-badge diff-hard">Difficile</span></h3>
+        <span class="boss-collapse-arrow">▼</span>
+      </div>
+      <div class="boss-card-body">
+        <div class="boss-phases">
+          <div class="phase">
+            <h4>Mécaniques</h4>
+            <ul>
+              <li><strong>Pull difficile</strong> — Auriaya patrouille avec 4 chats · Puller sans déclencher les chats = presque impossible · Préparer un CC</li>
+              <li><strong>Sanctum Sentry</strong> — AoE ou CC les chats dès le pull</li>
+              <li><strong>Feral Defender</strong> — Fantôme de chat · Ignorer ou tuer rapidement (9 vies)</li>
+            </ul>
+          </div>
+          <div class="phase">
+            <h4>Rôles</h4>
+            <ul>
+              <li>🛡️ <strong>Tank</strong> — Tanker Auriaya + grab les chats immédiatement</li>
+              <li>💚 <strong>Heal</strong> — Soins de raid pendant le chaos du pull</li>
+              <li>⚔️ <strong>DPS</strong> — AoE les chats, puis focus Auriaya</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LES GARDIENS -->
+  <div class="strat-wing">
+    <div class="wing-header">🔑 Les Gardiens</div>
+
+    <div class="boss-card">
+      <div class="boss-card-header">
+        <h3>❄️ Hodir <span class="difficulty-badge diff-medium">Moyen</span></h3>
+        <span class="boss-collapse-arrow">▼</span>
+      </div>
+      <div class="boss-card-body">
+        <div class="boss-phases">
+          <div class="phase">
+            <h4>Mécaniques</h4>
+            <ul>
+              <li><strong>Frozen</strong> — Joueur gelé · Frapper physiquement pour libérer (pas de sort)</li>
+              <li><strong>Storm Cloud</strong> — Buff de hâte · Rester collé au joueur avec le buff pour le partager</li>
+              <li><strong>Icicles</strong> — Stalactites qui tombent · Ne pas rester sous les ombres au sol</li>
+            </ul>
+          </div>
+          <div class="phase">
+            <h4>Rôles</h4>
+            <ul>
+              <li>🛡️ <strong>Tank</strong> — Rester dans la neige (bonus de hâte) · Libérer les gelés</li>
+              <li>💚 <strong>Heal</strong> — Profiter du Storm Cloud · Rester mobile</li>
+              <li>⚔️ <strong>DPS</strong> — Se placer dans la neige · Libérer les gelés rapidement</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="boss-card">
+      <div class="boss-card-header">
+        <h3>⚡ Thorim <span class="difficulty-badge diff-hard">Difficile</span></h3>
+        <span class="boss-collapse-arrow">▼</span>
+      </div>
+      <div class="boss-card-body">
+        <div class="boss-phases">
+          <div class="phase">
+            <h4>Phase 1 — Split</h4>
+            <ul>
+              <li><strong>Arène</strong> — Tank + heal restent dans l'arène, gèrent les adds</li>
+              <li><strong>Couloir</strong> — 2-3 DPS foncent dans le couloir, tuent les adds pour atteindre Thorim</li>
+              <li>Dès qu'un joueur du couloir engage Thorim = Phase 2</li>
+            </ul>
+          </div>
+          <div class="phase">
+            <h4>Phase 2 — Thorim en arène</h4>
+            <ul>
+              <li><strong>Unbalancing Strike</strong> — Tank swap si tank unique · CD déf</li>
+              <li><strong>Thunderstruck</strong> — Spread · Ne pas être groupé</li>
+            </ul>
+          </div>
+          <div class="phase">
+            <h4>Rôles</h4>
+            <ul>
+              <li>🛡️ <strong>Tank</strong> — Arène en P1 · Tanker Thorim en P2</li>
+              <li>💚 <strong>Heal</strong> — Heal l'arène en P1, tout le monde en P2</li>
+              <li>⚔️ <strong>DPS</strong> — Couloir en priorité · DPS Thorim en P2</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="boss-card">
+      <div class="boss-card-header">
+        <h3>🌿 Freya <span class="difficulty-badge diff-hard">Difficile</span></h3>
+        <span class="boss-collapse-arrow">▼</span>
+      </div>
+      <div class="boss-card-body">
+        <div class="boss-phases">
+          <div class="phase">
+            <h4>Mécaniques</h4>
+            <ul>
+              <li><strong>Trio d'arbres</strong> — Tuer Elder Brightleaf, Elder Stonebark, Elder Ironbranch avant Freya · Chaque ancien actif la buff massivement</li>
+              <li><strong>Sunbeam</strong> — Sortir immédiatement du faisceau lumineux</li>
+              <li><strong>Nature Bomb</strong> — Disperse-toi · Explosion AoE si joueur dans le rayon</li>
+            </ul>
+          </div>
+          <div class="phase">
+            <h4>Rôles</h4>
+            <ul>
+              <li>🛡️ <strong>Tank</strong> — Tanker Freya + gérer les vagues d'adds</li>
+              <li>💚 <strong>Heal</strong> — Soins de raid continus · Sortir vite du Sunbeam</li>
+              <li>⚔️ <strong>DPS</strong> — Anciens en priorité, puis Freya</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="boss-card">
+      <div class="boss-card-header">
+        <h3>🤖 Mimiron <span class="difficulty-badge diff-hard">Difficile</span></h3>
+        <span class="boss-collapse-arrow">▼</span>
+      </div>
+      <div class="boss-card-body">
+        <div class="boss-phases">
+          <div class="phase">
+            <h4>P1 — VX-001 (bas)</h4>
+            <ul>
+              <li><strong>Napalm Shell</strong> — AoE au sol · Bouger</li>
+              <li><strong>Shock Blast</strong> — Interrupt ou sortir du cône</li>
+            </ul>
+          </div>
+          <div class="phase">
+            <h4>P2 — Aerial Command Unit (en l'air)</h4>
+            <ul>
+              <li><strong>Plasma Ball</strong> — DPS la machine depuis le sol</li>
+              <li><strong>Bombots</strong> — Tuer les bombots avant qu'ils explosent</li>
+            </ul>
+          </div>
+          <div class="phase">
+            <h4>P3 — Leviathan MkII (tête)</h4>
+            <ul>
+              <li><strong>Head First</strong> — Laser frontal · Ne jamais être devant</li>
+            </ul>
+          </div>
+          <div class="phase">
+            <h4>P4 — Full Mimiron (les 3 parties ensemble)</h4>
+            <ul>
+              <li>Tout en simultané · Focus tête → corps → bas dans l'ordre</li>
+              <li>La partie la moins chargée en HP régénère · Équilibrer les dégâts</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SANCTUAIRE INTÉRIEUR -->
+  <div class="strat-wing">
+    <div class="wing-header">🌑 Le Sanctuaire Intérieur</div>
+
+    <div class="boss-card">
+      <div class="boss-card-header">
+        <h3>👁️ General Vezax <span class="difficulty-badge diff-hard">Difficile</span></h3>
+        <span class="boss-collapse-arrow">▼</span>
+      </div>
+      <div class="boss-card-body">
+        <div class="boss-phases">
+          <div class="phase">
+            <h4>Mécaniques</h4>
+            <ul>
+              <li><strong>Saronite Vapor</strong> — Les flaques de vapeur regénèrent le mana mais accumulent des stacks · Max 5 stacks sinon fatal</li>
+              <li><strong>Shadow Crash</strong> — Projectile au sol · Éviter à tout prix · Le heal ne peut pas soigner depuis l'intérieur d'une flaque</li>
+              <li><strong>Surge of Darkness</strong> — Enrage court · Tank CD déf ou kite</li>
+            </ul>
+          </div>
+          <div class="phase">
+            <h4>Rôles</h4>
+            <ul>
+              <li>🛡️ <strong>Tank</strong> — CD déf pendant Surge of Darkness · Rester loin des vapeurs</li>
+              <li>💚 <strong>Heal</strong> — Absorber les vapeurs avec parcimonie (mana) · Soigner sans entrer dans les flaques</li>
+              <li>⚔️ <strong>DPS</strong> — Éviter Shadow Crash · Gérer son mana avec les vapeurs</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="boss-card">
+      <div class="boss-card-header">
+        <h3>🐙 Yogg-Saron <span class="difficulty-badge diff-hard">Difficile</span></h3>
+        <span class="boss-collapse-arrow">▼</span>
+      </div>
+      <div class="boss-card-body">
+        <div class="boss-phases">
+          <div class="phase">
+            <h4>P1 — Sara</h4>
+            <ul>
+              <li>Tuer les Guardians et Corruptors · Ne pas regarder la bouche de Sara (folie)</li>
+              <li>Accumuler des Cloud of Darkness pour ouvrir le portail vers P2</li>
+            </ul>
+          </div>
+          <div class="phase">
+            <h4>P2 — Le cerveau</h4>
+            <ul>
+              <li>Entrer dans le portail vers le cerveau · Briser les chaînes · Ne pas regarder les tentacules (folie instantanée)</li>
+              <li>Tuer les tentacules de portail pour passer à P3</li>
+            </ul>
+          </div>
+          <div class="phase">
+            <h4>P3 — Yogg-Saron</h4>
+            <ul>
+              <li>Focus Yogg · Gérer les Guardians of Yogg-Saron (silence de zone)</li>
+              <li>Plus on tarde, plus les illusions mentales deviennent fréquentes</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ALGALON -->
+  <div class="strat-wing">
+    <div class="wing-header">🌌 Planétarium Céleste — Bonus</div>
+
+    <div class="boss-card">
+      <div class="boss-card-header">
+        <h3>⭐ Algalon the Observer <span class="difficulty-badge diff-hard">Légendaire</span></h3>
+        <span class="boss-collapse-arrow">▼</span>
+      </div>
+      <div class="boss-card-body">
+        <div class="boss-phases">
+          <div class="phase">
+            <h4>Mécaniques</h4>
+            <ul>
+              <li><strong>Big Bang</strong> — Wipe raid total · Se jeter dans un trou noir (Black Hole) pour survivre</li>
+              <li><strong>Collapsing Star</strong> — S'éloigner avant que l'étoile explose · Crée un trou noir</li>
+              <li><strong>Cosmic Smash</strong> — Zone d'impact au sol · Sortir immédiatement</li>
+              <li><strong>30 min</strong> — Timer de 1h par semaine · Algalon disparaît après 1h de tentatives cumulées</li>
+            </ul>
+          </div>
+          <div class="phase">
+            <h4>Rôles</h4>
+            <ul>
+              <li>🛡️ <strong>Tank</strong> — Tenir Algalon · Se jeter dans le trou noir au Big Bang</li>
+              <li>💚 <strong>Heal</strong> — Soins intensifs · Anticiper le Big Bang pour heal avant</li>
+              <li>⚔️ <strong>DPS</strong> — Gérer les Collapsing Stars · Se jeter dans le trou au Big Bang</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</main>
+
+<script>Layout.footer({ baseUrl: '../' });</script>
+</body>
+</html>

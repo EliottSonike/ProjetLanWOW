@@ -1,0 +1,276 @@
+﻿<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NomPerso — LAN Du Swag</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <script src="../js/layout.js"></script>
+</head>
+<body>
+<script>Layout.header({ baseUrl: '../', activeNav: 'swaggeurs' });</script>
+
+<main class="container">
+
+    <p class="breadcrumb">
+      <a href="../index.html">Protagonistes</a> › <span>NomPerso</span>
+    </p>
+
+    <!-- ====== EN-TÊTE PERSONNAGE ====== -->
+    <div class="char-page-header">
+      <div class="char-page-icon"></div><!-- Remplacer par l'emoji de la classe -->
+      <div class="char-page-title">
+        <h1>NomPerso</h1>
+        <div class="class-label warrior">Warrior</div><!-- Changer la classe CSS selon la classe WoW -->
+        <div class="spec-label">Arms · Niveau 80</div>
+      </div>
+    </div>
+
+    <!-- ====== ONGLETS ====== -->
+    <nav class="tabs-nav">
+      <button class="tab-btn active" data-tab="talents">Talents</button>
+      <button class="tab-btn" data-tab="bis">BiS List</button>
+      <button class="tab-btn" data-tab="rotation">Rotation</button>
+    </nav>
+
+    <!-- ====== ONGLET TALENTS ====== -->
+    <section id="talents" class="tab-panel active">
+
+      <div class="content-card">
+        <h3>Build de talents — Arms 51/5/15</h3>
+        <a class="talent-link" href="https://wotlk.evowow.com/?talent#" target="_blank" rel="noopener">
+          🔗 Voir le build sur WoWHead / Evowow
+        </a>
+        <p class="talent-points">Points : 51 Arms · 5 Fury · 15 Prot</p>
+        <div class="talent-note">
+          Remplacer ce lien par votre propre build. Sur WotLK Evowow ou Wowhead Classic,
+          construisez votre arbre de talents puis copiez l'URL.
+        </div>
+      </div>
+
+      <div class="content-card">
+        <h3>Justification des talents clés</h3>
+        <ul style="padding-left:1.2rem; display:flex; flex-direction:column; gap:0.4rem; font-size:0.88rem; color:var(--text-muted);">
+          <li><strong style="color:var(--gold-light)">Talent A</strong> — Explication de pourquoi ce talent est pris.</li>
+          <li><strong style="color:var(--gold-light)">Talent B</strong> — Explication.</li>
+          <li><strong style="color:var(--gold-light)">Talent C</strong> — Explication.</li>
+        </ul>
+      </div>
+
+      <div class="content-card">
+        <h3>Glyphes</h3>
+        <ul style="padding-left:1.2rem; display:flex; flex-direction:column; gap:0.4rem; font-size:0.88rem; color:var(--text-muted);">
+          <li><strong style="color:var(--gold-light)">Glyphe majeur 1</strong> — Explication.</li>
+          <li><strong style="color:var(--gold-light)">Glyphe majeur 2</strong> — Explication.</li>
+          <li><strong style="color:var(--gold-light)">Glyphe majeur 3</strong> — Explication.</li>
+          <li><strong style="color:var(--gold-light)">Glyphe mineur</strong> — Qualité de vie.</li>
+        </ul>
+      </div>
+
+    </section>
+
+    <!-- ====== ONGLET BiS LIST ====== -->
+    <section id="bis" class="tab-panel">
+
+      <div class="content-card">
+        <h3>Stats cibles (pré-raid / Phase 1)</h3>
+        <div class="stats-grid">
+          <div class="stat-item">
+            <span class="stat-label">Hit</span>
+            <span class="stat-value">263</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-label">Expertise</span>
+            <span class="stat-value">26</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-label">Crit</span>
+            <span class="stat-value">>40%</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-label">AP</span>
+            <span class="stat-value">>3 500</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-label">ArP</span>
+            <span class="stat-value">>600</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="content-card">
+        <h3>Best in Slot — Phase 1 (Naxxramas)</h3>
+        <table class="bis-table">
+          <thead>
+            <tr>
+              <th>Emplacement</th>
+              <th>Objet</th>
+              <th>Source</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="slot-label">Tête</td>
+              <td class="item-quality-epic"><a href="https://www.wowhead.com/wotlk/item=45519">Helm of the Faceless</a></td>
+              <td class="item-source">Ulduar · General Vezax</td>
+            </tr>
+            <tr>
+              <td class="slot-label">Cou</td>
+              <td class="item-quality-epic"><a href="https://www.wowhead.com/wotlk/item=40078">Pendant of the Dragonsworn</a></td>
+              <td class="item-source">Naxxramas · Sapphiron</td>
+            </tr>
+            <tr>
+              <td class="slot-label">Épaules</td>
+              <td class="item-quality-epic"><a href="https://www.wowhead.com/wotlk/item=40543">Valorous Dreadnaught Shoulderblades</a></td>
+              <td class="item-source">Naxxramas · Loottable</td>
+            </tr>
+            <tr>
+              <td class="slot-label">Cape</td>
+              <td class="item-quality-rare"><a href="https://www.wowhead.com/wotlk/item=40303">Cloak of Tormented Skies</a></td>
+              <td class="item-source">Naxxramas · Drop</td>
+            </tr>
+            <tr>
+              <td class="slot-label">Torse</td>
+              <td class="item-quality-epic"><a href="https://www.wowhead.com/wotlk/item=40541">Valorous Dreadnaught Battleplate</a></td>
+              <td class="item-source">Naxxramas · Loottable</td>
+            </tr>
+            <tr>
+              <td class="slot-label">Brassards</td>
+              <td class="item-quality-epic"><a href="https://www.wowhead.com/wotlk/item=40205">Bindings of the Hapless Prey</a></td>
+              <td class="item-source">Naxxramas · Anub'Rekhan</td>
+            </tr>
+            <tr>
+              <td class="slot-label">Gantelets</td>
+              <td class="item-quality-epic"><a href="https://www.wowhead.com/wotlk/item=40544">Valorous Dreadnaught Gauntlets</a></td>
+              <td class="item-source">Emblèmes</td>
+            </tr>
+            <tr>
+              <td class="slot-label">Ceinture</td>
+              <td class="item-quality-epic"><a href="https://www.wowhead.com/wotlk/item=40305">Warbelt of Calamity</a></td>
+              <td class="item-source">Craft · Forgeron</td>
+            </tr>
+            <tr>
+              <td class="slot-label">Jambières</td>
+              <td class="item-quality-epic"><a href="https://www.wowhead.com/wotlk/item=39191">Heroes' Dreadnaught Legplates</a></td>
+              <td class="item-source">Emblèmes</td>
+            </tr>
+            <tr>
+              <td class="slot-label">Bottes</td>
+              <td class="item-quality-epic"><a href="https://www.wowhead.com/wotlk/item=41255">Titansteel Treads</a></td>
+              <td class="item-source">Craft · Forgeron</td>
+            </tr>
+            <tr>
+              <td class="slot-label">Anneau 1</td>
+              <td class="item-quality-epic"><a href="https://www.wowhead.com/wotlk/item=40718">Hemorrhaging Circle</a></td>
+              <td class="item-source">Naxxramas · Loottable</td>
+            </tr>
+            <tr>
+              <td class="slot-label">Anneau 2</td>
+              <td class="item-quality-epic"><a href="https://www.wowhead.com/wotlk/item=40719">Signet of the Earthshaker</a></td>
+              <td class="item-source">Naxxramas · Drop</td>
+            </tr>
+            <tr>
+              <td class="slot-label">Trinket 1</td>
+              <td class="item-quality-epic"><a href="https://www.wowhead.com/wotlk/item=42987">Darkmoon Card: Greatness</a></td>
+              <td class="item-source">Darkmoon Faire</td>
+            </tr>
+            <tr>
+              <td class="slot-label">Trinket 2</td>
+              <td class="item-quality-epic"><a href="https://www.wowhead.com/wotlk/item=40431">Fury of the Five Flights</a></td>
+              <td class="item-source">Naxxramas · Loottable</td>
+            </tr>
+            <tr>
+              <td class="slot-label">Main droite</td>
+              <td class="item-quality-epic"><a href="https://www.wowhead.com/wotlk/item=40402">Betrayer of Humanity</a></td>
+              <td class="item-source">Naxxramas · Kel'Thuzad</td>
+            </tr>
+            <tr>
+              <td class="slot-label">Main gauche</td>
+              <td class="item-quality-epic">—</td>
+              <td class="item-source">Arme à 2 mains</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </section>
+
+    <!-- ====== ONGLET ROTATION ====== -->
+    <section id="rotation" class="tab-panel">
+
+      <div class="content-card">
+        <h3>Rotation d'ouverture</h3>
+        <div class="rotation-list">
+          <div class="rotation-step">
+            <span class="step-num">1.</span>
+            <span class="step-skill">Charge</span>
+            <span class="step-desc">— Génère de la rage, permet MS direct</span>
+          </div>
+          <div class="rotation-step">
+            <span class="step-num">2.</span>
+            <span class="step-skill">Mortal Strike</span>
+            <span class="step-desc">— Priorité absolue dès que possible</span>
+          </div>
+          <div class="rotation-step">
+            <span class="step-num">3.</span>
+            <span class="step-skill">Rend</span>
+            <span class="step-desc">— Posez le DoT en ouverture</span>
+          </div>
+          <div class="rotation-step">
+            <span class="step-num">4.</span>
+            <span class="step-skill">Overpower</span>
+            <span class="step-desc">— Dès que proc disponible (priorité haute)</span>
+          </div>
+          <div class="rotation-step">
+            <span class="step-num">5.</span>
+            <span class="step-skill">Execute</span>
+            <span class="step-desc">— À partir de 20% HP · remplace tout</span>
+          </div>
+          <div class="rotation-step">
+            <span class="step-num">6.</span>
+            <span class="step-skill">Slam</span>
+            <span class="step-desc">— Filler entre les GCDs</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="content-card">
+        <h3>Cooldowns à gérer</h3>
+        <div class="rotation-list">
+          <div class="rotation-step">
+            <span class="step-num">CD</span>
+            <span class="step-skill">Bladestorm</span>
+            <span class="step-desc">— Sur pull ou multi-cibles · 1min 30s</span>
+          </div>
+          <div class="rotation-step">
+            <span class="step-num">CD</span>
+            <span class="step-skill">Death Wish</span>
+            <span class="step-desc">— Avec trinket si possible · 3 min</span>
+          </div>
+          <div class="rotation-step">
+            <span class="step-num">CD</span>
+            <span class="step-skill">Recklessness</span>
+            <span class="step-desc">— Synchro avec DW · 30 min</span>
+          </div>
+        </div>
+        <div class="rotation-note">
+          ⚡ Sur les phases de burst, utilisez Death Wish + Recklessness + trinket ensemble pour maximiser la fenêtre de dégâts.
+        </div>
+      </div>
+
+      <div class="content-card">
+        <h3>Conseils situationnels</h3>
+        <ul style="padding-left:1.2rem; display:flex; flex-direction:column; gap:0.5rem; font-size:0.88rem; color:var(--text-muted);">
+          <li>Multi-cible : Whirlwind + Cleave remplacent Slam comme filler.</li>
+          <li>Si rage starved : Heroic Strike à retarder, Berserker Rage pour les enrages.</li>
+          <li>Survivabilité : Enraged Regeneration en urgence (10% HP max immédiat).</li>
+        </ul>
+      </div>
+
+    </section>
+
+  </main>
+
+<script>Layout.footer({ baseUrl: '../' });</script>
+</body>
+</html>
