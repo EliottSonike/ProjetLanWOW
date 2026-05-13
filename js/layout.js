@@ -12,7 +12,7 @@ const Layout = (function () {
     document.write(
       '\n  <header class="site-header">' +
       '\n    <div class="header-inner">' +
-      '\n      <a href="' + b + 'accueil.html" class="header-brand">' +
+      '\n      <a href="' + b + 'index.html" class="header-brand">' +
       '\n        <div class="header-logo"><img src="' + b + 'assets/img/icons8-world-of-warcraft-48.png" alt="LOGO" class="site-logo"></div>' +
       '\n        <h1 class="site-title">' +
       '\n          <img src="' + b + 'assets/img/LanDuSwag.png" alt="LAN Du Swag" class="site-name">' +
