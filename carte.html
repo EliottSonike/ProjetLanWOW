@@ -18,141 +18,136 @@
   </section>
 
   <!--
-    Approche ratio-box : le div interne .raid-map-ratio a padding-bottom:66.67%
-    soit le ratio exact de la carte (3840×2560 = 3:2).
-    Les pins en left/top % correspondent EXACTEMENT à des % de l'image,
-    quelle que soit la résolution de l'écran.
-    Le container parent coupe à 62vh pour ne pas déborder.
+    Container : aspect-ratio 3/2 = ratio exact de l'image (3840×2560).
+    L'image remplit avec object-fit:fill (aucune distorsion, aucun crop).
+    left/top en % = coordonnées directes sur l'image.
   -->
-  <div class="raid-map-container raid-map-fullpage">
+  <div class="raid-map-container">
 
-    <!-- Ratio-box : maintient le 3:2 de l'image -->
-    <div class="raid-map-ratio">
+    <img class="raid-map-img" src="assets/img/map-northrend.jpg" alt="Carte de Northrend">
+    <div class="raid-map-overlay"></div>
 
-      <img class="raid-map-img" src="assets/img/map-northrend.jpg" alt="Carte de Northrend">
-      <div class="raid-map-overlay"></div>
+    <!--
+      Positions calculées sur l'image 3840×2560 :
+        left = x_pixel / 3840 * 100
+        top  = y_pixel / 2560 * 100
 
-      <!-- ===== PINS NORTHREND =====
-           Positions = % de l'image (3840×2560)
-           X : left% = x_px / 3840 × 100
-           Y : top%  = y_px / 2560 × 100
-      -->
+      ICC (Icecrown Citadel)        x≈1100  y≈250  → 28.6%  9.8%
+      ToC (Argent Tournament)       x≈1470  y≈490  → 38.3% 19.1%
+      Ulduar (Storm Peaks)          x≈2400  y≈450  → 62.5% 17.6%
+      EoE (Coldarra)                x≈370   y≈850  →  9.6% 33.2%
+      VoA (Wintergrasp Fortress)    x≈1260  y≈1170 → 32.8% 45.7%
+      Naxx (Dragonblight NE)        x≈2250  y≈1190 → 58.6% 46.5%
+      OS (Twilight Citadel)         x≈2030  y≈1310 → 52.9% 51.2%
+      RS (Ruby Dragonshrine)        x≈2180  y≈1270 → 56.8% 49.6%
+    -->
 
-      <!-- ICC — pointe nord d'Icecrown : ~x=1100, y=250 -->
-      <div class="raid-pin" style="left:28.6%;top:9.8%" data-raid="icc">
-        <div class="raid-pin-dot diff-hard"></div>
-        <div class="raid-pin-label">ICC</div>
-        <div class="raid-pin-popup">
-          <strong>❄️ Icecrown Citadel</strong>
-          <span>12 boss · Phase 4</span>
-          <span class="rpp-zone">Icecrown, Northrend</span>
-          <a href="strategies/icc.html" class="rpp-link">Voir la stratégie →</a>
-        </div>
+    <div class="raid-pin" style="left:28.6%;top:9.8%">
+      <div class="raid-pin-dot diff-hard"></div>
+      <div class="raid-pin-label">ICC</div>
+      <div class="raid-pin-popup">
+        <strong>❄️ Icecrown Citadel</strong>
+        <span>12 boss · Phase 4</span>
+        <span class="rpp-zone">Icecrown, Northrend</span>
+        <a href="strategies/icc.html" class="rpp-link">Voir la stratégie →</a>
       </div>
+    </div>
 
-      <!-- ToC — Argent Tournament NE d'Icecrown : ~x=1470, y=490 -->
-      <div class="raid-pin" style="left:38.3%;top:19.1%" data-raid="toc">
-        <div class="raid-pin-dot diff-medium"></div>
-        <div class="raid-pin-label">ToC</div>
-        <div class="raid-pin-popup">
-          <strong>⚔️ Trial of the Crusader</strong>
-          <span>5 encounters · Phase 3</span>
-          <span class="rpp-zone">Icecrown, Northrend</span>
-          <a href="strategies/toc.html" class="rpp-link">Voir la stratégie →</a>
-        </div>
+    <div class="raid-pin" style="left:38.3%;top:19.1%">
+      <div class="raid-pin-dot diff-medium"></div>
+      <div class="raid-pin-label">ToC</div>
+      <div class="raid-pin-popup">
+        <strong>⚔️ Trial of the Crusader</strong>
+        <span>5 encounters · Phase 3</span>
+        <span class="rpp-zone">Icecrown, Northrend</span>
+        <a href="strategies/toc.html" class="rpp-link">Voir la stratégie →</a>
       </div>
+    </div>
 
-      <!-- Ulduar — Storm Peaks SE : ~x=2400, y=450 -->
-      <div class="raid-pin" style="left:62.5%;top:17.6%" data-raid="ulduar">
-        <div class="raid-pin-dot diff-hard"></div>
-        <div class="raid-pin-label">Ulduar</div>
-        <div class="raid-pin-popup">
-          <strong>⚙️ Ulduar</strong>
-          <span>14 boss + Algalon · Phase 2</span>
-          <span class="rpp-zone">Storm Peaks, Northrend</span>
-          <a href="strategies/ulduar.html" class="rpp-link">Voir la stratégie →</a>
-        </div>
+    <div class="raid-pin" style="left:62.5%;top:17.6%">
+      <div class="raid-pin-dot diff-hard"></div>
+      <div class="raid-pin-label">Ulduar</div>
+      <div class="raid-pin-popup">
+        <strong>⚙️ Ulduar</strong>
+        <span>14 boss + Algalon · Phase 2</span>
+        <span class="rpp-zone">Storm Peaks, Northrend</span>
+        <a href="strategies/ulduar.html" class="rpp-link">Voir la stratégie →</a>
       </div>
+    </div>
 
-      <!-- EoE — Coldarra, île côte ouest : ~x=370, y=850 -->
-      <div class="raid-pin" style="left:9.6%;top:33.2%" data-raid="eoe">
-        <div class="raid-pin-dot diff-hard"></div>
-        <div class="raid-pin-label">EoE</div>
-        <div class="raid-pin-popup">
-          <strong>🌌 Eye of Eternity</strong>
-          <span>1 boss · 3 phases · Phase 1</span>
-          <span class="rpp-zone">Coldarra, Borean Tundra</span>
-          <a href="strategies/eoe.html" class="rpp-link">Voir la stratégie →</a>
-        </div>
+    <div class="raid-pin" style="left:9.6%;top:33.2%">
+      <div class="raid-pin-dot diff-hard"></div>
+      <div class="raid-pin-label">EoE</div>
+      <div class="raid-pin-popup">
+        <strong>🌌 Eye of Eternity</strong>
+        <span>1 boss · 3 phases · Phase 1</span>
+        <span class="rpp-zone">Coldarra, Borean Tundra</span>
+        <a href="strategies/eoe.html" class="rpp-link">Voir la stratégie →</a>
       </div>
+    </div>
 
-      <!-- VoA — Forteresse de Joug-d'hiver : ~x=1260, y=1170 -->
-      <div class="raid-pin" style="left:32.8%;top:45.7%" data-raid="voa">
-        <div class="raid-pin-dot diff-easy"></div>
-        <div class="raid-pin-label">VoA</div>
-        <div class="raid-pin-popup">
-          <strong>🏛️ Vault of Archavon</strong>
-          <span>4 boss · Phase 1</span>
-          <span class="rpp-zone">Joug-d'hiver, Northrend</span>
-          <a href="strategies/voa.html" class="rpp-link">Voir la stratégie →</a>
-        </div>
+    <div class="raid-pin" style="left:32.8%;top:45.7%">
+      <div class="raid-pin-dot diff-easy"></div>
+      <div class="raid-pin-label">VoA</div>
+      <div class="raid-pin-popup">
+        <strong>🏛️ Vault of Archavon</strong>
+        <span>4 boss · Phase 1</span>
+        <span class="rpp-zone">Joug-d'hiver, Northrend</span>
+        <a href="strategies/voa.html" class="rpp-link">Voir la stratégie →</a>
       </div>
+    </div>
 
-      <!-- Naxx — nord-est Désolation des dragons : ~x=2250, y=1190 -->
-      <div class="raid-pin" style="left:58.6%;top:46.5%" data-raid="naxx">
-        <div class="raid-pin-dot diff-medium"></div>
-        <div class="raid-pin-label">Naxx</div>
-        <div class="raid-pin-popup">
-          <strong>💀 Naxxramas</strong>
-          <span>15 boss · 5 ailes · Phase 1</span>
-          <span class="rpp-zone">Désolation des dragons, Northrend</span>
-          <a href="strategies/naxxramas.html" class="rpp-link">Voir la stratégie →</a>
-        </div>
+    <div class="raid-pin" style="left:58.6%;top:46.5%">
+      <div class="raid-pin-dot diff-medium"></div>
+      <div class="raid-pin-label">Naxx</div>
+      <div class="raid-pin-popup">
+        <strong>💀 Naxxramas</strong>
+        <span>15 boss · 5 ailes · Phase 1</span>
+        <span class="rpp-zone">Désolation des dragons, Northrend</span>
+        <a href="strategies/naxxramas.html" class="rpp-link">Voir la stratégie →</a>
       </div>
+    </div>
 
-      <!-- OS — Twilight Citadel, Désolation des dragons : ~x=2030, y=1310 -->
-      <div class="raid-pin" style="left:52.9%;top:51.2%" data-raid="os">
-        <div class="raid-pin-dot diff-medium"></div>
-        <div class="raid-pin-label">OS</div>
-        <div class="raid-pin-popup">
-          <strong>🔥 Obsidian Sanctum</strong>
-          <span>4 boss · Phase 1</span>
-          <span class="rpp-zone">Désolation des dragons, Northrend</span>
-          <a href="strategies/os.html" class="rpp-link">Voir la stratégie →</a>
-        </div>
+    <div class="raid-pin" style="left:52.9%;top:51.2%">
+      <div class="raid-pin-dot diff-medium"></div>
+      <div class="raid-pin-label">OS</div>
+      <div class="raid-pin-popup">
+        <strong>🔥 Obsidian Sanctum</strong>
+        <span>4 boss · Phase 1</span>
+        <span class="rpp-zone">Désolation des dragons, Northrend</span>
+        <a href="strategies/os.html" class="rpp-link">Voir la stratégie →</a>
       </div>
+    </div>
 
-      <!-- RS — Ruby Dragonshrine, Désolation des dragons : ~x=2180, y=1270 -->
-      <div class="raid-pin" style="left:56.8%;top:49.6%" data-raid="ruby">
-        <div class="raid-pin-dot diff-hard"></div>
-        <div class="raid-pin-label">RS</div>
-        <div class="raid-pin-popup">
-          <strong>🔴 Ruby Sanctum</strong>
-          <span>4 boss · Phase 4</span>
-          <span class="rpp-zone">Désolation des dragons, Northrend</span>
-          <a href="strategies/ruby-sanctum.html" class="rpp-link">Voir la stratégie →</a>
-        </div>
+    <div class="raid-pin" style="left:56.8%;top:49.6%">
+      <div class="raid-pin-dot diff-hard"></div>
+      <div class="raid-pin-label">RS</div>
+      <div class="raid-pin-popup">
+        <strong>🔴 Ruby Sanctum</strong>
+        <span>4 boss · Phase 4</span>
+        <span class="rpp-zone">Désolation des dragons, Northrend</span>
+        <a href="strategies/ruby-sanctum.html" class="rpp-link">Voir la stratégie →</a>
       </div>
+    </div>
 
-      <!-- Labels de zones (en % de l'image) -->
-      <div class="map-region-label" style="left:28%;top:31%">Icecrown</div>
-      <div class="map-region-label" style="left:64%;top:12%">Storm Peaks</div>
-      <div class="map-region-label" style="left:55%;top:42%">Désolation des dragons</div>
-      <div class="map-region-label" style="left:33%;top:42%">Joug-d'hiver</div>
+    <!-- Labels de zones -->
+    <div class="map-region-label" style="left:27%;top:30%">Icecrown</div>
+    <div class="map-region-label" style="left:64%;top:11%">Storm Peaks</div>
+    <div class="map-region-label" style="left:55%;top:43%">Désolation des dragons</div>
+    <div class="map-region-label" style="left:32%;top:41%">Joug-d'hiver</div>
 
-    </div><!-- /.raid-map-ratio -->
-
-    <!-- Légende et inset Onyxia : positionnés par rapport au container visible -->
+    <!-- Légende -->
     <div class="raid-map-legend">
       <div class="rml-item"><span class="rml-dot diff-easy"></span> Facile</div>
       <div class="rml-item"><span class="rml-dot diff-medium"></span> Moyen</div>
       <div class="rml-item"><span class="rml-dot diff-hard"></span> Difficile</div>
     </div>
 
+    <!-- Onyxia (Kalimdor) -->
     <div class="onyxia-inset">
       <div class="onyxia-inset-title">🌿 Kalimdor</div>
       <div class="onyxia-inset-body">
-        <div class="raid-pin-inline" data-raid="onyxia">
+        <div class="raid-pin-inline">
           <div class="raid-pin-dot diff-medium"></div>
           <span class="raid-pin-label">Onyxia</span>
           <div class="raid-pin-popup raid-pin-popup-right">
@@ -166,7 +161,7 @@
       </div>
     </div>
 
-  </div><!-- /.raid-map-container -->
+  </div>
 
 </main>
 
