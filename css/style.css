@@ -9,9 +9,10 @@
   --bg-card:    #12151f;
   --bg-card2:   #1a1e2e;
   --border:     #2a2e42;
-  --text:       #d4d8e8;
-  --text-muted: #7a7f9a;
-  --red:        #c44;
+  --text:           #d4d8e8;
+  --text-muted:     #7a7f9a;
+  --text-secondary: #9a9db0;
+  --red:            #c44;
   --radius:     8px;
 
   /* Couleurs de classes WoW */
