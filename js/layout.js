@@ -52,13 +52,13 @@ const Layout = (function () {
       '\n  <footer class="site-footer">' +
       '\n    <p>LAN Du Swag · Juillet 2026 · <em>Vive les gobelins et les gnomes!</em></p>' +
       '\n  </footer>' +
-      '\n\n  <script src="' + b + 'js/main.js"><\/script>' +
-      '\n  <script src="' + b + 'js/discord-widget.js"><\/script>' +
-      '\n  <script src="' + b + 'js/particles.js"><\/script>' +
-      '\n  <script src="' + b + 'js/rotation-visual.js"><\/script>' +
-      '\n  <script src="' + b + 'js/boss-maps.js"><\/script>' +
+      '\n\n  <script defer src="' + b + 'js/main.js"><\/script>' +
+      '\n  <script defer src="' + b + 'js/discord-widget.js"><\/script>' +
+      '\n  <script defer src="' + b + 'js/particles.js"><\/script>' +
+      '\n  <script defer src="' + b + 'js/rotation-visual.js"><\/script>' +
+      '\n  <script defer src="' + b + 'js/boss-maps.js"><\/script>' +
       '\n  <script>const whTooltips = {colorLinks: true, iconizeLinks: true, iconSize: \'large\', hide: {sellprice: true, ddmoreinfo: true}};<\/script>' +
-      '\n  <script src="https://wow.zamimg.com/widgets/power.js"><\/script>\n'
+      '\n  <script defer src="https://wow.zamimg.com/widgets/power.js"><\/script>\n'
     );
   }
 

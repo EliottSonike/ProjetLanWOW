@@ -1,6 +1,5 @@
 {
-  "wowPath":     "C:/WotLK5",
-  "accountName": "TON_COMPTE",
-  "webhookUrl":  "https://discord.com/api/webhooks/XXXX/YYYY",
-  "channelNote": "Le webhook pointe vers le salon Discord qui recevra les kills"
+  "wowPath":    "C:/WotLK5/WoW",
+  "webhookUrl": "https://discord.com/api/webhooks/XXXX/YYYY",
+  "players":    ["Alban", "Eliott", "Fabien", "Maël", "Tristan"]
 }
