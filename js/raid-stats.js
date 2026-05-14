@@ -225,6 +225,8 @@
     return n.toString();
   }
 
+  window.initRaidStats = init;
+
   document.addEventListener('DOMContentLoaded', init);
 
 })();

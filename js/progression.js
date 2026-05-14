@@ -197,6 +197,8 @@
     container.innerHTML = html;
   }
 
+  window.initProgression = init;
+
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);
   } else {
