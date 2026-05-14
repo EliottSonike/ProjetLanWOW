@@ -157,6 +157,24 @@
         </table>
       </div>
 
+      <!-- Wipe Analyzer -->
+      <div class="stats-section">
+        <h3 class="stats-section-title">🔥 Wipe Analyzer</h3>
+        ${buildWipeAnalyzer(bossStats)}
+      </div>
+
+      <!-- Stats fun -->
+      <div class="stats-section">
+        <h3 class="stats-section-title">🎭 Stats fun</h3>
+        ${buildFunStats(data, bossStats, deathRank)}
+      </div>
+
+      <!-- Kill Timeline -->
+      <div class="stats-section">
+        <h3 class="stats-section-title">📅 Timeline des kills</h3>
+        ${buildKillTimeline(data)}
+      </div>
+
       <!-- Historique sessions -->
       <div class="stats-section">
         <h3 class="stats-section-title">Historique des sessions</h3>
@@ -216,6 +234,122 @@
             ${b.wipes ? `<span class="sb-wipes">${b.wipes} wipe${b.wipes > 1 ? 's' : ''}</span>` : ''}
           </div>`).join('')}
       </div>
+    </div>`;
+  }
+
+  /* ── Wipe Analyzer ───────────────────────────────────────── */
+  function buildWipeAnalyzer(bossStats) {
+    const sorted = Object.entries(bossStats)
+      .map(([name, bs]) => ({ name, wipes: bs.wipes || 0 }))
+      .filter(b => b.wipes > 0)
+      .sort((a, b) => b.wipes - a.wipes);
+
+    if (!sorted.length) return '<p class="no-data">Aucun wipe — vous êtes des dieux 🎉</p>';
+
+    const max = sorted[0].wipes;
+    return `<div class="wipe-bars">
+      ${sorted.map(b => {
+        const pct = Math.round(b.wipes / max * 100);
+        const cls = b.wipes >= 15 ? 'wipe-red' : b.wipes >= 7 ? 'wipe-orange' : 'wipe-green';
+        return `<div class="wipe-row">
+          <span class="wipe-name">${b.name}</span>
+          <div class="wipe-track"><div class="wipe-fill ${cls}" style="width:${pct}%"></div></div>
+          <span class="wipe-count">${b.wipes} wipe${b.wipes>1?'s':''}</span>
+        </div>`;
+      }).join('')}
+    </div>`;
+  }
+
+  /* ── Stats fun ───────────────────────────────────────────── */
+  function buildFunStats(data, bossStats, deathRank) {
+    // Fastest kill (minutes:secondes → secondes)
+    let fastest = null;
+    data.sessions.forEach(s => {
+      s.bosses.forEach(b => {
+        if (!b.killed || !b.duration) return;
+        const parts = b.duration.split(':');
+        const secs = (+parts[0]) * 60 + (+parts[1] || 0);
+        if (!fastest || secs < fastest.secs)
+          fastest = { boss: b.name, dur: b.duration, raid: s.raid, secs };
+      });
+    });
+
+    // Most wiped boss
+    const mostWiped = Object.entries(bossStats)
+      .map(([n, bs]) => ({ name: n, wipes: bs.wipes || 0 }))
+      .sort((a, b) => b.wipes - a.wipes)[0];
+
+    // First kill date
+    let firstKill = null;
+    data.sessions.forEach(s => {
+      s.bosses.forEach(b => {
+        if (!b.killed) return;
+        if (!firstKill || s.date < firstKill.date)
+          firstKill = { boss: b.name, date: s.date, raid: s.raid };
+      });
+    });
+
+    const top = deathRank[0];
+    const cards = [
+      fastest ? `<div class="fun-card">
+        <span class="fun-ico">⚡</span>
+        <div class="fun-body">
+          <div class="fun-title">Kill le plus rapide</div>
+          <div class="fun-val">${fastest.boss}</div>
+          <div class="fun-sub">${fastest.dur} · ${fastest.raid}</div>
+        </div></div>` : '',
+      mostWiped?.wipes > 0 ? `<div class="fun-card">
+        <span class="fun-ico">😤</span>
+        <div class="fun-body">
+          <div class="fun-title">Boss le plus récalcitrant</div>
+          <div class="fun-val">${mostWiped.name}</div>
+          <div class="fun-sub">${mostWiped.wipes} wipe${mostWiped.wipes>1?'s':''}</div>
+        </div></div>` : '',
+      top?.deaths > 0 ? `<div class="fun-card">
+        <span class="fun-ico">💀</span>
+        <div class="fun-body">
+          <div class="fun-title">Joueur le plus mort</div>
+          <div class="fun-val ${ROLES[top.player]?.class||''}">${top.player}</div>
+          <div class="fun-sub">${top.deaths} mort${top.deaths>1?'s':''} au compteur</div>
+        </div></div>` : '',
+      firstKill ? `<div class="fun-card">
+        <span class="fun-ico">🎉</span>
+        <div class="fun-body">
+          <div class="fun-title">Premier kill</div>
+          <div class="fun-val">${firstKill.boss}</div>
+          <div class="fun-sub">${firstKill.date} · ${firstKill.raid}</div>
+        </div></div>` : '',
+    ].filter(Boolean);
+
+    return cards.length
+      ? `<div class="fun-grid">${cards.join('')}</div>`
+      : '<p class="no-data">Pas encore de données.</p>';
+  }
+
+  /* ── Kill Timeline ───────────────────────────────────────── */
+  function buildKillTimeline(data) {
+    const kills = [];
+    data.sessions.forEach(s => {
+      s.bosses.forEach(b => {
+        if (b.killed) kills.push({ boss:b.name, raid:s.raid, date:s.date, dur:b.duration, wipes:b.wipes||0 });
+      });
+    });
+    kills.sort((a, b) => b.date.localeCompare(a.date));
+
+    if (!kills.length) return '<p class="no-data">Aucun kill enregistré pour l\'instant.</p>';
+
+    return `<div class="kill-tl">
+      ${kills.map(k => `
+        <div class="kl-item">
+          <div class="kl-date">${k.date}</div>
+          <div class="kl-line"><div class="kl-dot"></div></div>
+          <div class="kl-content">
+            <span class="kl-boss">${k.boss}</span>
+            <span class="kl-raid">${k.raid}</span>
+            ${k.dur ? `<span class="kl-tag">⏱ ${k.dur}</span>` : ''}
+            ${k.wipes > 0 ? `<span class="kl-tag kl-wipes">💀 ${k.wipes}w</span>` : ''}
+          </div>
+        </div>`).join('')}
     </div>`;
   }
 

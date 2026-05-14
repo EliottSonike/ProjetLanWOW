@@ -3586,3 +3586,67 @@ body[data-class="deathknight"]{ --class-accent: var(--deathknight);--class-glow:
 .conso-name a { color:inherit; text-decoration:none; }
 .conso-name a:hover { text-decoration:underline; color:var(--gold-light); }
 .conso-effect { color:var(--text-muted); font-size:.8rem; }
+
+/* ===== DASHBOARD ===== */
+.db-grid { display:grid; grid-template-columns:1fr 1fr; gap:1.2rem; }
+@media(max-width:700px){ .db-grid{ grid-template-columns:1fr; } }
+.db-card-kills { grid-column: span 2; }
+@media(max-width:700px){ .db-card-kills{ grid-column:1; } }
+
+.db-card {
+  background:var(--bg-card);
+  border:1px solid var(--border);
+  border-radius:10px;
+  padding:1.2rem 1.4rem;
+}
+.db-card-label { font-size:.72rem; text-transform:uppercase; letter-spacing:.06em; color:var(--text-muted); margin-bottom:.75rem; }
+
+.db-prog-bar { height:10px; background:rgba(255,255,255,.07); border-radius:5px; overflow:hidden; margin-bottom:.5rem; }
+.db-prog-fill { height:100%; background:var(--class-accent,var(--gold)); border-radius:5px; transition:width .6s; }
+.db-prog-text { font-size:.85rem; color:var(--text-muted); }
+
+.db-kpis { display:flex; gap:1.5rem; flex-wrap:wrap; margin-bottom:.5rem; }
+.db-kpi { display:flex; flex-direction:column; }
+.db-kpi-v { font-size:1.5rem; font-weight:800; color:var(--class-accent,var(--gold)); }
+.db-kpi-l { font-size:.7rem; color:var(--text-muted); text-transform:uppercase; }
+.db-topdps { font-size:.82rem; color:var(--text-muted); }
+
+.db-kills { display:flex; flex-direction:column; gap:.4rem; margin-bottom:.6rem; }
+.db-kill { display:flex; justify-content:space-between; align-items:center; padding:.3rem 0; border-bottom:1px solid rgba(255,255,255,.05); }
+.db-kill-boss { font-weight:600; font-size:.88rem; }
+.db-kill-meta { font-size:.76rem; color:var(--text-muted); }
+.db-link { font-size:.8rem; color:var(--class-accent,var(--gold)); text-decoration:none; }
+.db-link:hover { text-decoration:underline; }
+
+/* ===== WIPE ANALYZER ===== */
+.wipe-bars { display:flex; flex-direction:column; gap:.55rem; }
+.wipe-row { display:flex; align-items:center; gap:.75rem; font-size:.84rem; }
+.wipe-name { width:13rem; flex-shrink:0; color:#ccc; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.wipe-track { flex:1; height:12px; background:rgba(255,255,255,.06); border-radius:6px; overflow:hidden; }
+.wipe-fill { height:100%; border-radius:6px; transition:width .4s; }
+.wipe-red    { background:#ef5350; }
+.wipe-orange { background:#ff9800; }
+.wipe-green  { background:#4caf50; }
+.wipe-count { width:5rem; text-align:right; color:var(--text-muted); font-size:.8rem; }
+
+/* ===== STATS FUN ===== */
+.fun-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:1rem; }
+.fun-card { display:flex; align-items:center; gap:.9rem; padding:.9rem 1rem; background:var(--bg-card2); border:1px solid var(--border); border-radius:8px; }
+.fun-ico { font-size:1.8rem; flex-shrink:0; }
+.fun-title { font-size:.7rem; text-transform:uppercase; letter-spacing:.04em; color:var(--text-muted); margin-bottom:.2rem; }
+.fun-val { font-weight:700; font-size:1rem; color:#fff; }
+.fun-sub { font-size:.76rem; color:var(--text-muted); margin-top:.15rem; }
+
+/* ===== KILL TIMELINE ===== */
+.kill-tl { display:flex; flex-direction:column; gap:0; }
+.kl-item { display:flex; align-items:flex-start; gap:.75rem; }
+.kl-date { width:6rem; flex-shrink:0; font-size:.72rem; color:var(--text-muted); padding-top:.3rem; text-align:right; }
+.kl-line { display:flex; flex-direction:column; align-items:center; flex-shrink:0; }
+.kl-dot { width:10px; height:10px; border-radius:50%; background:var(--class-accent,var(--gold)); margin:.3rem 0; flex-shrink:0; }
+.kl-line::after { content:''; width:2px; flex:1; background:rgba(255,255,255,.08); min-height:1rem; }
+.kl-item:last-child .kl-line::after { display:none; }
+.kl-content { display:flex; align-items:center; flex-wrap:wrap; gap:.4rem; padding:.2rem 0 .8rem; }
+.kl-boss { font-weight:600; font-size:.9rem; }
+.kl-raid { font-size:.75rem; color:var(--text-muted); }
+.kl-tag { font-size:.72rem; background:rgba(255,255,255,.07); border-radius:4px; padding:.1rem .4rem; color:var(--text-muted); }
+.kl-wipes { color:#ef9a9a; background:rgba(244,67,54,.1); }
