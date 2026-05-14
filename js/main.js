@@ -1,4 +1,69 @@
-// Gestion des onglets (Talents / BiS / Rotation)
+/* ── 3D Model Viewer ────────────────────────────────────────────────── */
+
+function loadScript(src) {
+  return new Promise((resolve, reject) => {
+    if (document.querySelector(`script[src="${CSS.escape ? src : src}"]`)) { resolve(); return; }
+    const s = document.createElement('script');
+    s.src = src; s.onload = resolve; s.onerror = reject;
+    document.head.appendChild(s);
+  });
+}
+
+async function load3DModel(viewerId, portraitId, charData) {
+  const viewer  = document.getElementById(viewerId);
+  const toggle  = document.getElementById('toggle3d-' + portraitId.replace('pf-', ''));
+  if (!viewer || !charData) return;
+
+  try {
+    // Chemins vers le proxy Wowhead
+    window.CONTENT_PATH = '/wow-assets/modelviewer/live/';
+    window.WOTLK_TO_RETAIL_DISPLAY_ID_API = 'https://wotlk.murlocvillage.com/api/items';
+
+    // jQuery (requis par wow-model-viewer)
+    if (!window.jQuery) await loadScript('https://code.jquery.com/jquery-3.6.4.min.js');
+
+    // viewer.min.js de Wowhead via le proxy
+    if (!window.ZamModelViewer) await loadScript('/wow-assets/modelviewer/live/viewer/viewer.min.js');
+
+    // Charge le module ES
+    const { generateModels } = await import('/js/wow-viewer/index.js');
+
+    const model = {
+      race:        charData.race        || 1,
+      gender:      charData.gender      || 0,
+      skin:        charData.skin        || 0,
+      face:        charData.face        || 0,
+      hairStyle:   charData.hairstyle   || 0,
+      hairColor:   charData.haircolor   || 0,
+      facialStyle: charData.facialstyle || 0,
+    };
+
+    await generateModels(1.5, '#' + viewerId, model, 'classic');
+
+    // Succès : affiche le toggle
+    viewer.style.display = 'block';
+    if (toggle) toggle.style.display = 'inline-flex';
+    console.log('✅ 3D model loaded');
+
+  } catch(e) {
+    console.warn('3D model viewer:', e.message);
+    viewer.remove();
+    if (toggle) toggle.remove();
+  }
+}
+
+window.toggle3DViewer = function(safeId) {
+  const pf  = document.getElementById('pf-'       + safeId);
+  const v3  = document.getElementById('viewer3d-' + safeId);
+  const btn = document.getElementById('toggle3d-' + safeId);
+  if (!pf || !v3) return;
+  const show3d = pf.style.display !== 'none';
+  pf.style.display  = show3d ? 'none' : '';
+  v3.style.display  = show3d ? 'block' : 'none';
+  if (btn) btn.textContent = show3d ? '🖼️ Portrait' : '🔮 3D';
+};
+
+// ── Gestion des onglets (Talents / BiS / Rotation)
 function initTabs() {
   const navBtns = document.querySelectorAll('.tab-btn');
   const panels = document.querySelectorAll('.tab-panel');
@@ -142,6 +207,7 @@ function renderArmoryPanel(panel, charData, meta, fromCache) {
   const eq = charData.equipment || [];
   const portrait = panel.dataset.portrait || '';
   const specClass = panel.dataset.specclass || '';
+  const safeId  = meta.name.replace(/[^a-zA-Z0-9]/g, '');
 
   const cacheNote = fromCache
     ? `<span class="paperdoll-char-phase" style="font-size:0.6rem;opacity:0.6;">Cache · ${timeAgo(fromCache)}</span>`
@@ -155,7 +221,13 @@ function renderArmoryPanel(panel, charData, meta, fromCache) {
           <div class="paperdoll-col">${left.map(s => armorySlotHTML(eq, s)).join('')}</div>
           <div class="paperdoll-center">
             <div class="paperdoll-char">
-              ${portrait ? `<div class="portrait-frame"><img class="paperdoll-char-portrait" src="${portrait}" alt="${meta.name}"></div>` : ''}
+              ${portrait ? `
+              <div id="pf-${safeId}" class="portrait-frame">
+                <img class="paperdoll-char-portrait" src="${portrait}" alt="${meta.name}">
+              </div>
+              <div id="viewer3d-${safeId}" class="viewer3d" style="display:none"></div>
+              <button id="toggle3d-${safeId}" class="viewer3d-toggle" style="display:none" onclick="toggle3DViewer('${safeId}')">🔮 3D</button>
+              ` : ''}
               <span class="paperdoll-char-name">${meta.name}</span>
               <span class="paperdoll-char-spec ${specClass}">${meta.race} · ${meta.cls}</span>
               <span class="paperdoll-char-phase">Niveau ${meta.level}</span>
@@ -169,7 +241,8 @@ function renderArmoryPanel(panel, charData, meta, fromCache) {
       </div>
     </div>`;
 
-
+  // Lance le chargement du modèle 3D en arrière-plan
+  if (portrait) load3DModel('viewer3d-' + safeId, 'pf-' + safeId, charData);
 
 }
 
