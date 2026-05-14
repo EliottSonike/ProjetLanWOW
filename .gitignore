@@ -3,3 +3,6 @@
 Thumbs.db
 .DS_Store
 data/secrets.js
+discord-bot/config.json
+discord-bot/posted.json
+discord-bot/node_modules/

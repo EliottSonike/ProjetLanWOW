@@ -1,0 +1,7 @@
+## Interface: 30300
+## Title: LAN Kill Tracker
+## Notes: Enregistre les boss kills et prend un screenshot pour LAN Du Swag
+## Author: LAN Du Swag
+## SavedVariables: LanKillTrackerDB
+
+LanKillTracker.lua
