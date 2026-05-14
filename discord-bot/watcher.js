@@ -202,18 +202,57 @@ function findScreenshot(ts) {
   } catch { return null; }
 }
 
+// ── Rôles joueurs pour les icônes Discord ────────────────────────────
+const PLAYER_ROLES = cfg.playerRoles || {
+  Alban:'dps', Eliott:'dps', Fabien:'dps', Maël:'tank', Tristan:'heal'
+};
+const ROLE_ICON = { dps:'⚔️', tank:'🛡️', heal:'💚' };
+
+function fmtNum(n) { return n>=1000 ? (n/1000).toFixed(1)+'k' : String(n||0); }
+
 // ── Discord ───────────────────────────────────────────────────────────
 function buildEmbed(kill, withImg) {
   const color = RAID_COLORS[kill.raid]||0x9b59b6;
   const dur   = kill.durationSec>0
     ? `${Math.floor(kill.durationSec/60)}:${String(kill.durationSec%60).padStart(2,'0')}` : null;
   const fields = [
-    {name:'Raid',  value:kill.raid,                      inline:true},
-    {name:'Date',  value:`${kill.date} · ${kill.hour}`,  inline:true},
-    {name:'Joueurs',value:kill.players.join(' · '),       inline:false},
+    {name:'Raid',   value:kill.raid,                     inline:true},
+    {name:'Date',   value:`${kill.date} · ${kill.hour}`, inline:true},
+    {name:'Joueurs',value:kill.players.join(' · '),      inline:false},
   ];
   if (kill.wipes>0) fields.push({name:'Wipes', value:String(kill.wipes), inline:true});
   if (dur)          fields.push({name:'Durée', value:dur,                 inline:true});
+
+  // ── Performances DPS/HPS ──────────────────────────────────────────
+  if (kill.durationSec > 0) {
+    const perfs = kill.players
+      .map(p => {
+        const dps = kill.damageBy?.[p] ? Math.round(kill.damageBy[p] / kill.durationSec) : 0;
+        const hps = kill.healBy?.[p]   ? Math.round(kill.healBy[p]   / kill.durationSec) : 0;
+        return { player:p, dps, hps };
+      })
+      .filter(p => p.dps > 0 || p.hps > 0)
+      .sort((a, b) => (b.dps||b.hps) - (a.dps||a.hps));
+
+    if (perfs.length > 0) {
+      const lines = perfs.map(p => {
+        const role = PLAYER_ROLES[p.player] || 'dps';
+        const icon = ROLE_ICON[role] || '⚔️';
+        const stat = role === 'heal'
+          ? `${fmtNum(p.hps)} HPS`
+          : `${fmtNum(p.dps)} DPS`;
+        return `${icon} **${p.player}** — ${stat}`;
+      });
+      fields.push({ name:'📊 Performances', value:lines.join('\n'), inline:false });
+    }
+  }
+
+  // ── Morts du fight ────────────────────────────────────────────────
+  if (kill.deaths?.length > 0) {
+    const deathLines = kill.deaths.map(d => `💀 **${d.player}** — ${d.cause}`);
+    fields.push({ name:'☠️ Morts', value:deathLines.join('\n'), inline:false });
+  }
+
   const embed = {
     title:(kill.first?'🎉 FIRST KILL — ':'💀 Boss Kill — ')+kill.boss,
     color, fields,
