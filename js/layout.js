@@ -57,6 +57,7 @@ const Layout = (function () {
       '\n  <script defer src="' + b + 'js/particles.js"><\/script>' +
       '\n  <script defer src="' + b + 'js/rotation-visual.js"><\/script>' +
       '\n  <script defer src="' + b + 'js/boss-maps.js"><\/script>' +
+      '\n  <script defer src="' + b + 'js/live-data.js"><\/script>' +
       '\n  <script>const whTooltips = {colorLinks: true, iconizeLinks: true, iconSize: \'large\', hide: {sellprice: true, ddmoreinfo: true}};<\/script>' +
       '\n  <script defer src="https://wow.zamimg.com/widgets/power.js"><\/script>\n'
     );
