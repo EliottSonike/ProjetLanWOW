@@ -1,0 +1,5 @@
+{
+  "wowPath":    "C:/WotLK5/WoW",
+  "webhookUrl": "https://discord.com/api/webhooks/XXXX/YYYY",
+  "players":    ["Alban", "Eliott", "Fabien", "Maël", "Tristan"]
+}

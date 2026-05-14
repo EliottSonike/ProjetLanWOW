@@ -1,0 +1,14 @@
+{
+  "name": "lan-kill-watcher",
+  "version": "1.0.0",
+  "description": "Watcher local : détecte les boss kills WoW et poste sur Discord",
+  "main": "watcher.js",
+  "scripts": {
+    "start": "node watcher.js"
+  },
+  "dependencies": {
+    "chokidar": "^3.5.3",
+    "form-data": "^4.0.0",
+    "node-fetch": "^2.7.0"
+  }
+}

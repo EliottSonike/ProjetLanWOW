@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kill Tracker — LAN Du Swag</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/layout.js"></script>
+</head>
+<body>
+<script>Layout.header({ baseUrl: '', activeNav: 'kill-tracker' });</script>
+
+<main class="container">
+
+  <section class="section-title">
+    <h2>💀 Kill Tracker</h2>
+    <p>Poste un boss kill sur Discord avec screenshot</p>
+  </section>
+
+  <div class="kt-wrapper">
+
+    <div class="kt-form content-card">
+
+      <!-- Boss selection -->
+      <div class="kt-field">
+        <label class="kt-label">Raid</label>
+        <select class="kt-select" id="kt-raid">
+          <option value="">— Sélectionner un raid —</option>
+          <optgroup label="Phase 4">
+            <option value="ICC">Icecrown Citadel</option>
+            <option value="RS">Ruby Sanctum</option>
+          </optgroup>
+          <optgroup label="Phase 3">
+            <option value="ToC">Trial of the Crusader</option>
+          </optgroup>
+          <optgroup label="Phase 2">
+            <option value="Ulduar">Ulduar</option>
+            <option value="Onyxia">Onyxia's Lair</option>
+          </optgroup>
+          <optgroup label="Phase 1">
+            <option value="Naxx">Naxxramas</option>
+            <option value="OS">Obsidian Sanctum</option>
+            <option value="EoE">Eye of Eternity</option>
+            <option value="VoA">Vault of Archavon</option>
+          </optgroup>
+        </select>
+      </div>
+
+      <div class="kt-field">
+        <label class="kt-label">Boss</label>
+        <select class="kt-select" id="kt-boss">
+          <option value="">— Sélectionner un boss —</option>
+        </select>
+      </div>
+
+      <!-- Hard mode -->
+      <div class="kt-field kt-field-inline">
+        <input type="checkbox" id="kt-hm" class="kt-checkbox">
+        <label for="kt-hm" class="kt-label-inline">Hard Mode / Heroic</label>
+      </div>
+
+      <!-- First kill -->
+      <div class="kt-field kt-field-inline">
+        <input type="checkbox" id="kt-first" class="kt-checkbox" checked>
+        <label for="kt-first" class="kt-label-inline">First Kill 🎉</label>
+      </div>
+
+      <!-- Wipes -->
+      <div class="kt-field">
+        <label class="kt-label">Nombre de wipes avant le kill</label>
+        <input type="number" class="kt-input" id="kt-wipes" min="0" value="0" placeholder="0">
+      </div>
+
+      <!-- Screenshot -->
+      <div class="kt-field">
+        <label class="kt-label">Screenshot</label>
+        <div class="kt-drop" id="kt-drop">
+          <input type="file" id="kt-file" accept="image/*" style="display:none">
+          <div class="kt-drop-inner" id="kt-drop-inner">
+            <span class="kt-drop-icon">📸</span>
+            <span>Glisse un screenshot ici ou <button class="kt-drop-btn" type="button" onclick="document.getElementById('kt-file').click()">parcourir</button></span>
+          </div>
+          <img id="kt-preview" class="kt-preview" style="display:none" alt="preview">
+        </div>
+      </div>
+
+      <!-- Message -->
+      <div class="kt-field">
+        <label class="kt-label">Message (optionnel)</label>
+        <textarea class="kt-textarea" id="kt-msg" placeholder="GG les boys ! Smooth pull..." rows="3"></textarea>
+      </div>
+
+      <!-- Submit -->
+      <button class="kt-submit" id="kt-submit" type="button">
+        <span id="kt-submit-text">Poster sur Discord</span>
+      </button>
+
+      <!-- Feedback -->
+      <div id="kt-feedback" class="kt-feedback" style="display:none"></div>
+
+    </div>
+
+    <!-- Aperçu du message Discord -->
+    <div class="kt-preview-card content-card">
+      <h4 class="kt-preview-title">Aperçu Discord</h4>
+      <div class="kt-discord-preview" id="kt-discord-preview">
+        <div class="kt-dp-bar"></div>
+        <div class="kt-dp-body">
+          <div class="kt-dp-header" id="kt-dp-header">Sélectionne un boss…</div>
+          <div class="kt-dp-fields" id="kt-dp-fields"></div>
+          <div class="kt-dp-img-wrap" id="kt-dp-img-wrap" style="display:none">
+            <img id="kt-dp-img" class="kt-dp-img" alt="">
+          </div>
+          <div class="kt-dp-msg" id="kt-dp-msg" style="display:none"></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</main>
+
+<script src="data/secrets.js"></script>
+<script src="js/kill-tracker.js"></script>
+<script>Layout.footer({ baseUrl: '' });</script>
+</body>
+</html>

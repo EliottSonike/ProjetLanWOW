@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simulateur RNG — LAN Du Swag</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/layout.js"></script>
+</head>
+<body>
+<script>Layout.header({ baseUrl: '', activeNav: 'rng' });</script>
+
+<main class="container">
+
+  <section class="section-title">
+    <h2>🎲 Simulateur RNG</h2>
+    <p>Combien de semaines avant que le RNG te sourit ?</p>
+  </section>
+
+  <div class="rng-tabs-bar">
+    <button class="rng-tab active" data-tab="dying-curse">💀 Dying Curse</button>
+    <button class="rng-tab" data-tab="drop-sim">📦 Drop Simulator</button>
+    <button class="rng-tab" data-tab="roll">🎲 /roll 100</button>
+  </div>
+
+  <!-- ─── Dying Curse ─────────────────────────────────────────── -->
+  <div class="rng-panel active" id="rng-dying-curse">
+    <div class="rng-grid">
+
+      <div class="content-card rng-controls">
+        <div class="rng-item-header">
+          <div>
+            <div class="rng-item-name">
+              <a href="https://www.wowhead.com/wotlk/item=40255" target="_blank" data-wowhead="item=40255&amp;domain=wotlk">Dying Curse</a>
+            </div>
+            <div class="rng-item-source">Kel'Thuzad · Naxxramas 25 HM</div>
+          </div>
+        </div>
+
+        <div class="rng-field">
+          <div class="rng-field-row">
+            <label class="rng-label">Taux de drop</label>
+            <span class="rng-val-badge" id="dc-rate-val">19%</span>
+          </div>
+          <input type="range" class="rng-slider" id="dc-rate" min="1" max="50" value="19">
+        </div>
+
+        <div class="rng-field">
+          <div class="rng-field-row">
+            <label class="rng-label">Semaines farm sans drop</label>
+            <span class="rng-val-badge" id="dc-weeks-val">0</span>
+          </div>
+          <input type="range" class="rng-slider" id="dc-weeks" min="0" max="20" value="0">
+        </div>
+
+        <div id="dc-stats" class="rng-stats-box"></div>
+        <div id="dc-curse-meter"></div>
+      </div>
+
+      <div class="content-card">
+        <div class="rng-chart-title">Distribution · 10 000 simulations</div>
+        <div class="rng-chart-outer">
+          <div id="dc-chart" class="rng-bars"></div>
+        </div>
+        <div class="rng-chart-legend">
+          <span class="rng-legend past">■ Farm passé</span>
+          <span class="rng-legend current">■ Semaine actuelle</span>
+          <span class="rng-legend future">■ Semaines futures</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ─── Drop Simulator ──────────────────────────────────────── -->
+  <div class="rng-panel" id="rng-drop-sim">
+    <div class="rng-grid">
+
+      <div class="content-card rng-controls">
+        <h3 class="rng-section-h3">Simulateur de drop</h3>
+        <p class="rng-desc">Simule N kills sur un boss et vois combien de fois l'item tombe.</p>
+
+        <div class="rng-field">
+          <div class="rng-field-row">
+            <label class="rng-label">Taux de drop</label>
+            <span class="rng-val-badge" id="ds-rate-val">19%</span>
+          </div>
+          <input type="range" class="rng-slider" id="ds-rate" min="1" max="100" value="19">
+        </div>
+
+        <div class="rng-field">
+          <div class="rng-field-row">
+            <label class="rng-label">Nombre de kills</label>
+            <span class="rng-val-badge" id="ds-kills-val">10</span>
+          </div>
+          <input type="range" class="rng-slider" id="ds-kills" min="1" max="52" value="10">
+        </div>
+
+        <button class="kt-submit" id="ds-btn" type="button">Simuler</button>
+      </div>
+
+      <div class="content-card">
+        <div class="rng-chart-title">Résultats</div>
+        <div id="ds-result" class="rng-empty-state">Règle les paramètres et clique sur Simuler.</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ─── /roll ───────────────────────────────────────────────── -->
+  <div class="rng-panel" id="rng-roll">
+    <div class="rng-grid">
+
+      <div class="content-card rng-controls">
+        <h3 class="rng-section-h3">/roll 100</h3>
+        <p class="rng-desc">Simule un loot roll entre les membres du groupe.</p>
+
+        <div class="rng-field">
+          <label class="rng-label" style="display:block;margin-bottom:.6rem">Joueurs</label>
+          <div class="rng-player-checks" id="rng-player-checks">
+            <label class="rng-check-label"><input type="checkbox" value="Alban"   checked> Alban</label>
+            <label class="rng-check-label"><input type="checkbox" value="Eliott"  checked> Eliott</label>
+            <label class="rng-check-label"><input type="checkbox" value="Fabien"  checked> Fabien</label>
+            <label class="rng-check-label"><input type="checkbox" value="Maël"    checked> Maël</label>
+            <label class="rng-check-label"><input type="checkbox" value="Tristan" checked> Tristan</label>
+          </div>
+        </div>
+
+        <button class="kt-submit" id="roll-btn" type="button">🎲 Roll !</button>
+      </div>
+
+      <div class="content-card">
+        <div class="rng-chart-title">Résultats</div>
+        <div id="roll-result" class="rng-empty-state">Clique sur Roll !</div>
+      </div>
+
+    </div>
+  </div>
+
+</main>
+
+<script src="js/rng-simulator.js"></script>
+<script>Layout.footer({ baseUrl: '' });</script>
+</body>
+</html>

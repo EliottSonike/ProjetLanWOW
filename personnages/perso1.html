@@ -1,29 +1,43 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Alban â€” DÃ©moniste Affliction Â· LAN Du Swag</title>
+  <title>Alban — Démoniste Affliction · LAN Du Swag</title>
   <link rel="stylesheet" href="../css/style.css">
   <script src="../js/layout.js"></script>
 </head>
-<body>
+<body data-class="warlock" id="goblin-page">
 <script>Layout.header({ baseUrl: '../', activeNav: 'swaggeurs' });</script>
+
+<!-- Gobelins décoratifs pour Alban -->
+<div class="goblin-army" aria-hidden="true">
+  <img class="goblin g1" src="../assets/img/goblin-rogue.png"   alt="" loading="lazy">
+  <img class="goblin g2" src="../assets/img/goblin-warrior.png" alt="" loading="lazy">
+  <img class="goblin g3" src="../assets/img/gnome.png"          alt="" loading="lazy">
+  <img class="goblin g4" src="../assets/img/goblin-rogue.png"   alt="" loading="lazy">
+  <img class="goblin g5" src="../assets/img/goblin-warrior.png" alt="" loading="lazy">
+  <img class="goblin g6" src="../assets/img/gnome.png"          alt="" loading="lazy">
+  <img class="goblin g7" src="../assets/img/goblin-rogue.png"   alt="" loading="lazy">
+  <img class="goblin g8" src="../assets/img/goblin-warrior.png" alt="" loading="lazy">
+</div>
+<div class="goblin-peek-left"  aria-hidden="true"><img src="../assets/img/goblin-warrior.png" alt="" loading="lazy"></div>
+<div class="goblin-peek-right" aria-hidden="true"><img src="../assets/img/goblin-rogue.png"   alt="" loading="lazy"></div>
 
 <main class="container">
 
   <p class="breadcrumb">
-    <a href="../swaggeurs.html">Swaggeurs</a> â€º <span>Alban</span>
+    <a href="../swaggeurs.html">Swaggeurs</a> › <span>Alban</span>
   </p>
 
   <div class="char-page-header">
     <div class="char-page-icon">
-      <img src="../assets/img/classes-warlock-affliction.webp" alt="DÃ©moniste Affliction" style="width:100%;height:100%;object-fit:cover;border-radius:8px;">
+      <img src="../assets/img/classes-warlock-affliction.webp" alt="Démoniste Affliction" style="width:100%;height:100%;object-fit:cover;border-radius:8px;">
     </div>
     <div class="char-page-title">
-      <h1>Alban</h1>
-      <div class="class-label warlock">DÃ©moniste</div>
-      <div class="spec-label">Affliction Â· Niveau 80</div>
+      <h1>Alban <img src="../assets/img/gnome.png" alt="" class="title-goblin"></h1>
+      <div class="class-label warlock">Démoniste</div>
+      <div class="spec-label">Affliction · Niveau 80</div>
     </div>
   </div>
 
@@ -41,7 +55,7 @@
     data-portrait="../assets/img/classes-warlock-affliction.webp"
     data-specclass="warlock">
     <div class="content-card" style="text-align:center;padding:2rem;">
-      <p style="color:var(--text-muted);">Cliquez sur l'onglet pour charger les donnÃ©es depuis wotlk5.com.</p>
+      <p style="color:var(--text-muted);">Cliquez sur l'onglet pour charger les données depuis wotlk5.com.</p>
     </div>
   </section>
 
@@ -49,7 +63,7 @@
   <section id="talents" class="tab-panel">
 
     <div class="content-card">
-      <h3>Build â€” Affliction 56/0/15</h3>
+      <h3>Build — Affliction 56/0/15</h3>
       <a class="talent-link" href="https://wotlk.evowow.com/?talent#IZhbqszAcbdxfhxZZVocoM" target="_blank" rel="noopener">
         ðŸ”— Voir le build sur Evowow
       </a>
@@ -57,30 +71,30 @@
         <img src="../assets/img/talent-alban.png" alt="Arbre de talents Affliction 56/0/15"
              onerror="this.parentElement.style.display='none'">
       </div>
-      <p class="talent-points">Points : 56 Affliction Â· 0 DÃ©monologie Â· 15 Destruction</p>
+      <p class="talent-points">Points : 56 Affliction · 0 Démonologie · 15 Destruction</p>
       <div class="talent-note">
-        Build standard DÃ©moniste Affliction PvE. Les 15 points en Destruction servent uniquement Ã  obtenir <strong>Suppression</strong> et le bonus de hit. Le Felhunter est la monture recommandÃ©e pour le buff intellect.
+        Build standard Démoniste Affliction PvE. Les 15 points en Destruction servent uniquement Ã  obtenir <strong>Suppression</strong> et le bonus de hit. Le Felhunter est la monture recommandée pour le buff intellect.
       </div>
     </div>
 
     <div class="content-card">
-      <h3>Talents clÃ©s</h3>
+      <h3>Talents clés</h3>
       <ul style="padding-left:1.2rem; display:flex; flex-direction:column; gap:0.5rem; font-size:0.88rem; color:var(--text-muted);">
-        <li><strong style="color:var(--gold-light)">Haunt</strong> â€” Debuff qui amplifie tous vos DoTs de 20%. Ã€ maintenir absolument, c'est votre sort le plus important.</li>
-        <li><strong style="color:var(--gold-light)">Unstable Affliction</strong> â€” DoT puissant. Interrompre UA = silence 3s sur le caster.</li>
-        <li><strong style="color:var(--gold-light)">Pandemic</strong> â€” Vos DoTs peuvent crit. Multiplie l'efficacitÃ© du crit pour l'Affliction.</li>
-        <li><strong style="color:var(--gold-light)">Everlasting Affliction</strong> â€” Shadow Bolt refresh Corruption. Ne jamais rÃ©appliquer Corruption manuellement.</li>
-        <li><strong style="color:var(--gold-light)">Siphon Life</strong> â€” Corruption soigne en passif. Survie et DPS combinÃ©s.</li>
+        <li><strong style="color:var(--gold-light)">Haunt</strong> — Debuff qui amplifie tous vos DoTs de 20%. À maintenir absolument, c'est votre sort le plus important.</li>
+        <li><strong style="color:var(--gold-light)">Unstable Affliction</strong> — DoT puissant. Interrompre UA = silence 3s sur le caster.</li>
+        <li><strong style="color:var(--gold-light)">Pandemic</strong> — Vos DoTs peuvent crit. Multiplie l'efficacité du crit pour l'Affliction.</li>
+        <li><strong style="color:var(--gold-light)">Everlasting Affliction</strong> — Shadow Bolt refresh Corruption. Ne jamais réappliquer Corruption manuellement.</li>
+        <li><strong style="color:var(--gold-light)">Siphon Life</strong> — Corruption soigne en passif. Survie et DPS combinés.</li>
       </ul>
     </div>
 
     <div class="content-card">
       <h3>Glyphes</h3>
       <ul style="padding-left:1.2rem; display:flex; flex-direction:column; gap:0.4rem; font-size:0.88rem; color:var(--text-muted);">
-        <li><strong style="color:var(--gold-light)">Glyphe de Vie rapide</strong> â€” Quick Decay : augmente la vitesse de tick de Corruption.</li>
-        <li><strong style="color:var(--gold-light)">Glyphe d'Affliction instable</strong> â€” +10% dÃ©gÃ¢ts UA.</li>
-        <li><strong style="color:var(--gold-light)">Glyphe de Haunt</strong> â€” +3% dÃ©gÃ¢ts sur Haunt.</li>
-        <li><strong style="color:var(--gold-light)">Glyphe mineur â€” Unending Breath</strong> â€” QualitÃ© de vie en monde ouvert.</li>
+        <li><strong style="color:var(--gold-light)">Glyphe de Vie rapide</strong> — Quick Decay : augmente la vitesse de tick de Corruption.</li>
+        <li><strong style="color:var(--gold-light)">Glyphe d'Affliction instable</strong> — +10% dégâts UA.</li>
+        <li><strong style="color:var(--gold-light)">Glyphe de Haunt</strong> — +3% dégâts sur Haunt.</li>
+        <li><strong style="color:var(--gold-light)">Glyphe mineur — Unending Breath</strong> — Qualité de vie en monde ouvert.</li>
       </ul>
     </div>
 
@@ -90,7 +104,7 @@
   <section id="bis" class="tab-panel">
 
     <div class="content-card">
-      <h3>Stats cibles â€” Phase 4</h3>
+      <h3>Stats cibles — Phase 4</h3>
       <div class="stats-grid">
         <div class="stat-item"><span class="stat-label">Hit sort</span><span class="stat-value">446</span></div>
         <div class="stat-item"><span class="stat-label">Spell Power</span><span class="stat-value">&gt;4 000</span></div>
@@ -98,19 +112,19 @@
         <div class="stat-item"><span class="stat-label">Crit</span><span class="stat-value">secondaire</span></div>
       </div>
       <div class="talent-note" style="margin-top:0.8rem;">
-        Hit cap 446 prioritÃ© absolue. AprÃ¨s : <strong>Spell Power > Haste > Crit</strong>. Le set 4p T10 (Dark Coven) est indispensable pour le bonus Haunt.
+        Hit cap 446 priorité absolue. Après : <strong>Spell Power > Haste > Crit</strong>. Le set 4p T10 (Dark Coven) est indispensable pour le bonus Haunt.
       </div>
     </div>
 
     <div class="content-card">
-      <h3>Best in Slot â€” Phase 4 (Icecrown Citadel 25 HM)</h3>
+      <h3>Best in Slot — Phase 4 (Icecrown Citadel 25 HM)</h3>
       <div class="wow-paperdoll">
         <div class="paperdoll-main">
 
           <div class="paperdoll-col">
             <div class="equip-slot epic">
               <div class="equip-slot-icon"><a class="slot-link" href="https://www.wowhead.com/wotlk/item=51231">Sanctified Dark Coven Hood</a></div>
-              <span class="equip-slot-label">TÃªte</span>
+              <span class="equip-slot-label">Tête</span>
             </div>
             <div class="equip-slot epic">
               <div class="equip-slot-icon"><a class="slot-link" href="https://www.wowhead.com/wotlk/item=50724">Blood Queen's Crimson Choker</a></div>
@@ -118,7 +132,7 @@
             </div>
             <div class="equip-slot epic">
               <div class="equip-slot-icon"><a class="slot-link" href="https://www.wowhead.com/wotlk/item=51232">Sanctified Dark Coven Shoulderpads</a></div>
-              <span class="equip-slot-label">Ã‰paules</span>
+              <span class="equip-slot-label">Épaules</span>
             </div>
             <div class="equip-slot epic">
               <div class="equip-slot-icon"><a class="slot-link" href="https://www.wowhead.com/wotlk/item=54583">Cloak of Burning Dusk</a></div>
@@ -144,9 +158,9 @@
 
           <div class="paperdoll-center">
             <div class="paperdoll-char">
-              <img class="paperdoll-char-portrait" src="../assets/img/classes-warlock-affliction.webp" alt="Alban">
+              <div class="portrait-frame"><img class="paperdoll-char-portrait" src="../assets/img/classes-warlock-affliction.webp" alt="Alban"></div>
               <span class="paperdoll-char-name">Alban</span>
-              <span class="paperdoll-char-spec warlock">DÃ©moniste Â· Affliction</span>
+              <span class="paperdoll-char-spec warlock">Démoniste · Affliction</span>
               <span class="paperdoll-char-phase">Phase 4 BiS</span>
             </div>
           </div>
@@ -186,7 +200,7 @@
             </div>
             <div class="equip-slot empty">
               <div class="equip-slot-icon"></div>
-              <span class="equip-slot-label">â€”</span>
+              <span class="equip-slot-label">—</span>
             </div>
           </div>
 
@@ -215,62 +229,62 @@
         <div class="rotation-step">
           <span class="step-num">1.</span>
           <span class="step-skill">Corruption</span>
-          <span class="step-desc">â€” Appliquer immÃ©diatement (Everlasting Affliction le maintient via Shadow Bolt)</span>
+          <span class="step-desc">— Appliquer immédiatement (Everlasting Affliction le maintient via Shadow Bolt)</span>
         </div>
         <div class="rotation-step">
           <span class="step-num">2.</span>
           <span class="step-skill">Haunt</span>
-          <span class="step-desc">â€” DÃ¨s que Corruption est posÃ©, +20% dÃ©gÃ¢ts sur tous vos DoTs</span>
+          <span class="step-desc">— Dès que Corruption est posé, +20% dégâts sur tous vos DoTs</span>
         </div>
         <div class="rotation-step">
           <span class="step-num">3.</span>
           <span class="step-skill">Unstable Affliction</span>
-          <span class="step-desc">â€” DoT puissant, maintenir en permanence</span>
+          <span class="step-desc">— DoT puissant, maintenir en permanence</span>
         </div>
         <div class="rotation-step">
           <span class="step-num">4.</span>
           <span class="step-skill">Curse of Agony</span>
-          <span class="step-desc">â€” MalÃ©diction principale, maintenir en permanence</span>
+          <span class="step-desc">— Malédiction principale, maintenir en permanence</span>
         </div>
         <div class="rotation-step">
           <span class="step-num">5.</span>
           <span class="step-skill">Shadow Bolt</span>
-          <span class="step-desc">â€” Filler, refresh Corruption via Everlasting Affliction</span>
+          <span class="step-desc">— Filler, refresh Corruption via Everlasting Affliction</span>
         </div>
       </div>
     </div>
 
     <div class="content-card">
-      <h3>Rotation en combat (PrioritÃ©)</h3>
+      <h3>Rotation en combat (Priorité)</h3>
       <div class="rotation-list">
         <div class="rotation-step">
           <span class="step-num">1.</span>
           <span class="step-skill">Haunt</span>
-          <span class="step-desc">â€” Sur cooldown (15s), prioritÃ© absolue â€” c'est votre plus gros DPS</span>
+          <span class="step-desc">— Sur cooldown (15s), priorité absolue — c'est votre plus gros DPS</span>
         </div>
         <div class="rotation-step">
           <span class="step-num">2.</span>
           <span class="step-skill">Unstable Affliction</span>
-          <span class="step-desc">â€” Maintenir, ne jamais laisser expirer</span>
+          <span class="step-desc">— Maintenir, ne jamais laisser expirer</span>
         </div>
         <div class="rotation-step">
           <span class="step-num">3.</span>
           <span class="step-skill">Curse of Agony</span>
-          <span class="step-desc">â€” Maintenir, ne jamais laisser expirer</span>
+          <span class="step-desc">— Maintenir, ne jamais laisser expirer</span>
         </div>
         <div class="rotation-step">
           <span class="step-num">4.</span>
           <span class="step-skill">Shadow Bolt</span>
-          <span class="step-desc">â€” Spam filler entre les DoTs (maintient Corruption via Everlasting)</span>
+          <span class="step-desc">— Spam filler entre les DoTs (maintient Corruption via Everlasting)</span>
         </div>
         <div class="rotation-step">
           <span class="step-num">5.</span>
           <span class="step-skill">Life Tap</span>
-          <span class="step-desc">â€” DÃ¨s que le mana baisse, donne un buff +Spell Power via Glyph</span>
+          <span class="step-desc">— Dès que le mana baisse, donne un buff +Spell Power via Glyph</span>
         </div>
       </div>
       <div class="rotation-note">
-        ðŸ”® Ne jamais rÃ©appliquer Corruption manuellement â€” Shadow Bolt le refresh via Everlasting Affliction. VÃ©rifier que Haunt est toujours actif avant de cast UA ou CoA.
+        ðŸ”® Ne jamais réappliquer Corruption manuellement — Shadow Bolt le refresh via Everlasting Affliction. Vérifier que Haunt est toujours actif avant de cast UA ou CoA.
       </div>
     </div>
 
@@ -280,12 +294,12 @@
         <div class="rotation-step">
           <span class="step-num">1.</span>
           <span class="step-skill">Seed of Corruption</span>
-          <span class="step-desc">â€” Sur chaque cible si le groupe est groupÃ© (explosion en AoE)</span>
+          <span class="step-desc">— Sur chaque cible si le groupe est groupé (explosion en AoE)</span>
         </div>
         <div class="rotation-step">
           <span class="step-num">2.</span>
           <span class="step-skill">DoTs individuels</span>
-          <span class="step-desc">â€” Si seulement 2-3 cibles, DoTs sur chaque est plus rentable</span>
+          <span class="step-desc">— Si seulement 2-3 cibles, DoTs sur chaque est plus rentable</span>
         </div>
       </div>
     </div>
@@ -296,17 +310,17 @@
         <div class="rotation-step">
           <span class="step-num">Pet</span>
           <span class="step-skill">Felhunter</span>
-          <span class="step-desc">â€” Buff Spell Power intellect passif Â· Interrupt en cas d'urgence</span>
+          <span class="step-desc">— Buff Spell Power intellect passif · Interrupt en cas d'urgence</span>
         </div>
         <div class="rotation-step">
           <span class="step-num">CD</span>
           <span class="step-skill">Metamorphosis</span>
-          <span class="step-desc">â€” Non utilisÃ© en Affliction (spÃ© DÃ©mo). Pas dans ce build.</span>
+          <span class="step-desc">— Non utilisé en Affliction (spé Démo). Pas dans ce build.</span>
         </div>
         <div class="rotation-step">
           <span class="step-num">CD</span>
           <span class="step-skill">Trinkets actifs</span>
-          <span class="step-desc">â€” Sur pull avec Haunt pour la fenÃªtre de burst maximale</span>
+          <span class="step-desc">— Sur pull avec Haunt pour la fenêtre de burst maximale</span>
         </div>
       </div>
     </div>
