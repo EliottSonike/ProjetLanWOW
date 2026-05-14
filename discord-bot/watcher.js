@@ -72,8 +72,10 @@ const BOSS_RAID = {
   'Vesperon':'The Obsidian Sanctum','Shadron':'The Obsidian Sanctum',
   'Tenebron':'The Obsidian Sanctum','Sartharion':'The Obsidian Sanctum',
   'Malygos':'The Eye of Eternity',
-  'Archavon':'Vault of Archavon','Emalon':'Vault of Archavon',
-  'Koralon':'Vault of Archavon','Toravon':'Vault of Archavon',
+  'Archavon':'Vault of Archavon','Archavon the Stone Watcher':'Vault of Archavon',
+  'Emalon':'Vault of Archavon','Emalon the Storm Watcher':'Vault of Archavon',
+  'Koralon':'Vault of Archavon','Koralon the Flame Watcher':'Vault of Archavon',
+  'Toravon':'Vault of Archavon','Toravon the Ice Watcher':'Vault of Archavon',
 };
 
 const RAID_COLORS = {
@@ -119,8 +121,16 @@ function splitCsv(s) {
 }
 
 function parseLine(line) {
-  const m = line.match(/^[\d/]+ [\d:.]+\s{2}(\w+),(.*)/s);
-  return m ? { event:m[1], args:splitCsv(m[2]) } : null;
+  const m = line.match(/^([\d/]+) ([\d:.]+)\s{2}(\w+),(.*)/s);
+  if (!m) return null;
+  // Extrait le timestamp du log (M/D HH:MM:SS.mmm) → ms epoch
+  const [mo, dy]     = m[1].split('/').map(Number);
+  const [hh, mi, ss] = m[2].split(':');
+  const [sec, ms]    = ss.split('.');
+  const d = new Date();
+  d.setMonth(mo-1, dy);
+  d.setHours(+hh, +mi, +sec, +(ms||0));
+  return { event:m[3], args:splitCsv(m[4]), ts:d.getTime() };
 }
 
 function processLines(lines) {
@@ -129,7 +139,7 @@ function processLines(lines) {
     const { event, args } = p;
 
     if (event === 'ENCOUNTER_START') {
-      enc = { boss:args[1], raid:BOSS_RAID[args[1]]||'Unknown', startMs:Date.now(),
+      enc = { boss:args[1], raid:BOSS_RAID[args[1]]||'Unknown', startMs:p.ts,
               deaths:[], damageBy:{}, healBy:{}, lastHitOn:{} };
 
     } else if (event === 'ENCOUNTER_END') {
@@ -141,14 +151,14 @@ function processLines(lines) {
       }
       const wipes=wipeCounts[boss]||0; wipeCounts[boss]=0;
       const isFirst=!posted.some(id=>id.endsWith('_'+boss));
-      const now=new Date();
+      const killDate = new Date(p.ts);
       handleKill({
         boss, raid:BOSS_RAID[boss]||'Unknown', wipes, first:isFirst,
-        timestamp:Math.round(now.getTime()/1000),
-        date:now.toLocaleDateString('fr-FR'),
-        hour:now.toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'}),
-        players:PLAYERS,
-        durationSec: enc ? Math.round((Date.now()-enc.startMs)/1000) : 0,
+        timestamp:  Math.round(p.ts/1000),
+        date:       killDate.toLocaleDateString('fr-FR'),
+        hour:       killDate.toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'}),
+        players:    PLAYERS,
+        durationSec: enc ? Math.round((p.ts - enc.startMs)/1000) : 0,
         deaths:   enc?.deaths   || [],
         damageBy: enc?.damageBy || {},
         healBy:   enc?.healBy   || {},
