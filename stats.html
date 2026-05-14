@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stats de Raid — LAN Du Swag</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/layout.js"></script>
+</head>
+<body>
+<script>Layout.header({ baseUrl: '', activeNav: 'stats' });</script>
+
+<main class="container">
+
+  <section class="section-title">
+    <h2>📊 Stats de Raid</h2>
+    <p>Classements · Parses · Hall of Shame · Historique des sessions</p>
+  </section>
+
+  <!-- Stats manuelles -->
+  <div id="stats-page"></div>
+
+  <!-- WarcraftLogs -->
+  <section class="section-title" style="margin-top:3rem;">
+    <h2>🔥 WarcraftLogs</h2>
+    <p>Parses · Classements · Rapports de raid</p>
+  </section>
+  <div id="wcl-section" class="wcl-root"></div>
+
+</main>
+
+<script src="data/raid-stats.js"></script>
+<script src="js/raid-stats.js"></script>
+<script src="data/warcraftlogs-config.js"></script>
+<script src="js/warcraftlogs.js"></script>
+<script>Layout.footer({ baseUrl: '' });</script>
+</body>
+</html>

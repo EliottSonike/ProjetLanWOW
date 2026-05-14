@@ -7,8 +7,22 @@
   <link rel="stylesheet" href="../css/style.css">
   <script src="../js/layout.js"></script>
 </head>
-<body>
+<body data-class="warlock" id="goblin-page">
 <script>Layout.header({ baseUrl: '../', activeNav: 'swaggeurs' });</script>
+
+<!-- Gobelins décoratifs pour Alban -->
+<div class="goblin-army" aria-hidden="true">
+  <img class="goblin g1" src="../assets/img/goblin-rogue.png"   alt="">
+  <img class="goblin g2" src="../assets/img/goblin-warrior.png" alt="">
+  <img class="goblin g3" src="../assets/img/gnome.png"          alt="">
+  <img class="goblin g4" src="../assets/img/goblin-rogue.png"   alt="">
+  <img class="goblin g5" src="../assets/img/goblin-warrior.png" alt="">
+  <img class="goblin g6" src="../assets/img/gnome.png"          alt="">
+  <img class="goblin g7" src="../assets/img/goblin-rogue.png"   alt="">
+  <img class="goblin g8" src="../assets/img/goblin-warrior.png" alt="">
+</div>
+<div class="goblin-peek-left"  aria-hidden="true"><img src="../assets/img/goblin-warrior.png" alt=""></div>
+<div class="goblin-peek-right" aria-hidden="true"><img src="../assets/img/goblin-rogue.png"   alt=""></div>
 
 <main class="container">
 
@@ -21,7 +35,7 @@
       <img src="../assets/img/classes-warlock-affliction.webp" alt="DÃ©moniste Affliction" style="width:100%;height:100%;object-fit:cover;border-radius:8px;">
     </div>
     <div class="char-page-title">
-      <h1>Alban</h1>
+      <h1>Alban <img src="../assets/img/gnome.png" alt="" class="title-goblin"></h1>
       <div class="class-label warlock">DÃ©moniste</div>
       <div class="spec-label">Affliction Â· Niveau 80</div>
     </div>
@@ -144,7 +158,7 @@
 
           <div class="paperdoll-center">
             <div class="paperdoll-char">
-              <img class="paperdoll-char-portrait" src="../assets/img/classes-warlock-affliction.webp" alt="Alban">
+              <div class="portrait-frame"><img class="paperdoll-char-portrait" src="../assets/img/classes-warlock-affliction.webp" alt="Alban"></div>
               <span class="paperdoll-char-name">Alban</span>
               <span class="paperdoll-char-spec warlock">DÃ©moniste Â· Affliction</span>
               <span class="paperdoll-char-phase">Phase 4 BiS</span>

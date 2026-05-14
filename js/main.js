@@ -155,7 +155,7 @@ function renderArmoryPanel(panel, charData, meta, fromCache) {
           <div class="paperdoll-col">${left.map(s => armorySlotHTML(eq, s)).join('')}</div>
           <div class="paperdoll-center">
             <div class="paperdoll-char">
-              ${portrait ? `<img class="paperdoll-char-portrait" src="${portrait}" alt="${meta.name}">` : ''}
+              ${portrait ? `<div class="portrait-frame"><img class="paperdoll-char-portrait" src="${portrait}" alt="${meta.name}"></div>` : ''}
               <span class="paperdoll-char-name">${meta.name}</span>
               <span class="paperdoll-char-spec ${specClass}">${meta.race} · ${meta.cls}</span>
               <span class="paperdoll-char-phase">Niveau ${meta.level}</span>
