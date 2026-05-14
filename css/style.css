@@ -3557,3 +3557,32 @@ body[data-class="deathknight"]{ --class-accent: var(--deathknight);--class-glow:
   font-size: .92rem;
   padding: .4rem;
 }
+
+/* ===== CONSOMMABLES ===== */
+.conso-list { display: flex; flex-direction: column; gap: .5rem; }
+.conso-row {
+  display: flex;
+  align-items: baseline;
+  gap: .75rem;
+  padding: .45rem 0;
+  border-bottom: 1px solid rgba(255,255,255,.05);
+  font-size: .87rem;
+}
+.conso-badge {
+  flex-shrink: 0;
+  padding: .12rem .5rem;
+  border-radius: 4px;
+  font-size: .68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  width: 5.8rem;
+  text-align: center;
+}
+.conso-badge.flask  { background:rgba(105,204,240,.12); color:#69ccf0; border:1px solid rgba(105,204,240,.3); }
+.conso-badge.food   { background:rgba(76,175,80,.12);   color:#81c784; border:1px solid rgba(76,175,80,.3); }
+.conso-badge.potion { background:rgba(233,30,99,.12);   color:#f48fb1; border:1px solid rgba(233,30,99,.3); }
+.conso-name { font-weight:600; color:#fff; }
+.conso-name a { color:inherit; text-decoration:none; }
+.conso-name a:hover { text-decoration:underline; color:var(--gold-light); }
+.conso-effect { color:var(--text-muted); font-size:.8rem; }
