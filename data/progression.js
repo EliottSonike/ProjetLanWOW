@@ -510,10 +510,10 @@ window.PROGRESSION = {
             },
             {
               "name": "Sindragosa",
-              "killed": true,
+              "killed": false,
               "hm": false,
               "wipes": 0,
-              "firstKill": "14/05/2026"
+              "firstKill": null
             }
           ]
         },
