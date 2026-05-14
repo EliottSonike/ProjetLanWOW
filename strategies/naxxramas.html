@@ -122,6 +122,8 @@
               <li><strong>Blink</strong> — Noth se téléporte · Repositionner le tank rapidement</li>
               <li><strong>Skeletons</strong> — AoE au sol, ne pas laisser s'accumuler</li>
               <li><strong>Phase balcon (70s)</strong> — Noth invulnérable · Gérer les vagues de squelettes</li>
+              <li><strong>Plague Warrior</strong> — Utilise Sunder Armor · Réduire son armure au fil du combat</li>
+              <li><strong>Berserk</strong> — Déclenché après la 3e phase balcon · DPS race sur la fin</li>
             </ul>
           </div>
           <div class="phase">
@@ -149,6 +151,8 @@
               <li>La salle est divisée en <strong>4 colonnes</strong> · Les éruptions balayent de droite à gauche</li>
               <li>Rythme : partir en <strong>colonne 1</strong> (côté entrée), bouger vers la 2, 3, 4 puis revenir</li>
               <li>Ne jamais s'arrêter pendant la danse · Mourir ici = honte éternelle au Hall of Shame</li>
+              <li><strong>Timer berserk : 6:45 min</strong> — La danse doit être maîtrisée rapidement</li>
+              <li><strong>Dancing Mastery (25m)</strong> — Chaque stack non perdu après la danse = +5% dégâts</li>
             </ul>
           </div>
           <div class="phase">
@@ -176,6 +180,9 @@
               <li><strong>Necrotic Aura</strong> — Heal interdit sauf pendant 3 secondes toutes les 20 sec (fenêtre Spore)</li>
               <li><strong>Spore</strong> — Coller la spore pour le buff Fungal Creep (+50% crit heal) · Soigner en burst dans cette fenêtre uniquement</li>
               <li><strong>Inevitable Doom</strong> — Dégâts croissants · DPS race</li>
+              <li><strong>Timer berserk : 8 min</strong></li>
+              <li><strong>Plagued Mushroom-Men (25m)</strong> — Spawn toutes les 33s, suit Loatheb · S'il l'atteint → soft enrage (+100% AS) · Les DPS doivent l'abattre en priorité</li>
+              <li><strong>Protective Mushroom (25m)</strong> — Apparaît avant Acid Explosion (toutes les 50s) · Se réfugier dessus : -95% dégâts reçus +75% vitesse · Utiliser la fenêtre pour soigner en burst</li>
             </ul>
           </div>
           <div class="phase">
@@ -205,17 +212,18 @@
           <div class="phase">
             <h4>Mécaniques</h4>
             <ul>
-              <li><strong>Understudy</strong> — Razuvious ne peut être tanké que par les Death Knight Understudies en Mind Control</li>
-              <li><strong>Rotation MC</strong> — 2 joueurs se relaient pour maintenir un Understudy MC en permanence</li>
-              <li><strong>Unbalancing Strike</strong> — Réduit la défense · Swapper l'Understudy actif à chaque charge</li>
+              <li><strong>Darion Mograine</strong> — Tanke Razuvious lui-même · Pas besoin de joueur pour tanker le boss</li>
+              <li><strong>Death Knight Understudy</strong> — Spawn avec 3 stacks de Taunt Gauge · Chaque Taunt d'un joueur (sauf Righteous Defense) retire un stack</li>
+              <li><strong>Understudy Despair</strong> — À 0 stacks + Darion à &lt;10 yards → l'Understudy reçoit Understudy Despair (-50% dégâts reçus)</li>
+              <li><strong>Bone Barrier (10m)</strong> — Réduction de dégâts réduite de 25% vs standard</li>
             </ul>
           </div>
           <div class="phase">
             <h4>Rôles</h4>
             <ul>
-              <li>🛡️ <strong>Tank</strong> — Mind Control un Understudy, le positionner face à Razuvious</li>
-              <li>💚 <strong>Heal</strong> — Soigner les Understudies MC en priorité</li>
-              <li>⚔️ <strong>DPS</strong> — Rotation MC, DPS boss en parallèle</li>
+              <li>🛡️ <strong>Tank</strong> — Utiliser les sorts de Taunt sur les Understudies pour réduire leurs stacks · Gérer le positionnement de Darion</li>
+              <li>💚 <strong>Heal</strong> — Soigner Darion Mograine · Soigner l'Understudy actif si nécessaire</li>
+              <li>⚔️ <strong>DPS</strong> — DPS sur Razuvious · Utiliser les Taunt abilities sur les Understudies pour aider</li>
             </ul>
           </div>
         </div>
@@ -232,9 +240,10 @@
           <div class="phase">
             <h4>Mécaniques</h4>
             <ul>
-              <li><strong>Deux côtés</strong> — Côté vivant (adds humains) et côté mort (spectres) · Répartir le groupe</li>
-              <li><strong>Adds</strong> — Tuer rapidement · Chaque mort côté vivant renforce le côté mort</li>
-              <li><strong>Descente de Gothik</strong> — Devient attaquable · Tout le monde focus boss</li>
+              <li><strong>Phase 1 — Living side</strong> — 5 vagues d'adds humains de plus en plus forts · Tuer rapidement avant la prochaine vague · Pas besoin de split le groupe</li>
+              <li><strong>Phase 2 — Undead side</strong> — 5 vagues de spectres · Même principe</li>
+              <li><strong>Phase finale</strong> — Gothik apparaît au sol à 20% HP · Focus immédiat</li>
+              <li>Ne pas diviser le groupe · Tout le monde sur le même côté à chaque phase</li>
             </ul>
           </div>
           <div class="phase">
@@ -260,8 +269,10 @@
             <h4>Mécaniques</h4>
             <ul>
               <li><strong>Marks</strong> — Chaque cavalier applique un debuff stackant · À 5 stacks = mort · Swap obligatoire</li>
-              <li><strong>Split</strong> — 2 joueurs à l'avant (Rivendare + Blaumeux), 2-3 à l'arrière (Korth'azz + Zeliek)</li>
-              <li><strong>Communication</strong> — Annoncer les stacks, swapper de façon coordonnée</li>
+              <li><strong>Activation</strong> — Seulement 2 cavaliers actifs à la fois · Les 2 mêlée (Korth'azz + Rivendare) ET les 2 ranged (Zeliek + Blaumeux) combattent séparément</li>
+              <li><strong>Marks range</strong> — Réduit à 45 yards · Plus facile de s'échapper</li>
+              <li><strong>Berserk individuel</strong> — 3 min par cavalier · Kill priorité : Korth'azz → Rivendare → ranged</li>
+              <li><strong>Note 25m</strong> — Portails sur Korth'azz/Rivendare (vulnérabilités élémentaires) · Zeliek cast Void Zone · Rivendare cast Meteor</li>
             </ul>
           </div>
           <div class="phase">
@@ -412,6 +423,7 @@
               <li><strong>Blizzard</strong> — Zones de glace au sol · Se déplacer constamment</li>
               <li><strong>Phase aérienne</strong> — Sapphiron vole · Des blocs de glace apparaissent · Se cacher derrière un bloc contre le Frost Breath</li>
               <li><strong>Icebolt</strong> — Libérer immédiatement le joueur gelé (focus le bloc)</li>
+              <li><strong>Frozen Blood (25m)</strong> — Chaque tick de dégâts de givre = 1 stack de Frozen Blood · À 35 stacks → vous vous figez (mort) · Hot Flames x4 dans la salle · Se placer dessus pour enlever les stacks · Agir vite : 10s après la mort d'un Hot Flame il explose</li>
             </ul>
           </div>
           <div class="phase">
@@ -434,18 +446,27 @@
       <div class="boss-card-body">
         <div class="boss-phases">
           <div class="phase">
-            <h4>Phase 1 — L'antichambre (3 min 30)</h4>
+            <h4>Phase 1 — L'antichambre (2 min)</h4>
             <ul>
               <li>Tuer les Souls et Abominations · Ne pas approcher KT (déclenche la phase 2)</li>
-              <li>Nettoyer la salle entièrement avant d'engager</li>
+              <li>Nettoyer la salle entièrement avant d'engager · Préparez-vous, la phase est courte</li>
             </ul>
           </div>
           <div class="phase">
             <h4>Phase 2 — Kel'Thuzad</h4>
             <ul>
-              <li><strong>Frost Blast</strong> — Joueur gelé à 1 PV · Heal d'urgence absolu immédiat</li>
-              <li><strong>Chains of Kel'Thuzad</strong> — MC d'un joueur · Les autres le CC ou le tuent rapidement</li>
-              <li><strong>Guardians of Icecrown à 40%</strong> — Le tank grab immédiatement, DPS ignore</li>
+              <li><strong>Frost Blast</strong> — Joueur gelé à 1 PV · Heal d'urgence absolu immédiat · Le heal et le tank ne sont PAS ciblés</li>
+              <li><strong>Chains of Kel'Thuzad</strong> — MC d'un joueur · Les autres le CC ou le tuent rapidement · Le heal et le tank ne sont PAS ciblés</li>
+              <li><strong>Guardians of Icecrown à 50%</strong> — 2x Guardians spawn · Le tank grab immédiatement, DPS ignore</li>
+            </ul>
+          </div>
+          <div class="phase">
+            <h4>Phase 3 (25m) — Dans la Phylactère</h4>
+            <ul>
+              <li><strong>Frost Fissure</strong> — Remplace Shadow Fissure · Apparaît sous chaque joueur · Bouger immédiatement</li>
+              <li><strong>Ice Barrier</strong> — Kel'Thuzad immunisé aux interrupts pendant ce buff</li>
+              <li><strong>Permafrost</strong> — Debuff sévère de vitesse de déplacement et de haste</li>
+              <li>Toutes les mécaniques de Phase 2 restent actives</li>
             </ul>
           </div>
           <div class="phase">

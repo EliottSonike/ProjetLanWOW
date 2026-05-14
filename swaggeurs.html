@@ -10,76 +10,208 @@
 <body>
 <script>Layout.header({ baseUrl: '', activeNav: 'swaggeurs' });</script>
 
-<main class="container">
+<section class="roster-hero">
+  <canvas id="roster-canvas" class="roster-canvas"></canvas>
 
-  <section class="section-title">
-    <h2>Les 5 Swaggeurs</h2>
-    <p>Cliquez sur un swaggeur pour voir son personnage, ses talents, son stuff et sa rotation.</p>
-  </section>
+  <div class="roster-header">
+    <div class="roster-hl"></div>
+    <h1 class="roster-title">LES SWAGGEURS</h1>
+    <div class="roster-hl"></div>
+  </div>
+  <p class="roster-sub">5 Aventuriers &middot; Wrath of the Lich King &middot; Juillet 2026</p>
 
-  <div class="roles-layout">
+  <div class="roster-grid">
 
-    <div class="role-row">
-      <div class="role-label role-dps">⚔️ DPS</div>
-      <div class="role-cards">
-        <a href="personnages/perso1.html" class="char-card">
-          <div class="char-icon classes-warlock-affliction"><img src="assets/img/classes-warlock-affliction.webp" alt="Démoniste Affliction"></div>
-          <div class="char-info">
-            <span class="char-name">Alban</span>
-            <span class="char-class warlock">Démoniste</span>
-            <span class="char-spec">Affliction</span>
-          </div>
-        </a>
-        <a href="personnages/perso2.html" class="char-card">
-          <div class="char-icon classes-mage-fire"><img src="assets/img/classes-mage-fire.webp" alt="Mage Feu"></div>
-          <div class="char-info">
-            <span class="char-name">Eliott</span>
-            <span class="char-class mage">Mage</span>
-            <span class="char-spec">Feu</span>
-          </div>
-        </a>
-        <a href="personnages/perso3.html" class="char-card">
-          <div class="char-icon classes-hunter-mm"><img src="assets/img/classes-hunter-marksmanship.webp" alt="Chasseur Précision" onerror="this.parentElement.innerHTML='🏹'"></div>
-          <div class="char-info">
-            <span class="char-name">Fabien</span>
-            <span class="char-class hunter">Chasseur</span>
-            <span class="char-spec">Précision</span>
-          </div>
-        </a>
-      </div>
+    <!-- Alban — Warlock Affliction -->
+    <div class="swag-wrap">
+      <a href="personnages/perso1.html" class="swag-card" data-class="warlock">
+        <div class="swag-glow"></div>
+        <span class="swag-role">⚔️ DPS</span>
+        <div class="swag-portrait">
+          <img src="assets/img/classes-warlock-affliction.webp" alt="Démoniste Affliction">
+        </div>
+        <div class="swag-name">Alban</div>
+        <div class="swag-class">Démoniste · Affliction</div>
+        <div class="swag-sep"></div>
+        <div class="swag-stat" data-p="Alban"></div>
+      </a>
     </div>
 
-    <div class="role-row">
-      <div class="role-label role-tank">🛡️ TANK</div>
-      <div class="role-cards">
-        <a href="personnages/perso4.html" class="char-card">
-          <div class="char-icon classes-paladin-protection"><img src="assets/img/classes-paladin-protection.webp" alt="Paladin Protection"></div>
-          <div class="char-info">
-            <span class="char-name">Maël</span>
-            <span class="char-class paladin">Paladin</span>
-            <span class="char-spec">Protection</span>
-          </div>
-        </a>
-      </div>
+    <!-- Eliott — Mage Feu -->
+    <div class="swag-wrap">
+      <a href="personnages/perso2.html" class="swag-card" data-class="mage">
+        <div class="swag-glow"></div>
+        <span class="swag-role">⚔️ DPS</span>
+        <div class="swag-portrait">
+          <img src="assets/img/classes-mage-fire.webp" alt="Mage Feu">
+        </div>
+        <div class="swag-name">Eliott</div>
+        <div class="swag-class">Mage · Feu</div>
+        <div class="swag-sep"></div>
+        <div class="swag-stat" data-p="Eliott"></div>
+      </a>
     </div>
 
-    <div class="role-row">
-      <div class="role-label role-heal">💚 HEAL</div>
-      <div class="role-cards">
-        <a href="personnages/perso5.html" class="char-card">
-          <div class="char-icon classes-paladin-holy"><img src="assets/img/classes-paladin-holy.webp" alt="Paladin Holy"></div>
-          <div class="char-info">
-            <span class="char-name">Tristan</span>
-            <span class="char-class paladin">Paladin</span>
-            <span class="char-spec">Holy</span>
-          </div>
-        </a>
-      </div>
+    <!-- Maël — Paladin Protection (centre / featured) -->
+    <div class="swag-wrap swag-wrap--center">
+      <a href="personnages/perso4.html" class="swag-card swag-card--center" data-class="paladin">
+        <div class="swag-glow"></div>
+        <span class="swag-role">🛡️ TANK</span>
+        <div class="swag-portrait swag-portrait--lg">
+          <img src="assets/img/classes-paladin-protection.webp" alt="Paladin Protection">
+        </div>
+        <div class="swag-name">Maël</div>
+        <div class="swag-class">Paladin · Protection</div>
+        <div class="swag-sep"></div>
+        <div class="swag-stat" data-p="Maël"></div>
+      </a>
+    </div>
+
+    <!-- Fabien — Chasseur Précision -->
+    <div class="swag-wrap">
+      <a href="personnages/perso3.html" class="swag-card" data-class="hunter">
+        <div class="swag-glow"></div>
+        <span class="swag-role">⚔️ DPS</span>
+        <div class="swag-portrait">
+          <img src="assets/img/classes-hunter-marksmanship.webp" alt="Chasseur Précision"
+               onerror="this.style.display='none'">
+        </div>
+        <div class="swag-name">Fabien</div>
+        <div class="swag-class">Chasseur · Précision</div>
+        <div class="swag-sep"></div>
+        <div class="swag-stat" data-p="Fabien"></div>
+      </a>
+    </div>
+
+    <!-- Tristan — Paladin Holy -->
+    <div class="swag-wrap">
+      <a href="personnages/perso5.html" class="swag-card" data-class="paladin">
+        <div class="swag-glow"></div>
+        <span class="swag-role">💚 HEAL</span>
+        <div class="swag-portrait">
+          <img src="assets/img/classes-paladin-holy.webp" alt="Paladin Holy">
+        </div>
+        <div class="swag-name">Tristan</div>
+        <div class="swag-class">Paladin · Holy</div>
+        <div class="swag-sep"></div>
+        <div class="swag-stat" data-p="Tristan"></div>
+      </a>
     </div>
 
   </div>
+</section>
 
-</main>
+<script>
+(function () {
+  // ── Particules (couleurs des 5 classes) ──────────────────────────────
+  const canvas = document.getElementById('roster-canvas');
+  if (canvas) {
+    const ctx = canvas.getContext('2d');
+    const COLORS = ['#9482c9', '#69ccf0', '#abd473', '#f58cba', '#c59b3b'];
+    let particles = [];
+
+    function resize() { canvas.width = canvas.offsetWidth; canvas.height = canvas.offsetHeight; }
+
+    function makeParticle(rY) {
+      return {
+        x: Math.random() * canvas.width,
+        y: rY ? Math.random() * canvas.height : canvas.height + 10,
+        r: Math.random() * 1.5 + 0.3,
+        color: COLORS[Math.floor(Math.random() * COLORS.length)],
+        speed: Math.random() * 0.4 + 0.1,
+        opacity: Math.random() * 0.5 + 0.1,
+        opacityDir: Math.random() < 0.5 ? 1 : -1,
+        opacitySpeed: Math.random() * 0.006 + 0.002,
+        drift: (Math.random() - 0.5) * 0.2,
+      };
+    }
+
+    function toHex(v) { return Math.round(Math.max(0, Math.min(1, v)) * 255).toString(16).padStart(2, '0'); }
+
+    function init() { resize(); particles = []; for (let i = 0; i < 80; i++) particles.push(makeParticle(true)); }
+
+    function tick() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (let i = 0; i < particles.length; i++) {
+        const p = particles[i];
+        p.y -= p.speed; p.x += p.drift;
+        p.opacity += p.opacitySpeed * p.opacityDir;
+        if (p.opacity >= 0.75) p.opacityDir = -1;
+        if (p.opacity <= 0.05) p.opacityDir = 1;
+        if (p.y < -12) particles[i] = makeParticle(false);
+        const g = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r * 6);
+        g.addColorStop(0, p.color + toHex(p.opacity * 0.4));
+        g.addColorStop(1, p.color + '00');
+        ctx.beginPath(); ctx.arc(p.x, p.y, p.r * 6, 0, Math.PI * 2); ctx.fillStyle = g; ctx.fill();
+        ctx.beginPath(); ctx.arc(p.x, p.y, p.r,     0, Math.PI * 2); ctx.fillStyle = p.color + toHex(p.opacity); ctx.fill();
+      }
+      requestAnimationFrame(tick);
+    }
+
+    window.addEventListener('resize', init);
+    init(); tick();
+  }
+
+  // ── Animations d'entrée + flottement ────────────────────────────────
+  const cards = document.querySelectorAll('.swag-card');
+  cards.forEach((card, i) => {
+    // État initial (inline > CSS)
+    card.style.opacity = '0';
+    card.style.transform = 'translateY(55px) scale(0.88)';
+    card.style.transition = 'none';
+
+    // Force reflow
+    card.offsetHeight;
+
+    // Entrée décalée
+    setTimeout(() => {
+      card.style.transition = 'opacity 0.75s cubic-bezier(0.22,1,0.36,1), transform 0.75s cubic-bezier(0.22,1,0.36,1)';
+      card.style.opacity = '1';
+      card.style.transform = 'translateY(0) scale(1)';
+
+      // Après l'entrée : transition rapide pour le hover + démarrage du flottement
+      setTimeout(() => {
+        card.style.transition = 'transform 0.35s cubic-bezier(0.22,1,0.36,1), border-color 0.25s ease, box-shadow 0.25s ease';
+        card.style.transform = ''; // retire l'inline pour que :hover prenne le relais
+        const wrap = card.closest('.swag-wrap');
+        if (wrap) wrap.classList.add('floating');
+      }, 780);
+    }, 120 + i * 145);
+  });
+
+  // ── Stats live depuis l'API ──────────────────────────────────────────
+  const ROLES = { Alban: 'dps', Eliott: 'dps', Fabien: 'dps', Maël: 'tank', Tristan: 'heal' };
+  const fmtK = n => n >= 1000 ? (n / 1000).toFixed(1) + 'k' : String(Math.round(n));
+
+  fetch('/api/stats').then(r => r.json()).then(stats => {
+    const agg = {};
+    (stats.sessions || []).forEach(s =>
+      (s.bosses || []).forEach(b =>
+        (b.performances || []).forEach(p => {
+          if (!agg[p.player]) agg[p.player] = { dps: [], hps: [], dtps: [] };
+          if (p.dps  > 0) agg[p.player].dps.push(p.dps);
+          if (p.hps  > 0) agg[p.player].hps.push(p.hps);
+          if (p.dtps > 0) agg[p.player].dtps.push(p.dtps);
+        })
+      )
+    );
+
+    const avg = arr => arr.length ? Math.round(arr.reduce((s, x) => s + x, 0) / arr.length) : 0;
+
+    document.querySelectorAll('.swag-stat[data-p]').forEach(el => {
+      const a = agg[el.dataset.p]; if (!a) return;
+      const role = ROLES[el.dataset.p] || 'dps';
+      if (role === 'heal' && a.hps.length > 0) {
+        el.textContent = '~' + fmtK(avg(a.hps)) + ' HPS moy.';
+      } else if (role === 'tank' && a.dtps.length > 0) {
+        el.textContent = '~' + fmtK(avg(a.dtps)) + ' DTPS moy.';
+      } else if (a.dps.length > 0) {
+        el.textContent = '~' + fmtK(avg(a.dps)) + ' DPS moy.';
+      }
+    });
+  }).catch(() => {});
+})();
+</script>
 
 <script>Layout.footer({ baseUrl: '' });</script>
 </body>

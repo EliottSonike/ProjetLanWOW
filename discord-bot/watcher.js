@@ -140,7 +140,7 @@ function processLines(lines) {
 
     if (event === 'ENCOUNTER_START') {
       enc = { boss:args[1], raid:BOSS_RAID[args[1]]||'Unknown', startMs:p.ts,
-              deaths:[], damageBy:{}, healBy:{}, lastHitOn:{} };
+              deaths:[], damageBy:{}, healBy:{}, damageTakenBy:{}, lastHitOn:{} };
 
     } else if (event === 'ENCOUNTER_END') {
       const boss=args[1], ok=+args[4];
@@ -159,9 +159,10 @@ function processLines(lines) {
         hour:       killDate.toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'}),
         players:    PLAYERS,
         durationSec: enc ? Math.round((p.ts - enc.startMs)/1000) : 0,
-        deaths:   enc?.deaths   || [],
-        damageBy: enc?.damageBy || {},
-        healBy:   enc?.healBy   || {},
+        deaths:        enc?.deaths        || [],
+        damageBy:      enc?.damageBy      || {},
+        healBy:        enc?.healBy        || {},
+        damageTakenBy: enc?.damageTakenBy || {},
       });
       enc=null;
 
@@ -174,12 +175,18 @@ function processLines(lines) {
     } else if ((event==='SPELL_DAMAGE'||event==='RANGE_DAMAGE') && enc) {
       const src=charToDisplay(args[1]), dst=charToDisplay(args[5]);
       if (src) enc.damageBy[src]=(enc.damageBy[src]||0)+(+args[11]||0);
-      if (dst) enc.lastHitOn[dst]={ spell:args[9], src:args[1].split('-')[0] };
+      if (dst) {
+        enc.lastHitOn[dst]={ spell:args[9], src:args[1].split('-')[0] };
+        if (PLAYER_ROLES[dst]==='tank') enc.damageTakenBy[dst]=(enc.damageTakenBy[dst]||0)+(+args[11]||0);
+      }
 
     } else if (event==='SWING_DAMAGE' && enc) {
       const src=charToDisplay(args[1]), dst=charToDisplay(args[5]);
       if (src) enc.damageBy[src]=(enc.damageBy[src]||0)+(+args[8]||0);
-      if (dst) enc.lastHitOn[dst]={ spell:'Melee', src:args[1].split('-')[0] };
+      if (dst) {
+        enc.lastHitOn[dst]={ spell:'Melee', src:args[1].split('-')[0] };
+        if (PLAYER_ROLES[dst]==='tank') enc.damageTakenBy[dst]=(enc.damageTakenBy[dst]||0)+(+args[8]||0);
+      }
 
     } else if ((event==='SPELL_HEAL'||event==='SPELL_PERIODIC_HEAL') && enc) {
       const src=charToDisplay(args[1]);
@@ -227,12 +234,13 @@ function buildEmbed(kill, withImg) {
   if (kill.durationSec > 0) {
     const perfs = kill.players
       .map(p => {
-        const dps = kill.damageBy?.[p] ? Math.round(kill.damageBy[p] / kill.durationSec) : 0;
-        const hps = kill.healBy?.[p]   ? Math.round(kill.healBy[p]   / kill.durationSec) : 0;
-        return { player:p, dps, hps };
+        const dps  = kill.damageBy?.[p]       ? Math.round(kill.damageBy[p]       / kill.durationSec) : 0;
+        const hps  = kill.healBy?.[p]         ? Math.round(kill.healBy[p]         / kill.durationSec) : 0;
+        const dtps = kill.damageTakenBy?.[p]  ? Math.round(kill.damageTakenBy[p]  / kill.durationSec) : 0;
+        return { player:p, dps, hps, dtps };
       })
-      .filter(p => p.dps > 0 || p.hps > 0)
-      .sort((a, b) => (b.dps||b.hps) - (a.dps||a.hps));
+      .filter(p => p.dps > 0 || p.hps > 0 || p.dtps > 0)
+      .sort((a, b) => (b.dps||b.hps||b.dtps) - (a.dps||a.hps||a.dtps));
 
     if (perfs.length > 0) {
       const lines = perfs.map(p => {
@@ -240,6 +248,8 @@ function buildEmbed(kill, withImg) {
         const icon = ROLE_ICON[role] || '⚔️';
         const stat = role === 'heal'
           ? `${fmtNum(p.hps)} HPS`
+          : role === 'tank'
+          ? `${fmtNum(p.dps)} DPS · 🛡️ ${fmtNum(p.dtps)} DTPS`
           : `${fmtNum(p.dps)} DPS`;
         return `${icon} **${p.player}** — ${stat}`;
       });

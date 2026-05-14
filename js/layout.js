@@ -12,7 +12,14 @@ const Layout = (function () {
     const sk = nav === 'kill-tracker' ? ' class="active"' : '';
     const sr = nav === 'rng'          ? ' class="active"' : '';
 
-    document.write('<div class="page-map-bg"></div>');
+    // Fonts non-bloquantes — ne retardent pas les scripts defer (dont Wowhead power.js)
+    (function() {
+      var l = document.createElement('link');
+      l.rel = 'stylesheet';
+      l.href = 'https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cinzel+Decorative:wght@700;900&display=swap';
+      document.head.appendChild(l);
+    })();
+    document.write('<div class="page-map-bg"></div><div class="ambient-overlay" aria-hidden="true"></div>');
     document.write(
       '\n  <header class="site-header">' +
       '\n    <div class="header-inner">' +
@@ -58,6 +65,7 @@ const Layout = (function () {
       '\n  <script defer src="' + b + 'js/rotation-visual.js"><\/script>' +
       '\n  <script defer src="' + b + 'js/boss-maps.js"><\/script>' +
       '\n  <script defer src="' + b + 'js/live-data.js"><\/script>' +
+      '\n  <script defer src="' + b + 'js/side-deco.js"><\/script>' +
       '\n  <script>const whTooltips = {colorLinks: true, iconizeLinks: true, iconSize: \'large\', hide: {sellprice: true, ddmoreinfo: true}};<\/script>' +
       '\n  <script defer src="https://wow.zamimg.com/widgets/power.js"><\/script>\n'
     );

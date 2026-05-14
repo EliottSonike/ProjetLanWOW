@@ -154,8 +154,9 @@ function updateStats(kill) {
   const players = kill.players || stats.players || [];
   const perfs   = players.map(p => ({
     player: p,
-    dps:    durSec > 0 ? Math.round((kill.damageBy?.[p]||0) / durSec) : 0,
-    hps:    durSec > 0 ? Math.round((kill.healBy?.[p]||0)   / durSec) : 0,
+    dps:    durSec > 0 ? Math.round((kill.damageBy?.[p]       ||0) / durSec) : 0,
+    hps:    durSec > 0 ? Math.round((kill.healBy?.[p]          ||0) / durSec) : 0,
+    dtps:   durSec > 0 ? Math.round((kill.damageTakenBy?.[p]   ||0) / durSec) : 0,
     deaths: deathCnt[p] || 0,
   }));
 

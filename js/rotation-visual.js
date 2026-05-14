@@ -3,7 +3,7 @@
 const RotationVisual = (function () {
 
   const ICON = name =>
-    `https://wowgaming.altervista.org/aowow/static/images/wow/icons/large/${name}.jpg`;
+    `https://wow.zamimg.com/images/wow/icons/large/${name}.jpg`;
 
   /* ================================================================
      DONNÉES DE ROTATION PAR SPEC
@@ -93,6 +93,35 @@ const RotationVisual = (function () {
       ]
     },
 
+    /* ── Chasseur Précision ──────────────────────────────────── */
+    'hunter-marksmanship': {
+      label: 'Chasseur Précision — Rotation',
+      color: '#8bc34a',
+      glow:  'rgba(139,195,74,0.4)',
+      phases: [
+        {
+          name: 'Ouverture',
+          steps: [
+            { icon: ICON('ability_hunter_markofthehunter'),  name: "Hunter's Mark",  priority: 1, proc: false, note: 'Avant le pull · debuff +110 PA contre la cible' },
+            { icon: ICON('ability_hunter_serpentsting'),     name: 'Venin du Serpent', priority: 2, proc: false, note: 'DoT principal · refreshé automatiquement par Chimera Shot' },
+            { icon: ICON('ability_hunter_rapidfire'),        name: 'Tir Rapide',     priority: 3, proc: false, note: '+40% vitesse d\'attaque 20s · activer sur pull' },
+            { icon: ICON('ability_hunter_chimerashot2'),     name: 'Tir de Chimère', priority: 4, proc: false, note: 'Sort signature · CD 9-10s · sort le plus puissant' },
+            { icon: ICON('ability_hunter_aimedshot'),        name: 'Tir Visé',       priority: 5, proc: false, note: 'Si buff Tir Constant amélioré actif (x2 Steady Shot)' },
+          ]
+        },
+        {
+          name: 'Priorités combat',
+          steps: [
+            { icon: ICON('ability_hunter_assassinate2'),     name: 'Tir Mortel',     priority: 1, proc: true,  note: '💀 Cible < 20% HP · PRIORITÉ ABSOLUE · reset si manqué' },
+            { icon: ICON('ability_hunter_chimerashot2'),     name: 'Tir de Chimère', priority: 2, proc: false, note: 'Sur cooldown (9s) · refresh Venin du Serpent' },
+            { icon: ICON('ability_hunter_aimedshot'),        name: 'Tir Visé',       priority: 3, proc: true,  note: '⚡ PROC Improved Steady Shot → +20% dégâts · ne pas rater' },
+            { icon: ICON('ability_impalingbolt'),            name: 'Tir Arcane',     priority: 4, proc: false, note: 'Instant filler si Chimère/Visé en CD' },
+            { icon: ICON('ability_hunter_steadyshot'),       name: 'Tir Constant',   priority: 5, proc: false, note: 'Spam de base · 2 consécutifs → proc Tir Visé amélioré' },
+          ]
+        }
+      ]
+    },
+
     /* ── Paladin Holy ─────────────────────────────────────────── */
     'paladin-holy': {
       label: 'Paladin Holy — Priorités de soin',
@@ -130,6 +159,7 @@ const RotationVisual = (function () {
 
     if (cls === 'mage')    return 'mage-fire';
     if (cls === 'warlock') return 'warlock-affliction';
+    if (cls === 'hunter')  return 'hunter-marksmanship';
 
     if (cls === 'paladin') {
       // Distinguer prot vs holy via le titre de la page
@@ -158,8 +188,10 @@ const RotationVisual = (function () {
 
     const phaseDivs = data.phases.map((p, i) =>
       `<div class="rv-phase${i === 0 ? '' : ' rv-hidden'}" data-phase="${i}">
-        <div class="rv-steps">
-          ${p.steps.map((s, si) => buildStep(s, si, data.color, data.glow)).join('')}
+        <div class="rv-steps-wrap">
+          <div class="rv-steps">
+            ${p.steps.map((s, si) => buildStep(s, si, data.color, data.glow)).join('')}
+          </div>
         </div>
       </div>`
     ).join('');
@@ -179,7 +211,7 @@ const RotationVisual = (function () {
   ${idx > 0 ? '<div class="rv-arrow">→</div>' : ''}
   <div class="rv-spell">
     <div class="rv-icon-wrap">
-      <img class="rv-icon" src="${step.icon}" alt="${step.name}" loading="lazy">
+      <img class="rv-icon" src="${step.icon}" alt="${step.name}" loading="lazy" onerror="this.style.display='none';this.parentElement.classList.add('rv-icon-missing')">
       <span class="rv-priority">${step.priority}</span>
       ${step.proc ? '<div class="rv-proc-ring"></div>' : ''}
     </div>

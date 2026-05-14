@@ -32,7 +32,7 @@
           <div class="phase">
             <h4>3 bêtes successives</h4>
             <ul>
-              <li><strong>Gormok the Impaler</strong> — Snobold s'accroche sur des joueurs · Le DPS brûle le Snobold · Impale sur le tank · Swap de tank à 2 stacks · Firebomb sur des zones au sol · Éviter</li>
+              <li><strong>Gormok the Impaler</strong> — Snobold s'accroche sur des joueurs · Le DPS brûle le Snobold · Impale sur le tank · Swap de tank à 2 stacks · Firebomb sur des zones au sol · Éviter · Impale : dégâts réduits · Tuer un Snobold retire 2 stacks d'Impale du tank · Arctic Breath ne cible pas le heal · Staggered Daze : dégâts augmentés</li>
               <li><strong>Acidmaw &amp; Dreadscale (Jörmungar)</strong> — Deux serpents · Un stationnaire / un mobile · L'un inflige Arctic Breath (froid), l'autre Burning Bile (feu) · Paralytic Toxin + Burning Bile = mort · Switcher de serpent selon le debuff pour le "nettoyer"</li>
               <li><strong>Icehowl</strong> — Massive Crash : charge sur un mur · Se disperser contre le mur opposé · L'intercepter pour un buff DPS · Arctic Breath cône · Whirl AoE</li>
             </ul>
@@ -59,11 +59,13 @@
           <div class="phase">
             <h4>Mécaniques</h4>
             <ul>
-              <li><strong>Incinerate Flesh</strong> — Debuff sur un joueur · Il doit recevoir des soins massifs pour le "brûler" · Sinon il explose en AoE</li>
+              <li><strong>Incinerate Flesh</strong> — Debuff sur un joueur · Il doit recevoir des soins massifs pour le "brûler" · Sinon il explose en AoE · Ne cible pas le tank</li>
               <li><strong>Fel Fireball</strong> — Projectile sur un joueur · Interruptible · Toujours interrompre</li>
-              <li><strong>Legion Flame</strong> — Le joueur ciblé laisse une traîne de feu en se déplaçant · Courir vers le bord de l'arène pour limiter la zone</li>
+              <li><strong>Legion Flame</strong> — Le joueur ciblé laisse une traîne de feu en se déplaçant · Courir vers le bord de l'arène pour limiter la zone · Ne cible pas le heal</li>
               <li><strong>Mistress of Pain</strong> — Succube invoquée depuis un portail · La tanker et tuer · Interférence = Mistress of Pain immobile</li>
-              <li><strong>Nether Portal</strong> — Infernaux invoqués · AoE / tuer rapidement</li>
+              <li><strong>Nether Portal et Infernal Volcano</strong> — Positions fixes dans la salle · Anticipez les spawns · Infernaux invoqués · AoE / tuer rapidement</li>
+              <li><strong>Nether Power</strong> — Max 5 stacks · Dispellable par un Taunt du tank (comme Gluth Enrage)</li>
+              <li><strong>Mistress Kiss</strong> — Dispellable</li>
             </ul>
           </div>
           <div class="phase">
@@ -88,20 +90,20 @@
           <div class="phase">
             <h4>Mécaniques</h4>
             <ul>
-              <li>Un groupe de PNJ contrôlés par une IA PvP — ils agissent comme de vrais joueurs</li>
-              <li>Pas de taunt · Ils attaquent aléatoirement et swappent de cible</li>
-              <li><strong>Ordre de kill recommandé</strong> : Healers en premier → Casters → Melee</li>
+              <li>5 champions spawent toujours dont 1 heal obligatoire · Focus le heal en premier</li>
+              <li>Les champions suivent la table de menace normale et reset l'agro toutes les ~20s · Pas de taunt possible mais la menace compte</li>
+              <li><strong>Aura (10m)</strong> — -50% soins reçus, -20% dégâts de sorts · Pas de crit en mêlée · Pas d'AoE fears</li>
+              <li><strong>25m</strong> — -70% soins, -30% sorts · Coffre au centre au début : 3 trinkets aléatoires</li>
               <li>Crowd Control massif : CC les healers en priorité (Hex, Poly, Fear, Cyclone)</li>
               <li>Les Champions utilisent leurs CDs de classe normalement</li>
-              <li>Kiter les melee pour réduire les dégâts sur le raid</li>
             </ul>
           </div>
           <div class="phase">
             <h4>Rôles</h4>
             <ul>
-              <li>🛡️ <strong>Tank</strong> — Essayer de peel les melee adverses · Aucun taunt ne fonctionne</li>
-              <li>💚 <strong>Heal</strong> — Rester mobile · Trouver les angles pour soigner sans être focus</li>
-              <li>⚔️ <strong>DPS</strong> — CC les healers adverses · Focus un target à la fois · Ne pas split le DPS</li>
+              <li>🛡️ <strong>Tank</strong> — Peel les melee · La menace compte même sans taunt</li>
+              <li>💚 <strong>Heal</strong> — Heal intensif malgré la réduction de soins</li>
+              <li>⚔️ <strong>DPS</strong> — CC le heal ennemi · Focus un par un</li>
             </ul>
           </div>
         </div>
@@ -119,11 +121,13 @@
             <h4>Mécaniques</h4>
             <ul>
               <li>Fjola (lumière) et Eydis (ombre) · Doivent mourir en même temps (à 5% de différence max)</li>
-              <li><strong>Essence system</strong> — Chaque joueur choisit une essence : lumière ou ombre (via des orbes au sol)</li>
+              <li><strong>Essence system</strong> — Chaque joueur choisit une essence : lumière ou ombre (via des orbes au sol) · Essences concentrées au sol en nombre réduit</li>
               <li>Lumière vs Lumière = immunité aux dégâts de lumière · Ombre vs Ombre = immunité aux dégâts d'ombre</li>
               <li><strong>Règle</strong> : Prenez l'essence opposée à la Val'kyr que vous tankez/DPS</li>
               <li><strong>Vortex of Darkness/Light</strong> — AoE massive · Changer d'essence pour résister</li>
-              <li><strong>Orbes volants</strong> — Toucher un orbe de votre couleur = soin · Orbe adverse = dégâts</li>
+              <li><strong>Powering Up</strong> — Se stack par 10 · À 100 stacks → Empowered (buff massif) · Éviter les orbes adverses</li>
+              <li><strong>Twin's Pack</strong> — Soigne 25% des HP max · Viser les orbes de sa couleur activement</li>
+              <li><strong>Surge et Twin Spike</strong> — Dégâts légèrement réduits</li>
             </ul>
           </div>
           <div class="phase">
@@ -150,13 +154,15 @@
             <ul>
               <li><strong>Pound</strong> — Coup massif sur le tank · Swap de tank à 3 stacks</li>
               <li><strong>Spike</strong> — Pic de glace sous-terrain qui pourchasse un joueur · Courir · Si rattrapé = stun + dégâts</li>
-              <li><strong>Nerubian Burrowers</strong> — Adds qui émergent du sol · Les tuer · Peuvent Submerge → deviennent immunisés</li>
+              <li><strong>Nerubian Burrowers</strong> — 1 seul Nerubian Burrower à la fois · Focus immédiat · Peuvent Submerge → deviennent immunisés</li>
+              <li><strong>Freezing Slash</strong> — Réduit la dodge chance du tank</li>
             </ul>
           </div>
           <div class="phase">
             <h4>⚡ Phase 2 — Sous terre (intercalée)</h4>
             <ul>
               <li>Anub'arak s'enfouit · Spawn de Nerubian Burrowers · Les tuer toujours</li>
+              <li><strong>Penetrating Cold</strong> — Ne cible qu'1 joueur (pas tout le raid)</li>
               <li><strong>Frozen Spheres</strong> — Orbes de glace qui ralentissent · Ne pas se laisser toucher</li>
               <li>Utiliser cette phase pour régénérer les CD healers</li>
             </ul>
@@ -165,9 +171,10 @@
             <h4>🔥 Phase 3 — Burn (30% → 0%)</h4>
             <ul>
               <li>Anub'arak remonte définitivement · Mêmes mécaniques mais intensifiées</li>
-              <li><strong>Leech (Mécanique principale)</strong> — Anub'arak vole des HP à tous les joueurs · Les healers NE DOIVENT PAS soigner à fond · Laisser le raid bas pour réduire les soins volés par Anub'arak</li>
+              <li><strong>Locust Infection</strong> — Sur Anub'arak : -50% soins reçus</li>
+              <li><strong>Leech (Mécanique principale)</strong> — HP leech depuis le tank réduit de 10% · Anub'arak vole des HP à tous les joueurs · Les healers NE DOIVENT PAS soigner à fond · Laisser le raid bas pour réduire les soins volés par Anub'arak</li>
               <li>Les adds continuent de spawn · Les tuer en priorité</li>
-              <li><strong>Stratégie</strong> : Le raid doit rester autour de 20-30% HP · C'est difficile mais critique</li>
+              <li><strong>Stratégie</strong> : Stratégie de bas HP reste nécessaire mais moins critique · Le raid doit rester autour de 20-30% HP</li>
             </ul>
           </div>
           <div class="phase">

@@ -1,3 +1,10 @@
+/* ── Wowhead tooltips refresh ───────────────────────────────────────── */
+function refreshWowhead() {
+  if (window.$WowheadPower)              window.$WowheadPower.refreshLinks();
+  else if (window.WH && window.WH.Tooltips) window.WH.Tooltips.refreshLinks();
+}
+window.addEventListener('load', () => setTimeout(refreshWowhead, 500));
+
 /* ── 3D Model Viewer ────────────────────────────────────────────────── */
 
 function loadScript(src) {
@@ -93,10 +100,8 @@ function initTabs() {
       // met à jour le hash URL
       history.replaceState(null, '', '#' + target);
 
-      // refresh wowhead
-      setTimeout(() => {
-        window.dispatchEvent(new Event('resize'));
-      }, 100);
+      // refresh wowhead tooltips (panneaux cachés au chargement)
+      setTimeout(refreshWowhead, 80);
     });
 
   });
@@ -244,6 +249,8 @@ function renderArmoryPanel(panel, charData, meta, fromCache) {
   // Lance le chargement du modèle 3D en arrière-plan
   if (portrait) load3DModel('viewer3d-' + safeId, 'pf-' + safeId, charData);
 
+  // Refresh Wowhead tooltips sur les items nouvellement insérés
+  setTimeout(refreshWowhead, 300);
 }
 
 function timeAgo(timestamp) {
