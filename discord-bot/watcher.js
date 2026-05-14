@@ -152,6 +152,47 @@ function processLogLines(lines) {
   }
 }
 
+// ── Mise à jour progression ───────────────────────────────────────────
+const vm          = require('vm');
+const PROG_FILE   = path.resolve(__dirname, '..', 'data', 'progression.js');
+
+function allBossesFlat(entry) {
+  if (entry.bosses) return entry.bosses;
+  return (entry.wings || []).flatMap(w => w.bosses);
+}
+
+function updateProgression(kill) {
+  if (!fs.existsSync(PROG_FILE)) return;
+  try {
+    const ctx = { window: {} };
+    vm.runInNewContext(fs.readFileSync(PROG_FILE, 'utf8'), ctx);
+    const prog = ctx.window.PROGRESSION;
+
+    let updated = false;
+    for (const entry of [...prog.raids, ...(prog.dungeons || [])]) {
+      const boss = allBossesFlat(entry).find(b => b.name === kill.boss);
+      if (boss && !boss.killed) {
+        boss.killed    = true;
+        boss.wipes     = kill.wipes || 0;
+        boss.firstKill = kill.first ? kill.date : (boss.firstKill || null);
+        updated        = true;
+        console.log(`📊 Progression : ${kill.boss} → killed ✅ (${entry.name})`);
+        break;
+      }
+    }
+
+    if (updated) {
+      fs.writeFileSync(
+        PROG_FILE,
+        'window.PROGRESSION = ' + JSON.stringify(prog, null, 2) + ';\n',
+        'utf8'
+      );
+    }
+  } catch (e) {
+    console.error('⚠️  Progression update :', e.message);
+  }
+}
+
 // ── Screenshot matching ───────────────────────────────────────────────
 const MATCH_WINDOW = 90 * 1000;
 
@@ -228,6 +269,8 @@ async function handleKill(kill) {
     const tag      = screenshot ? '📸' : '📝';
     const firstTag = kill.first ? ' [FIRST KILL]' : '';
     console.log(`✅ ${tag} Posté : ${kill.boss}${firstTag}`);
+
+    updateProgression(kill);
 
     if (msgId) {
       pending.push({ msgId, killId: id });
