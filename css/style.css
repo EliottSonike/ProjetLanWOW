@@ -2293,6 +2293,87 @@ body[data-class="deathknight"]{ --class-accent: var(--deathknight);--class-glow:
   animation: wcl-spin 0.7s linear infinite;
 }
 
+/* ===== KILL TRACKER ===== */
+.kt-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+@media (max-width: 700px) { .kt-wrapper { grid-template-columns: 1fr; } }
+
+.kt-field { margin-bottom: 1rem; }
+.kt-field-inline { display: flex; align-items: center; gap: 0.5rem; }
+
+.kt-label { display: block; font-size: 0.78rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.4px; margin-bottom: 0.35rem; }
+.kt-label-inline { font-size: 0.85rem; color: var(--text-secondary); cursor: pointer; }
+
+.kt-select, .kt-input, .kt-textarea {
+  width: 100%;
+  background: var(--bg-card2);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0.55rem 0.8rem;
+  color: var(--text-primary);
+  font-size: 0.88rem;
+  transition: border-color 0.15s;
+}
+.kt-select:focus, .kt-input:focus, .kt-textarea:focus { border-color: var(--gold-dark); outline: none; }
+.kt-textarea { resize: vertical; min-height: 80px; font-family: inherit; }
+.kt-checkbox { width: 16px; height: 16px; accent-color: var(--gold); cursor: pointer; }
+
+/* Drop zone */
+.kt-drop {
+  border: 2px dashed var(--border);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: border-color 0.15s;
+  overflow: hidden;
+  min-height: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.kt-drop.dragging, .kt-drop:hover { border-color: var(--gold-dark); }
+.kt-drop-inner { display: flex; flex-direction: column; align-items: center; gap: 0.4rem; padding: 1.2rem; color: var(--text-muted); font-size: 0.85rem; text-align: center; }
+.kt-drop-icon  { font-size: 1.8rem; }
+.kt-drop-btn   { background: none; border: none; color: var(--gold-light); cursor: pointer; text-decoration: underline; font-size: 0.85rem; }
+.kt-preview    { width: 100%; max-height: 200px; object-fit: cover; display: block; }
+
+/* Submit */
+.kt-submit {
+  width: 100%;
+  padding: 0.8rem;
+  background: linear-gradient(135deg, #f44336, #c62828);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: opacity 0.2s;
+  margin-top: 0.5rem;
+}
+.kt-submit:hover    { opacity: 0.9; }
+.kt-submit:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.kt-feedback { padding: 0.7rem 1rem; border-radius: 6px; font-size: 0.88rem; margin-top: 0.8rem; }
+.kt-feedback-success { background: rgba(76,175,80,.15); border: 1px solid #4caf50; color: #a5d6a7; }
+.kt-feedback-error   { background: rgba(244,67,54,.12); border: 1px solid #f44336; color: #ef9a9a; }
+
+/* Aperçu Discord */
+.kt-preview-title { font-size: 0.82rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.4px; margin-bottom: 1rem; }
+.kt-discord-preview { background: #36393f; border-radius: 8px; overflow: hidden; }
+.kt-dp-bar   { width: 4px; height: 100%; background: #9b59b6; float: left; min-height: 80px; }
+.kt-dp-body  { padding: 0.8rem 1rem; overflow: hidden; }
+.kt-dp-header { font-size: 0.9rem; color: #fff; font-weight: 600; margin-bottom: 0.6rem; line-height: 1.4; }
+.kt-dp-fields { display: flex; flex-direction: column; gap: 0.3rem; margin-bottom: 0.6rem; }
+.kt-dp-field  { font-size: 0.78rem; color: #dcddde; display: flex; gap: 0.4rem; }
+.kt-dp-field-name { color: #72767d; min-width: 60px; }
+.kt-dp-img   { width: 100%; border-radius: 4px; max-height: 180px; object-fit: cover; display: block; margin-top: 0.5rem; }
+.kt-dp-msg   { font-size: 0.82rem; color: #dcddde; margin-top: 0.5rem; font-style: italic; }
+
 /* ===== FOOTER ===== */
 .site-footer {
   margin-top: 4rem;

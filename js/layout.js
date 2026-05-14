@@ -9,6 +9,7 @@ const Layout = (function () {
     const sp = nav === 'progression' ? ' class="active"' : '';
     const sh = nav === 'hall-of-shame' ? ' class="active"' : '';
     const ss = nav === 'stats'       ? ' class="active"' : '';
+    const sk = nav === 'kill-tracker' ? ' class="active"' : '';
 
     document.write('<div class="page-map-bg"></div>');
     document.write(
@@ -27,6 +28,7 @@ const Layout = (function () {
       '\n        <a href="' + b + 'progression.html"' + sp + '>Progression</a>' +
       '\n        <a href="' + b + 'hall-of-shame.html"' + sh + '>Hall of Shame</a>' +
       '\n        <a href="' + b + 'stats.html"' + ss + '>Stats</a>' +
+      '\n        <a href="' + b + 'kill-tracker.html"' + sk + '>💀 Kill Tracker</a>' +
       '\n      </nav>' +
       '\n      <a href="https://discord.gg/n96wrGtenG" target="_blank" rel="noopener" class="nav-discord" id="nav-discord-btn">' +
       '\n        <svg viewBox="0 0 71 55" fill="none" class="nav-discord-logo"><path d="M60.1 4.9A58.5 58.5 0 0 0 45.5.9a40.8 40.8 0 0 0-1.8 3.7 54 54 0 0 0-16.4 0A40.4 40.4 0 0 0 25.5.9 58.4 58.4 0 0 0 10.8 4.9C1.6 18.6-.9 31.9.3 45A59 59 0 0 0 18.3 54a44.6 44.6 0 0 0 3.8-6.2 38.3 38.3 0 0 1-6-2.9l1.5-1.1a42 42 0 0 0 36 0l1.5 1.1a38.4 38.4 0 0 1-6 2.9A44.7 44.7 0 0 0 52.7 54a58.8 58.8 0 0 0 18-9C72 29.6 68.7 16.4 60.1 4.9ZM23.7 37a6.7 6.7 0 0 1-6.3-7 6.7 6.7 0 0 1 6.3-7 6.7 6.7 0 0 1 6.3 7 6.7 6.7 0 0 1-6.3 7Zm23.6 0a6.7 6.7 0 0 1-6.3-7 6.7 6.7 0 0 1 6.3-7 6.7 6.7 0 0 1 6.3 7 6.7 6.7 0 0 1-6.3 7Z" fill="currentColor"/><\/svg>' +
