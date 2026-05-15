@@ -19,7 +19,12 @@ const Layout = (function () {
     const sk = nav === 'kill-tracker' ? ' class="active"' : '';
     const sr = nav === 'rng'          ? ' class="active"' : '';
 
-    // Fonts non-bloquantes
+    // Favicon + fonts non-bloquantes
+    const fav = document.createElement('link');
+    fav.rel  = 'icon';
+    fav.href = b + 'assets/img/icons8-world-of-warcraft-48.png';
+    document.head.appendChild(fav);
+
     const fl = document.createElement('link');
     fl.rel  = 'stylesheet';
     fl.href = 'https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cinzel+Decorative:wght@700;900&display=swap';
