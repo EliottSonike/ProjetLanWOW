@@ -17,6 +17,10 @@ function loadScript(src) {
 }
 
 async function load3DModel(viewerId, portraitId, charData) {
+  // 3D viewer désactivé — wotlk5.com assets non accessibles de façon fiable
+  // À réactiver quand les persos seront niveau 80 avec assets stables
+  return;
+  /* eslint-disable no-unreachable */
   const viewerEl = document.getElementById(viewerId);
   const toggle   = document.getElementById('toggle3d-' + portraitId.replace('pf-', ''));
   if (!viewerEl || !charData) return;
@@ -25,7 +29,6 @@ async function load3DModel(viewerId, portraitId, charData) {
   const customOpts  = charData.customizationOptions  || [];
   const modelItems  = charData.characterModelItems   || [];
 
-  // Montrer le bouton tout de suite — on le cache seulement si ça plante
   if (toggle) toggle.style.display = 'inline-flex';
 
   try {
