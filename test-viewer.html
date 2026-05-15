@@ -16,26 +16,8 @@
 <div id="log">Initialisation...</div>
 
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-<!-- pako chargé EN PREMIER et patché avant viewer.min.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pako/2.1.0/pako.min.js"></script>
-<script>
-// Patch pako.inflate pour tolérer raw deflate (format wotlk5.com)
-(function() {
-  if (!window.pako) { console.warn('pako non trouvé'); return; }
-  var orig = pako.inflate;
-  pako.inflate = function(data, opts) {
-    try {
-      return orig.call(pako, data, opts);
-    } catch(e) {
-      // Si header invalide, essayer raw deflate
-      try { return pako.inflateRaw(data, opts || {}); }
-      catch(e2) { return new Uint8Array(data); }
-    }
-  };
-  console.log('[PATCH] pako.inflate patché pour raw deflate ✅');
-})();
-</script>
-<script src="https://wow.zamimg.com/modelviewer/classic/viewer/viewer.min.js"></script>
+<!-- viewer.min.js servi depuis notre proxy avec patch pako injecté -->
+<script src="/wow-assets/viewer/viewer.min.js"></script>
 <script>
 const log = document.getElementById('log');
 function L(msg, color) {

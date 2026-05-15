@@ -64,6 +64,53 @@ function auth(req, res, next) {
   next();
 }
 
+// ── viewer.min.js patché (pako inflate fallback raw deflate) ─────────
+const VIEWER_URL = 'https://wow.zamimg.com/modelviewer/classic/viewer/viewer.min.js';
+const PAKO_PATCH = `
+;(function(){
+  var _orig=null;
+  function findPako(obj,depth){
+    if(depth>3||!obj||typeof obj!=='object')return;
+    if(obj.inflate&&obj.inflateRaw&&obj.Inflate){
+      if(!obj.__patched){
+        _orig=obj.inflate.bind(obj);
+        obj.inflate=function(d,o){
+          try{return _orig(d,o);}
+          catch(e){
+            try{return obj.inflateRaw(d,o||{});}
+            catch(e2){return new Uint8Array(typeof d==='string'?0:d.length);}
+          }
+        };
+        obj.__patched=true;
+        console.log('[PATCH] pako bundlé patché ✅');
+      }
+    }
+    for(var k in obj){try{findPako(obj[k],depth+1);}catch(e){}}
+  }
+  setTimeout(function(){findPako(window,0);},0);
+})();
+`;
+
+let viewerCache = null;
+let viewerCacheTime = 0;
+app.get('/wow-assets/viewer/viewer.min.js', async (req, res) => {
+  try {
+    const now = Date.now();
+    if (!viewerCache || now - viewerCacheTime > 3600000) {
+      const r = await fetch(VIEWER_URL);
+      const code = await r.text();
+      viewerCache = code + PAKO_PATCH;
+      viewerCacheTime = now;
+    }
+    res.setHeader('Content-Type', 'application/javascript');
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Cache-Control', 'public, max-age=3600');
+    res.send(viewerCache);
+  } catch(e) {
+    res.status(502).send('// Error: ' + e.message);
+  }
+});
+
 // ── GET ───────────────────────────────────────────────────────────────
 app.get('/api/health',      (_, res) => res.json({ ok: true, ts: Date.now() }));
 app.get('/api/progression', (_, res) => res.json(load('progression.json', {})));
