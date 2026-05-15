@@ -15,6 +15,15 @@ jobs:
           BASE="https://wotlk5.com/armory/data/mo3"
           UA="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
 
+          # Métadonnées wotlk5.com (différentes de zamimg.com)
+          mkdir -p wow-mo3/meta/character
+          curl -fsSL -A "$UA" -H "Referer: https://wotlk5.com/" \
+            -o "wow-mo3/meta/character/7.json" \
+            "https://wotlk5.com/armory/data/meta/character/7.json" \
+            && echo "✅ meta/character/7.json ($(stat -c%s wow-mo3/meta/character/7.json) bytes)" \
+            || echo "❌ meta/character/7.json introuvable"
+
+          # Modèles mo3
           for ID in 147530 900914 974343 7760205 7760285; do
             curl -fsSL -L \
               -A "$UA" \
@@ -46,6 +55,15 @@ jobs:
       - name: Copy to server
         run: |
           mkdir -p /home/eliott/monsite/wow-assets/mo3
+          mkdir -p /home/eliott/monsite/wow-assets/meta/character
+
+          # Métadonnées
+          if [ -f /tmp/wow-mo3/meta/character/7.json ]; then
+            cp /tmp/wow-mo3/meta/character/7.json /home/eliott/monsite/wow-assets/meta/character/
+            echo "✅ meta/character/7.json"
+          fi
+
+          # Modèles mo3
           for f in /tmp/wow-mo3/*.mo3; do
             SIZE=$(stat -c%s "$f")
             if [ "$SIZE" -gt 10000 ]; then
