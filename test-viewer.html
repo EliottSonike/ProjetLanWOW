@@ -49,6 +49,30 @@ window.WH.WebP = {
   isSupported: function() { return true; }
 };
 
+// Patch pako inflate pour ignorer les erreurs de header check
+// wotlk5.com mo3 utilise une variante zlib différente
+document.addEventListener('DOMContentLoaded', () => {
+  if (window.pako && window.pako.inflate) {
+    const origInflate = window.pako.inflate;
+    window.pako.inflate = function(data, opts) {
+      try {
+        return origInflate(data, opts);
+      } catch(e) {
+        if (e.message && e.message.includes('header check')) {
+          // Essayer sans vérification du header
+          try {
+            return origInflate(data, Object.assign({}, opts || {}, {raw: true}));
+          } catch(e2) {
+            return new Uint8Array(0);
+          }
+        }
+        throw e;
+      }
+    };
+    L('pako.inflate patché pour header check ✅', '#4a9');
+  }
+});
+
 L('WH.WebP patché ✅', '#4a9');
 L('ZamModelViewer: ' + typeof ZamModelViewer, typeof ZamModelViewer !== 'undefined' ? '#4a9' : '#e55');
 
