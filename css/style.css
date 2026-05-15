@@ -73,7 +73,13 @@ body {
   font-size: 15px;
   line-height: 1.6;
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
+
+main, main.container { flex: 1; }
+
+.site-footer { margin-top: auto; }
 
 a { color: var(--gold); text-decoration: none; }
 a:hover { color: var(--gold-light); }
