@@ -111,7 +111,8 @@ app.get('/wow-assets/viewer/viewer.min.js', async (req, res) => {
     if (!viewerCache || now - viewerCacheTime > 3600000) {
       const r = await fetch(VIEWER_URL);
       const code = await r.text();
-      viewerCache = code + PAKO_PATCH;
+      // Prépendre le patch AVANT le code du viewer pour intercepter au plus tôt
+      viewerCache = PAKO_PATCH + '\n' + code;
       viewerCacheTime = now;
     }
     res.setHeader('Content-Type', 'application/javascript');
