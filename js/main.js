@@ -29,7 +29,7 @@ async function load3DModel(viewerId, portraitId, charData) {
   if (toggle) toggle.style.display = 'inline-flex';
 
   try {
-    window.CONTENT_PATH = '/wow-assets/';
+    window.CONTENT_PATH = 'https://wotlk5.com/armory/data/';
     window.WH = window.WH || {};
     window.WH.debug = window.WH.debug || (() => {});
 
@@ -38,7 +38,7 @@ async function load3DModel(viewerId, portraitId, charData) {
 
     const inst = new ZamModelViewer({
       type:        ZamModelViewer.WOW,
-      contentPath: '/wow-assets/',
+      contentPath: 'https://wotlk5.com/armory/data/',
       container:   $(viewerEl),
       hd:          true,
       aspect:      viewerEl.offsetWidth / (viewerEl.offsetHeight || viewerEl.offsetWidth) || 0.75,
@@ -50,7 +50,7 @@ async function load3DModel(viewerId, portraitId, charData) {
         sheathOff:  -1,
       },
       cls:   charData.class,
-      items: [],
+      items: modelItems.filter(i => i[1] !== -1),
       models: { type: ZamModelViewer.Wow.Types.CHARACTER, id: charData.race },
     });
 
