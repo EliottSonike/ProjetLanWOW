@@ -68,26 +68,38 @@ function auth(req, res, next) {
 const VIEWER_URL = 'https://wow.zamimg.com/modelviewer/classic/viewer/viewer.min.js';
 const PAKO_PATCH = `
 ;(function(){
-  var _orig=null;
-  function findPako(obj,depth){
-    if(depth>3||!obj||typeof obj!=='object')return;
+  // Patch 1: pako inflate → raw deflate fallback (wotlk5 mo3 format)
+  function patchPako(obj,depth){
+    if(depth>4||!obj||typeof obj!=='object'||obj.__pakoPatched)return;
     if(obj.inflate&&obj.inflateRaw&&obj.Inflate){
-      if(!obj.__patched){
-        _orig=obj.inflate.bind(obj);
-        obj.inflate=function(d,o){
-          try{return _orig(d,o);}
-          catch(e){
-            try{return obj.inflateRaw(d,o||{});}
-            catch(e2){return new Uint8Array(typeof d==='string'?0:d.length);}
-          }
-        };
-        obj.__patched=true;
-        console.log('[PATCH] pako bundlé patché ✅');
-      }
+      obj.__pakoPatched=true;
+      var orig=obj.inflate.bind(obj);
+      obj.inflate=function(d,o){
+        try{return orig(d,o);}
+        catch(e){
+          try{return obj.inflateRaw(d,o||{});}
+          catch(e2){return d instanceof Uint8Array?d:new Uint8Array(0);}
+        }
+      };
+      console.log('[PATCH] pako inflate patched ✅');
     }
-    for(var k in obj){try{findPako(obj[k],depth+1);}catch(e){}}
+    Object.keys(obj).forEach(function(k){try{patchPako(obj[k],depth+1);}catch(e){}});
   }
-  setTimeout(function(){findPako(window,0);},0);
+  setTimeout(function(){patchPako(window,0);},50);
+
+  // Patch 2: suppress bounds errors (He/getBounds when geometry undefined)
+  // Override requestAnimationFrame to catch errors silently
+  var origRAF=window.requestAnimationFrame;
+  window.requestAnimationFrame=function(cb){
+    return origRAF.call(window,function(t){
+      try{cb(t);}catch(e){
+        if(e instanceof TypeError&&e.message&&e.message.includes("reading '0'")){
+          // Geometry not ready, skip frame silently
+        } else { throw e; }
+      }
+    });
+  };
+  console.log('[PATCH] requestAnimationFrame patched ✅');
 })();
 `;
 
