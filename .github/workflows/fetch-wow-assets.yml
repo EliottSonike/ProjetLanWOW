@@ -6,44 +6,51 @@ on:
     - cron: '0 3 * * 1'
 
 jobs:
-  fetch:
+  download:
     runs-on: ubuntu-latest
     steps:
       - name: Download mo3 files from wotlk5.com
         run: |
-          mkdir -p $GITHUB_WORKSPACE/wow-mo3
+          mkdir -p wow-mo3
           BASE="https://wotlk5.com/armory/data/mo3"
           UA="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
 
           for ID in 147530 900914 974343; do
-            echo "→ Downloading $ID.mo3..."
-            curl -v -A "$UA" -H "Referer: https://wotlk5.com/" \
-              -o "$GITHUB_WORKSPACE/wow-mo3/$ID.mo3" \
-              "$BASE/$ID.mo3" 2>&1 | tail -5
-            SIZE=$(stat -c%s "$GITHUB_WORKSPACE/wow-mo3/$ID.mo3" 2>/dev/null || echo 0)
-            echo "   Size: $SIZE bytes"
+            curl -fsSL -A "$UA" -H "Referer: https://wotlk5.com/" \
+              -o "wow-mo3/$ID.mo3" "$BASE/$ID.mo3" \
+              && echo "✅ $ID.mo3 ($(stat -c%s wow-mo3/$ID.mo3) bytes)" \
+              || echo "❌ $ID.mo3 introuvable"
           done
+          ls -lh wow-mo3/
 
-          echo "--- Files downloaded ---"
-          ls -lh $GITHUB_WORKSPACE/wow-mo3/
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: wow-mo3-files
+          path: wow-mo3/
+          retention-days: 1
 
-      - name: Upload to server via SSH
-        env:
-          DEPLOY_KEY: ${{ secrets.DEPLOY_KEY }}
-          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
-          DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
+  deploy:
+    needs: download
+    runs-on: self-hosted
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: wow-mo3-files
+          path: /tmp/wow-mo3/
+
+      - name: Copy to server
         run: |
-          mkdir -p ~/.ssh
-          printf '%s\n' "$DEPLOY_KEY" > ~/.ssh/deploy_key
-          chmod 600 ~/.ssh/deploy_key
-          ssh-keyscan -H "$DEPLOY_HOST" >> ~/.ssh/known_hosts 2>/dev/null
-
-          ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=no \
-            "$DEPLOY_USER@$DEPLOY_HOST" \
-            "mkdir -p /home/eliott/monsite/wow-assets/mo3"
-
-          scp -i ~/.ssh/deploy_key -o StrictHostKeyChecking=no \
-            $GITHUB_WORKSPACE/wow-mo3/*.mo3 \
-            "$DEPLOY_USER@$DEPLOY_HOST:/home/eliott/monsite/wow-assets/mo3/"
-
-          echo "✅ Upload terminé"
+          mkdir -p /home/eliott/monsite/wow-assets/mo3
+          for f in /tmp/wow-mo3/*.mo3; do
+            SIZE=$(stat -c%s "$f")
+            if [ "$SIZE" -gt 10000 ]; then
+              cp "$f" /home/eliott/monsite/wow-assets/mo3/
+              echo "✅ $(basename $f) ($SIZE bytes)"
+            else
+              echo "⚠️ $(basename $f) trop petit ($SIZE bytes) — ignoré"
+            fi
+          done
+          ls -lh /home/eliott/monsite/wow-assets/mo3/
+          echo "✅ Assets 3D en place"
