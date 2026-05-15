@@ -120,17 +120,52 @@ app.get('/wow-assets/viewer/viewer.min.js', async (req, res) => {
         var _off=z.byteOffset||0;
         for(var _j=Math.max(0,_off-200);_j<=_off;_j++){
           if(_buf[_j]===0x78&&(_buf[_j+1]===0x9c||_buf[_j+1]===0xda||_buf[_j+1]===0x01||_buf[_j+1]===0x5e)){
-            try{G=Mh(new Uint8Array(z.buffer,_j));_found=true;console.log("inflate fixed at -"+(_off-_j));break;}catch(_e2){}
+            try{
+              G=Mh(new Uint8Array(z.buffer,_j));
+              _found=true;
+              P=new DataView(z.buffer).getUint32(_j-4,true);
+              console.log("inflate+P fixed at -"+(_off-_j)+", P="+P);
+              break;
+            }catch(_e2){}
           }
         }
         if(!_found){return void console.log("Decompression error: "+_e1);}
       }`.replace(/\n\s*/g,'');
-      const patched = code.replace(inflateTarget, inflatePatch);
+
+      // Patch rn reader to be bounds-safe (wotlk5 mo3 has 10 fewer section slots than
+      // zamimg format; viewer reads garbage offsets for those slots → DataView throws
+      // RangeError without bounds checking)
+      const rnPatches = [
+        ['getUint32(){var t=this.buffer.getUint32(this.position,!0);return this.position+=4,t}',
+         'getUint32(){if(this.position+4>this.buffer.byteLength)return this.position+=4,0;var t=this.buffer.getUint32(this.position,!0);return this.position+=4,t}'],
+        ['getInt32(){var t=this.buffer.getInt32(this.position,!0);return this.position+=4,t}',
+         'getInt32(){if(this.position+4>this.buffer.byteLength)return this.position+=4,0;var t=this.buffer.getInt32(this.position,!0);return this.position+=4,t}'],
+        ['getUint16(){var t=this.buffer.getUint16(this.position,!0);return this.position+=2,t}',
+         'getUint16(){if(this.position+2>this.buffer.byteLength)return this.position+=2,0;var t=this.buffer.getUint16(this.position,!0);return this.position+=2,t}'],
+        ['getInt16(){var t=this.buffer.getInt16(this.position,!0);return this.position+=2,t}',
+         'getInt16(){if(this.position+2>this.buffer.byteLength)return this.position+=2,0;var t=this.buffer.getInt16(this.position,!0);return this.position+=2,t}'],
+        ['getFloat(){var t=this.buffer.getFloat32(this.position,!0);return this.position+=4,t}',
+         'getFloat(){if(this.position+4>this.buffer.byteLength)return this.position+=4,0;var t=this.buffer.getFloat32(this.position,!0);return this.position+=4,t}'],
+        ['getUint8(){var t=this.buffer.getUint8(this.position);return this.position+=1,t}',
+         'getUint8(){if(this.position+1>this.buffer.byteLength)return this.position+=1,0;var t=this.buffer.getUint8(this.position);return this.position+=1,t}'],
+        ['getInt8(){var t=this.buffer.getInt8(this.position);return this.position+=1,t}',
+         'getInt8(){if(this.position+1>this.buffer.byteLength)return this.position+=1,0;var t=this.buffer.getInt8(this.position);return this.position+=1,t}'],
+        ['getBool(){var t=0!=this.buffer.getUint8(this.position);return this.position+=1,t}',
+         'getBool(){if(this.position+1>this.buffer.byteLength)return this.position+=1,false;var t=0!=this.buffer.getUint8(this.position);return this.position+=1,t}'],
+      ];
+      let patched = code.replace(inflateTarget, inflatePatch);
       if(patched === code) {
         console.log('⚠️ viewer patch: cible inflate non trouvée');
       } else {
-        console.log('✅ viewer patch: inflate patché avec succès');
+        console.log('✅ viewer patch: inflate+P patché');
       }
+      let rnOk = 0;
+      for(const [target, replacement] of rnPatches) {
+        const prev = patched;
+        patched = patched.replace(target, replacement);
+        if(patched !== prev) rnOk++;
+      }
+      console.log(`✅ viewer patch: rn bounds-safe (${rnOk}/8 méthodes)`);
       viewerCache = PAKO_PATCH + '\n' + patched;
       viewerCacheTime = now;
     }
