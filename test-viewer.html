@@ -17,16 +17,17 @@
 
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script>
-// PATCH RAF avant chargement du viewer — supprime les TypeError de bounds
+// PATCH RAF — log les erreurs pour diagnostic
 (function(){
   var _raf = window.requestAnimationFrame;
+  var _errCnt = 0;
   window.requestAnimationFrame = function(cb) {
     return _raf.call(window, function(t) {
       try { cb(t); }
       catch(e) {
-        if(e instanceof TypeError && String(e.message).includes("'0'")) {
-          // getBounds avec géométrie undefined — frame skippée silencieusement
-        } else { throw e; }
+        if(_errCnt++ < 5) {
+          console.warn('[RAF ERROR #'+_errCnt+']', e.message, e.stack ? e.stack.split('\n')[1] : '');
+        }
       }
     });
   };
