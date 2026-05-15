@@ -29,7 +29,7 @@ async function load3DModel(viewerId, portraitId, charData) {
   if (toggle) toggle.style.display = 'inline-flex';
 
   try {
-    window.CONTENT_PATH = '/wow-assets/modelviewer/live/';
+    window.CONTENT_PATH = '/wow-assets/';
     window.WH = window.WH || {};
     window.WH.debug = window.WH.debug || (() => {});
 
@@ -38,7 +38,7 @@ async function load3DModel(viewerId, portraitId, charData) {
 
     const inst = new ZamModelViewer({
       type:        ZamModelViewer.WOW,
-      contentPath: '/wow-assets/modelviewer/live/',
+      contentPath: '/wow-assets/',
       container:   $(viewerEl),
       hd:          true,
       aspect:      viewerEl.offsetWidth / (viewerEl.offsetHeight || viewerEl.offsetWidth) || 0.75,
