@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Test Viewer — Krapule WebP Fix</title>
+  <style>
+    body { background: #0a0a14; color: #c8a96e; font-family: monospace; padding: 20px; }
+    #viewer { width: 400px; height: 500px; margin: 20px auto; border: 1px solid #3a3a5a; }
+    #log { background: #111; padding: 10px; font-size: 12px; max-height: 250px; overflow: auto; margin-top: 10px; }
+    h2 { color: #f0c060; text-align: center; }
+  </style>
+</head>
+<body>
+<h2>🧙 Test Viewer — Krapule (WebP textures fix)</h2>
+<div id="viewer"></div>
+<div id="log">Initialisation...</div>
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="https://wow.zamimg.com/modelviewer/classic/viewer/viewer.min.js"></script>
+<script>
+const log = document.getElementById('log');
+function L(msg, color) {
+  const d = document.createElement('div');
+  d.style.color = color || '#c8a96e';
+  d.textContent = new Date().toLocaleTimeString() + ' ' + msg;
+  log.appendChild(d);
+  log.scrollTop = log.scrollHeight;
+  console.log(msg);
+}
+
+// Intercepter XHR pour voir les requêtes
+const origOpen = XMLHttpRequest.prototype.open;
+XMLHttpRequest.prototype.open = function(method, url) {
+  if (url && url.includes('/wow-assets/')) {
+    const short = url.replace('https://lansduswag.site', '').substring(0, 80);
+    L('XHR: ' + short, '#88aaff');
+  }
+  return origOpen.apply(this, arguments);
+};
+
+// PATCH critique : WH.WebP pour les textures
+window.CONTENT_PATH = '/wow-assets/';
+window.WH = window.WH || {};
+window.WH.debug = window.WH.debug || (() => {});
+
+// La correction clé : WH.WebP.getImageExtension() → '.webp'
+window.WH.WebP = {
+  getImageExtension: function() { return '.webp'; },
+  isSupported: function() { return true; }
+};
+
+L('WH.WebP patché ✅', '#4a9');
+L('ZamModelViewer: ' + typeof ZamModelViewer, typeof ZamModelViewer !== 'undefined' ? '#4a9' : '#e55');
+
+// customizationOptions réels de Krapule depuis wotlk5.com
+const customOpts = [
+  {"optionId":81,"choiceId":1188},
+  {"optionId":80,"choiceId":1176},
+  {"optionId":82,"choiceId":1200},
+  {"optionId":83,"choiceId":1222},
+  {"optionId":783,"choiceId":8762},
+  {"optionId":84,"choiceId":1233},
+  {"optionId":784,"choiceId":8766},
+  {"optionId":548,"choiceId":6523}
+];
+
+try {
+  const inst = new ZamModelViewer({
+    type: ZamModelViewer.WOW,
+    contentPath: '/wow-assets/',
+    container: $('#viewer'),
+    hd: true,
+    aspect: 0.8,
+    charCustomization: {
+      race: 7,
+      gender: 0,
+      options: customOpts,
+      sheathMain: -1,
+      sheathOff: -1,
+    },
+    cls: 8,
+    items: [],
+    models: { type: ZamModelViewer.Wow.Types.CHARACTER, id: 13 },
+  });
+  L('ZamModelViewer créé ✅', '#4a9');
+} catch(e) {
+  L('ERREUR: ' + e.message, '#e55');
+}
+</script>
+</body>
+</html>
