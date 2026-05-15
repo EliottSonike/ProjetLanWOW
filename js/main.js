@@ -17,10 +17,6 @@ function loadScript(src) {
 }
 
 async function load3DModel(viewerId, portraitId, charData) {
-  // 3D viewer désactivé — wotlk5.com assets non accessibles de façon fiable
-  // À réactiver quand les persos seront niveau 80 avec assets stables
-  return;
-  /* eslint-disable no-unreachable */
   const viewerEl = document.getElementById(viewerId);
   const toggle   = document.getElementById('toggle3d-' + portraitId.replace('pf-', ''));
   if (!viewerEl || !charData) return;
@@ -32,7 +28,7 @@ async function load3DModel(viewerId, portraitId, charData) {
   if (toggle) toggle.style.display = 'inline-flex';
 
   try {
-    window.CONTENT_PATH = 'https://wotlk5.com/armory/data/';
+    window.CONTENT_PATH = '/wow-assets/';
     window.WH = window.WH || {};
     window.WH.debug = window.WH.debug || (() => {});
 
@@ -41,7 +37,7 @@ async function load3DModel(viewerId, portraitId, charData) {
 
     const inst = new ZamModelViewer({
       type:        ZamModelViewer.WOW,
-      contentPath: 'https://wotlk5.com/armory/data/',
+      contentPath: '/wow-assets/',
       container:   $(viewerEl),
       hd:          true,
       aspect:      viewerEl.offsetWidth / (viewerEl.offsetHeight || viewerEl.offsetWidth) || 0.75,
