@@ -287,9 +287,9 @@ async function fetchArmoryData(charName, realm) {
   let html;
 
   const proxies = [
-    u => `https://corsproxy.io/?${encodeURIComponent(u)}`,
+    (u, c, r) => `/api/armory?realm=${encodeURIComponent(r)}&char=${encodeURIComponent(c)}`,
     u => `https://api.allorigins.win/get?url=${encodeURIComponent(u)}`,
-    u => `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(u)}`,
+    u => `https://corsproxy.io/?${encodeURIComponent(u)}`,
   ];
 
   // Essai direct d'abord
@@ -301,7 +301,7 @@ async function fetchArmoryData(charName, realm) {
     // Essai des proxies un par un
     for (const makeProxy of proxies) {
       try {
-        const r = await fetch(makeProxy(armoryUrl));
+        const r = await fetch(makeProxy(armoryUrl, charName, realm));
         if (!r.ok) throw new Error('HTTP ' + r.status);
         const ct = r.headers.get('content-type') || '';
         html = ct.includes('json') ? (await r.json()).contents : await r.text();

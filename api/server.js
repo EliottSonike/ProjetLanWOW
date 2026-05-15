@@ -70,6 +70,22 @@ app.get('/api/progression', (_, res) => res.json(load('progression.json', {})));
 app.get('/api/stats',       (_, res) => res.json(load('stats.json', {})));
 app.get('/api/shame',       (_, res) => res.json(load('shame.json', {})));
 
+// ── Proxy armory wotlk5.com (contourne CORS) ─────────────────────────
+app.get('/api/armory', async (req, res) => {
+  const { realm, char } = req.query;
+  if (!realm || !char) return res.status(400).json({ error: 'realm et char requis' });
+  try {
+    const url = `https://wotlk5.com/armory/character/${encodeURIComponent(realm)}/${encodeURIComponent(char)}`;
+    const r = await fetch(url, { headers: { 'User-Agent': 'Mozilla/5.0' } });
+    const html = await r.text();
+    res.setHeader('Content-Type', 'text/html');
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.send(html);
+  } catch(e) {
+    res.status(502).json({ error: e.message });
+  }
+});
+
 // ── POST /api/kill ────────────────────────────────────────────────────
 app.post('/api/kill', auth, (req, res) => {
   const kill = req.body;
