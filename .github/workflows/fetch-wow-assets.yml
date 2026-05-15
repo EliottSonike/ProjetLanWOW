@@ -11,20 +11,18 @@ jobs:
     steps:
       - name: Download mo3 files from wotlk5.com
         run: |
-          mkdir -p /tmp/wow-mo3
+          mkdir -p $GITHUB_WORKSPACE/wow-mo3
           BASE="https://wotlk5.com/armory/data/mo3"
           UA="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
-          HDRS='-H "Referer: https://wotlk5.com/" -H "Origin: https://wotlk5.com"'
 
-          # Race 7 (Gnome) — Krapule / Eliott
           curl -fsSL -A "$UA" -H "Referer: https://wotlk5.com/" \
-            -o /tmp/wow-mo3/147530.mo3 "$BASE/147530.mo3" && echo "✅ 147530.mo3" || echo "❌ 147530.mo3"
+            -o $GITHUB_WORKSPACE/wow-mo3/147530.mo3 "$BASE/147530.mo3" && echo "✅ 147530.mo3" || echo "❌ 147530.mo3"
           curl -fsSL -A "$UA" -H "Referer: https://wotlk5.com/" \
-            -o /tmp/wow-mo3/900914.mo3 "$BASE/900914.mo3" && echo "✅ 900914.mo3" || echo "❌ 900914.mo3"
+            -o $GITHUB_WORKSPACE/wow-mo3/900914.mo3 "$BASE/900914.mo3" && echo "✅ 900914.mo3" || echo "❌ 900914.mo3"
           curl -fsSL -A "$UA" -H "Referer: https://wotlk5.com/" \
-            -o /tmp/wow-mo3/974343.mo3 "$BASE/974343.mo3" && echo "✅ 974343.mo3" || echo "❌ 974343.mo3"
+            -o $GITHUB_WORKSPACE/wow-mo3/974343.mo3 "$BASE/974343.mo3" && echo "✅ 974343.mo3" || echo "❌ 974343.mo3"
 
-          ls -lh /tmp/wow-mo3/
+          ls -lh $GITHUB_WORKSPACE/wow-mo3/
 
       - name: Upload to server
         uses: appleboy/scp-action@v0.1.7
@@ -32,6 +30,6 @@ jobs:
           host: ${{ secrets.DEPLOY_HOST }}
           username: ${{ secrets.DEPLOY_USER }}
           key: ${{ secrets.DEPLOY_KEY }}
-          source: "/tmp/wow-mo3/*.mo3"
+          source: "wow-mo3/*.mo3"
           target: "/home/eliott/monsite/wow-assets/mo3/"
-          strip_components: 3
+          strip_components: 1
