@@ -7,22 +7,17 @@ on:
 
 jobs:
   deploy:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
-      - name: Deploy via SSH
-        uses: appleboy/ssh-action@v1.0.3
-        with:
-          host: ${{ secrets.DEPLOY_HOST }}
-          username: ${{ secrets.DEPLOY_USER }}
-          key: ${{ secrets.DEPLOY_KEY }}
-          script: |
-            cd /home/eliott/ProjetLanWOW
-            git pull origin master
-            rsync -a --delete \
-              --exclude='.git' \
-              --exclude='discord-bot/node_modules' \
-              --exclude='api/node_modules' \
-              --exclude='api/data' \
-              /home/eliott/ProjetLanWOW/ /home/eliott/monsite/
-            docker exec monsite nginx -s reload
-            echo "✅ Deploy OK"
+      - name: Deploy
+        run: |
+          cd /home/eliott/ProjetLanWOW
+          git pull origin master
+          rsync -a --delete \
+            --exclude='.git' \
+            --exclude='discord-bot/node_modules' \
+            --exclude='api/node_modules' \
+            --exclude='api/data' \
+            /home/eliott/ProjetLanWOW/ /home/eliott/monsite/
+          docker exec monsite nginx -s reload
+          echo "✅ Deploy OK"
