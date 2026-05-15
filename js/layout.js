@@ -63,39 +63,22 @@ const Layout = (function () {
 
   function footer(cfg) {
     const b = cfg.baseUrl || '';
-
-    // Scripts injectés via createElement — plus robuste que document.write
-    const frag = document.createDocumentFragment();
-
-    const footer = document.createElement('footer');
-    footer.className = 'site-footer';
-    footer.innerHTML = '<p>LAN Du Swag · Juillet 2026 · <em>Vive les gobelins et les gnomes!</em></p>';
-    frag.appendChild(footer);
-
-    [
-      b + 'js/main.js',
-      b + 'js/discord-widget.js',
-      b + 'js/particles.js',
-      b + 'js/rotation-visual.js',
-      b + 'js/boss-maps.js',
-      b + 'js/live-data.js',
-      b + 'js/side-deco.js',
-    ].forEach(function(src) {
-      const s = document.createElement('script');
-      s.src = src; s.defer = true;
-      frag.appendChild(s);
-    });
-
-    // whTooltips doit être défini avant power.js
-    const wh = document.createElement('script');
-    wh.textContent = "const whTooltips = {colorLinks: true, iconizeLinks: true, iconSize: 'large', hide: {sellprice: true, ddmoreinfo: true}};";
-    frag.appendChild(wh);
-
-    const pw = document.createElement('script');
-    pw.src = 'https://wow.zamimg.com/widgets/power.js'; pw.defer = true;
-    frag.appendChild(pw);
-
-    document.body.appendChild(frag);
+    // document.write est sûr ici : footer() est toujours appelé pendant le parsing initial
+    // Les scripts <defer> écrits via document.write s'exécutent dans l'ordre garanti par le parseur
+    document.write(
+      '\n<footer class="site-footer">' +
+      '\n  <p>LAN Du Swag \xB7 Juillet 2026 \xB7 <em>Vive les gobelins et les gnomes!</em></p>' +
+      '\n</footer>' +
+      '\n<script defer src="' + b + 'js/main.js"><\/script>' +
+      '\n<script defer src="' + b + 'js/discord-widget.js"><\/script>' +
+      '\n<script defer src="' + b + 'js/particles.js"><\/script>' +
+      '\n<script defer src="' + b + 'js/rotation-visual.js"><\/script>' +
+      '\n<script defer src="' + b + 'js/boss-maps.js"><\/script>' +
+      '\n<script defer src="' + b + 'js/live-data.js"><\/script>' +
+      '\n<script defer src="' + b + 'js/side-deco.js"><\/script>' +
+      '\n<script>const whTooltips = {colorLinks: true, iconizeLinks: true, iconSize: \'large\', hide: {sellprice: true, ddmoreinfo: true}};<\/script>' +
+      '\n<script defer src="https://wow.zamimg.com/widgets/power.js"><\/script>'
+    );
   }
 
   return { header, footer };
