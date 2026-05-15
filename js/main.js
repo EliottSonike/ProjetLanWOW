@@ -25,6 +25,9 @@ async function load3DModel(viewerId, portraitId, charData) {
   const customOpts  = charData.customizationOptions  || [];
   const modelItems  = charData.characterModelItems   || [];
 
+  // Montrer le bouton tout de suite — on le cache seulement si ça plante
+  if (toggle) toggle.style.display = 'inline-flex';
+
   try {
     window.CONTENT_PATH = '/wow-assets/modelviewer/live/';
     window.WH = window.WH || {};
@@ -65,7 +68,6 @@ async function load3DModel(viewerId, portraitId, charData) {
     });
 
     viewerEl.style.display = 'block';
-    if (toggle) toggle.style.display = 'inline-flex';
 
   } catch(e) {
     console.warn('3D model viewer:', e.message);
