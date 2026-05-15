@@ -110,9 +110,24 @@ app.get('/wow-assets/viewer/viewer.min.js', async (req, res) => {
     const now = Date.now();
     if (!viewerCache || now - viewerCacheTime > 3600000) {
       const r = await fetch(VIEWER_URL);
-      const code = await r.text();
-      // Prépendre le patch AVANT le code du viewer pour intercepter au plus tôt
-      viewerCache = PAKO_PATCH + '\n' + code;
+      let code = await r.text();
+
+      // Patch ciblé : quand Mh(z) (inflate) échoue, essayer avec header zlib 0x78 0x01
+      const inflateTarget = 'try{G=Mh(z)}catch(t){return void console.log("Decompression error: "+t)}';
+      const inflatePatch = `try{G=Mh(z)}catch(_e1){
+        try{const _z=new Uint8Array(z.length+2);_z[0]=0x78;_z[1]=0x01;_z.set(z,2);G=Mh(_z)}catch(_e2){
+          try{G=Mh(z,{raw:true})}catch(_e3){
+            console.log("Decompression error (all fallbacks failed): "+_e1)
+          }
+        }
+      }`.replace(/\n\s*/g,'');
+      const patched = code.replace(inflateTarget, inflatePatch);
+      if(patched === code) {
+        console.log('⚠️ viewer patch: cible inflate non trouvée');
+      } else {
+        console.log('✅ viewer patch: inflate patché avec succès');
+      }
+      viewerCache = PAKO_PATCH + '\n' + patched;
       viewerCacheTime = now;
     }
     res.setHeader('Content-Type', 'application/javascript');
