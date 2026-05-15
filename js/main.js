@@ -47,7 +47,7 @@ async function load3DModel(viewerId, portraitId, charData) {
       contentPath: 'https://wow.zamimg.com/modelviewer/live/',
       container:   $(viewerEl),
       hd:          true,
-      aspect:      viewerEl.offsetWidth / (viewerEl.offsetHeight || viewerEl.offsetWidth),
+      aspect:      viewerEl.offsetWidth / (viewerEl.offsetHeight || viewerEl.offsetWidth) || 0.75,
       charCustomization: {
         race:       charData.race,
         gender:     charData.gender,
