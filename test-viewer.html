@@ -92,10 +92,23 @@ setTimeout(() => {
   else L('Canvas présent '+canvas.width+'×'+canvas.height, '#fa0');
 }, 5000);
 
-// RAF counter + état viewer après 2s
+// RAF counter après 2s
 setTimeout(() => {
   L('RAF calls: ' + window._rafCount + (window._rafCount > 0 ? ' ✅ loop tourne' : ' ❌ loop jamais démarré'), window._rafCount > 0 ? '#4a9' : '#e55');
 }, 2000);
+
+// Lire le pixel central du canvas après 3s
+setTimeout(() => {
+  const canvas = document.querySelector('#viewer canvas');
+  if(!canvas) { L('pas de canvas pour readPixels', '#e55'); return; }
+  // Le viewer possède le contexte WebGL — on le récupère
+  const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+  if(!gl) { L('getContext webgl null', '#e55'); return; }
+  const px = new Uint8Array(4);
+  gl.readPixels(Math.floor(canvas.width/2), Math.floor(canvas.height/2), 1, 1, gl.RGBA, gl.UNSIGNED_BYTE, px);
+  const alpha = px[3];
+  L('Pixel centre RGBA: ['+Array.from(px)+'] '+(alpha>0?'✅ quelque chose est rendu':'❌ transparent — rien rendu'), alpha>0?'#4a9':'#e55');
+}, 3000);
 
 // PATCH critique : WH.WebP pour les textures
 window.CONTENT_PATH = '/wow-assets/';
@@ -129,7 +142,7 @@ try {
     type: ZamModelViewer.WOW,
     contentPath: '/wow-assets/',
     container: $('#viewer'),
-    hd: true,
+    hd: false,
     aspect: 0.8,
     charCustomization: {
       race: 7,
