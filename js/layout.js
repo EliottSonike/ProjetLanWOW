@@ -1,4 +1,5 @@
 const Layout = (function () {
+  const V = '__CACHE_BUST__';
 
   function inject(html) {
     // insertAdjacentHTML sur le script courant — remplace document.write()
@@ -69,13 +70,13 @@ const Layout = (function () {
       '\n<footer class="site-footer">' +
       '\n  <p>LAN Du Swag \xB7 Juillet 2026 \xB7 <em>Vive les gobelins et les gnomes!</em></p>' +
       '\n</footer>' +
-      '\n<script defer src="' + b + 'js/main.js"><\/script>' +
-      '\n<script defer src="' + b + 'js/discord-widget.js"><\/script>' +
-      '\n<script defer src="' + b + 'js/particles.js"><\/script>' +
-      '\n<script defer src="' + b + 'js/rotation-visual.js"><\/script>' +
-      '\n<script defer src="' + b + 'js/boss-maps.js"><\/script>' +
-      '\n<script defer src="' + b + 'js/live-data.js"><\/script>' +
-      '\n<script defer src="' + b + 'js/side-deco.js"><\/script>' +
+      '\n<script defer src="' + b + 'js/main.js?v=' + V + '"><\/script>' +
+      '\n<script defer src="' + b + 'js/discord-widget.js?v=' + V + '"><\/script>' +
+      '\n<script defer src="' + b + 'js/particles.js?v=' + V + '"><\/script>' +
+      '\n<script defer src="' + b + 'js/rotation-visual.js?v=' + V + '"><\/script>' +
+      '\n<script defer src="' + b + 'js/boss-maps.js?v=' + V + '"><\/script>' +
+      '\n<script defer src="' + b + 'js/live-data.js?v=' + V + '"><\/script>' +
+      '\n<script defer src="' + b + 'js/side-deco.js?v=' + V + '"><\/script>' +
       '\n<script>const whTooltips = {colorLinks: true, iconizeLinks: true, iconSize: \'large\', hide: {sellprice: true, ddmoreinfo: true}};<\/script>' +
       '\n<script defer src="https://wow.zamimg.com/widgets/power.js"><\/script>'
     );

@@ -19,5 +19,7 @@ jobs:
             --exclude='api/node_modules' \
             --exclude='api/data' \
             /home/eliott/ProjetLanWOW/ /home/eliott/monsite/
+          TS=$(date +%s)
+          sed -i "s/__CACHE_BUST__/$TS/g" /home/eliott/monsite/js/layout.js
           docker exec monsite nginx -s reload
-          echo "✅ Deploy OK"
+          echo "✅ Deploy OK (v=$TS)"
