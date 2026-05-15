@@ -3,7 +3,7 @@ name: Fetch WoW 3D Assets
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 3 * * 1'  # Chaque lundi à 3h du matin
+    - cron: '0 3 * * 1'
 
 jobs:
   fetch:
@@ -15,21 +15,45 @@ jobs:
           BASE="https://wotlk5.com/armory/data/mo3"
           UA="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
 
-          curl -fsSL -A "$UA" -H "Referer: https://wotlk5.com/" \
-            -o $GITHUB_WORKSPACE/wow-mo3/147530.mo3 "$BASE/147530.mo3" && echo "✅ 147530.mo3" || echo "❌ 147530.mo3"
-          curl -fsSL -A "$UA" -H "Referer: https://wotlk5.com/" \
-            -o $GITHUB_WORKSPACE/wow-mo3/900914.mo3 "$BASE/900914.mo3" && echo "✅ 900914.mo3" || echo "❌ 900914.mo3"
-          curl -fsSL -A "$UA" -H "Referer: https://wotlk5.com/" \
-            -o $GITHUB_WORKSPACE/wow-mo3/974343.mo3 "$BASE/974343.mo3" && echo "✅ 974343.mo3" || echo "❌ 974343.mo3"
+          for ID in 147530 900914 974343; do
+            echo "→ Downloading $ID.mo3..."
+            curl -v -A "$UA" -H "Referer: https://wotlk5.com/" \
+              -o "$GITHUB_WORKSPACE/wow-mo3/$ID.mo3" \
+              "$BASE/$ID.mo3" 2>&1 | tail -5
+            SIZE=$(stat -c%s "$GITHUB_WORKSPACE/wow-mo3/$ID.mo3" 2>/dev/null || echo 0)
+            echo "   Size: $SIZE bytes"
+          done
 
+          echo "--- Files downloaded ---"
           ls -lh $GITHUB_WORKSPACE/wow-mo3/
 
-      - name: Upload to server
-        uses: appleboy/scp-action@v0.1.7
-        with:
-          host: ${{ secrets.DEPLOY_HOST }}
-          username: ${{ secrets.DEPLOY_USER }}
-          key: ${{ secrets.DEPLOY_KEY }}
-          source: "wow-mo3/*.mo3"
-          target: "/home/eliott/monsite/wow-assets/mo3/"
-          strip_components: 1
+      - name: Setup SSH key
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.DEPLOY_KEY }}" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          ssh-keyscan -H ${{ secrets.DEPLOY_HOST }} >> ~/.ssh/known_hosts 2>/dev/null
+
+      - name: Upload to server via scp
+        run: |
+          mkdir -p /tmp/upload
+          # Ne copier que les fichiers non vides
+          for f in $GITHUB_WORKSPACE/wow-mo3/*.mo3; do
+            SIZE=$(stat -c%s "$f")
+            if [ "$SIZE" -gt 1000 ]; then
+              cp "$f" /tmp/upload/
+              echo "✅ $(basename $f) ($SIZE bytes)"
+            else
+              echo "❌ $(basename $f) trop petit ($SIZE bytes) — ignoré"
+            fi
+          done
+
+          ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=no \
+            ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }} \
+            "mkdir -p /home/eliott/monsite/wow-assets/mo3"
+
+          scp -i ~/.ssh/deploy_key -o StrictHostKeyChecking=no \
+            /tmp/upload/*.mo3 \
+            ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }}:/home/eliott/monsite/wow-assets/mo3/
+
+          echo "✅ Upload terminé"
