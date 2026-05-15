@@ -17,6 +17,9 @@ function loadScript(src) {
 }
 
 async function load3DModel(viewerId, portraitId, charData) {
+  // Viewer 3D désactivé — incompatibilité format WotLK/retail + customizationOptions manquants
+  // Réactiver avant la LAN quand les persos sont niveau 80 avec des vrais customizationOptions
+  if (!charData?.customizationOptions?.length) return;
   const viewerEl = document.getElementById(viewerId);
   const toggle   = document.getElementById('toggle3d-' + portraitId.replace('pf-', ''));
   if (!viewerEl || !charData) return;
