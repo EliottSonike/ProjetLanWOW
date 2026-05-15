@@ -22,5 +22,6 @@ jobs:
           TS=$(date +%s)
           sed -i "s/__CACHE_BUST__/$TS/g" /home/eliott/monsite/js/layout.js
           cp /home/eliott/monsite/nginx/default.conf /home/eliott/nginx-lan.conf
+          pm2 restart lan-api
           docker exec monsite nginx -s reload
           echo "✅ Deploy OK (v=$TS)"
