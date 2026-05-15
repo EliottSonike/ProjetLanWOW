@@ -46,15 +46,49 @@ function L(msg, color) {
   console.log(msg);
 }
 
-// Intercepter XHR pour voir les requêtes
-const origOpen = XMLHttpRequest.prototype.open;
+// XHR — log requête + réponse avec status
+const _xhrOpen = XMLHttpRequest.prototype.open;
+const _xhrSend = XMLHttpRequest.prototype.send;
 XMLHttpRequest.prototype.open = function(method, url) {
-  if (url && url.includes('/wow-assets/')) {
-    const short = url.replace('https://lansduswag.site', '').substring(0, 80);
-    L('XHR: ' + short, '#88aaff');
-  }
-  return origOpen.apply(this, arguments);
+  this._wowUrl = (url||'').includes('/wow-assets/') ? url : null;
+  return _xhrOpen.apply(this, arguments);
 };
+XMLHttpRequest.prototype.send = function() {
+  if (this._wowUrl) {
+    const s = this._wowUrl.replace('https://lansduswag.site','').substring(0,80);
+    L('XHR→ ' + s, '#88aaff');
+    this.addEventListener('load', () => L('XHR '+(this.status===200?'✅':'❌')+' '+this.status+': '+s, this.status===200?'#4a9':'#e55'));
+    this.addEventListener('error', () => L('XHR ❌ ERR: '+s, '#e55'));
+  }
+  return _xhrSend.apply(this, arguments);
+};
+
+// fetch() — intercepte les requêtes du viewer (bone files, textures, shaders)
+const _origFetch = window.fetch;
+window.fetch = function(url, opts) {
+  const u = (typeof url==='string'?url:(url&&url.url)||'');
+  const s = u.replace('https://lansduswag.site','').substring(0,80);
+  if(u.includes('wow-assets')||u.includes('zamimg')||u.includes('wotlk')) L('FETCH→ '+s,'#88aaff');
+  return _origFetch.apply(this, arguments).then(r=>{
+    if(u.includes('wow-assets')||u.includes('zamimg')||u.includes('wotlk'))
+      L('FETCH '+(r.ok?'✅':'❌')+' '+r.status+': '+s, r.ok?'#4a9':'#e55');
+    return r;
+  }).catch(e=>{ L('FETCH ❌ '+e.message+': '+s,'#e55'); throw e; });
+};
+
+// Détecter création du canvas WebGL dans #viewer
+new MutationObserver(muts => {
+  for(const m of muts) for(const n of m.addedNodes) {
+    if(n.tagName==='CANVAS') L('Canvas WebGL créé ✅ ('+n.width+'×'+n.height+')', '#4a9');
+  }
+}).observe(document.getElementById('viewer'), {childList:true, subtree:true});
+
+// Stall detector — si rien après 5s
+setTimeout(() => {
+  const canvas = document.querySelector('#viewer canvas');
+  if(!canvas) L('⚠️ STALL 5s: aucun canvas — WebGL init échoué?', '#e55');
+  else L('Canvas présent '+canvas.width+'×'+canvas.height, '#fa0');
+}, 5000);
 
 // PATCH critique : WH.WebP pour les textures
 window.CONTENT_PATH = '/wow-assets/';
