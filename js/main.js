@@ -17,44 +17,57 @@ function loadScript(src) {
 }
 
 async function load3DModel(viewerId, portraitId, charData) {
-  const viewer  = document.getElementById(viewerId);
-  const toggle  = document.getElementById('toggle3d-' + portraitId.replace('pf-', ''));
-  if (!viewer || !charData) return;
+  const viewerEl = document.getElementById(viewerId);
+  const toggle   = document.getElementById('toggle3d-' + portraitId.replace('pf-', ''));
+  if (!viewerEl || !charData) return;
+
+  // wotlk5.com fournit customizationOptions + characterModelItems (format retail ZamModelViewer)
+  if (!charData.customizationOptions || !charData.characterModelItems) return;
 
   try {
-    // Chemins vers le proxy Wowhead
     window.CONTENT_PATH = '/wow-assets/modelviewer/live/';
-    window.WOTLK_TO_RETAIL_DISPLAY_ID_API = 'https://wotlk.murlocvillage.com/api/items';
+    window.WH = window.WH || { debug: () => {} };
 
-    // jQuery (requis par wow-model-viewer)
     if (!window.jQuery) await loadScript('https://code.jquery.com/jquery-3.6.4.min.js');
-
-    // viewer.min.js de Wowhead via le proxy
     if (!window.ZamModelViewer) await loadScript('/wow-assets/modelviewer/live/viewer/viewer.min.js');
 
-    // Charge le module ES
-    const { generateModels } = await import('/js/wow-viewer/index.js');
+    const RACES   = {1:'human',2:'orc',3:'dwarf',4:'nightelf',5:'scourge',6:'tauren',7:'gnome',8:'troll',10:'bloodelf',11:'draenei'};
+    const GENDERS = ['male','female'];
 
-    const model = {
-      race:        charData.race        || 1,
-      gender:      charData.gender      || 0,
-      skin:        charData.skin        || 0,
-      face:        charData.face        || 0,
-      hairStyle:   charData.hairstyle   || 0,
-      hairColor:   charData.haircolor   || 0,
-      facialStyle: charData.facialstyle || 0,
-    };
+    const inst = new ZamModelViewer({
+      type:        ZamModelViewer.WOW,
+      contentPath: '/wow-assets/modelviewer/live/',
+      container:   $(viewerEl),
+      hd:          true,
+      aspect:      viewerEl.offsetWidth / (viewerEl.offsetHeight || viewerEl.offsetWidth),
+      charCustomization: {
+        race:       charData.race,
+        gender:     charData.gender,
+        options:    charData.customizationOptions,
+        sheathMain: -1,
+        sheathOff:  -1,
+      },
+      cls:   charData.class,
+      items: (charData.characterModelItems || []).filter(i => i[1] !== -1),
+      models: {
+        type: ZamModelViewer.Wow.Types.CHARACTER,
+        id:   `${RACES[charData.race]}${GENDERS[charData.gender]}`,
+      },
+      mount: { type: ZamModelViewer.Wow.Types.NPC, id: 0 },
+    });
 
-    await generateModels(1.5, '#' + viewerId, model, 'classic');
+    // Attend le chargement (max 10s)
+    await new Promise(resolve => {
+      const t = setInterval(() => { if (inst.method('isLoaded')) { clearInterval(t); resolve(); } }, 200);
+      setTimeout(() => { clearInterval(t); resolve(); }, 10000);
+    });
 
-    // Succès : affiche le toggle
-    viewer.style.display = 'block';
+    viewerEl.style.display = 'block';
     if (toggle) toggle.style.display = 'inline-flex';
-    console.log('✅ 3D model loaded');
 
   } catch(e) {
     console.warn('3D model viewer:', e.message);
-    viewer.remove();
+    viewerEl.remove();
     if (toggle) toggle.remove();
   }
 }
