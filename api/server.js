@@ -115,9 +115,10 @@ app.get('/wow-assets/viewer/viewer.min.js', async (req, res) => {
       // Patch ciblé : quand Mh(z) (inflate) échoue, essayer avec header zlib 0x78 0x01
       const inflateTarget = 'try{G=Mh(z)}catch(t){return void console.log("Decompression error: "+t)}';
       const inflatePatch = `try{G=Mh(z)}catch(_e1){
+        console.log("inflate z[0..3]="+(z[0]||0).toString(16)+(z[1]||0).toString(16)+(z[2]||0).toString(16)+(z[3]||0).toString(16)+" len="+z.length);
         try{G=Mh(z,{raw:true})}catch(_e2){
-          G=z;
-          console.log("Decompression error - using raw data: "+_e1)
+          console.log("inflateRaw also failed: "+_e2.message);
+          return void console.log("Decompression error: "+_e1)
         }
       }`.replace(/\n\s*/g,'');
       const patched = code.replace(inflateTarget, inflatePatch);
