@@ -20,7 +20,7 @@ async function load3DModel(viewerId, portraitId, charData) {
   const viewerEl = document.getElementById(viewerId);
   const toggle   = document.getElementById('toggle3d-' + portraitId.replace('pf-', ''));
   if (!viewerEl || !charData) return;
-  if (!charData.race || !charData.gender) return;
+  if (charData.race == null || charData.gender == null) return;
 
   const customOpts  = charData.customizationOptions  || [];
   const modelItems  = charData.characterModelItems   || [];
