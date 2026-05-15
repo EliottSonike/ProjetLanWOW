@@ -36,9 +36,6 @@ async function load3DModel(viewerId, portraitId, charData) {
     if (!window.jQuery) await loadScript('https://code.jquery.com/jquery-3.6.4.min.js');
     if (!window.ZamModelViewer) await loadScript('https://wow.zamimg.com/modelviewer/live/viewer/viewer.min.js');
 
-    const RACES   = {1:'human',2:'orc',3:'dwarf',4:'nightelf',5:'scourge',6:'tauren',7:'gnome',8:'troll',10:'bloodelf',11:'draenei'};
-    const GENDERS = ['male','female'];
-
     const inst = new ZamModelViewer({
       type:        ZamModelViewer.WOW,
       contentPath: '/wow-assets/modelviewer/live/',
@@ -54,11 +51,6 @@ async function load3DModel(viewerId, portraitId, charData) {
       },
       cls:   charData.class,
       items: modelItems.filter(i => i[1] !== -1),
-      models: {
-        type: ZamModelViewer.Wow.Types.CHARACTER,
-        id:   `${RACES[charData.race]}${GENDERS[charData.gender]}`,
-      },
-      mount: { type: ZamModelViewer.Wow.Types.NPC, id: 0 },
     });
 
     // Attend le chargement (max 10s)
