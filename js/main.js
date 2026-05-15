@@ -41,7 +41,7 @@ async function load3DModel(viewerId, portraitId, charData) {
 
     const inst = new ZamModelViewer({
       type:        ZamModelViewer.WOW,
-      contentPath: '/wow-assets/modelviewer/live/',
+      contentPath: 'https://wow.zamimg.com/modelviewer/live/',
       container:   $(viewerEl),
       hd:          true,
       aspect:      viewerEl.offsetWidth / (viewerEl.offsetHeight || viewerEl.offsetWidth),
@@ -70,7 +70,7 @@ async function load3DModel(viewerId, portraitId, charData) {
     viewerEl.style.display = 'block';
 
   } catch(e) {
-    console.warn('3D model viewer:', e.message);
+    console.warn('3D model viewer:', e?.message || e);
     viewerEl.remove();
     if (toggle) toggle.remove();
   }
