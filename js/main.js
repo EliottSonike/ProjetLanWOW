@@ -20,9 +20,10 @@ async function load3DModel(viewerId, portraitId, charData) {
   const viewerEl = document.getElementById(viewerId);
   const toggle   = document.getElementById('toggle3d-' + portraitId.replace('pf-', ''));
   if (!viewerEl || !charData) return;
+  if (!charData.race || !charData.gender) return;
 
-  // wotlk5.com fournit customizationOptions + characterModelItems (format retail ZamModelViewer)
-  if (!charData.customizationOptions || !charData.characterModelItems) return;
+  const customOpts  = charData.customizationOptions  || [];
+  const modelItems  = charData.characterModelItems   || [];
 
   try {
     window.CONTENT_PATH = '/wow-assets/modelviewer/live/';
@@ -43,12 +44,12 @@ async function load3DModel(viewerId, portraitId, charData) {
       charCustomization: {
         race:       charData.race,
         gender:     charData.gender,
-        options:    charData.customizationOptions,
+        options:    customOpts,
         sheathMain: -1,
         sheathOff:  -1,
       },
       cls:   charData.class,
-      items: (charData.characterModelItems || []).filter(i => i[1] !== -1),
+      items: modelItems.filter(i => i[1] !== -1),
       models: {
         type: ZamModelViewer.Wow.Types.CHARACTER,
         id:   `${RACES[charData.race]}${GENDERS[charData.gender]}`,
