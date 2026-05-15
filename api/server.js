@@ -132,7 +132,7 @@ app.get('/wow-assets/viewer/viewer.min.js', async (req, res) => {
     }
     res.setHeader('Content-Type', 'application/javascript');
     res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Cache-Control', 'public, max-age=3600');
+    res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate');
     res.send(viewerCache);
   } catch(e) {
     res.status(502).send('// Error: ' + e.message);
