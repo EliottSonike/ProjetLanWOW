@@ -29,12 +29,12 @@ async function load3DModel(viewerId, portraitId, charData) {
   if (toggle) toggle.style.display = 'inline-flex';
 
   try {
-    window.CONTENT_PATH = '/wow-assets/modelviewer/live/';
+    window.CONTENT_PATH = 'https://wow.zamimg.com/modelviewer/live/';
     window.WH = window.WH || {};
     window.WH.debug = window.WH.debug || (() => {});
 
     if (!window.jQuery) await loadScript('https://code.jquery.com/jquery-3.6.4.min.js');
-    if (!window.ZamModelViewer) await loadScript('/wow-assets/modelviewer/live/viewer/viewer.min.js');
+    if (!window.ZamModelViewer) await loadScript('https://wow.zamimg.com/modelviewer/live/viewer/viewer.min.js');
 
     const RACES   = {1:'human',2:'orc',3:'dwarf',4:'nightelf',5:'scourge',6:'tauren',7:'gnome',8:'troll',10:'bloodelf',11:'draenei'};
     const GENDERS = ['male','female'];
