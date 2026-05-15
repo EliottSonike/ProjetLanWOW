@@ -24,6 +24,14 @@ jobs:
             || echo "❌ meta/character/7.json introuvable"
 
           # Modèles mo3
+          # Textures de customisation gnome (plage 118937-119368)
+          for ID in $(seq 118937 119368); do
+            curl -fsSL -A "$UA" -H "Referer: https://wotlk5.com/" \
+              -o "wow-mo3/$ID.mo3" "$BASE/$ID.mo3" 2>/dev/null \
+              && echo "✅ $ID.mo3 ($(stat -c%s wow-mo3/$ID.mo3)b)" \
+              || true
+          done
+
           for ID in 147530 900914 974343 7760205 7760285 120791 119159; do
             curl -fsSL -L \
               -A "$UA" \

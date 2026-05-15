@@ -36,6 +36,8 @@
     window.CONTENT_PATH = '/wow-assets/';
     window.WH = window.WH || {};
     window.WH.debug = window.WH.debug || (() => {});
+    window.WH.getImageExtension = window.WH.getImageExtension || (() => 'blp');
+    window.WH.defaultTextureFlags = window.WH.defaultTextureFlags || 0;
 
     addLog('Viewer chargé: ' + (typeof ZamModelViewer));
     addLog('jQuery: ' + (typeof $ !== "undefined" ? "OK" : "MANQUANT"));
