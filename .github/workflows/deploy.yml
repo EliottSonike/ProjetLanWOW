@@ -21,6 +21,6 @@ jobs:
             /home/eliott/ProjetLanWOW/ /home/eliott/monsite/
           TS=$(date +%s)
           sed -i "s/__CACHE_BUST__/$TS/g" /home/eliott/monsite/js/layout.js
-          docker cp /home/eliott/monsite/nginx/default.conf monsite:/etc/nginx/conf.d/default.conf
+          cat /home/eliott/monsite/nginx/default.conf | docker exec -i monsite tee /etc/nginx/conf.d/default.conf > /dev/null
           docker exec monsite nginx -s reload
           echo "✅ Deploy OK (v=$TS)"
