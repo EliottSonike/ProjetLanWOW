@@ -18,7 +18,10 @@ jobs:
             --exclude='discord-bot/node_modules' \
             --exclude='api/node_modules' \
             --exclude='api/data' \
-            --exclude='wow-assets/mo3/' \
+            --exclude='wow-assets/mo3/900914.mo3' \
+            --exclude='wow-assets/mo3/974343.mo3' \
+            --exclude='wow-assets/mo3/7760205.mo3' \
+            --exclude='wow-assets/mo3/7760285.mo3' \
             /home/eliott/ProjetLanWOW/ /home/eliott/monsite/
           TS=$(date +%s)
           sed -i "s/__CACHE_BUST__/$TS/g" /home/eliott/monsite/js/layout.js
