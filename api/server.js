@@ -70,6 +70,29 @@ app.get('/api/progression', (_, res) => res.json(load('progression.json', {})));
 app.get('/api/stats',       (_, res) => res.json(load('stats.json', {})));
 app.get('/api/shame',       (_, res) => res.json(load('shame.json', {})));
 
+// ── Proxy assets 3D viewer wotlk5.com (mo3, meta…) ──────────────────
+app.get('/api/wow-asset/*', async (req, res) => {
+  const assetPath = req.params[0];
+  try {
+    const url = `https://wotlk5.com/armory/data/${assetPath}`;
+    const r = await fetch(url, {
+      headers: {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
+        'Referer':    'https://wotlk5.com/',
+        'Origin':     'https://wotlk5.com',
+      }
+    });
+    if (!r.ok) return res.status(r.status).end();
+    const buf = await r.arrayBuffer();
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Content-Type', r.headers.get('content-type') || 'application/octet-stream');
+    res.setHeader('Cache-Control', 'public, max-age=86400');
+    res.send(Buffer.from(buf));
+  } catch(e) {
+    res.status(502).json({ error: e.message });
+  }
+});
+
 // ── Proxy armory wotlk5.com (contourne CORS) ─────────────────────────
 app.get('/api/armory', async (req, res) => {
   const { realm, char } = req.query;
