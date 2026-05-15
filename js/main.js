@@ -50,7 +50,7 @@ async function load3DModel(viewerId, portraitId, charData) {
         sheathOff:  -1,
       },
       cls:   charData.class,
-      items: modelItems.filter(i => i[1] !== -1),
+      items: [],
       models: { type: ZamModelViewer.Wow.Types.CHARACTER, id: charData.race },
     });
 
