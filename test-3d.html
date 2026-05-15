@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Test 3D Viewer</title>
+  <style>
+    body { background: #111; color: #fff; font-family: monospace; padding: 20px; }
+    #viewer { width: 400px; height: 500px; margin: 20px auto; }
+    #log { background: #222; padding: 10px; margin-top: 10px; font-size: 12px; max-height: 300px; overflow: auto; }
+  </style>
+</head>
+<body>
+  <h2>Test Viewer 3D - Krapule (Gnome Mage)</h2>
+  <div id="viewer"></div>
+  <div id="log">Loading...</div>
+
+  <!-- Classic viewer depuis zamimg.com -->
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  <script src="https://wow.zamimg.com/modelviewer/classic/viewer/viewer.min.js"></script>
+
+  <script>
+    const log = document.getElementById('log');
+    function addLog(msg) {
+      log.innerHTML += msg + '<br>';
+      log.scrollTop = log.scrollHeight;
+      console.log(msg);
+    }
+
+    // Intercepter toutes les requêtes XHR pour voir ce qui est chargé
+    const origOpen = XMLHttpRequest.prototype.open;
+    XMLHttpRequest.prototype.open = function(method, url) {
+      addLog('XHR: ' + url.replace('https://lansduswag.site','').substring(0, 80));
+      return origOpen.apply(this, arguments);
+    };
+
+    window.CONTENT_PATH = '/wow-assets/';
+    window.WH = window.WH || {};
+    window.WH.debug = window.WH.debug || (() => {});
+
+    addLog('Viewer chargé: ' + (typeof ZamModelViewer));
+    addLog('jQuery: ' + (typeof $ !== "undefined" ? "OK" : "MANQUANT"));
+
+    try {
+      const inst = new ZamModelViewer({
+        type: ZamModelViewer.WOW,
+        contentPath: '/wow-assets/',
+        container: $('#viewer'),
+        hd: true,
+        aspect: 0.8,
+        charCustomization: {
+          race: 7,
+          gender: 0,
+          options: [
+            {"optionId":81,"choiceId":1188},
+            {"optionId":80,"choiceId":1176},
+            {"optionId":82,"choiceId":1200},
+            {"optionId":83,"choiceId":1222},
+            {"optionId":783,"choiceId":8762},
+            {"optionId":84,"choiceId":1233},
+            {"optionId":784,"choiceId":8766},
+            {"optionId":548,"choiceId":6523}
+          ],
+          sheathMain: -1,
+          sheathOff: -1,
+        },
+        cls: 8,
+        items: [],
+        models: { type: ZamModelViewer.Wow.Types.CHARACTER, id: 7 },
+      });
+      addLog('ZamModelViewer créé avec succès');
+    } catch(e) {
+      addLog('ERREUR: ' + e.message);
+    }
+  </script>
+</body>
+</html>
