@@ -24,7 +24,7 @@ jobs:
             || echo "❌ meta/character/7.json introuvable"
 
           # Modèles mo3
-          for ID in 147530 900914 974343 7760205 7760285; do
+          for ID in 147530 900914 974343 7760205 7760285 120791; do
             curl -fsSL -L \
               -A "$UA" \
               -H "Referer: https://wotlk5.com/" \

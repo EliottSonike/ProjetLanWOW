@@ -36,7 +36,7 @@ async function load3DModel(viewerId, portraitId, charData) {
     window.WH.debug = window.WH.debug || (() => {});
 
     if (!window.jQuery) await loadScript('https://code.jquery.com/jquery-3.6.4.min.js');
-    if (!window.ZamModelViewer) await loadScript('https://wow.zamimg.com/modelviewer/live/viewer/viewer.min.js');
+    if (!window.ZamModelViewer) await loadScript('https://wow.zamimg.com/modelviewer/classic/viewer/viewer.min.js');
 
     const inst = new ZamModelViewer({
       type:        ZamModelViewer.WOW,
