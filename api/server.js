@@ -20,7 +20,8 @@ const path    = require('path');
 const vm      = require('vm');
 
 const PORT   = process.env.PORT   || 3001;
-const SECRET = process.env.SECRET || 'changeme';
+const SECRET = process.env.SECRET;
+if (!SECRET) { console.error('❌  Variable SECRET non définie — arrêt du serveur.'); process.exit(1); }
 const DATA   = path.join(__dirname, 'data');
 const STATIC = path.join(__dirname, '..', 'data');
 
