@@ -33,12 +33,15 @@ async function load3DModel(viewerId, portraitId, charData) {
     window.WH = window.WH || {};
     window.WH.debug = window.WH.debug || (() => {});
 
-    if (!window.jQuery) await loadScript('https://code.jquery.com/jquery-3.6.4.min.js');
-    if (!window.ZamModelViewer) await loadScript('https://wow.zamimg.com/modelviewer/live/viewer/viewer.min.js');
+    if (!window.jQuery) { console.log('3D: chargement jQuery...'); await loadScript('https://code.jquery.com/jquery-3.6.4.min.js'); }
+    console.log('3D: jQuery OK, ZamModelViewer=', !!window.ZamModelViewer);
+    if (!window.ZamModelViewer) { console.log('3D: chargement viewer...'); await loadScript('https://wow.zamimg.com/modelviewer/live/viewer/viewer.min.js'); }
+    console.log('3D: viewer OK, race=', charData.race, 'gender=', charData.gender, 'class=', charData.class);
 
     const RACES   = {1:'human',2:'orc',3:'dwarf',4:'nightelf',5:'scourge',6:'tauren',7:'gnome',8:'troll',10:'bloodelf',11:'draenei'};
     const GENDERS = ['male','female'];
 
+    console.log('3D: création instance...', RACES[charData.race], GENDERS[charData.gender]);
     const inst = new ZamModelViewer({
       type:        ZamModelViewer.WOW,
       contentPath: 'https://wow.zamimg.com/modelviewer/live/',
