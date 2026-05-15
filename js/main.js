@@ -27,7 +27,8 @@ async function load3DModel(viewerId, portraitId, charData) {
 
   try {
     window.CONTENT_PATH = '/wow-assets/modelviewer/live/';
-    window.WH = window.WH || { debug: () => {} };
+    window.WH = window.WH || {};
+    window.WH.debug = window.WH.debug || (() => {});
 
     if (!window.jQuery) await loadScript('https://code.jquery.com/jquery-3.6.4.min.js');
     if (!window.ZamModelViewer) await loadScript('/wow-assets/modelviewer/live/viewer/viewer.min.js');
