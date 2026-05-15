@@ -82,7 +82,7 @@
   </div>
 
   <div id="controls">
-    <button onclick="document.getElementById('file-input').click()">📁 Ouvrir GLB/GLTF</button>
+    <button onclick="document.getElementById('file-input').click()">📁 Ouvrir GLB/GLTF/M2</button>
     <button onclick="loadDefault()">🔄 Tester modèle demo</button>
     <button onclick="resetCamera()">🎥 Reset caméra</button>
     <button onclick="toggleRotate()" id="rotate-btn">⏸ Stop rotation</button>
@@ -93,11 +93,13 @@
     <div id="anim-btns" style="display:flex; gap:6px; flex-wrap:wrap; justify-content:center;"></div>
   </div>
 
-  <input type="file" id="file-input" accept=".glb,.gltf">
+  <input type="file" id="file-input" accept=".glb,.gltf,.m2">
   <div id="status"></div>
   <div id="info">
     Three.js custom viewer · Sans Wowhead/zamimg.com<br>
-    Pour exporter ton perso : <strong>wow.export</strong> → Models → ton perso → Export GLTF
+    Glisse un <strong>.glb/.gltf</strong> (wow.export) ou un <strong>.m2</strong> (extrait des MPQ WoW)<br>
+    <a href="https://github.com/Kruithne/wow.export/releases" target="_blank" style="color:#c8a96e">⬇ wow.export</a> ·
+    <a href="https://wowdev.wiki/M2" target="_blank" style="color:#c8a96e">📖 format M2</a>
   </div>
 </div>
 
@@ -105,7 +107,8 @@
 {
   "imports": {
     "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
-    "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+    "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/",
+    "three-m2loader": "https://unpkg.com/three-m2loader@5.2.0/M2Loader.js"
   }
 }
 </script>
@@ -115,6 +118,7 @@ import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
+import { M2Loader } from 'three-m2loader';
 
 const wrap = document.getElementById('viewer-wrap');
 const dropOverlay = document.getElementById('drop-overlay');
@@ -419,9 +423,48 @@ document.getElementById('file-input').addEventListener('change', e => {
   if (e.target.files[0]) handleFile(e.target.files[0]);
 });
 
+const m2Loader = new M2Loader();
+
+function loadM2(file) {
+  clearModel();
+  loading.classList.remove('hidden');
+  dropOverlay.classList.add('hidden');
+  setStatus('Chargement M2 ' + file.name + '…', '#c8a96e');
+
+  const url = URL.createObjectURL(file);
+  m2Loader.load(url, (m2) => {
+    loading.classList.add('hidden');
+    currentModel = m2.scene || m2;
+    scene.add(currentModel);
+
+    const box = new THREE.Box3().setFromObject(currentModel);
+    const center = box.getCenter(new THREE.Vector3());
+    const size = box.getSize(new THREE.Vector3());
+    const scale = 2 / Math.max(size.x, size.y, size.z);
+    currentModel.scale.setScalar(scale);
+    currentModel.position.y -= box.min.y * scale;
+
+    controls.target.set(0, 1, 0);
+    camera.position.set(0, 1.5, 3);
+    controls.update();
+
+    setStatus('✅ M2 chargé : ' + file.name, '#4a9');
+    URL.revokeObjectURL(url);
+  }, undefined, (err) => {
+    loading.classList.add('hidden');
+    dropOverlay.classList.remove('hidden');
+    setStatus('❌ M2 erreur: ' + err.message, '#e55');
+    URL.revokeObjectURL(url);
+  });
+}
+
 function handleFile(file) {
+  if (file.name.match(/\.m2$/i)) {
+    loadM2(file);
+    return;
+  }
   if (!file.name.match(/\.(glb|gltf)$/i)) {
-    setStatus('❌ Fichier invalide — utilise .glb ou .gltf', '#e55');
+    setStatus('❌ Fichier invalide — utilise .glb, .gltf ou .m2', '#e55');
     return;
   }
   const url = URL.createObjectURL(file);
