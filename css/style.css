@@ -164,9 +164,11 @@ a:hover { color: var(--gold-light); }
    2. LAYOUT GLOBAL — container, section-title
 ═══════════════════════════════════════════════════════ */
 .container {
-  max-width: 1280px;
+  width: 100%;
+  max-width: 100%;
   margin: 0 auto;
-  padding: 2rem 1.5rem;
+  padding: 2rem 3rem;
+  box-sizing: border-box;
 }
 
 .section-title {
