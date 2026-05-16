@@ -125,10 +125,12 @@ async function load3DModel(viewerId, portraitId, charData, meta) {
 window.toggle3DViewer = function(safeId) {
   const pf  = document.getElementById('pf-'       + safeId);
   const v3  = document.getElementById('viewer3d-' + safeId);
+  const img = document.getElementById('pfimg-'    + safeId);
   const btn = document.getElementById('toggle3d-' + safeId);
   if (!pf || !v3) return;
-  const show3d = pf.style.display !== 'none';
-  pf.style.display = show3d ? 'none' : '';
+  const show3d = !pf.classList.contains('is-3d');
+  pf.classList.toggle('is-3d', show3d);
+  if (img) img.style.display = show3d ? 'none' : '';
   v3.style.display = show3d ? 'block' : 'none';
   if (btn) btn.textContent = show3d ? '🖼️ Portrait' : '🔮 3D';
 };
@@ -291,9 +293,9 @@ function renderArmoryPanel(panel, charData, meta, fromCache) {
             <div class="paperdoll-char">
               ${portrait ? `
               <div id="pf-${safeId}" class="portrait-frame">
-                <img class="paperdoll-char-portrait" src="${portrait}" alt="${meta.name}">
+                <img id="pfimg-${safeId}" class="paperdoll-char-portrait" src="${portrait}" alt="${meta.name}">
+                <div id="viewer3d-${safeId}" class="viewer3d" style="display:none"></div>
               </div>
-              <div id="viewer3d-${safeId}" class="viewer3d" style="display:none"></div>
               <button id="toggle3d-${safeId}" class="viewer3d-toggle" style="display:none" onclick="toggle3DViewer('${safeId}')">🔮 3D</button>
               ` : ''}
               <span class="paperdoll-char-name">${meta.name}</span>

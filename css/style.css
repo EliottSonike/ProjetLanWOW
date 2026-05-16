@@ -4189,6 +4189,34 @@ body[data-class="deathknight"]{ --class-accent: var(--deathknight);--class-glow:
 }
 .viewer3d canvas { display: block; width: 100% !important; height: 100% !important; }
 
+/* portrait-frame en mode 3D : anneau doré rectangulaire */
+.portrait-frame.is-3d {
+  width: 220px;
+  height: 390px;
+  border-radius: 12px;
+}
+.portrait-frame.is-3d::before {
+  border-radius: 12px;
+}
+.portrait-frame.is-3d::after {
+  border-radius: 8px;
+}
+/* viewer3d plaqué à l'intérieur de l'anneau (inset 5px = épaisseur du ring) */
+.portrait-frame.is-3d .viewer3d {
+  position: absolute !important;
+  top: 5px !important;
+  left: 5px !important;
+  right: 5px !important;
+  bottom: 5px !important;
+  width: auto !important;
+  height: auto !important;
+  border: none !important;
+  box-shadow: none !important;
+  border-radius: 8px !important;
+  overflow: hidden;
+  z-index: 2;
+  margin: 0 !important;
+}
 
 .viewer3d-toggle {
   display: none;
