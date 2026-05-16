@@ -48,9 +48,10 @@ async function load3DModel(viewerId, portraitId, charData, meta) {
 
   // Initialise Three.js via dynamic import (module)
   try {
-    const THREE      = (await import('https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js')).default;
-    const { GLTFLoader }    = await import('https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/loaders/GLTFLoader.js');
-    const { OrbitControls } = await import('https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/controls/OrbitControls.js');
+    // esm.sh réécrit les imports internes ('three') en URLs absolues — pas besoin d'importmap
+    const THREE             = await import('https://esm.sh/three@0.160.0');
+    const { GLTFLoader }    = await import('https://esm.sh/three@0.160.0/examples/jsm/loaders/GLTFLoader.js');
+    const { OrbitControls } = await import('https://esm.sh/three@0.160.0/examples/jsm/controls/OrbitControls.js');
 
     const W = 300, H = 400;
     const scene = new THREE.Scene();
