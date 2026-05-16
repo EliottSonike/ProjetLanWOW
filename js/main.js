@@ -97,9 +97,10 @@ async function load3DModel(viewerId, portraitId, charData, meta) {
       const box    = new THREE.Box3().setFromObject(model);
       const center = box.getCenter(new THREE.Vector3());
       const size   = box.getSize(new THREE.Vector3());
-      // Vue de face : caméra devant le gnome (axe Y positif = haut après rotation -90° X)
-      controls.target.set(center.x, center.y, center.z);
-      camera.position.set(center.x, center.y + 0.2, center.z + size.length() * 1.1);
+      // Vue horizontale parfaite : caméra alignée avec le centre, distance 1.3x
+      // (le +0.2 Y causait une inclinaison vers le bas → la tête sortait du cadre)
+      controls.target.copy(center);
+      camera.position.set(center.x, center.y, center.z + size.length() * 1.3);
       controls.update();
 
       viewerEl._renderer = renderer;
