@@ -1667,7 +1667,7 @@ body[data-class="deathknight"]{ --class-accent: var(--deathknight);--class-glow:
   background: linear-gradient(180deg, var(--bg-black) 0%, var(--bg) 100%);
   border: 1px solid var(--gold-dark);
   border-radius: var(--radius);
-  max-width: 820px;
+  max-width: 980px;
   margin: 0 auto;
   width: 100%;
 }
@@ -1702,7 +1702,7 @@ body[data-class="deathknight"]{ --class-accent: var(--deathknight);--class-glow:
   background: linear-gradient(180deg, #050a20 0%, #010306 100%);
   border: 1px solid var(--gold-dark);
   border-radius: 8px;
-  width: 180px;
+  width: 260px;
 }
 
 .paperdoll-char-portrait {
@@ -4191,8 +4191,8 @@ body[data-class="deathknight"]{ --class-accent: var(--deathknight);--class-glow:
 
 /* portrait-frame en mode 3D : anneau doré rectangulaire */
 .portrait-frame.is-3d {
-  width: 260px;
-  height: 440px;
+  width: 220px;
+  height: 390px;
   border-radius: 12px;
   overflow: hidden;
 }
