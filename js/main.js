@@ -16,56 +16,98 @@ function loadScript(src) {
   });
 }
 
+// GLB model map: race → fileId (only races for which we have a GLB)
+const RACE_GLB = {
+  7: 900914,  // Gnome (male + female, BfA model)
+};
+
 async function load3DModel(viewerId, portraitId, charData) {
-  // Viewer 3D désactivé — fichiers mo3 wotlk5.com incompatibles avec viewer zamimg.com
-  return;
   const viewerEl = document.getElementById(viewerId);
   const toggle   = document.getElementById('toggle3d-' + portraitId.replace('pf-', ''));
   if (!viewerEl || !charData) return;
-  if (charData.race == null || charData.gender == null) return;
 
-  const customOpts  = charData.customizationOptions  || [];
-  const modelItems  = charData.characterModelItems   || [];
+  const race = charData.race;
+  const glbId = RACE_GLB[race];
+  if (!glbId) return; // pas de GLB pour cette race
+
+  const glbUrl = `/wow-assets/mo3/${glbId}.glb`;
+
+  // Vérifier que le GLB existe avant de montrer le bouton
+  try {
+    const check = await fetch(glbUrl, { method: 'HEAD' });
+    if (!check.ok) return;
+  } catch { return; }
 
   if (toggle) toggle.style.display = 'inline-flex';
 
+  // Initialise Three.js via dynamic import (module)
   try {
-    window.CONTENT_PATH = '/wow-assets/';
-    window.WH = window.WH || {};
-    window.WH.debug = window.WH.debug || (() => {});
+    const THREE      = (await import('https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js')).default;
+    const { GLTFLoader }    = await import('https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/loaders/GLTFLoader.js');
+    const { OrbitControls } = await import('https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/controls/OrbitControls.js');
 
-    if (!window.jQuery) await loadScript('https://code.jquery.com/jquery-3.6.4.min.js');
-    if (!window.ZamModelViewer) await loadScript('https://wow.zamimg.com/modelviewer/classic/viewer/viewer.min.js');
+    const W = 300, H = 400;
+    const scene = new THREE.Scene();
+    scene.background = new THREE.Color(0x1a1a2e);
 
-    const inst = new ZamModelViewer({
-      type:        ZamModelViewer.WOW,
-      contentPath: '/wow-assets/',
-      container:   $(viewerEl),
-      hd:          true,
-      aspect:      viewerEl.offsetWidth / (viewerEl.offsetHeight || viewerEl.offsetWidth) || 0.75,
-      charCustomization: {
-        race:       charData.race,
-        gender:     charData.gender,
-        options:    customOpts,
-        sheathMain: -1,
-        sheathOff:  -1,
-      },
-      cls:   charData.class,
-      items: modelItems.filter(i => i[1] !== -1),
-      models: { type: ZamModelViewer.Wow.Types.CHARACTER, id: charData.race },
+    const camera = new THREE.PerspectiveCamera(45, W / H, 0.01, 100);
+    const renderer = new THREE.WebGLRenderer({ antialias: true });
+    renderer.setSize(W, H);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    viewerEl.style.width  = W + 'px';
+    viewerEl.style.height = H + 'px';
+    viewerEl.appendChild(renderer.domElement);
+
+    // Éclairage
+    scene.add(new THREE.AmbientLight(0xffffff, 1.2));
+    const dl = new THREE.DirectionalLight(0xffffff, 1.5);
+    dl.position.set(1, 2, 3);
+    scene.add(dl);
+    const fl = new THREE.DirectionalLight(0xaaaaff, 0.8);
+    fl.position.set(-2, 1, -2);
+    scene.add(fl);
+
+    const controls = new OrbitControls(camera, renderer.domElement);
+    controls.enableDamping = true;
+    controls.dampingFactor = 0.05;
+    controls.minDistance = 0.5;
+    controls.maxDistance = 8;
+
+    // Charger le GLB
+    const loader = new GLTFLoader();
+    loader.load(glbUrl, (gltf) => {
+      const model = gltf.scene;
+      model.rotation.x = -Math.PI / 2; // WoW Z-up → Three.js Y-up
+
+      const mat = new THREE.MeshStandardMaterial({
+        color: 0xc8a078,
+        roughness: 0.6,
+        metalness: 0.05,
+        side: THREE.DoubleSide,
+      });
+      model.traverse(child => { if (child.isMesh) child.material = mat; });
+      scene.add(model);
+
+      const box    = new THREE.Box3().setFromObject(model);
+      const center = box.getCenter(new THREE.Vector3());
+      const size   = box.getSize(new THREE.Vector3());
+      controls.target.copy(center);
+      camera.position.set(center.x, center.y, center.z + size.length() * 1.2);
+      controls.update();
+
+      let active = true;
+      function animate() {
+        if (!active) return;
+        requestAnimationFrame(animate);
+        controls.update();
+        renderer.render(scene, camera);
+      }
+      animate();
+      viewerEl._destroy3d = () => { active = false; renderer.dispose(); };
     });
-
-    // Attend le chargement (max 10s)
-    await new Promise(resolve => {
-      const t = setInterval(() => { if (inst.method('isLoaded')) { clearInterval(t); resolve(); } }, 200);
-      setTimeout(() => { clearInterval(t); resolve(); }, 10000);
-    });
-
-    viewerEl.style.display = 'block';
 
   } catch(e) {
     console.warn('3D model viewer:', e?.message || e);
-    viewerEl.remove();
     if (toggle) toggle.remove();
   }
 }
