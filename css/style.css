@@ -1780,13 +1780,12 @@ body[data-class="deathknight"]{ --class-accent: var(--deathknight);--class-glow:
 }
 
 .equip-slot.empty .equip-slot-icon {
-  box-shadow: 0 0 0 1px #2a2e3e;
-  background: linear-gradient(135deg, #0d1020 0%, #161a2e 100%);
-  opacity: 0.5;
+  box-shadow: 0 0 0 2px #1e2236;
+  background: linear-gradient(135deg, #0d1020 0%, #0f1428 100%);
+  opacity: 0.45;
 }
 .equip-slot.empty .equip-slot-label {
-  opacity: 0.4;
-  font-style: italic;
+  opacity: 0.35;
 }
 
 .equip-slot-icon:hover {
@@ -4171,15 +4170,22 @@ body[data-class="deathknight"]{ --class-accent: var(--deathknight);--class-glow:
 .kl-tag { font-size:.72rem; background:rgba(255,255,255,.07); border-radius:4px; padding:.1rem .4rem; color:var(--text-muted); }
 .kl-wipes { color:#ef9a9a; background:rgba(244,67,54,.1); }
 
-/* — Viewer 3D — mode compact (dans la colonne portrait) */
+/* — Viewer 3D — cadre doré assorti au portrait-frame */
 .viewer3d {
   width: 186px;
-  height: 266px;
-  border-radius: 8px;
+  height: 300px;
+  border-radius: 10px;
   overflow: hidden;
-  background: #0a0c14;
+  background: linear-gradient(180deg, #050a20 0%, #010306 100%);
   margin: 0 auto;
-  transition: all 0.3s ease;
+  position: relative;
+  /* Cadre doré multicouche : fond sombre + anneau or + lueur */
+  border: 2px solid var(--gold-dark);
+  box-shadow:
+    0 0 0 5px #050a20,
+    0 0 0 7px var(--gold-dark),
+    0 0 24px rgba(197,153,57,0.35),
+    inset 0 0 30px rgba(0,0,0,0.6);
 }
 .viewer3d canvas { display: block; width: 100% !important; height: 100% !important; }
 
