@@ -131,6 +131,17 @@ app.get('/wow-assets/viewer/viewer.min.js', async (req, res) => {
           }
         }
         if(!_found){return void console.log("Decompression error: "+_e1);}
+      }
+      if(G){
+        var _mOff=new DataView(z.buffer).getUint32(76,true);
+        if(_mOff>0&&_mOff+56<=G.length){
+          var _gDv=new DataView(G.buffer),_f0=_gDv.getFloat32(_mOff,true);
+          if(isNaN(_f0)||Math.abs(_f0)<1e-10){
+            var _bb=[-0.5,0,-0.5,0.5,2.0,0.5,1.3,-0.5,0,-0.5,0.5,2.0,0.5,1.3];
+            for(var _bi=0;_bi<14;_bi++)_gDv.setFloat32(_mOff+_bi*4,_bb[_bi],true);
+            console.log("[PATCH] BBox fixed at d"+_mOff);
+          }
+        }
       }`.replace(/\n\s*/g,'');
 
       // Patch rn reader to be bounds-safe (wotlk5 mo3 has 10 fewer section slots than
