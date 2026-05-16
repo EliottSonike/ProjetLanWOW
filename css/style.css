@@ -1424,7 +1424,7 @@ body[data-class="deathknight"]{ --class-accent: var(--deathknight);--class-glow:
 /* Stats cibles */
 .stats-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 0.8rem;
 }
 
@@ -2059,7 +2059,7 @@ body[data-class="deathknight"]{ --class-accent: var(--deathknight);--class-glow:
 /* KPIs */
 .stats-kpis {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 1rem;
   margin-bottom: 2rem;
 }
@@ -2907,7 +2907,7 @@ body[data-class="deathknight"]{ --class-accent: var(--deathknight);--class-glow:
 
 .timeline {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   gap: 1rem;
   align-items: start;
 }
@@ -4140,7 +4140,7 @@ body[data-class="deathknight"]{ --class-accent: var(--deathknight);--class-glow:
 .wipe-count { width:5rem; text-align:right; color:var(--text-muted); font-size:.8rem; }
 
 /* — Fun stats — */
-.fun-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:1rem; }
+.fun-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:1rem; }
 .fun-card { display:flex; align-items:center; gap:.9rem; padding:.9rem 1rem; background:var(--bg-card2); border:1px solid var(--border); border-radius:8px; }
 .fun-ico { font-size:1.8rem; flex-shrink:0; }
 .fun-title { font-size:.7rem; text-transform:uppercase; letter-spacing:.04em; color:var(--text-muted); margin-bottom:.2rem; }
