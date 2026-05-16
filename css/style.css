@@ -4191,9 +4191,10 @@ body[data-class="deathknight"]{ --class-accent: var(--deathknight);--class-glow:
 
 /* portrait-frame en mode 3D : anneau doré rectangulaire */
 .portrait-frame.is-3d {
-  width: 220px;
-  height: 390px;
+  width: 260px;
+  height: 440px;
   border-radius: 12px;
+  overflow: hidden;
 }
 .portrait-frame.is-3d::before {
   border-radius: 12px;
