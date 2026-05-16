@@ -87,15 +87,24 @@ loader.load(
     model.rotation.x = -Math.PI / 2;
 
     // Appliquer un matériau WoW-like (gris/stone pour le debug)
+    // Charger la texture de peau de Krapule (confirmée 200 OK depuis zamimg live CDN)
+    const texLoader = new THREE.TextureLoader();
+    const skinTex = texLoader.load(
+      '/wow-assets/textures/3550825.webp',
+      () => L('Texture peau chargée ✅', '#4a9'),
+      undefined,
+      () => L('Texture peau non dispo, couleur unie', '#fa0')
+    );
+    skinTex.flipY = false; // WoW UVs: origine en haut, Three.js en bas
+
     model.traverse(child => {
       if (child.isMesh) {
         child.material = new THREE.MeshStandardMaterial({
-          color: 0xc8a078,
-          roughness: 0.7,
-          metalness: 0.1,
+          map: skinTex,
+          roughness: 0.6,
+          metalness: 0.05,
           side: THREE.DoubleSide,
         });
-        child.castShadow = true;
       }
     });
 
