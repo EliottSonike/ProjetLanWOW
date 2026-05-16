@@ -134,7 +134,6 @@ app.get('/wow-assets/viewer/viewer.min.js', async (req, res) => {
       }
       if(G){
         var _fDv=new DataView(z.buffer),_gDv=new DataView(G.buffer);
-        // Patch 1: BBox fix
         var _mOff=_fDv.getUint32(76,true);
         if(_mOff>0&&_mOff+56<=G.length){
           var _f0=_gDv.getFloat32(_mOff,true);
@@ -144,7 +143,6 @@ app.get('/wow-assets/viewer/viewer.min.js', async (req, res) => {
             console.log("[PATCH] BBox fixed at d"+_mOff);
           }
         }
-        // Patch 2: vertex decimation si modele trop grand (BfA+ era, >10k vertices -> OOM)
         var _iOff=_fDv.getUint32(12,true),_sOff=_fDv.getUint32(16,true);
         var _origV=_gDv.getInt32(_iOff,true);
         var _MAX_V=5000;
