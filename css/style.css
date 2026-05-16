@@ -165,9 +165,9 @@ a:hover { color: var(--gold-light); }
 ═══════════════════════════════════════════════════════ */
 .container {
   width: 100%;
-  max-width: 100%;
+  max-width: 1400px;
   margin: 0 auto;
-  padding: 2rem 3rem;
+  padding: 2rem 2rem;
   box-sizing: border-box;
 }
 
