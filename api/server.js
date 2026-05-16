@@ -18,6 +18,7 @@ const cors    = require('cors');
 const fs      = require('fs');
 const path    = require('path');
 const vm      = require('vm');
+const zlib    = require('zlib');
 
 const PORT   = process.env.PORT   || 3001;
 const SECRET = process.env.SECRET;
@@ -176,6 +177,63 @@ app.get('/wow-assets/viewer/viewer.min.js', async (req, res) => {
   } catch(e) {
     res.status(502).send('// Error: ' + e.message);
   }
+});
+
+// ── Mo3 files avec bounding box patchée ──────────────────────────────
+// Le format wotlk5 (116-byte header) a la section 'm' (bounding box)
+// pointant sur de la data incorrecte → floats NaN → frustum dégénéré → tout transparent.
+// On décompresse, patch les 14 floats, recompresse et cache.
+const MO3_DIR  = path.join(__dirname, '..', 'wow-assets', 'mo3');
+const mo3Cache = {};
+const GNOME_BBOX = [-0.5, 0, -0.5, 0.5, 2.0, 0.5, 1.3,
+                    -0.5, 0, -0.5, 0.5, 2.0, 0.5, 1.3]; // 14 floats
+
+app.get('/wow-assets/mo3/:id([0-9]+).mo3', (req, res) => {
+  const id = req.params.id;
+  const headers = {
+    'Content-Type':              'application/octet-stream',
+    'Access-Control-Allow-Origin': '*',
+    'Cache-Control':             'public, max-age=86400',
+  };
+  if (mo3Cache[id]) { res.set(headers); return res.send(mo3Cache[id]); }
+
+  const filepath = path.join(MO3_DIR, id + '.mo3');
+  if (!fs.existsSync(filepath)) return res.status(404).end();
+
+  const raw = fs.readFileSync(filepath);
+
+  // Find zlib header (always at 116 for wotlk5 format)
+  let zlibOff = -1;
+  for (let i = 0; i < 300 && i < raw.length - 1; i++) {
+    if (raw[i] === 0x78 && (raw[i+1]===0x9c||raw[i+1]===0xda||raw[i+1]===0x01||raw[i+1]===0x5e)) {
+      zlibOff = i; break;
+    }
+  }
+  if (zlibOff === -1) { mo3Cache[id] = raw; res.set(headers); return res.send(raw); }
+
+  const mDataOff = raw.readUInt32LE(76); // section m offset in decompressed data
+
+  let decompressed;
+  try { decompressed = zlib.inflateSync(raw.slice(zlibOff)); }
+  catch { mo3Cache[id] = raw; res.set(headers); return res.send(raw); }
+
+  // Patch bounding box if floats are NaN or ~0
+  const f0 = decompressed.readFloatLE(mDataOff);
+  if (isNaN(f0) || Math.abs(f0) < 1e-10) {
+    let off = mDataOff;
+    for (const v of GNOME_BBOX) { decompressed.writeFloatLE(v, off); off += 4; }
+    console.log(`✅ BBox patched: mo3/${id} at d${mDataOff}`);
+  }
+
+  // Recompress + assemble: original 116-byte header + new zlib
+  const newZlib = zlib.deflateSync(decompressed);
+  const newBuf  = Buffer.alloc(zlibOff + newZlib.length);
+  raw.copy(newBuf, 0, 0, zlibOff);
+  newZlib.copy(newBuf, zlibOff);
+
+  mo3Cache[id] = newBuf;
+  res.set(headers);
+  res.send(newBuf);
 });
 
 // ── GET ───────────────────────────────────────────────────────────────
