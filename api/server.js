@@ -133,14 +133,32 @@ app.get('/wow-assets/viewer/viewer.min.js', async (req, res) => {
         if(!_found){return void console.log("Decompression error: "+_e1);}
       }
       if(G){
-        var _mOff=new DataView(z.buffer).getUint32(76,true);
+        var _fDv=new DataView(z.buffer),_gDv=new DataView(G.buffer);
+        // Patch 1: BBox fix
+        var _mOff=_fDv.getUint32(76,true);
         if(_mOff>0&&_mOff+56<=G.length){
-          var _gDv=new DataView(G.buffer),_f0=_gDv.getFloat32(_mOff,true);
+          var _f0=_gDv.getFloat32(_mOff,true);
           if(isNaN(_f0)||Math.abs(_f0)<1e-10){
             var _bb=[-0.5,0,-0.5,0.5,2.0,0.5,1.3,-0.5,0,-0.5,0.5,2.0,0.5,1.3];
             for(var _bi=0;_bi<14;_bi++)_gDv.setFloat32(_mOff+_bi*4,_bb[_bi],true);
             console.log("[PATCH] BBox fixed at d"+_mOff);
           }
+        }
+        // Patch 2: vertex decimation si modele trop grand (BfA+ era, >10k vertices -> OOM)
+        var _iOff=_fDv.getUint32(12,true),_sOff=_fDv.getUint32(16,true);
+        var _origV=_gDv.getInt32(_iOff,true);
+        var _MAX_V=5000;
+        if(_origV>_MAX_V){
+          var _origI=_gDv.getInt32(_sOff,true),_filtI=[];
+          var _sBase=_sOff+4;
+          for(var _ti=0;_ti<_origI;_ti+=3){
+            var _a=_gDv.getUint16(_sBase+_ti*2,true),_b=_gDv.getUint16(_sBase+(_ti+1)*2,true),_c=_gDv.getUint16(_sBase+(_ti+2)*2,true);
+            if(_a<_MAX_V&&_b<_MAX_V&&_c<_MAX_V){_filtI.push(_a,_b,_c);}
+          }
+          _gDv.setInt32(_iOff,_MAX_V,true);
+          _gDv.setInt32(_sOff,_filtI.length,true);
+          for(var _fi=0;_fi<_filtI.length;_fi++)_gDv.setUint16(_sBase+_fi*2,_filtI[_fi],true);
+          console.log("[PATCH] Decimated: "+_origV+"->"+_MAX_V+" verts, tris: "+_origI+"->"+_filtI.length);
         }
       }`.replace(/\n\s*/g,'');
 
