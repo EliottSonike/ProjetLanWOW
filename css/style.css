@@ -4172,8 +4172,8 @@ body[data-class="deathknight"]{ --class-accent: var(--deathknight);--class-glow:
 
 /* — Viewer 3D — cadre doré assorti au portrait-frame */
 .viewer3d {
-  width: 186px;
-  height: 300px;
+  width: 210px;
+  height: 380px;
   border-radius: 10px;
   overflow: hidden;
   background: linear-gradient(180deg, #050a20 0%, #010306 100%);

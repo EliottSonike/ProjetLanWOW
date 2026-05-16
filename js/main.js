@@ -53,7 +53,7 @@ async function load3DModel(viewerId, portraitId, charData, meta) {
     const { GLTFLoader }    = await import('https://esm.sh/three@0.160.0/examples/jsm/loaders/GLTFLoader.js');
     const { OrbitControls } = await import('https://esm.sh/three@0.160.0/examples/jsm/controls/OrbitControls.js');
 
-    const W = 186, H = 300;  // correspond au CSS .viewer3d
+    const W = 210, H = 380;  // correspond au CSS .viewer3d
     const scene = new THREE.Scene();
     scene.background = new THREE.Color(0x1a1a2e);
 
