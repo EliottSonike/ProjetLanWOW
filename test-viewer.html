@@ -138,22 +138,15 @@ const customOpts = [
 ];
 
 try {
+  // NPC type (8) = pas de skin compositing WebGL → pas d'OOM
+  // CHARACTER type (16) créait des framebuffers géants → OOM Chrome
   const inst = new ZamModelViewer({
     type: ZamModelViewer.WOW,
     contentPath: '/wow-assets/',
     container: $('#viewer'),
     hd: false,
     aspect: 0.8,
-    charCustomization: {
-      race: 7,
-      gender: 0,
-      options: [],    // pas de customisation → pas de skin compositing → moins de mémoire
-      sheathMain: -1,
-      sheathOff: -1,
-    },
-    cls: 8,
-    items: [],
-    models: { type: ZamModelViewer.Wow.Types.CHARACTER, id: 13 },
+    models: { type: ZamModelViewer.Wow.Types.NPC, id: 900914 },
   });
   L('ZamModelViewer créé ✅', '#4a9');
 } catch(e) {
