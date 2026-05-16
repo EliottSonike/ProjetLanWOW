@@ -16,27 +16,33 @@ function loadScript(src) {
   });
 }
 
-// GLB model map: race → fileId (only races for which we have a GLB)
-const RACE_GLB = {
-  7: 900914,  // Gnome (male + female, BfA model)
-};
+// GLB model map: race ID (number) ou nom de race (string) → fileId
+const RACE_GLB = { 7: 900914 };
+const RACE_NAME_GLB = { Gnome: 900914, gnome: 900914, GNOME: 900914 };
 
-async function load3DModel(viewerId, portraitId, charData) {
+async function load3DModel(viewerId, portraitId, charData, meta) {
   const viewerEl = document.getElementById(viewerId);
   const toggle   = document.getElementById('toggle3d-' + portraitId.replace('pf-', ''));
-  if (!viewerEl || !charData) return;
+  if (!viewerEl) return;
 
-  const race = charData.race;
-  const glbId = RACE_GLB[race];
-  if (!glbId) return; // pas de GLB pour cette race
+  // Chercher l'ID du GLB via race numérique ou nom de race (fallback)
+  const race  = charData?.race;
+  const raceN = meta?.race || '';
+  const glbId = RACE_GLB[race] || RACE_NAME_GLB[raceN] || RACE_NAME_GLB[raceN.trim()];
+  console.log('[3D] race:', race, 'raceStr:', raceN, '→ glbId:', glbId);
+  if (!glbId) return;
 
   const glbUrl = `/wow-assets/mo3/${glbId}.glb`;
 
   // Vérifier que le GLB existe avant de montrer le bouton
   try {
     const check = await fetch(glbUrl, { method: 'HEAD' });
+    console.log('[3D] GLB HEAD:', glbUrl, check.status);
     if (!check.ok) return;
-  } catch { return; }
+  } catch(e) {
+    console.warn('[3D] GLB HEAD error:', e.message);
+    return;
+  }
 
   if (toggle) toggle.style.display = 'inline-flex';
 
@@ -300,7 +306,7 @@ function renderArmoryPanel(panel, charData, meta, fromCache) {
     </div>`;
 
   // Lance le chargement du modèle 3D en arrière-plan
-  if (portrait) load3DModel('viewer3d-' + safeId, 'pf-' + safeId, charData);
+  if (portrait) load3DModel('viewer3d-' + safeId, 'pf-' + safeId, charData, meta);
 
   // Refresh Wowhead tooltips sur les items nouvellement insérés
   setTimeout(refreshWowhead, 300);
