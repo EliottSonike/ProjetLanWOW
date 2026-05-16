@@ -56,15 +56,18 @@ renderer.setPixelRatio(window.devicePixelRatio);
 container.appendChild(renderer.domElement);
 L('WebGL renderer créé ✅', '#4a9');
 
-// Lighting
-const ambient = new THREE.AmbientLight(0xffffff, 0.5);
+// Lighting — assez fort pour voir le modèle sans texture
+const ambient = new THREE.AmbientLight(0xffffff, 1.2);
 scene.add(ambient);
-const dirLight = new THREE.DirectionalLight(0xffffff, 1.2);
+const dirLight = new THREE.DirectionalLight(0xffffff, 1.5);
 dirLight.position.set(1, 2, 3);
 scene.add(dirLight);
-const fillLight = new THREE.DirectionalLight(0x8888ff, 0.3);
-fillLight.position.set(-1, 0, -1);
+const fillLight = new THREE.DirectionalLight(0xaaaaff, 0.8);
+fillLight.position.set(-2, 1, -2);
 scene.add(fillLight);
+const backLight = new THREE.DirectionalLight(0xffffff, 0.5);
+backLight.position.set(0, -1, -3);
+scene.add(backLight);
 
 // Controls
 const controls = new OrbitControls(camera, renderer.domElement);
@@ -87,25 +90,29 @@ loader.load(
     model.rotation.x = -Math.PI / 2;
 
     // Appliquer un matériau WoW-like (gris/stone pour le debug)
-    // Charger la texture de peau de Krapule (confirmée 200 OK depuis zamimg live CDN)
     const texLoader = new THREE.TextureLoader();
-    const skinTex = texLoader.load(
+    const mat = new THREE.MeshStandardMaterial({
+      color: 0xc8a078,  // couleur gnome par défaut
+      roughness: 0.6,
+      metalness: 0.05,
+      side: THREE.DoubleSide,
+    });
+
+    // Tenter de charger la texture de peau
+    texLoader.load(
       '/wow-assets/textures/3550825.webp',
-      () => L('Texture peau chargée ✅', '#4a9'),
+      (tex) => {
+        tex.flipY = false;
+        mat.map = tex;
+        mat.needsUpdate = true;
+        L('Texture peau chargée ✅', '#4a9');
+      },
       undefined,
-      () => L('Texture peau non dispo, couleur unie', '#fa0')
+      () => L('Texture peau non dispo — couleur unie', '#fa0')
     );
-    skinTex.flipY = false; // WoW UVs: origine en haut, Three.js en bas
 
     model.traverse(child => {
-      if (child.isMesh) {
-        child.material = new THREE.MeshStandardMaterial({
-          map: skinTex,
-          roughness: 0.6,
-          metalness: 0.05,
-          side: THREE.DoubleSide,
-        });
-      }
+      if (child.isMesh) child.material = mat;
     });
 
     scene.add(model);
