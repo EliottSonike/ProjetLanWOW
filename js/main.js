@@ -102,6 +102,8 @@ async function load3DModel(viewerId, portraitId, charData, meta) {
       camera.position.set(center.x, center.y, center.z + size.length() * 1.2);
       controls.update();
 
+      viewerEl._renderer = renderer;
+      viewerEl._camera   = camera;
       let active = true;
       function animate() {
         if (!active) return;
@@ -120,14 +122,25 @@ async function load3DModel(viewerId, portraitId, charData, meta) {
 }
 
 window.toggle3DViewer = function(safeId) {
-  const pf  = document.getElementById('pf-'       + safeId);
-  const v3  = document.getElementById('viewer3d-' + safeId);
-  const btn = document.getElementById('toggle3d-' + safeId);
+  const pf      = document.getElementById('pf-'       + safeId);
+  const v3      = document.getElementById('viewer3d-' + safeId);
+  const btn     = document.getElementById('toggle3d-' + safeId);
+  const pdMain  = v3 && v3.closest('.paperdoll-main');
   if (!pf || !v3) return;
   const show3d = pf.style.display !== 'none';
-  pf.style.display  = show3d ? 'none' : '';
-  v3.style.display  = show3d ? 'block' : 'none';
+  pf.style.display = show3d ? 'none' : '';
+  v3.style.display = show3d ? 'block' : 'none';
+  if (pdMain) pdMain.classList.toggle('paperdoll-mode-3d', show3d);
   if (btn) btn.textContent = show3d ? '🖼️ Portrait' : '🔮 3D';
+  // Redimensionner le renderer Three.js si nécessaire
+  if (show3d && v3._renderer) {
+    const r = v3._renderer;
+    r.setSize(v3.offsetWidth, v3.offsetHeight, false);
+    if (v3._camera) {
+      v3._camera.aspect = v3.offsetWidth / v3.offsetHeight;
+      v3._camera.updateProjectionMatrix();
+    }
+  }
 };
 
 // ── Gestion des onglets (Talents / BiS / Rotation)
