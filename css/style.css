@@ -1675,7 +1675,7 @@ body[data-class="deathknight"]{ --class-accent: var(--deathknight);--class-glow:
 .paperdoll-main {
   display: flex;
   align-items: stretch;
-  justify-content: space-between;
+  justify-content: center;
   gap: 10px;
 }
 
@@ -1683,7 +1683,6 @@ body[data-class="deathknight"]{ --class-accent: var(--deathknight);--class-glow:
   display: flex;
   flex-direction: column;
   gap: 4px;
-  flex: 1;
 }
 
 .paperdoll-center {
@@ -1781,8 +1780,13 @@ body[data-class="deathknight"]{ --class-accent: var(--deathknight);--class-glow:
 }
 
 .equip-slot.empty .equip-slot-icon {
-  box-shadow: 0 0 0 2px #1a1e2e;
-  opacity: 0.35;
+  box-shadow: 0 0 0 1px #2a2e3e;
+  background: linear-gradient(135deg, #0d1020 0%, #161a2e 100%);
+  opacity: 0.5;
+}
+.equip-slot.empty .equip-slot-label {
+  opacity: 0.4;
+  font-style: italic;
 }
 
 .equip-slot-icon:hover {
