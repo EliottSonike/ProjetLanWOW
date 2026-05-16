@@ -53,7 +53,8 @@ async function load3DModel(viewerId, portraitId, charData, meta) {
     const { GLTFLoader }    = await import('https://esm.sh/three@0.160.0/examples/jsm/loaders/GLTFLoader.js');
     const { OrbitControls } = await import('https://esm.sh/three@0.160.0/examples/jsm/controls/OrbitControls.js');
 
-    const W = 300, H = 400;
+    // Utiliser la taille définie par le CSS .viewer3d (186×266)
+    const W = 186, H = 266;
     const scene = new THREE.Scene();
     scene.background = new THREE.Color(0x1a1a2e);
 
@@ -61,8 +62,7 @@ async function load3DModel(viewerId, portraitId, charData, meta) {
     const renderer = new THREE.WebGLRenderer({ antialias: true });
     renderer.setSize(W, H);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-    viewerEl.style.width  = W + 'px';
-    viewerEl.style.height = H + 'px';
+    renderer.domElement.style.cssText = 'width:100%;height:100%;display:block;';
     viewerEl.appendChild(renderer.domElement);
 
     // Éclairage
