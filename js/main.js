@@ -53,8 +53,7 @@ async function load3DModel(viewerId, portraitId, charData, meta) {
     const { GLTFLoader }    = await import('https://esm.sh/three@0.160.0/examples/jsm/loaders/GLTFLoader.js');
     const { OrbitControls } = await import('https://esm.sh/three@0.160.0/examples/jsm/controls/OrbitControls.js');
 
-    // Utiliser la taille définie par le CSS .viewer3d (186×266)
-    const W = 186, H = 266;
+    const W = 186, H = 266;  // correspond au CSS .viewer3d
     const scene = new THREE.Scene();
     scene.background = new THREE.Color(0x1a1a2e);
 
@@ -98,8 +97,9 @@ async function load3DModel(viewerId, portraitId, charData, meta) {
       const box    = new THREE.Box3().setFromObject(model);
       const center = box.getCenter(new THREE.Vector3());
       const size   = box.getSize(new THREE.Vector3());
-      controls.target.copy(center);
-      camera.position.set(center.x, center.y, center.z + size.length() * 1.2);
+      // Vue de face : caméra devant le gnome (axe Y positif = haut après rotation -90° X)
+      controls.target.set(center.x, center.y, center.z);
+      camera.position.set(center.x, center.y + 0.2, center.z + size.length() * 1.1);
       controls.update();
 
       viewerEl._renderer = renderer;
@@ -122,25 +122,14 @@ async function load3DModel(viewerId, portraitId, charData, meta) {
 }
 
 window.toggle3DViewer = function(safeId) {
-  const pf      = document.getElementById('pf-'       + safeId);
-  const v3      = document.getElementById('viewer3d-' + safeId);
-  const btn     = document.getElementById('toggle3d-' + safeId);
-  const pdMain  = v3 && v3.closest('.paperdoll-main');
+  const pf  = document.getElementById('pf-'       + safeId);
+  const v3  = document.getElementById('viewer3d-' + safeId);
+  const btn = document.getElementById('toggle3d-' + safeId);
   if (!pf || !v3) return;
   const show3d = pf.style.display !== 'none';
   pf.style.display = show3d ? 'none' : '';
   v3.style.display = show3d ? 'block' : 'none';
-  if (pdMain) pdMain.classList.toggle('paperdoll-mode-3d', show3d);
   if (btn) btn.textContent = show3d ? '🖼️ Portrait' : '🔮 3D';
-  // Redimensionner le renderer Three.js si nécessaire
-  if (show3d && v3._renderer) {
-    const r = v3._renderer;
-    r.setSize(v3.offsetWidth, v3.offsetHeight, false);
-    if (v3._camera) {
-      v3._camera.aspect = v3.offsetWidth / v3.offsetHeight;
-      v3._camera.updateProjectionMatrix();
-    }
-  }
 };
 
 // ── Gestion des onglets (Talents / BiS / Rotation)

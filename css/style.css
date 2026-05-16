@@ -4175,14 +4175,6 @@ body[data-class="deathknight"]{ --class-accent: var(--deathknight);--class-glow:
 }
 .viewer3d canvas { display: block; width: 100% !important; height: 100% !important; }
 
-/* Mode plein paperdoll : viewer prend toute la largeur */
-.paperdoll-mode-3d .paperdoll-col { display: none !important; }
-.paperdoll-mode-3d .paperdoll-center { flex: 1 !important; }
-.paperdoll-mode-3d .viewer3d {
-  width: 100% !important;
-  height: 460px !important;
-  border-radius: 12px;
-}
 
 .viewer3d-toggle {
   display: none;
