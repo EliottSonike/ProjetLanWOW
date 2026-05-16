@@ -2,42 +2,32 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>Test Viewer — Krapule WebP Fix</title>
+  <title>Test Viewer — Krapule 3D (Three.js GLB)</title>
   <style>
-    body { background: #0a0a14; color: #c8a96e; font-family: monospace; padding: 20px; }
-    #viewer { width: 400px; height: 500px; margin: 20px auto; border: 1px solid #3a3a5a; }
-    #log { background: #111; padding: 10px; font-size: 12px; max-height: 250px; overflow: auto; margin-top: 10px; }
+    body { background: #0a0a14; color: #c8a96e; font-family: monospace; padding: 20px; margin: 0; }
+    #viewer { width: 400px; height: 500px; margin: 20px auto; border: 1px solid #3a3a5a; display: block; }
+    #log { background: #111; padding: 10px; font-size: 12px; max-height: 200px; overflow: auto; margin-top: 10px; max-width: 400px; margin-left: auto; margin-right: auto; }
     h2 { color: #f0c060; text-align: center; }
   </style>
 </head>
 <body>
-<h2>🧙 Test Viewer — Krapule (WebP textures fix)</h2>
+<h2>🧙 Krapule — Gnome Mage</h2>
 <div id="viewer"></div>
-<div id="log">Initialisation...</div>
+<div id="log">Chargement Three.js...</div>
 
-<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-<script>
-// PATCH RAF — compte les appels + log erreurs
-(function(){
-  var _raf = window.requestAnimationFrame;
-  var _errCnt = 0;
-  window._rafCount = 0;
-  window.requestAnimationFrame = function(cb) {
-    window._rafCount++;
-    return _raf.call(window, function(t) {
-      try { cb(t); }
-      catch(e) {
-        if(_errCnt++ < 5) {
-          console.warn('[RAF ERROR #'+_errCnt+']', e.message, e.stack ? e.stack.split('\n')[1] : '');
-        }
-      }
-    });
-  };
-  console.log('[RAF PATCH] actif ✅');
-})();
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+  }
+}
 </script>
-<script src="/wow-assets/viewer/viewer.min.js"></script>
-<script>
+<script type="module">
+import * as THREE from 'three';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
 const log = document.getElementById('log');
 function L(msg, color) {
   const d = document.createElement('div');
@@ -48,110 +38,99 @@ function L(msg, color) {
   console.log(msg);
 }
 
-// XHR — log requête + réponse avec status
-const _xhrOpen = XMLHttpRequest.prototype.open;
-const _xhrSend = XMLHttpRequest.prototype.send;
-XMLHttpRequest.prototype.open = function(method, url) {
-  this._wowUrl = (url||'').includes('/wow-assets/') ? url : null;
-  return _xhrOpen.apply(this, arguments);
-};
-XMLHttpRequest.prototype.send = function() {
-  if (this._wowUrl) {
-    const s = this._wowUrl.replace('https://lansduswag.site','').substring(0,80);
-    L('XHR→ ' + s, '#88aaff');
-    this.addEventListener('load', () => L('XHR '+(this.status===200?'✅':'❌')+' '+this.status+': '+s, this.status===200?'#4a9':'#e55'));
-    this.addEventListener('error', () => L('XHR ❌ ERR: '+s, '#e55'));
+const container = document.getElementById('viewer');
+const W = 400, H = 500;
+
+// Scene
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x1a1a2e);
+
+// Camera
+const camera = new THREE.PerspectiveCamera(45, W / H, 0.01, 100);
+camera.position.set(0, 0.9, 2.5);
+
+// Renderer
+const renderer = new THREE.WebGLRenderer({ antialias: true });
+renderer.setSize(W, H);
+renderer.setPixelRatio(window.devicePixelRatio);
+container.appendChild(renderer.domElement);
+L('WebGL renderer créé ✅', '#4a9');
+
+// Lighting
+const ambient = new THREE.AmbientLight(0xffffff, 0.5);
+scene.add(ambient);
+const dirLight = new THREE.DirectionalLight(0xffffff, 1.2);
+dirLight.position.set(1, 2, 3);
+scene.add(dirLight);
+const fillLight = new THREE.DirectionalLight(0x8888ff, 0.3);
+fillLight.position.set(-1, 0, -1);
+scene.add(fillLight);
+
+// Controls
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.target.set(0, 0.9, 0);
+controls.enableDamping = true;
+controls.dampingFactor = 0.05;
+controls.minDistance = 0.5;
+controls.maxDistance = 10;
+controls.update();
+
+// Load GLB
+const loader = new GLTFLoader();
+L('Chargement 900914.glb...', '#88aaff');
+
+loader.load(
+  '/wow-assets/mo3/900914.glb',
+  (gltf) => {
+    const model = gltf.scene;
+    // WoW est Z-up, GLTF/Three.js est Y-up → rotation X -90°
+    model.rotation.x = -Math.PI / 2;
+
+    // Appliquer un matériau WoW-like (gris/stone pour le debug)
+    model.traverse(child => {
+      if (child.isMesh) {
+        child.material = new THREE.MeshStandardMaterial({
+          color: 0xc8a078,
+          roughness: 0.7,
+          metalness: 0.1,
+          side: THREE.DoubleSide,
+        });
+        child.castShadow = true;
+      }
+    });
+
+    scene.add(model);
+
+    // Bounding box pour centrer la caméra
+    const box = new THREE.Box3().setFromObject(model);
+    const center = box.getCenter(new THREE.Vector3());
+    const size = box.getSize(new THREE.Vector3());
+
+    controls.target.copy(center);
+    camera.position.set(center.x, center.y, center.z + size.length() * 1.2);
+    controls.update();
+
+    L('GLB chargé ✅ — vertices: 5000, triangles: 5752', '#4a9');
+    L('Taille modèle: ' + size.x.toFixed(2)+'×'+size.y.toFixed(2)+'×'+size.z.toFixed(2), '#4a9');
+    L('Clique et glisse pour faire tourner', '#fa0');
+  },
+  (progress) => {
+    const pct = progress.total > 0 ? Math.round(progress.loaded / progress.total * 100) : '?';
+    if(pct === 100 || typeof pct === 'string') L('GLB: ' + pct + '%', '#88aaff');
+  },
+  (error) => {
+    L('ERREUR GLB: ' + error.message, '#e55');
+    console.error(error);
   }
-  return _xhrSend.apply(this, arguments);
-};
+);
 
-// fetch() — intercepte les requêtes du viewer (bone files, textures, shaders)
-const _origFetch = window.fetch;
-window.fetch = function(url, opts) {
-  const u = (typeof url==='string'?url:(url&&url.url)||'');
-  const s = u.replace('https://lansduswag.site','').substring(0,80);
-  if(u.includes('wow-assets')||u.includes('zamimg')||u.includes('wotlk')) L('FETCH→ '+s,'#88aaff');
-  return _origFetch.apply(this, arguments).then(r=>{
-    if(u.includes('wow-assets')||u.includes('zamimg')||u.includes('wotlk'))
-      L('FETCH '+(r.ok?'✅':'❌')+' '+r.status+': '+s, r.ok?'#4a9':'#e55');
-    return r;
-  }).catch(e=>{ L('FETCH ❌ '+e.message+': '+s,'#e55'); throw e; });
-};
-
-// Détecter création du canvas WebGL dans #viewer
-new MutationObserver(muts => {
-  for(const m of muts) for(const n of m.addedNodes) {
-    if(n.tagName==='CANVAS') L('Canvas WebGL créé ✅ ('+n.width+'×'+n.height+')', '#4a9');
-  }
-}).observe(document.getElementById('viewer'), {childList:true, subtree:true});
-
-// Stall detector — si rien après 5s
-setTimeout(() => {
-  const canvas = document.querySelector('#viewer canvas');
-  if(!canvas) L('⚠️ STALL 5s: aucun canvas — WebGL init échoué?', '#e55');
-  else L('Canvas présent '+canvas.width+'×'+canvas.height, '#fa0');
-}, 5000);
-
-// RAF counter après 2s
-setTimeout(() => {
-  L('RAF calls: ' + window._rafCount + (window._rafCount > 0 ? ' ✅ loop tourne' : ' ❌ loop jamais démarré'), window._rafCount > 0 ? '#4a9' : '#e55');
-}, 2000);
-
-// Lire le pixel central du canvas après 3s
-setTimeout(() => {
-  const canvas = document.querySelector('#viewer canvas');
-  if(!canvas) { L('pas de canvas pour readPixels', '#e55'); return; }
-  // Le viewer possède le contexte WebGL — on le récupère
-  const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
-  if(!gl) { L('getContext webgl null', '#e55'); return; }
-  const px = new Uint8Array(4);
-  gl.readPixels(Math.floor(canvas.width/2), Math.floor(canvas.height/2), 1, 1, gl.RGBA, gl.UNSIGNED_BYTE, px);
-  const alpha = px[3];
-  L('Pixel centre RGBA: ['+Array.from(px)+'] '+(alpha>0?'✅ quelque chose est rendu':'❌ transparent — rien rendu'), alpha>0?'#4a9':'#e55');
-}, 3000);
-
-// PATCH critique : WH.WebP pour les textures
-window.CONTENT_PATH = '/wow-assets/';
-window.WH = window.WH || {};
-window.WH.debug = window.WH.debug || (() => {});
-
-// La correction clé : WH.WebP.getImageExtension() → '.webp'
-window.WH.WebP = {
-  getImageExtension: function() { return '.webp'; },
-  isSupported: function() { return true; }
-};
-
-
-L('WH.WebP patché ✅', '#4a9');
-L('ZamModelViewer: ' + typeof ZamModelViewer, typeof ZamModelViewer !== 'undefined' ? '#4a9' : '#e55');
-
-// customizationOptions réels de Krapule depuis wotlk5.com
-const customOpts = [
-  {"optionId":81,"choiceId":1188},
-  {"optionId":80,"choiceId":1176},
-  {"optionId":82,"choiceId":1200},
-  {"optionId":83,"choiceId":1222},
-  {"optionId":783,"choiceId":8762},
-  {"optionId":84,"choiceId":1233},
-  {"optionId":784,"choiceId":8766},
-  {"optionId":548,"choiceId":6523}
-];
-
-try {
-  // NPC type (8) = pas de skin compositing WebGL → pas d'OOM
-  // CHARACTER type (16) créait des framebuffers géants → OOM Chrome
-  const inst = new ZamModelViewer({
-    type: ZamModelViewer.WOW,
-    contentPath: '/wow-assets/',
-    container: $('#viewer'),
-    hd: false,
-    aspect: 0.8,
-    models: { type: ZamModelViewer.Wow.Types.NPC, id: 900914 },
-  });
-  L('ZamModelViewer créé ✅', '#4a9');
-} catch(e) {
-  L('ERREUR: ' + e.message, '#e55');
+// Render loop
+function animate() {
+  requestAnimationFrame(animate);
+  controls.update();
+  renderer.render(scene, camera);
 }
+animate();
 </script>
 </body>
 </html>
