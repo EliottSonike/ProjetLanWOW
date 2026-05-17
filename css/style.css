@@ -4120,22 +4120,63 @@ body[data-class="deathknight"]{ --class-accent: var(--deathknight);--class-glow:
 @media(max-width:700px){ .db-card-kills{ grid-column:1; } }
 
 .db-card {
-  background:var(--bg-card);
-  border:1px solid var(--border);
-  border-radius:10px;
-  padding:1.2rem 1.4rem;
+  background: linear-gradient(160deg, rgba(200,169,110,.04) 0%, var(--bg-card) 50%);
+  border: 1px solid var(--gold-dark);
+  border-radius: 12px;
+  padding: 1.4rem 1.8rem;
+  box-shadow: 0 0 0 1px rgba(200,169,110,.08), 0 4px 24px rgba(0,0,0,.5), inset 0 1px 0 rgba(200,169,110,.06);
+  position: relative;
 }
-.db-card-label { font-size:.72rem; text-transform:uppercase; letter-spacing:.06em; color:var(--text-muted); margin-bottom:.75rem; }
+.db-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 12px;
+  background: radial-gradient(ellipse at 0% 0%, rgba(200,169,110,.06) 0%, transparent 60%);
+  pointer-events: none;
+}
+.db-card-label {
+  font-family: 'Cinzel', serif;
+  font-size: .7rem;
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  color: var(--gold);
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+}
 
-.db-prog-bar { height:10px; background:rgba(255,255,255,.07); border-radius:5px; overflow:hidden; margin-bottom:.5rem; }
-.db-prog-fill { height:100%; background:var(--class-accent,var(--gold)); border-radius:5px; transition:width .6s; }
-.db-prog-text { font-size:.85rem; color:var(--text-muted); }
+.db-prog-bar {
+  height: 12px;
+  background: rgba(255,255,255,.06);
+  border-radius: 6px;
+  overflow: hidden;
+  margin-bottom: .6rem;
+  box-shadow: inset 0 2px 4px rgba(0,0,0,.5);
+}
+.db-prog-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--gold-dark), var(--gold), var(--gold-light));
+  border-radius: 6px;
+  box-shadow: 0 0 10px rgba(200,169,110,.6);
+  transition: width 1s cubic-bezier(.22,1,.36,1);
+}
+.db-prog-text { font-size:.88rem; color:var(--text-muted); }
+.db-prog-text strong { color: var(--gold); }
 
-.db-kpis { display:flex; gap:1.5rem; flex-wrap:wrap; margin-bottom:.5rem; }
-.db-kpi { display:flex; flex-direction:column; }
-.db-kpi-v { font-size:1.5rem; font-weight:800; color:var(--class-accent,var(--gold)); }
-.db-kpi-l { font-size:.7rem; color:var(--text-muted); text-transform:uppercase; }
-.db-topdps { font-size:.82rem; color:var(--text-muted); }
+.db-kpis { display:flex; gap:2rem; flex-wrap:wrap; margin-bottom:.5rem; }
+.db-kpi { display:flex; flex-direction:column; gap:.1rem; }
+.db-kpi-v {
+  font-family: 'Cinzel', serif;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--gold);
+  text-shadow: 0 0 20px rgba(200,169,110,.5);
+  line-height: 1;
+}
+.db-kpi-l { font-size:.68rem; color:var(--text-muted); text-transform:uppercase; letter-spacing:.1em; }
+.db-topdps { font-size:.82rem; color:var(--text-muted); margin-top:.3rem; }
 
 .db-kills { display:flex; flex-direction:column; gap:.4rem; margin-bottom:.6rem; }
 .db-kill { display:flex; justify-content:space-between; align-items:center; padding:.3rem 0; border-bottom:1px solid rgba(255,255,255,.05); }
@@ -4350,7 +4391,7 @@ body[data-class="deathknight"]{ --class-accent: var(--deathknight);--class-glow:
 /* ── Carte ── */
 .swag-card {
   position: relative;
-  width: 178px;
+  width: 220px;
   background: linear-gradient(160deg, rgba(255,255,255,0.03) 0%, transparent 60%), var(--bg-card);
   border-radius: 18px;
   border: 1px solid rgba(var(--cc), 0.25);
@@ -4366,7 +4407,7 @@ body[data-class="deathknight"]{ --class-accent: var(--deathknight);--class-glow:
 }
 
 .swag-card--center {
-  width: 210px;
+  width: 260px;
   border-color: rgba(var(--cc), 0.4);
   background: linear-gradient(160deg, rgba(var(--cc), 0.05) 0%, transparent 60%), var(--bg-card);
 }
@@ -4412,8 +4453,8 @@ body[data-class="deathknight"]{ --class-accent: var(--deathknight);--class-glow:
 }
 
 .swag-portrait {
-  width: 88px;
-  height: 88px;
+  width: 110px;
+  height: 110px;
   border-radius: 50%;
   border: 2px solid rgba(var(--cc), 0.5);
   box-shadow: 0 0 18px rgba(var(--cc), 0.28), inset 0 0 12px rgba(0,0,0,0.4);
@@ -4486,6 +4527,19 @@ body[data-class="deathknight"]{ --class-accent: var(--deathknight);--class-glow:
   .roster-sub    { text-align: center; }
 }
 .viewer3d-toggle:hover { background: rgba(198,165,90,.25); }
+
+/* ── Animation scroll CSS pure (remplace AOS) ───────────────────── */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes zoomIn {
+  from { opacity: 0; transform: scale(0.88); }
+  to   { opacity: 1; transform: scale(1); }
+}
+.content-card {
+  animation: fadeInUp 0.5s cubic-bezier(.22,1,.36,1) both;
+}
 
 /* ═══════════════════════════════════════════════════════
    WoW THEME — Cinzel + Toast notification

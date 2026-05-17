@@ -31,29 +31,6 @@ const Layout = (function () {
     fl.href = 'https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cinzel+Decorative:wght@700;900&display=swap';
     document.head.appendChild(fl);
 
-    // AOS (scroll animations)
-    const aosCSS = document.createElement('link');
-    aosCSS.rel  = 'stylesheet';
-    aosCSS.href = 'https://unpkg.com/aos@2.3.4/dist/aos.css';
-    document.head.appendChild(aosCSS);
-
-    const aosJS = document.createElement('script');
-    aosJS.src   = 'https://unpkg.com/aos@2.3.4/dist/aos.js';
-    aosJS.defer = true;
-    aosJS.onload = () => {
-      AOS.init({ once: true, duration: 550, offset: 40, easing: 'ease-out-cubic' });
-      // Appliquer AOS aux éléments communs
-      document.querySelectorAll('.content-card:not([data-aos])').forEach((el, i) => {
-        el.dataset.aos = 'fade-up';
-        el.dataset.aosDelay = Math.min(i % 4 * 60, 180);
-      });
-      document.querySelectorAll('.roster-card:not([data-aos]), .swag-card:not([data-aos])').forEach((el, i) => {
-        el.dataset.aos = 'zoom-in';
-        el.dataset.aosDelay = Math.min(i * 50, 300);
-      });
-      AOS.refresh();
-    };
-    document.head.appendChild(aosJS);
 
     inject(
       '<div class="page-map-bg"></div><div class="ambient-overlay" aria-hidden="true"></div>' +
