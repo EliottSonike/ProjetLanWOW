@@ -66,6 +66,13 @@
   --deathknight:#c41f3b;
 }
 
+/* ── Scrollbar WoW ─────────────────────────────────────── */
+* { scrollbar-width: thin; scrollbar-color: var(--gold-dark) #050a20; }
+::-webkit-scrollbar       { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: #050a20; }
+::-webkit-scrollbar-thumb { background: var(--gold-dark); border-radius: 4px; border: 1px solid var(--gold); }
+::-webkit-scrollbar-thumb:hover { background: var(--gold); }
+
 body {
   background: var(--bg);
   color: var(--text);
@@ -4479,3 +4486,102 @@ body[data-class="deathknight"]{ --class-accent: var(--deathknight);--class-glow:
   .roster-sub    { text-align: center; }
 }
 .viewer3d-toggle:hover { background: rgba(198,165,90,.25); }
+
+/* ═══════════════════════════════════════════════════════
+   WoW THEME — Cinzel + Toast notification
+═══════════════════════════════════════════════════════ */
+
+/* Cinzel sur tous les titres */
+h1, h2, h3,
+.section-title h2, .section-title h3,
+.raid-title, .boss-name, .strat-title,
+.paperdoll-char-name, .char-page-title h1,
+.roster-title, .roster-name,
+.content-card h3, .content-card h2,
+.equip-section-title {
+  font-family: 'Cinzel', 'Segoe UI', serif;
+  letter-spacing: 0.04em;
+}
+
+/* Cinzel Decorative sur le titre principal */
+.site-title, .section-title h2 {
+  font-family: 'Cinzel Decorative', 'Cinzel', serif;
+}
+
+/* ── Toast notification WoW ──────────────────────────── */
+#wow-toast-container {
+  position: fixed;
+  bottom: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  align-items: center;
+  pointer-events: none;
+}
+
+.wow-toast {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  background: linear-gradient(135deg, #060b1a 0%, #0a1428 100%);
+  border: 1px solid var(--gold-dark);
+  border-left: 3px solid var(--gold);
+  border-radius: 6px;
+  padding: 0.75rem 1.2rem;
+  min-width: 300px;
+  max-width: 460px;
+  box-shadow: 0 0 0 1px rgba(200,169,110,.15), 0 8px 32px rgba(0,0,0,.8), 0 0 20px rgba(200,169,110,.15);
+  animation: wowToastIn 0.4s cubic-bezier(.22,1,.36,1) both;
+  pointer-events: all;
+}
+.wow-toast.removing {
+  animation: wowToastOut 0.3s ease-in forwards;
+}
+.wow-toast-icon {
+  font-size: 1.8rem;
+  flex-shrink: 0;
+  filter: drop-shadow(0 0 6px var(--gold));
+}
+.wow-toast-body { flex: 1; min-width: 0; }
+.wow-toast-title {
+  font-family: 'Cinzel', serif;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--gold);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 0.1rem;
+}
+.wow-toast-msg {
+  font-size: 0.88rem;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.wow-toast-bar {
+  position: absolute;
+  bottom: 0; left: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--gold-dark), var(--gold));
+  border-radius: 0 0 6px 6px;
+  animation: wowToastBar var(--duration, 5s) linear forwards;
+  width: 100%;
+  transform-origin: left;
+}
+.wow-toast { position: relative; overflow: hidden; }
+
+@keyframes wowToastIn {
+  from { opacity: 0; transform: translateY(20px) scale(.95); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+@keyframes wowToastOut {
+  to { opacity: 0; transform: translateY(10px) scale(.9); }
+}
+@keyframes wowToastBar {
+  from { transform: scaleX(1); }
+  to   { transform: scaleX(0); }
+}

@@ -180,6 +180,17 @@
 
       if (res.ok || res.status === 204) {
         showFeedback('✅ Posté sur Discord !', 'success');
+        const bossLabel = bossSel.options[bossSel.selectedIndex]?.text || 'Boss';
+        const isFirst   = firstCheck.checked;
+        const isHM      = hmCheck.checked;
+        if (window.wowToast) {
+          window.wowToast(
+            isFirst ? '🏆 World First !' : '⚔️ Boss Vaincu !',
+            bossLabel + (isHM ? ' (Heroic)' : '') + ' — LAN Du Swag',
+            isFirst ? '🏆' : '💀',
+            6000
+          );
+        }
         // Reset
         raidSel.value = ''; bossSel.innerHTML = '<option value="">—</option>';
         wipesInput.value = 0; msgInput.value = '';

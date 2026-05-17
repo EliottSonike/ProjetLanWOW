@@ -31,6 +31,30 @@ const Layout = (function () {
     fl.href = 'https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cinzel+Decorative:wght@700;900&display=swap';
     document.head.appendChild(fl);
 
+    // AOS (scroll animations)
+    const aosCSS = document.createElement('link');
+    aosCSS.rel  = 'stylesheet';
+    aosCSS.href = 'https://unpkg.com/aos@2.3.4/dist/aos.css';
+    document.head.appendChild(aosCSS);
+
+    const aosJS = document.createElement('script');
+    aosJS.src   = 'https://unpkg.com/aos@2.3.4/dist/aos.js';
+    aosJS.defer = true;
+    aosJS.onload = () => {
+      AOS.init({ once: true, duration: 550, offset: 40, easing: 'ease-out-cubic' });
+      // Appliquer AOS aux éléments communs
+      document.querySelectorAll('.content-card:not([data-aos])').forEach((el, i) => {
+        el.dataset.aos = 'fade-up';
+        el.dataset.aosDelay = Math.min(i % 4 * 60, 180);
+      });
+      document.querySelectorAll('.roster-card:not([data-aos]), .swag-card:not([data-aos])').forEach((el, i) => {
+        el.dataset.aos = 'zoom-in';
+        el.dataset.aosDelay = Math.min(i * 50, 300);
+      });
+      AOS.refresh();
+    };
+    document.head.appendChild(aosJS);
+
     inject(
       '<div class="page-map-bg"></div><div class="ambient-overlay" aria-hidden="true"></div>' +
       '\n<header class="site-header">' +
@@ -81,6 +105,31 @@ const Layout = (function () {
       '\n<script defer src="https://wow.zamimg.com/widgets/power.js"><\/script>'
     );
   }
+
+  // ── Toast WoW global ────────────────────────────────────────────────
+  window.wowToast = function(title, msg, icon = '⚔️', duration = 5000) {
+    let container = document.getElementById('wow-toast-container');
+    if (!container) {
+      container = document.createElement('div');
+      container.id = 'wow-toast-container';
+      document.body.appendChild(container);
+    }
+    const toast = document.createElement('div');
+    toast.className = 'wow-toast';
+    toast.style.setProperty('--duration', duration + 'ms');
+    toast.innerHTML =
+      '<div class="wow-toast-icon">' + icon + '</div>' +
+      '<div class="wow-toast-body">' +
+        '<div class="wow-toast-title">' + title + '</div>' +
+        '<div class="wow-toast-msg">' + msg + '</div>' +
+      '</div>' +
+      '<div class="wow-toast-bar"></div>';
+    container.appendChild(toast);
+    setTimeout(() => {
+      toast.classList.add('removing');
+      setTimeout(() => toast.remove(), 300);
+    }, duration);
+  };
 
   return { header, footer };
 
