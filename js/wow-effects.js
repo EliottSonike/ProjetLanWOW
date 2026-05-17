@@ -115,95 +115,80 @@
 
 
   /* ── 3. LOOT BEAM ────────────────────────────────────────────── */
+  /* Approche : décorer le .equip-slot lui-même (pas wraper le <a>)
+     pour ne pas casser la structure attendue par Wowhead power.js    */
   (function lootBeam() {
     const LEGENDARY_IDS = new Set([
-      '17182',  /* Thunderfury */
-      '19019',  /* Sulfuras */
-      '22589',  /* Atiesh */
-      '32837',  /* Warglaive MH */
-      '32838',  /* Warglaive OH */
-      '45038',  /* Val'anyr */
-      '49623',  /* Shadowmourne */
-      '71086',  /* Dragonwrath */
-      '77941',  /* Fangs of the Father MH */
-      '77942',  /* Fangs of the Father OH */
+      '17182','19019','22589','32837','32838',
+      '45038','49623','71086','77941','77942',
     ]);
 
     const css = document.createElement('style');
     css.textContent = `
-      @keyframes beam-shimmer {
-        0%,100% { opacity:.15; filter:blur(5px) brightness(1);   }
-        50%      { opacity:.35; filter:blur(3px) brightness(1.4); }
+      @keyframes lb-shimmer {
+        0%,100% { opacity:.14; }
+        50%      { opacity:.32; }
       }
-      @keyframes beam-glow {
-        0%,100% { opacity:.25; }
-        50%      { opacity:.5;  }
+      @keyframes lb-glow-pulse {
+        0%,100% { opacity:.2; }
+        50%      { opacity:.45; }
       }
-      .loot-beam-anchor {
-        position:relative;
-        display:inline;
+      .equip-slot.has-loot-beam {
+        position: relative;
+        overflow: visible;
       }
-      .loot-beam-anchor .lb-shaft {
-        position:absolute;
-        left:50%; top:-110px;
-        transform:translateX(-50%);
-        width:18px; height:110px;
-        background:linear-gradient(to bottom, transparent 0%, var(--lbc) 55%, transparent 100%);
-        border-radius:50%;
-        pointer-events:none;
-        opacity:0;
-        transition:opacity .2s;
-        animation:beam-shimmer 2s ease-in-out infinite;
-        filter:blur(5px);
-        z-index:12;
+      .equip-slot.has-loot-beam::before {
+        content: '';
+        position: absolute;
+        left: 50%; top: -90px;
+        transform: translateX(-50%);
+        width: 14px; height: 90px;
+        background: linear-gradient(to bottom, transparent 0%, var(--lbc, #a335ee) 60%, transparent 100%);
+        border-radius: 50%;
+        pointer-events: none;
+        opacity: 0;
+        transition: opacity .22s;
+        animation: lb-shimmer 2s ease-in-out infinite;
+        filter: blur(4px);
+        z-index: 5;
       }
-      .loot-beam-anchor .lb-glow {
-        position:absolute;
-        left:50%; top:-6px;
-        transform:translateX(-50%);
-        width:52px; height:52px;
-        background:radial-gradient(circle, var(--lbc) 0%, transparent 70%);
-        border-radius:50%;
-        pointer-events:none;
-        opacity:0;
-        transition:opacity .2s;
-        animation:beam-glow 2s ease-in-out infinite;
-        filter:blur(7px);
-        z-index:12;
+      .equip-slot.has-loot-beam::after {
+        content: '';
+        position: absolute;
+        left: 50%; top: 50%;
+        transform: translate(-50%, -50%);
+        width: 56px; height: 56px;
+        background: radial-gradient(circle, var(--lbc, #a335ee) 0%, transparent 70%);
+        border-radius: 50%;
+        pointer-events: none;
+        opacity: 0;
+        transition: opacity .22s;
+        animation: lb-glow-pulse 2s ease-in-out infinite;
+        filter: blur(8px);
+        z-index: 4;
       }
-      .loot-beam-anchor:hover .lb-shaft,
-      .loot-beam-anchor:hover .lb-glow { opacity:1; }
+      .equip-slot.has-loot-beam:hover::before,
+      .equip-slot.has-loot-beam:hover::after { opacity: 1; }
     `;
     document.head.appendChild(css);
 
-    function wrapLink(a) {
-      if (a.closest('.loot-beam-anchor')) return;
-      const id      = (a.href.match(/item=(\d+)/) || [])[1];
-      const color   = LEGENDARY_IDS.has(id) ? '#ff8000' : '#a335ee';
-
-      const wrap  = document.createElement('span');
-      wrap.className = 'loot-beam-anchor';
-      wrap.style.setProperty('--lbc', color);
-
-      const shaft = document.createElement('span'); shaft.className = 'lb-shaft';
-      const glow  = document.createElement('span'); glow.className  = 'lb-glow';
-
-      a.parentNode.insertBefore(wrap, a);
-      wrap.appendChild(shaft);
-      wrap.appendChild(glow);
-      wrap.appendChild(a);
+    function decorateSlots() {
+      document.querySelectorAll('.equip-slot').forEach(slot => {
+        const a = slot.querySelector('a[href*="wowhead"]');
+        if (!a) return;
+        const id    = (a.href.match(/item=(\d+)/) || [])[1];
+        const color = LEGENDARY_IDS.has(id) ? '#ff8000' : '#a335ee';
+        slot.classList.add('has-loot-beam');
+        slot.style.setProperty('--lbc', color);
+      });
     }
 
-    function init() {
-      document.querySelectorAll(
-        '.equip-slot a[href*="wowhead"], .bis-item a[href*="wowhead"]'
-      ).forEach(wrapLink);
-    }
-
+    /* Attendre que Wowhead power.js ait fini de traiter les liens
+       (~800ms après DOMContentLoaded) pour ne pas interférer */
     if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', init);
+      document.addEventListener('DOMContentLoaded', () => setTimeout(decorateSlots, 900));
     } else {
-      init();
+      setTimeout(decorateSlots, 900);
     }
   })();
 
