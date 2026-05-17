@@ -57,6 +57,10 @@ async function load3DModel(viewerId, portraitId, charData, meta) {
         await new Promise(r => setTimeout(r, 500));
         const WMVClass = window.ZamModelViewer || window.WowModelViewer || window.WMV;
         if (WMVClass && window.jQuery) {
+          // Stub WH (Wowhead global) requis par ZamModelViewer
+          if (!window.WH) window.WH = {};
+          if (typeof window.WH.debug !== 'function') window.WH.debug = () => {};
+          if (typeof window.WH.log   !== 'function') window.WH.log   = () => {};
           const rect = viewerEl.getBoundingClientRect();
           const W = rect.width  > 0 ? rect.width  : 210;
           const H = rect.height > 0 ? rect.height : 380;
