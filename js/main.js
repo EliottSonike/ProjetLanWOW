@@ -3,7 +3,13 @@ function refreshWowhead() {
   if (window.$WowheadPower)              window.$WowheadPower.refreshLinks();
   else if (window.WH && window.WH.Tooltips) window.WH.Tooltips.refreshLinks();
 }
-window.addEventListener('load', () => setTimeout(refreshWowhead, 500));
+window.addEventListener('load', () => {
+  setTimeout(refreshWowhead, 500);
+  // Preload jQuery en arrière-plan si la page a un viewer 3D
+  if (document.querySelector('#armory[data-char]')) {
+    setTimeout(() => loadScript('https://code.jquery.com/jquery-3.7.1.min.js'), 1000);
+  }
+});
 
 /* ── 3D Model Viewer ────────────────────────────────────────────────── */
 
@@ -455,7 +461,7 @@ function initArmory() {
     </div>`;
   }
 
-  const CACHE_TTL = 30 * 60 * 1000; // 30 minutes entre deux fetches
+  const CACHE_TTL = 2 * 60 * 60 * 1000; // 2h — perso WotLK5 change rarement
 
   async function doFetch() {
     const cacheAge = raw ? Date.now() - JSON.parse(raw).timestamp : Infinity;

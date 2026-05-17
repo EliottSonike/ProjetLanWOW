@@ -238,16 +238,28 @@ app.get('/api/wow-asset/*', async (req, res) => {
   }
 });
 
-// ── Proxy armory wotlk5.com (contourne CORS) ─────────────────────────
+// ── Proxy armory wotlk5.com (contourne CORS) — cache 5 min ──────────
+const armoryCache = new Map();
+const ARMORY_CACHE_TTL = 5 * 60 * 1000;
 app.get('/api/armory', async (req, res) => {
   const { realm, char } = req.query;
   if (!realm || !char) return res.status(400).json({ error: 'realm et char requis' });
+  const key = `${realm}|${char}`;
+  const cached = armoryCache.get(key);
+  if (cached && Date.now() - cached.ts < ARMORY_CACHE_TTL) {
+    res.setHeader('Content-Type', 'text/html');
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('X-Cache', 'HIT');
+    return res.send(cached.html);
+  }
   try {
     const url = `https://wotlk5.com/armory/character/${encodeURIComponent(realm)}/${encodeURIComponent(char)}`;
     const r = await fetch(url, { headers: { 'User-Agent': 'Mozilla/5.0' } });
     const html = await r.text();
+    armoryCache.set(key, { html, ts: Date.now() });
     res.setHeader('Content-Type', 'text/html');
     res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('X-Cache', 'MISS');
     res.send(html);
   } catch(e) {
     res.status(502).json({ error: e.message });
