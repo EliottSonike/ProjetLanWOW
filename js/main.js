@@ -70,6 +70,7 @@ async function load3DModel(viewerId, portraitId, charData, meta) {
             contentPath: '/wow-assets-live/',
             container: window.jQuery('#' + viewerId),
             aspect: W / H,
+            hd: false,
             models: {
               id: raceGender,
               type: 16,
