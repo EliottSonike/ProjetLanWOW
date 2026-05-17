@@ -41,52 +41,7 @@ async function load3DModel(viewerId, portraitId, charData, meta) {
   viewerEl._initViewer = async () => {
     delete viewerEl._initViewer;
 
-    // ── Priorité : ZamModelViewer CHARACTER (textures composées automatiquement)
-    if (charData?.customizationOptions?.length) {
-      try {
-        if (!window.jQuery) {
-          await loadScript('https://code.jquery.com/jquery-3.7.1.min.js');
-          await new Promise(r => setTimeout(r, 100));
-        }
-        // Fallback jQuery si CDN bloqué
-        if (!window.jQuery) {
-          await loadScript('https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js');
-          await new Promise(r => setTimeout(r, 100));
-        }
-        await loadScript('/wow-assets/viewer/viewer-live.min.js');
-        await new Promise(r => setTimeout(r, 500));
-        const WMVClass = window.ZamModelViewer || window.WowModelViewer || window.WMV;
-        if (WMVClass && window.jQuery) {
-          // Stub WH (Wowhead global) requis par ZamModelViewer
-          if (!window.WH) window.WH = {};
-          if (typeof window.WH.debug !== 'function') window.WH.debug = () => {};
-          if (typeof window.WH.log   !== 'function') window.WH.log   = () => {};
-          const rect = viewerEl.getBoundingClientRect();
-          const W = rect.width  > 0 ? rect.width  : 210;
-          const H = rect.height > 0 ? rect.height : 380;
-          const raceGender = (charData.race || 7) * 2 - 1 + (charData.gender || 0);
-          await new WMVClass({
-            type: 2,
-            contentPath: '/wow-assets-live/',
-            container: window.jQuery('#' + viewerId),
-            aspect: W / H,
-            hd: false,
-            models: {
-              id: raceGender,
-              type: 16,
-              charCustomization: { options: charData.customizationOptions },
-              items: charData.characterModelItems || []
-            },
-          });
-          viewerEl.addEventListener('wheel', e => e.preventDefault(), { passive: false });
-          return;
-        }
-      } catch(e) {
-        console.warn('[3D] ZamModelViewer CHARACTER failed:', e?.message || e);
-      }
-    }
-
-    // ── Fallback : Three.js + GLB (silhouette sans texture)
+    // ── Three.js + GLB + texture
     try {
       const THREE             = await import('https://esm.sh/three@0.160.0');
       const { GLTFLoader }    = await import('https://esm.sh/three@0.160.0/examples/jsm/loaders/GLTFLoader.js');
@@ -116,10 +71,26 @@ async function load3DModel(viewerId, portraitId, charData, meta) {
       controls.maxDistance    = 8;
       controls.enableZoom     = false;
 
+      // Pré-charger la texture gnome (UVs présents dans le GLB)
+      const texLoader = new THREE.TextureLoader();
+      const gnomeTex = await new Promise(resolve => {
+        texLoader.load('/wow-assets/textures/3550825.webp',
+          tex => { tex.flipY = false; resolve(tex); },
+          undefined,
+          () => resolve(null)
+        );
+      });
+
       new GLTFLoader().load(`/wow-assets/mo3/${glbId}.glb`, (gltf) => {
         const model = gltf.scene;
         model.rotation.x = -Math.PI / 2; // WoW Z-up → Three.js Y-up
-        const mat = new THREE.MeshStandardMaterial({ color: 0xc8a078, roughness: 0.6, metalness: 0.05, side: THREE.DoubleSide });
+        const mat = new THREE.MeshStandardMaterial({
+          map: gnomeTex || null,
+          color: gnomeTex ? 0xffffff : 0xc8a078,
+          roughness: 0.6,
+          metalness: 0.05,
+          side: THREE.DoubleSide,
+        });
         model.traverse(child => { if (child.isMesh) child.material = mat; });
         scene.add(model);
         const box    = new THREE.Box3().setFromObject(model);
