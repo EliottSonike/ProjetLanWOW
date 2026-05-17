@@ -46,11 +46,17 @@ async function load3DModel(viewerId, portraitId, charData, meta) {
       try {
         if (!window.jQuery) {
           await loadScript('https://code.jquery.com/jquery-3.7.1.min.js');
-          await new Promise(r => setTimeout(r, 50));
+          await new Promise(r => setTimeout(r, 100));
+        }
+        // Fallback jQuery si CDN bloqué
+        if (!window.jQuery) {
+          await loadScript('https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js');
+          await new Promise(r => setTimeout(r, 100));
         }
         await loadScript('/wow-assets/viewer/viewer-live.min.js');
-        await new Promise(r => setTimeout(r, 300));
+        await new Promise(r => setTimeout(r, 500));
 
+        console.log('[3D] WMV:', typeof window.WowModelViewer, 'jQuery:', typeof window.jQuery, 'el:', !!document.getElementById(viewerId));
         if (window.WowModelViewer && window.jQuery) {
           const raceGender = (charData.race || 7) * 2 - 1 + (charData.gender || 0);
           new window.WowModelViewer({
@@ -104,7 +110,8 @@ async function load3DModel(viewerId, portraitId, charData, meta) {
 
       new GLTFLoader().load(`/wow-assets/mo3/${glbId}.glb`, (gltf) => {
         const model = gltf.scene;
-        model.rotation.x = -Math.PI / 2;
+        model.rotation.x = -Math.PI / 2; // WoW Z-up → Three.js Y-up
+        model.rotation.y = Math.PI;       // face caméra (WoW +Y → Three.js -Z → retourner)
         const mat = new THREE.MeshStandardMaterial({ color: 0xc8a078, roughness: 0.6, metalness: 0.05, side: THREE.DoubleSide });
         model.traverse(child => { if (child.isMesh) child.material = mat; });
         scene.add(model);
