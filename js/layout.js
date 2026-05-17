@@ -78,6 +78,7 @@ const Layout = (function () {
       '\n<script defer src="' + b + 'js/boss-maps.js?v=' + V + '"><\/script>' +
       '\n<script defer src="' + b + 'js/live-data.js?v=' + V + '"><\/script>' +
       '\n<script defer src="' + b + 'js/side-deco.js?v=' + V + '"><\/script>' +
+      '\n<script defer src="' + b + 'js/wow-effects.js?v=' + V + '"><\/script>' +
       '\n<script>const whTooltips = {colorLinks: true, iconizeLinks: true, iconSize: \'large\', hide: {sellprice: true, ddmoreinfo: true}};<\/script>' +
       '\n<script defer src="https://wow.zamimg.com/widgets/power.js"><\/script>'
     );
