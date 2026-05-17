@@ -44,6 +44,7 @@ async function load3DModel(viewerId, portraitId, charData, meta) {
 
   if (!hasWotlk5 && !hasGlb) return;
   if (toggle) toggle.style.display = 'inline-flex';
+  console.log('[3D] toggle visible pour', meta?.name, '— race:', charData?.race, 'hasWotlk5:', hasWotlk5, 'hasGlb:', hasGlb);
 
   // Lazy init : déclenché au premier clic 3D (viewer visible, taille correcte)
   viewerEl._initViewer = async () => {
@@ -58,6 +59,7 @@ async function load3DModel(viewerId, portraitId, charData, meta) {
         }
         await loadScript('/wow-assets/viewer/viewer-wotlk5.min.js');
         await new Promise(r => setTimeout(r, 500));
+        console.log('[3D] WMV:', typeof window.ZamModelViewer, 'jQuery:', typeof window.jQuery);
         const WMV = window.ZamModelViewer;
         if (WMV && window.jQuery) {
           if (!window.WH) window.WH = {};
