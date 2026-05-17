@@ -95,6 +95,11 @@ async function load3DModel(viewerId, portraitId, charData, meta) {
             },
             mount: { type: WMV.Wow?.Types?.NPC || 8, id: 0 },
           });
+          // Zoom arrière par défaut
+          setTimeout(() => {
+            const el = viewerEl.querySelector('canvas') || viewerEl;
+            el.dispatchEvent(new WheelEvent('wheel', { deltaY: 400, deltaMode: 0, bubbles: true, cancelable: true }));
+          }, 1200);
           return;
         }
       } catch(e) {
