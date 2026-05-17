@@ -44,7 +44,10 @@ async function load3DModel(viewerId, portraitId, charData, meta) {
 
   if (!hasWotlk5 && !hasGlb) return;
   if (toggle) toggle.style.display = 'inline-flex';
-  console.log('[3D] toggle visible pour', meta?.name, '— race:', charData?.race, 'hasWotlk5:', hasWotlk5, 'hasGlb:', hasGlb);
+
+  // Afficher le 3D par défaut
+  const safeId = viewerId.replace('viewer3d-', '');
+  setTimeout(() => toggle3DViewer(safeId), 50);
 
   // Lazy init : déclenché au premier clic 3D (viewer visible, taille correcte)
   viewerEl._initViewer = async () => {
