@@ -259,7 +259,19 @@ const mo3Cache = {};
 const GNOME_BBOX = [-0.5, 0, -0.5, 0.5, 2.0, 0.5, 1.3,
                     -0.5, 0, -0.5, 0.5, 2.0, 0.5, 1.3]; // 14 floats
 
-app.get('/wow-assets/mo3/:id([0-9]+).mo3', (req, res) => {
+async function getMo3Raw(id) {
+  const filepath = path.join(MO3_DIR, id + '.mo3');
+  if (fs.existsSync(filepath)) return fs.readFileSync(filepath);
+  // Téléchargement depuis wotlk5.com si fichier absent
+  console.log(`[mo3] Téléchargement ${id}.mo3 depuis wotlk5.com...`);
+  const r = await fetch(`https://wotlk5.com/armory/data/mo3/${id}.mo3`);
+  if (!r.ok) throw new Error('wotlk5 ' + r.status);
+  const buf = Buffer.from(await r.arrayBuffer());
+  console.log(`[mo3] ${id}.mo3 téléchargé (${Math.round(buf.length/1024)}KB)`);
+  return buf;
+}
+
+app.get('/wow-assets/mo3/:id([0-9]+).mo3', async (req, res) => {
   const id = req.params.id;
   const headers = {
     'Content-Type':              'application/octet-stream',
@@ -268,10 +280,9 @@ app.get('/wow-assets/mo3/:id([0-9]+).mo3', (req, res) => {
   };
   if (mo3Cache[id]) { res.set(headers); return res.send(mo3Cache[id]); }
 
-  const filepath = path.join(MO3_DIR, id + '.mo3');
-  if (!fs.existsSync(filepath)) return res.status(404).end();
-
-  const raw = fs.readFileSync(filepath);
+  let raw;
+  try { raw = await getMo3Raw(id); }
+  catch(e) { console.error('[mo3] Erreur:', e.message); return res.status(404).end(); }
 
   // Find zlib header (always at 116 for wotlk5 format)
   let zlibOff = -1;
