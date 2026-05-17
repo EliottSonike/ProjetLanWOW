@@ -1,107 +1,785 @@
 {
   "_meta": {
     "description": "Base de données des items épiques et légendaires WoW — Vanilla à MoP",
-    "quality": { "4": "Épique", "5": "Légendaire" },
-    "slots": ["head","neck","shoulders","back","chest","shirt","wrists","hands","waist","legs","feet","finger","trinket","mainhand","offhand","ranged","libram","idol","totem","sigil","staff","twohand"],
-    "expansions": ["vanilla","tbc","wotlk","cata","mop"],
+    "quality": {
+      "4": "Épique",
+      "5": "Légendaire"
+    },
+    "slots": [
+      "head",
+      "neck",
+      "shoulders",
+      "back",
+      "chest",
+      "shirt",
+      "wrists",
+      "hands",
+      "waist",
+      "legs",
+      "feet",
+      "finger",
+      "trinket",
+      "mainhand",
+      "offhand",
+      "ranged",
+      "libram",
+      "idol",
+      "totem",
+      "sigil",
+      "staff",
+      "twohand"
+    ],
+    "expansions": [
+      "vanilla",
+      "tbc",
+      "wotlk",
+      "cata",
+      "mop"
+    ],
     "last_updated": "2026-05-17"
   },
   "legendaries": {
-    "17182": { "name": "Sulfuras, Hand of Ragnaros",          "slot": "twohand", "quality": 5, "ilvl": 71,  "expansion": "vanilla", "source": "Crafted (Eye of Sulfuras + Sulfuron Hammer)", "class": ["warrior","paladin","shaman"] },
-    "19019": { "name": "Thunderfury, Blessed Blade of the Windseeker", "slot": "mainhand", "quality": 5, "ilvl": 71, "expansion": "vanilla", "source": "Molten Core (Geddon & Garr bindings)", "class": ["warrior","rogue","paladin","shaman","hunter"] },
-    "22589": { "name": "Atiesh, Greatstaff of the Guardian (Druid)",  "slot": "staff",    "quality": 5, "ilvl": 106, "expansion": "vanilla", "source": "Naxxramas 40 (splinter quest)",   "class": ["druid"] },
-    "22630": { "name": "Atiesh, Greatstaff of the Guardian (Mage)",   "slot": "staff",    "quality": 5, "ilvl": 106, "expansion": "vanilla", "source": "Naxxramas 40 (splinter quest)",   "class": ["mage"] },
-    "22631": { "name": "Atiesh, Greatstaff of the Guardian (Priest)",  "slot": "staff",    "quality": 5, "ilvl": 106, "expansion": "vanilla", "source": "Naxxramas 40 (splinter quest)",   "class": ["priest"] },
-    "22632": { "name": "Atiesh, Greatstaff of the Guardian (Warlock)", "slot": "staff",    "quality": 5, "ilvl": 106, "expansion": "vanilla", "source": "Naxxramas 40 (splinter quest)",   "class": ["warlock"] },
-    "32837": { "name": "Warglaive of Azzinoth (main hand)",  "slot": "mainhand", "quality": 5, "ilvl": 150, "expansion": "tbc",     "source": "Illidan Stormrage (Black Temple 25)",       "class": ["warrior","rogue","deathknight","demonhunter"] },
-    "32838": { "name": "Warglaive of Azzinoth (off hand)",   "slot": "offhand",  "quality": 5, "ilvl": 150, "expansion": "tbc",     "source": "Illidan Stormrage (Black Temple 25)",       "class": ["warrior","rogue","deathknight","demonhunter"] },
-    "34334": { "name": "Thori'dal, the Stars' Fury",         "slot": "ranged",   "quality": 5, "ilvl": 154, "expansion": "tbc",     "source": "Kil'jaeden (Sunwell Plateau 25)",           "class": ["hunter"] },
-    "46017": { "name": "Val'anyr, Hammer of Ancient Kings",  "slot": "mainhand", "quality": 5, "ilvl": 258, "expansion": "wotlk",   "source": "Ulduar 25 (Fragment quest chain — 30 fragments)", "class": ["paladin","priest","shaman","druid"] },
-    "49623": { "name": "Shadowmourne",                        "slot": "twohand",  "quality": 5, "ilvl": 284, "expansion": "wotlk",   "source": "Crafted (ICC 25HM — Shadow's Edge + Unholy fragments)", "class": ["warrior","paladin","deathknight"] },
-    "71086": { "name": "Dragonwrath, Tarecgosa's Rest",      "slot": "staff",    "quality": 5, "ilvl": 397, "expansion": "cata",    "source": "Firelands 25 (Delegation quest chain)",    "class": ["mage","warlock","druid","priest","shaman"] },
-    "77942": { "name": "Fangs of the Father — Golad, Twilight of Aspects (MH)", "slot": "mainhand", "quality": 5, "ilvl": 410, "expansion": "cata", "source": "Dragon Soul 25HM (Rogue legendary chain — Elementium Gem Cluster)", "class": ["rogue"] },
-    "77943": { "name": "Fangs of the Father — Tiriosh, Nightmare of Ages (OH)", "slot": "offhand",  "quality": 5, "ilvl": 410, "expansion": "cata", "source": "Dragon Soul 25HM (Rogue legendary chain)", "class": ["rogue"] },
-    "102245": { "name": "Qian-Le, Courage of Niuzao",        "slot": "back",     "quality": 5, "ilvl": 600, "expansion": "mop",    "source": "Patch 5.4 — Legendary Cloak quest chain (tank dodge)", "class": ["all_tank"] },
-    "102246": { "name": "Xing-Ho, Breath of Yu'lon",         "slot": "back",     "quality": 5, "ilvl": 600, "expansion": "mop",    "source": "Patch 5.4 — Legendary Cloak quest chain (caster DPS)", "class": ["mage","warlock","shadow_priest","balance_druid","elemental_shaman"] },
-    "102247": { "name": "Jina-Kang, Kindness of Chi-Ji",     "slot": "back",     "quality": 5, "ilvl": 600, "expansion": "mop",    "source": "Patch 5.4 — Legendary Cloak quest chain (healer)",    "class": ["all_healer"] },
-    "102248": { "name": "Fen-Yu, Fury of Xuen",              "slot": "back",     "quality": 5, "ilvl": 600, "expansion": "mop",    "source": "Patch 5.4 — Legendary Cloak quest chain (agility DPS)", "class": ["hunter","rogue","feral_druid","windwalker_monk"] },
-    "102249": { "name": "Gong-Lu, Strength of Xuen",         "slot": "back",     "quality": 5, "ilvl": 600, "expansion": "mop",    "source": "Patch 5.4 — Legendary Cloak quest chain (strength DPS)", "class": ["warrior","paladin","deathknight","monk"] }
+    "17182": {
+      "name": "Sulfuras, Hand of Ragnaros",
+      "slot": "twohand",
+      "quality": 5,
+      "ilvl": 71,
+      "expansion": "vanilla",
+      "source": "Crafted (Eye of Sulfuras + Sulfuron Hammer)",
+      "class": [
+        "warrior",
+        "paladin",
+        "shaman"
+      ]
+    },
+    "19019": {
+      "name": "Thunderfury, Blessed Blade of the Windseeker",
+      "slot": "mainhand",
+      "quality": 5,
+      "ilvl": 71,
+      "expansion": "vanilla",
+      "source": "Molten Core (Geddon & Garr bindings)",
+      "class": [
+        "warrior",
+        "rogue",
+        "paladin",
+        "shaman",
+        "hunter"
+      ]
+    },
+    "22589": {
+      "name": "Atiesh, Greatstaff of the Guardian (Druid)",
+      "slot": "staff",
+      "quality": 5,
+      "ilvl": 106,
+      "expansion": "vanilla",
+      "source": "Naxxramas 40 (splinter quest)",
+      "class": [
+        "druid"
+      ]
+    },
+    "22630": {
+      "name": "Atiesh, Greatstaff of the Guardian (Mage)",
+      "slot": "staff",
+      "quality": 5,
+      "ilvl": 106,
+      "expansion": "vanilla",
+      "source": "Naxxramas 40 (splinter quest)",
+      "class": [
+        "mage"
+      ]
+    },
+    "22631": {
+      "name": "Atiesh, Greatstaff of the Guardian (Priest)",
+      "slot": "staff",
+      "quality": 5,
+      "ilvl": 106,
+      "expansion": "vanilla",
+      "source": "Naxxramas 40 (splinter quest)",
+      "class": [
+        "priest"
+      ]
+    },
+    "22632": {
+      "name": "Atiesh, Greatstaff of the Guardian (Warlock)",
+      "slot": "staff",
+      "quality": 5,
+      "ilvl": 106,
+      "expansion": "vanilla",
+      "source": "Naxxramas 40 (splinter quest)",
+      "class": [
+        "warlock"
+      ]
+    },
+    "32837": {
+      "name": "Warglaive of Azzinoth (main hand)",
+      "slot": "mainhand",
+      "quality": 5,
+      "ilvl": 150,
+      "expansion": "tbc",
+      "source": "Illidan Stormrage (Black Temple 25)",
+      "class": [
+        "warrior",
+        "rogue",
+        "deathknight",
+        "demonhunter"
+      ]
+    },
+    "32838": {
+      "name": "Warglaive of Azzinoth (off hand)",
+      "slot": "offhand",
+      "quality": 5,
+      "ilvl": 150,
+      "expansion": "tbc",
+      "source": "Illidan Stormrage (Black Temple 25)",
+      "class": [
+        "warrior",
+        "rogue",
+        "deathknight",
+        "demonhunter"
+      ]
+    },
+    "34334": {
+      "name": "Thori'dal, the Stars' Fury",
+      "slot": "ranged",
+      "quality": 5,
+      "ilvl": 154,
+      "expansion": "tbc",
+      "source": "Kil'jaeden (Sunwell Plateau 25)",
+      "class": [
+        "hunter"
+      ]
+    },
+    "46017": {
+      "name": "Val'anyr, Hammer of Ancient Kings",
+      "slot": "mainhand",
+      "quality": 5,
+      "ilvl": 258,
+      "expansion": "wotlk",
+      "source": "Ulduar 25 (Fragment quest chain — 30 fragments)",
+      "class": [
+        "paladin",
+        "priest",
+        "shaman",
+        "druid"
+      ]
+    },
+    "49623": {
+      "name": "Shadowmourne",
+      "slot": "twohand",
+      "quality": 5,
+      "ilvl": 284,
+      "expansion": "wotlk",
+      "source": "Crafted (ICC 25HM — Shadow's Edge + Unholy fragments)",
+      "class": [
+        "warrior",
+        "paladin",
+        "deathknight"
+      ]
+    },
+    "71086": {
+      "name": "Dragonwrath, Tarecgosa's Rest",
+      "slot": "staff",
+      "quality": 5,
+      "ilvl": 397,
+      "expansion": "cata",
+      "source": "Firelands 25 (Delegation quest chain)",
+      "class": [
+        "mage",
+        "warlock",
+        "druid",
+        "priest",
+        "shaman"
+      ]
+    },
+    "77942": {
+      "name": "Fangs of the Father — Golad, Twilight of Aspects (MH)",
+      "slot": "mainhand",
+      "quality": 5,
+      "ilvl": 410,
+      "expansion": "cata",
+      "source": "Dragon Soul 25HM (Rogue legendary chain — Elementium Gem Cluster)",
+      "class": [
+        "rogue"
+      ]
+    },
+    "77943": {
+      "name": "Fangs of the Father — Tiriosh, Nightmare of Ages (OH)",
+      "slot": "offhand",
+      "quality": 5,
+      "ilvl": 410,
+      "expansion": "cata",
+      "source": "Dragon Soul 25HM (Rogue legendary chain)",
+      "class": [
+        "rogue"
+      ]
+    },
+    "102245": {
+      "name": "Qian-Le, Courage of Niuzao",
+      "slot": "back",
+      "quality": 5,
+      "ilvl": 600,
+      "expansion": "mop",
+      "source": "Patch 5.4 — Legendary Cloak quest chain (tank dodge)",
+      "class": [
+        "all_tank"
+      ]
+    },
+    "102246": {
+      "name": "Xing-Ho, Breath of Yu'lon",
+      "slot": "back",
+      "quality": 5,
+      "ilvl": 600,
+      "expansion": "mop",
+      "source": "Patch 5.4 — Legendary Cloak quest chain (caster DPS)",
+      "class": [
+        "mage",
+        "warlock",
+        "shadow_priest",
+        "balance_druid",
+        "elemental_shaman"
+      ]
+    },
+    "102247": {
+      "name": "Jina-Kang, Kindness of Chi-Ji",
+      "slot": "back",
+      "quality": 5,
+      "ilvl": 600,
+      "expansion": "mop",
+      "source": "Patch 5.4 — Legendary Cloak quest chain (healer)",
+      "class": [
+        "all_healer"
+      ]
+    },
+    "102248": {
+      "name": "Fen-Yu, Fury of Xuen",
+      "slot": "back",
+      "quality": 5,
+      "ilvl": 600,
+      "expansion": "mop",
+      "source": "Patch 5.4 — Legendary Cloak quest chain (agility DPS)",
+      "class": [
+        "hunter",
+        "rogue",
+        "feral_druid",
+        "windwalker_monk"
+      ]
+    },
+    "102249": {
+      "name": "Gong-Lu, Strength of Xuen",
+      "slot": "back",
+      "quality": 5,
+      "ilvl": 600,
+      "expansion": "mop",
+      "source": "Patch 5.4 — Legendary Cloak quest chain (strength DPS)",
+      "class": [
+        "warrior",
+        "paladin",
+        "deathknight",
+        "monk"
+      ]
+    }
   },
   "epics": {
     "wotlk_icc25hm": {
-      "_info": "Icecrown Citadel 25 Heroic — ilvl 277",
-      "50362": { "name": "Deathbringer's Will",              "slot": "trinket",    "ilvl": 277, "source": "Deathbringer Saurfang 25HM",    "note": "BiS trinket physique — ArPen/AP proc" },
-      "50363": { "name": "Deathbringer's Will",              "slot": "trinket",    "ilvl": 264, "source": "Deathbringer Saurfang 25N",     "note": "Version 25N" },
-      "50348": { "name": "Dislodged Foreign Object",         "slot": "trinket",    "ilvl": 277, "source": "Professor Putricide 25HM",      "note": "BiS trinket haste caster" },
-      "50365": { "name": "Phylactery of the Nameless Lich",  "slot": "trinket",    "ilvl": 277, "source": "Professor Putricide 25HM",      "note": "BiS trinket SP caster" },
-      "50364": { "name": "Sindragosa's Flawless Fang",       "slot": "trinket",    "ilvl": 277, "source": "Sindragosa 25HM",               "note": "BiS trinket tank stam" },
-      "50356": { "name": "Corroded Skeleton Key",            "slot": "trinket",    "ilvl": 277, "source": "Lord Marrowgar 25HM",           "note": "BiS trinket tank armor" },
-      "50359": { "name": "Althor's Abacus",                  "slot": "trinket",    "ilvl": 277, "source": "Gunship Battle 25HM",           "note": "Trinket heal proc" },
-      "50354": { "name": "Bauble of True Blood",             "slot": "trinket",    "ilvl": 277, "source": "Blood-Queen Lana'thel 25HM",    "note": "Trinket SP haste" },
-      "50706": { "name": "Tiny Abomination in a Jar",        "slot": "trinket",    "ilvl": 277, "source": "Professor Putricide 25HM",      "note": "Trinket physique proc AP" },
-      "50398": { "name": "Ashen Band of Endless Destruction","slot": "finger",     "ilvl": 284, "source": "Ashen Verdict (Exalted)",       "note": "BiS anneau caster SP" },
-      "50399": { "name": "Ashen Band of Unmatched Wisdom",   "slot": "finger",     "ilvl": 277, "source": "Ashen Verdict (Revered)",       "note": "Anneau heal" },
-      "50400": { "name": "Ashen Band of Endless Wisdom",     "slot": "finger",     "ilvl": 284, "source": "Ashen Verdict (Exalted)",       "note": "Anneau heal exalted" },
-      "50401": { "name": "Ashen Band of Unmatched Vengeance","slot": "finger",     "ilvl": 277, "source": "Ashen Verdict (Revered)",       "note": "Anneau physique DPS" },
-      "50402": { "name": "Ashen Band of Endless Vengeance",  "slot": "finger",     "ilvl": 284, "source": "Ashen Verdict (Exalted)",       "note": "BiS anneau physique DPS" },
-      "50403": { "name": "Ashen Band of Unmatched Courage",  "slot": "finger",     "ilvl": 277, "source": "Ashen Verdict (Revered)",       "note": "Anneau tank" },
-      "50404": { "name": "Ashen Band of Endless Courage",    "slot": "finger",     "ilvl": 284, "source": "Ashen Verdict (Exalted)",       "note": "BiS anneau tank" },
-      "50604": { "name": "Band of the Bone Colossus",        "slot": "finger",     "ilvl": 277, "source": "Lord Marrowgar 25HM",           "note": "Anneau physique (str/ArPen)" },
-      "50664": { "name": "Ring of Rapid Ascent",             "slot": "finger",     "ilvl": 277, "source": "Valithria Dreamwalker 25HM",    "note": "BiS anneau caster haste" },
-      "50642": { "name": "Juggernaut Band",                  "slot": "finger",     "ilvl": 277, "source": "Festergut 25HM",               "note": "Anneau tank" },
-      "50622": { "name": "Devium's Eternally Cold Ring",     "slot": "finger",     "ilvl": 277, "source": "Sindragosa 25HM",              "note": "Anneau tank" },
-      "50638": { "name": "Zod's Repeating Longbow",          "slot": "ranged",     "ilvl": 277, "source": "The Lich King 25HM",           "note": "BiS arc chasseur" },
-      "50732": { "name": "Bloodsurge, Kel'Thuzad's Blade of Agony", "slot": "mainhand", "ilvl": 277, "source": "Kel'Thuzad 25HM",         "note": "BiS 1H épée caster" },
-      "50719": { "name": "Shadow Silk Spindle",              "slot": "offhand",    "ilvl": 277, "source": "Blood-Queen Lana'thel 25HM",   "note": "BiS off-hand caster" },
-      "50724": { "name": "Blood Queen's Crimson Choker",     "slot": "neck",       "ilvl": 277, "source": "Blood-Queen Lana'thel 25HM",   "note": "BiS cou caster" },
-      "50628": { "name": "Frostbinder's Shredded Cape",      "slot": "back",       "ilvl": 277, "source": "Lord Marrowgar 25HM",          "note": "Cape caster (hit+SP)" },
-      "50613": { "name": "Crushing Coldwraith Belt",         "slot": "waist",      "ilvl": 277, "source": "Blood-Queen Lana'thel 25HM",   "note": "BiS ceinture caster (SP+haste)" },
-      "50699": { "name": "Plague Scientist's Boots",         "slot": "feet",       "ilvl": 277, "source": "Rotface 25HM",                 "note": "BiS bottes caster SP" },
-      "50629": { "name": "Robe of the Waking Nightmare",     "slot": "chest",      "ilvl": 277, "source": "Lady Deathwhisper 25HM",       "note": "Torse caster (tissu)" },
-      "50651": { "name": "The Lady's Brittle Bracers",       "slot": "wrists",     "ilvl": 277, "source": "Lady Deathwhisper 25HM",       "note": "Brassards caster" },
-      "50718": { "name": "Royal Crimson Cloak",              "slot": "back",       "ilvl": 277, "source": "Blood-Queen Lana'thel 25HM",   "note": "Cape tank" },
-      "50682": { "name": "Bile-Encrusted Medallion",         "slot": "neck",       "ilvl": 277, "source": "Professor Putricide 25HM",     "note": "Cou tank (def/dodge)" },
-      "50691": { "name": "Belt of Broken Bones",             "slot": "waist",      "ilvl": 277, "source": "Deathbringer Saurfang 25HM",   "note": "Ceinture tank" },
-      "50625": { "name": "Grinning Skull Greatboots",        "slot": "feet",       "ilvl": 277, "source": "Festergut 25HM",               "note": "Bottes tank plaque" },
-      "50611": { "name": "Bracers of Dark Reckoning",        "slot": "wrists",     "ilvl": 277, "source": "Lady Deathwhisper 25HM",       "note": "Brassards tank plaque" },
-      "50729": { "name": "Icecrown Glacial Wall",            "slot": "offhand",    "ilvl": 277, "source": "Blood-Queen Lana'thel 25HM",   "note": "BiS bouclier tank" },
-      "50672": { "name": "Bloodvenom Blade",                 "slot": "mainhand",   "ilvl": 277, "source": "Festergut 25HM",               "note": "Épée 1H tank" },
-      "50616": { "name": "Bulwark of Smouldering Steel",     "slot": "offhand",    "ilvl": 277, "source": "Rotface 25HM",                 "note": "Bouclier heal paladin" },
-      "50628": { "name": "Frostbinder's Shredded Cape",      "slot": "back",       "ilvl": 277, "source": "Lord Marrowgar 25HM",          "note": "Cape heal" },
-      "50680": { "name": "Rot-Resistant Breastplate",        "slot": "chest",      "ilvl": 277, "source": "Rotface 25HM",                 "note": "Torse heal plaque (int+crit)" },
-      "50650": { "name": "Fallen Lord's Handguards",         "slot": "hands",      "ilvl": 277, "source": "Lady Deathwhisper 25HM",       "note": "Gantelets heal plaque" },
-      "50721": { "name": "Crypt Keeper's Bracers",           "slot": "wrists",     "ilvl": 277, "source": "Gunship Battle 25HM",          "note": "Brassards heal" },
-      "50711": { "name": "Treads of the Wasteland",          "slot": "feet",       "ilvl": 277, "source": "Professor Putricide 25HM",     "note": "BiS bottes mail agility" },
-      "50655": { "name": "Scourge Hunter's Vambraces",       "slot": "wrists",     "ilvl": 277, "source": "Deathbringer Saurfang 25HM",   "note": "BiS brassards mail agility" },
-      "50647": { "name": "Ahn'kahar Onyx Neckguard",         "slot": "neck",       "ilvl": 277, "source": "Lady Deathwhisper 25HM",       "note": "Cou mail agility (chasseur)" },
-      "50466": { "name": "Sentinel's Winter Cloak",          "slot": "back",       "ilvl": 277, "source": "Valithria Dreamwalker 25HM",   "note": "Cape DPS physique" },
-      "50707": { "name": "Astrylian's Sutured Cinch",        "slot": "waist",      "ilvl": 277, "source": "Professor Putricide 25HM",     "note": "Ceinture mail (haste)" },
-      "50694": { "name": "Plaguebringer's Stained Pants",    "slot": "legs",       "ilvl": 277, "source": "Professor Putricide 25HM",     "note": "Jambes caster tissu (non-tier)" },
-      "53486": { "name": "Bracers of Fiery Night",           "slot": "wrists",     "ilvl": 277, "source": "Sindragosa 25HM",              "note": "Brassards caster tissu" },
-      "51928": { "name": "Corrupted Silverplate Leggings",   "slot": "legs",       "ilvl": 277, "source": "ICC 25HM",                    "note": "Jambes heal plaque" },
-      "51160": { "name": "Sanctified Lightsworn Shoulderplates", "slot": "shoulders", "ilvl": 277, "source": "Vendor T10H (Protector token)", "note": "T10H Pala Prot épaules" },
-      "51265": { "name": "Sanctified Lightsworn Chestguard",  "slot": "chest",     "ilvl": 277, "source": "Vendor T10H (Protector token)", "note": "T10H Pala Prot torse" },
-      "51266": { "name": "Sanctified Lightsworn Faceguard",   "slot": "head",      "ilvl": 277, "source": "Vendor T10H (Protector token)", "note": "T10H Pala Prot tête" },
-      "51267": { "name": "Sanctified Lightsworn Handguards",  "slot": "hands",     "ilvl": 277, "source": "Vendor T10H (Protector token)", "note": "T10H Pala Prot gantelets" },
-      "51268": { "name": "Sanctified Lightsworn Legguards",   "slot": "legs",      "ilvl": 277, "source": "Vendor T10H (Protector token)", "note": "T10H Pala Prot jambes" },
-      "51272": { "name": "Sanctified Lightsworn Headpiece",   "slot": "head",      "ilvl": 277, "source": "Vendor T10H (Conqueror token)", "note": "T10H Pala Holy tête" },
-      "51273": { "name": "Sanctified Lightsworn Spaulders",   "slot": "shoulders", "ilvl": 277, "source": "Vendor T10H (Conqueror token)", "note": "T10H Pala Holy épaules" },
-      "51150": { "name": "Sanctified Ahn'Kahar Blood Hunter's Tunic",      "slot": "chest",     "ilvl": 277, "source": "Vendor T10H (Vanquisher token)", "note": "T10H Hunter torse" },
-      "51151": { "name": "Sanctified Ahn'Kahar Blood Hunter's Spaulders",  "slot": "shoulders", "ilvl": 277, "source": "Vendor T10H (Vanquisher token)", "note": "T10H Hunter épaules" },
-      "51152": { "name": "Sanctified Ahn'Kahar Blood Hunter's Legguards",  "slot": "legs",      "ilvl": 277, "source": "Vendor T10H (Vanquisher token)", "note": "T10H Hunter jambes" },
-      "51153": { "name": "Sanctified Ahn'Kahar Blood Hunter's Headpiece",  "slot": "head",      "ilvl": 277, "source": "Vendor T10H (Vanquisher token)", "note": "T10H Hunter tête" },
-      "51154": { "name": "Sanctified Ahn'Kahar Blood Hunter's Handguards", "slot": "hands",     "ilvl": 277, "source": "Vendor T10H (Vanquisher token)", "note": "T10H Hunter gantelets" },
-      "51208": { "name": "Sanctified Dark Coven Hood",        "slot": "head",      "ilvl": 277, "source": "Vendor T10H (Conqueror token)", "note": "T10H Warlock tête (variante)" },
-      "51231": { "name": "Sanctified Dark Coven Hood",        "slot": "head",      "ilvl": 277, "source": "Vendor T10H (Conqueror token)", "note": "T10H Warlock tête" },
-      "51234": { "name": "Sanctified Dark Coven Shoulderpads","slot": "shoulders", "ilvl": 277, "source": "Vendor T10H (Conqueror token)", "note": "T10H Warlock épaules" },
-      "51233": { "name": "Sanctified Dark Coven Robe",        "slot": "chest",     "ilvl": 277, "source": "Vendor T10H (Conqueror token)", "note": "T10H Warlock torse" },
-      "51230": { "name": "Sanctified Dark Coven Gloves",      "slot": "hands",     "ilvl": 277, "source": "Vendor T10H (Conqueror token)", "note": "T10H Warlock gantelets" },
-      "51232": { "name": "Sanctified Dark Coven Leggings",    "slot": "legs",      "ilvl": 277, "source": "Vendor T10H (Conqueror token)", "note": "T10H Warlock jambes (⚠️ pas épaules!)" },
-      "51281": { "name": "Sanctified Bloodmage Hood",         "slot": "head",      "ilvl": 277, "source": "Vendor T10H (Vanquisher token)", "note": "T10H Mage tête" },
-      "51284": { "name": "Sanctified Bloodmage Shoulderpads", "slot": "shoulders", "ilvl": 277, "source": "Vendor T10H (Vanquisher token)", "note": "T10H Mage épaules" },
-      "51283": { "name": "Sanctified Bloodmage Robe",         "slot": "chest",     "ilvl": 277, "source": "Vendor T10H (Vanquisher token)", "note": "T10H Mage torse" },
-      "51280": { "name": "Sanctified Bloodmage Gloves",       "slot": "hands",     "ilvl": 277, "source": "Vendor T10H (Vanquisher token)", "note": "T10H Mage gantelets" },
-      "51282": { "name": "Sanctified Bloodmage Leggings",     "slot": "legs",      "ilvl": 277, "source": "Vendor T10H (Vanquisher token)", "note": "T10H Mage jambes" }
+      "50348": {
+        "name": "Dislodged Foreign Object",
+        "slot": "trinket",
+        "ilvl": 277,
+        "source": "Professor Putricide 25HM",
+        "note": "BiS trinket haste caster"
+      },
+      "50354": {
+        "name": "Bauble of True Blood",
+        "slot": "trinket",
+        "ilvl": 277,
+        "source": "Blood-Queen Lana'thel 25HM",
+        "note": "Trinket SP haste"
+      },
+      "50356": {
+        "name": "Corroded Skeleton Key",
+        "slot": "trinket",
+        "ilvl": 277,
+        "source": "Lord Marrowgar 25HM",
+        "note": "BiS trinket tank armor"
+      },
+      "50359": {
+        "name": "Althor's Abacus",
+        "slot": "trinket",
+        "ilvl": 277,
+        "source": "Gunship Battle 25HM",
+        "note": "Trinket heal proc"
+      },
+      "50362": {
+        "name": "Deathbringer's Will",
+        "slot": "trinket",
+        "ilvl": 277,
+        "source": "Deathbringer Saurfang 25HM",
+        "note": "BiS trinket physique — ArPen/AP proc"
+      },
+      "50363": {
+        "name": "Deathbringer's Will",
+        "slot": "trinket",
+        "ilvl": 264,
+        "source": "Deathbringer Saurfang 25N",
+        "note": "Version 25N"
+      },
+      "50364": {
+        "name": "Sindragosa's Flawless Fang",
+        "slot": "trinket",
+        "ilvl": 277,
+        "source": "Sindragosa 25HM",
+        "note": "BiS trinket tank stam"
+      },
+      "50365": {
+        "name": "Phylactery of the Nameless Lich",
+        "slot": "trinket",
+        "ilvl": 277,
+        "source": "Professor Putricide 25HM",
+        "note": "BiS trinket SP caster"
+      },
+      "50398": {
+        "name": "Ashen Band of Endless Destruction",
+        "slot": "finger",
+        "ilvl": 284,
+        "source": "Ashen Verdict (Exalted)",
+        "note": "BiS anneau caster SP"
+      },
+      "50399": {
+        "name": "Ashen Band of Unmatched Wisdom",
+        "slot": "finger",
+        "ilvl": 277,
+        "source": "Ashen Verdict (Revered)",
+        "note": "Anneau heal"
+      },
+      "50400": {
+        "name": "Ashen Band of Endless Wisdom",
+        "slot": "finger",
+        "ilvl": 284,
+        "source": "Ashen Verdict (Exalted)",
+        "note": "Anneau heal exalted"
+      },
+      "50401": {
+        "name": "Ashen Band of Unmatched Vengeance",
+        "slot": "finger",
+        "ilvl": 277,
+        "source": "Ashen Verdict (Revered)",
+        "note": "Anneau physique DPS"
+      },
+      "50402": {
+        "name": "Ashen Band of Endless Vengeance",
+        "slot": "finger",
+        "ilvl": 284,
+        "source": "Ashen Verdict (Exalted)",
+        "note": "BiS anneau physique DPS"
+      },
+      "50403": {
+        "name": "Ashen Band of Unmatched Courage",
+        "slot": "finger",
+        "ilvl": 277,
+        "source": "Ashen Verdict (Revered)",
+        "note": "Anneau tank"
+      },
+      "50404": {
+        "name": "Ashen Band of Endless Courage",
+        "slot": "finger",
+        "ilvl": 284,
+        "source": "Ashen Verdict (Exalted)",
+        "note": "BiS anneau tank"
+      },
+      "50466": {
+        "name": "Sentinel's Winter Cloak",
+        "slot": "back",
+        "ilvl": 277,
+        "source": "Valithria Dreamwalker 25HM",
+        "note": "Cape DPS physique"
+      },
+      "50604": {
+        "name": "Band of the Bone Colossus",
+        "slot": "finger",
+        "ilvl": 277,
+        "source": "Lord Marrowgar 25HM",
+        "note": "Anneau physique (str/ArPen)"
+      },
+      "50611": {
+        "name": "Bracers of Dark Reckoning",
+        "slot": "wrists",
+        "ilvl": 277,
+        "source": "Lady Deathwhisper 25HM",
+        "note": "Brassards tank plaque"
+      },
+      "50613": {
+        "name": "Crushing Coldwraith Belt",
+        "slot": "waist",
+        "ilvl": 277,
+        "source": "Blood-Queen Lana'thel 25HM",
+        "note": "BiS ceinture caster (SP+haste)"
+      },
+      "50616": {
+        "name": "Bulwark of Smouldering Steel",
+        "slot": "offhand",
+        "ilvl": 277,
+        "source": "Rotface 25HM",
+        "note": "Bouclier heal paladin"
+      },
+      "50622": {
+        "name": "Devium's Eternally Cold Ring",
+        "slot": "finger",
+        "ilvl": 277,
+        "source": "Sindragosa 25HM",
+        "note": "Anneau tank"
+      },
+      "50625": {
+        "name": "Grinning Skull Greatboots",
+        "slot": "feet",
+        "ilvl": 277,
+        "source": "Festergut 25HM",
+        "note": "Bottes tank plaque"
+      },
+      "50628": {
+        "name": "Frostbinder's Shredded Cape",
+        "slot": "back",
+        "ilvl": 277,
+        "source": "Lord Marrowgar 25HM",
+        "note": "Cape heal"
+      },
+      "50629": {
+        "name": "Robe of the Waking Nightmare",
+        "slot": "chest",
+        "ilvl": 277,
+        "source": "Lady Deathwhisper 25HM",
+        "note": "Torse caster (tissu)"
+      },
+      "50638": {
+        "name": "Zod's Repeating Longbow",
+        "slot": "ranged",
+        "ilvl": 277,
+        "source": "The Lich King 25HM",
+        "note": "BiS arc chasseur"
+      },
+      "50642": {
+        "name": "Juggernaut Band",
+        "slot": "finger",
+        "ilvl": 277,
+        "source": "Festergut 25HM",
+        "note": "Anneau tank"
+      },
+      "50647": {
+        "name": "Ahn'kahar Onyx Neckguard",
+        "slot": "neck",
+        "ilvl": 277,
+        "source": "Lady Deathwhisper 25HM",
+        "note": "Cou mail agility (chasseur)"
+      },
+      "50650": {
+        "name": "Fallen Lord's Handguards",
+        "slot": "hands",
+        "ilvl": 277,
+        "source": "Lady Deathwhisper 25HM",
+        "note": "Gantelets heal plaque"
+      },
+      "50651": {
+        "name": "The Lady's Brittle Bracers",
+        "slot": "wrists",
+        "ilvl": 277,
+        "source": "Lady Deathwhisper 25HM",
+        "note": "Brassards caster"
+      },
+      "50655": {
+        "name": "Scourge Hunter's Vambraces",
+        "slot": "wrists",
+        "ilvl": 277,
+        "source": "Deathbringer Saurfang 25HM",
+        "note": "BiS brassards mail agility"
+      },
+      "50664": {
+        "name": "Ring of Rapid Ascent",
+        "slot": "finger",
+        "ilvl": 277,
+        "source": "Valithria Dreamwalker 25HM",
+        "note": "BiS anneau caster haste"
+      },
+      "50672": {
+        "name": "Bloodvenom Blade",
+        "slot": "mainhand",
+        "ilvl": 277,
+        "source": "Festergut 25HM",
+        "note": "Épée 1H tank"
+      },
+      "50680": {
+        "name": "Rot-Resistant Breastplate",
+        "slot": "chest",
+        "ilvl": 277,
+        "source": "Rotface 25HM",
+        "note": "Torse heal plaque (int+crit)"
+      },
+      "50682": {
+        "name": "Bile-Encrusted Medallion",
+        "slot": "neck",
+        "ilvl": 277,
+        "source": "Professor Putricide 25HM",
+        "note": "Cou tank (def/dodge)"
+      },
+      "50691": {
+        "name": "Belt of Broken Bones",
+        "slot": "waist",
+        "ilvl": 277,
+        "source": "Deathbringer Saurfang 25HM",
+        "note": "Ceinture tank"
+      },
+      "50694": {
+        "name": "Plaguebringer's Stained Pants",
+        "slot": "legs",
+        "ilvl": 277,
+        "source": "Professor Putricide 25HM",
+        "note": "Jambes caster tissu (non-tier)"
+      },
+      "50699": {
+        "name": "Plague Scientist's Boots",
+        "slot": "feet",
+        "ilvl": 277,
+        "source": "Rotface 25HM",
+        "note": "BiS bottes caster SP"
+      },
+      "50706": {
+        "name": "Tiny Abomination in a Jar",
+        "slot": "trinket",
+        "ilvl": 277,
+        "source": "Professor Putricide 25HM",
+        "note": "Trinket physique proc AP"
+      },
+      "50707": {
+        "name": "Astrylian's Sutured Cinch",
+        "slot": "waist",
+        "ilvl": 277,
+        "source": "Professor Putricide 25HM",
+        "note": "Ceinture mail (haste)"
+      },
+      "50711": {
+        "name": "Treads of the Wasteland",
+        "slot": "feet",
+        "ilvl": 277,
+        "source": "Professor Putricide 25HM",
+        "note": "BiS bottes mail agility"
+      },
+      "50718": {
+        "name": "Royal Crimson Cloak",
+        "slot": "back",
+        "ilvl": 277,
+        "source": "Blood-Queen Lana'thel 25HM",
+        "note": "Cape tank"
+      },
+      "50719": {
+        "name": "Shadow Silk Spindle",
+        "slot": "offhand",
+        "ilvl": 277,
+        "source": "Blood-Queen Lana'thel 25HM",
+        "note": "BiS off-hand caster"
+      },
+      "50721": {
+        "name": "Crypt Keeper's Bracers",
+        "slot": "wrists",
+        "ilvl": 277,
+        "source": "Gunship Battle 25HM",
+        "note": "Brassards heal"
+      },
+      "50724": {
+        "name": "Blood Queen's Crimson Choker",
+        "slot": "neck",
+        "ilvl": 277,
+        "source": "Blood-Queen Lana'thel 25HM",
+        "note": "BiS cou caster"
+      },
+      "50729": {
+        "name": "Icecrown Glacial Wall",
+        "slot": "offhand",
+        "ilvl": 277,
+        "source": "Blood-Queen Lana'thel 25HM",
+        "note": "BiS bouclier tank"
+      },
+      "50732": {
+        "name": "Bloodsurge, Kel'Thuzad's Blade of Agony",
+        "slot": "mainhand",
+        "ilvl": 277,
+        "source": "Kel'Thuzad 25HM",
+        "note": "BiS 1H épée caster"
+      },
+      "51150": {
+        "name": "Sanctified Ahn'Kahar Blood Hunter's Tunic",
+        "slot": "chest",
+        "ilvl": 277,
+        "source": "Vendor T10H (Vanquisher token)",
+        "note": "T10H Hunter torse"
+      },
+      "51151": {
+        "name": "Sanctified Ahn'Kahar Blood Hunter's Spaulders",
+        "slot": "shoulders",
+        "ilvl": 277,
+        "source": "Vendor T10H (Vanquisher token)",
+        "note": "T10H Hunter épaules"
+      },
+      "51152": {
+        "name": "Sanctified Ahn'Kahar Blood Hunter's Legguards",
+        "slot": "legs",
+        "ilvl": 277,
+        "source": "Vendor T10H (Vanquisher token)",
+        "note": "T10H Hunter jambes"
+      },
+      "51153": {
+        "name": "Sanctified Ahn'Kahar Blood Hunter's Headpiece",
+        "slot": "head",
+        "ilvl": 277,
+        "source": "Vendor T10H (Vanquisher token)",
+        "note": "T10H Hunter tête"
+      },
+      "51154": {
+        "name": "Sanctified Ahn'Kahar Blood Hunter's Handguards",
+        "slot": "hands",
+        "ilvl": 277,
+        "source": "Vendor T10H (Vanquisher token)",
+        "note": "T10H Hunter gantelets"
+      },
+      "51160": {
+        "name": "Sanctified Lightsworn Shoulderplates",
+        "slot": "shoulders",
+        "ilvl": 277,
+        "source": "Vendor T10H (Protector token)",
+        "note": "T10H Pala Prot épaules"
+      },
+      "51208": {
+        "name": "Sanctified Dark Coven Hood",
+        "slot": "head",
+        "ilvl": 277,
+        "source": "Vendor T10H (Conqueror token)",
+        "note": "T10H Warlock tête (variante)"
+      },
+      "51230": {
+        "name": "Sanctified Dark Coven Gloves",
+        "slot": "hands",
+        "ilvl": 277,
+        "source": "Vendor T10H (Conqueror token)",
+        "note": "T10H Warlock gantelets"
+      },
+      "51231": {
+        "name": "Sanctified Dark Coven Hood",
+        "slot": "head",
+        "ilvl": 277,
+        "source": "Vendor T10H (Conqueror token)",
+        "note": "T10H Warlock tête"
+      },
+      "51232": {
+        "name": "Sanctified Dark Coven Leggings",
+        "slot": "legs",
+        "ilvl": 277,
+        "source": "Vendor T10H (Conqueror token)",
+        "note": "T10H Warlock jambes (⚠️ pas épaules!)"
+      },
+      "51233": {
+        "name": "Sanctified Dark Coven Robe",
+        "slot": "chest",
+        "ilvl": 277,
+        "source": "Vendor T10H (Conqueror token)",
+        "note": "T10H Warlock torse"
+      },
+      "51234": {
+        "name": "Sanctified Dark Coven Shoulderpads",
+        "slot": "shoulders",
+        "ilvl": 277,
+        "source": "Vendor T10H (Conqueror token)",
+        "note": "T10H Warlock épaules"
+      },
+      "51265": {
+        "name": "Sanctified Lightsworn Chestguard",
+        "slot": "chest",
+        "ilvl": 277,
+        "source": "Vendor T10H (Protector token)",
+        "note": "T10H Pala Prot torse"
+      },
+      "51266": {
+        "name": "Sanctified Lightsworn Faceguard",
+        "slot": "head",
+        "ilvl": 277,
+        "source": "Vendor T10H (Protector token)",
+        "note": "T10H Pala Prot tête"
+      },
+      "51267": {
+        "name": "Sanctified Lightsworn Handguards",
+        "slot": "hands",
+        "ilvl": 277,
+        "source": "Vendor T10H (Protector token)",
+        "note": "T10H Pala Prot gantelets"
+      },
+      "51268": {
+        "name": "Sanctified Lightsworn Legguards",
+        "slot": "legs",
+        "ilvl": 277,
+        "source": "Vendor T10H (Protector token)",
+        "note": "T10H Pala Prot jambes"
+      },
+      "51272": {
+        "name": "Sanctified Lightsworn Headpiece",
+        "slot": "head",
+        "ilvl": 277,
+        "source": "Vendor T10H (Conqueror token)",
+        "note": "T10H Pala Holy tête"
+      },
+      "51273": {
+        "name": "Sanctified Lightsworn Spaulders",
+        "slot": "shoulders",
+        "ilvl": 277,
+        "source": "Vendor T10H (Conqueror token)",
+        "note": "T10H Pala Holy épaules"
+      },
+      "51280": {
+        "name": "Sanctified Bloodmage Gloves",
+        "slot": "hands",
+        "ilvl": 277,
+        "source": "Vendor T10H (Vanquisher token)",
+        "note": "T10H Mage gantelets"
+      },
+      "51281": {
+        "name": "Sanctified Bloodmage Hood",
+        "slot": "head",
+        "ilvl": 277,
+        "source": "Vendor T10H (Vanquisher token)",
+        "note": "T10H Mage tête"
+      },
+      "51282": {
+        "name": "Sanctified Bloodmage Leggings",
+        "slot": "legs",
+        "ilvl": 277,
+        "source": "Vendor T10H (Vanquisher token)",
+        "note": "T10H Mage jambes"
+      },
+      "51283": {
+        "name": "Sanctified Bloodmage Robe",
+        "slot": "chest",
+        "ilvl": 277,
+        "source": "Vendor T10H (Vanquisher token)",
+        "note": "T10H Mage torse"
+      },
+      "51284": {
+        "name": "Sanctified Bloodmage Shoulderpads",
+        "slot": "shoulders",
+        "ilvl": 277,
+        "source": "Vendor T10H (Vanquisher token)",
+        "note": "T10H Mage épaules"
+      },
+      "51928": {
+        "name": "Corrupted Silverplate Leggings",
+        "slot": "legs",
+        "ilvl": 277,
+        "source": "ICC 25HM",
+        "note": "Jambes heal plaque"
+      },
+      "53486": {
+        "name": "Bracers of Fiery Night",
+        "slot": "wrists",
+        "ilvl": 277,
+        "source": "Sindragosa 25HM",
+        "note": "Brassards caster tissu"
+      },
+      "_info": "Icecrown Citadel 25 Heroic — ilvl 277"
     }
   }
 }

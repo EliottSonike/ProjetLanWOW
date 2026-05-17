@@ -1,5 +1,5 @@
 const Layout = (function () {
-  const V = '__CACHE_BUST__';
+  const V = '20260517';
 
   function inject(html) {
     // insertAdjacentHTML sur le script courant — remplace document.write()
