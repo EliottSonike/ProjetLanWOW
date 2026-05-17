@@ -217,7 +217,19 @@ app.get('/wow-assets/viewer/viewer-live.min.js', async (req, res) => {
       const r = await fetch(VIEWER_LIVE_URL);
       if (!r.ok) throw new Error('HTTP ' + r.status);
       let code = await r.text();
-      // Mêmes patches rn bounds-safe que le viewer classic (wotlk5 mo3 = 25 sections vs 35 attendues)
+
+      // inflate+P fix + BBox fix (même logique que classic, sans décimation de vertices)
+      const inflateTarget = 'try{G=Mh(z)}catch(t){return void console.log("Decompression error: "+t)}';
+      const inflatePatchLive = `try{G=Mh(z)}catch(_e1){var _found=false;var _buf=new Uint8Array(z.buffer);var _off=z.byteOffset||0;for(var _j=Math.max(0,_off-200);_j<=_off;_j++){if(_buf[_j]===0x78&&(_buf[_j+1]===0x9c||_buf[_j+1]===0xda||_buf[_j+1]===0x01||_buf[_j+1]===0x5e)){try{G=Mh(new Uint8Array(z.buffer,_j));_found=true;P=new DataView(z.buffer).getUint32(_j-4,true);console.log("inflate+P fixed at -"+(_off-_j)+", P="+P);break;}catch(_e2){}}}if(!_found){return void console.log("Decompression error: "+_e1);}}if(G){var _fDv=new DataView(z.buffer),_gDv=new DataView(G.buffer);var _mOff=_fDv.getUint32(76,true);if(_mOff>0&&_mOff+56<=G.length){var _f0=_gDv.getFloat32(_mOff,true);if(isNaN(_f0)||Math.abs(_f0)<1e-10){var _bb=[-0.5,0,-0.5,0.5,2.0,0.5,1.3,-0.5,0,-0.5,0.5,2.0,0.5,1.3];for(var _bi=0;_bi<14;_bi++)_gDv.setFloat32(_mOff+_bi*4,_bb[_bi],true);console.log("[PATCH] BBox fixed at d"+_mOff);}}}`;
+      const patchedInflate = code.replace(inflateTarget, inflatePatchLive);
+      if (patchedInflate !== code) {
+        code = patchedInflate;
+        console.log('✅ viewer-live: inflate+P+BBox patché');
+      } else {
+        console.log('⚠️ viewer-live: inflate target non trouvé');
+      }
+
+      // Patches rn bounds-safe (wotlk5 mo3 = 25 sections vs 35 attendues)
       const rnPatches = [
         ['getUint32(){var t=this.buffer.getUint32(this.position,!0);return this.position+=4,t}',
          'getUint32(){if(this.position+4>this.buffer.byteLength)return this.position+=4,0;var t=this.buffer.getUint32(this.position,!0);return this.position+=4,t}'],
