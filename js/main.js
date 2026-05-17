@@ -25,101 +25,113 @@ async function load3DModel(viewerId, portraitId, charData, meta) {
   const toggle   = document.getElementById('toggle3d-' + portraitId.replace('pf-', ''));
   if (!viewerEl) return;
 
-  // Chercher l'ID du GLB via race numérique ou nom de race (fallback)
   const race  = charData?.race;
   const raceN = meta?.race || '';
   const glbId = RACE_GLB[race] || RACE_NAME_GLB[raceN] || RACE_NAME_GLB[raceN.trim()];
-  console.log('[3D] race:', race, 'raceStr:', raceN, '→ glbId:', glbId);
   if (!glbId) return;
 
-  const glbUrl = `/wow-assets/mo3/${glbId}.glb`;
-
-  // Vérifier que le GLB existe avant de montrer le bouton
   try {
-    const check = await fetch(glbUrl, { method: 'HEAD' });
-    console.log('[3D] GLB HEAD:', glbUrl, check.status);
+    const check = await fetch(`/wow-assets/mo3/${glbId}.glb`, { method: 'HEAD' });
     if (!check.ok) return;
-  } catch(e) {
-    console.warn('[3D] GLB HEAD error:', e.message);
-    return;
-  }
+  } catch(e) { return; }
 
   if (toggle) toggle.style.display = 'inline-flex';
 
-  // Initialise Three.js via dynamic import (module)
-  try {
-    // esm.sh réécrit les imports internes ('three') en URLs absolues — pas besoin d'importmap
-    const THREE             = await import('https://esm.sh/three@0.160.0');
-    const { GLTFLoader }    = await import('https://esm.sh/three@0.160.0/examples/jsm/loaders/GLTFLoader.js');
-    const { OrbitControls } = await import('https://esm.sh/three@0.160.0/examples/jsm/controls/OrbitControls.js');
+  // Lazy init : déclenché au premier clic 3D (viewer visible, taille correcte)
+  viewerEl._initViewer = async () => {
+    delete viewerEl._initViewer;
 
-    const W = 210, H = 380;  // correspond au CSS .portrait-frame.is-3d intérieur (220-10 x 390-10)
-    const scene = new THREE.Scene();
-    scene.background = new THREE.Color(0x1a1a2e);
+    // ── Priorité : ZamModelViewer CHARACTER (textures composées automatiquement)
+    if (charData?.customizationOptions?.length) {
+      try {
+        if (!window.jQuery) {
+          await loadScript('https://code.jquery.com/jquery-3.7.1.min.js');
+          await new Promise(r => setTimeout(r, 50));
+        }
+        await loadScript('/wow-assets/viewer/viewer.min.js');
+        await new Promise(r => setTimeout(r, 300));
 
-    const camera = new THREE.PerspectiveCamera(45, W / H, 0.01, 100);
-    const renderer = new THREE.WebGLRenderer({ antialias: true });
-    renderer.setSize(W, H);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-    renderer.domElement.style.cssText = 'width:100%;height:100%;display:block;';
-    viewerEl.appendChild(renderer.domElement);
-
-    // Éclairage
-    scene.add(new THREE.AmbientLight(0xffffff, 1.2));
-    const dl = new THREE.DirectionalLight(0xffffff, 1.5);
-    dl.position.set(1, 2, 3);
-    scene.add(dl);
-    const fl = new THREE.DirectionalLight(0xaaaaff, 0.8);
-    fl.position.set(-2, 1, -2);
-    scene.add(fl);
-
-    const controls = new OrbitControls(camera, renderer.domElement);
-    controls.enableDamping = true;
-    controls.dampingFactor = 0.05;
-    controls.minDistance = 0.5;
-    controls.maxDistance = 8;
-
-    // Charger le GLB
-    const loader = new GLTFLoader();
-    loader.load(glbUrl, (gltf) => {
-      const model = gltf.scene;
-      model.rotation.x = -Math.PI / 2; // WoW Z-up → Three.js Y-up
-
-      const mat = new THREE.MeshStandardMaterial({
-        color: 0xc8a078,
-        roughness: 0.6,
-        metalness: 0.05,
-        side: THREE.DoubleSide,
-      });
-      model.traverse(child => { if (child.isMesh) child.material = mat; });
-      scene.add(model);
-
-      const box    = new THREE.Box3().setFromObject(model);
-      const center = box.getCenter(new THREE.Vector3());
-      const size   = box.getSize(new THREE.Vector3());
-      // Vue horizontale parfaite : caméra alignée avec le centre, distance 1.3x
-      // (le +0.2 Y causait une inclinaison vers le bas → la tête sortait du cadre)
-      controls.target.copy(center);
-      camera.position.set(center.x, center.y, center.z + size.length() * 1.3);
-      controls.update();
-
-      viewerEl._renderer = renderer;
-      viewerEl._camera   = camera;
-      let active = true;
-      function animate() {
-        if (!active) return;
-        requestAnimationFrame(animate);
-        controls.update();
-        renderer.render(scene, camera);
+        if (window.WowModelViewer && window.jQuery) {
+          const raceGender = (charData.race || 7) * 2 - 1 + (charData.gender || 0);
+          new window.WowModelViewer({
+            type: 2,
+            contentPath: '/wow-assets/',
+            container: window.jQuery('#' + viewerId),
+            models: {
+              id: raceGender,
+              type: 16,
+              charCustomization: { options: charData.customizationOptions },
+              items: charData.characterModelItems || []
+            },
+            dataEnv: 'classic',
+            env: 'classic',
+            gameDataEnv: 'classic',
+            hd: false,
+          });
+          viewerEl.addEventListener('wheel', e => e.preventDefault(), { passive: false });
+          return;
+        }
+      } catch(e) {
+        console.warn('[3D] ZamModelViewer CHARACTER failed:', e?.message || e);
       }
-      animate();
-      viewerEl._destroy3d = () => { active = false; renderer.dispose(); };
-    });
+    }
 
-  } catch(e) {
-    console.warn('3D model viewer:', e?.message || e);
-    if (toggle) toggle.remove();
-  }
+    // ── Fallback : Three.js + GLB (silhouette sans texture)
+    try {
+      const THREE             = await import('https://esm.sh/three@0.160.0');
+      const { GLTFLoader }    = await import('https://esm.sh/three@0.160.0/examples/jsm/loaders/GLTFLoader.js');
+      const { OrbitControls } = await import('https://esm.sh/three@0.160.0/examples/jsm/controls/OrbitControls.js');
+
+      const W = 210, H = 380;
+      const scene = new THREE.Scene();
+      scene.background = new THREE.Color(0x1a1a2e);
+
+      const camera = new THREE.PerspectiveCamera(45, W / H, 0.01, 100);
+      const renderer = new THREE.WebGLRenderer({ antialias: true });
+      renderer.setSize(W, H);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      renderer.domElement.style.cssText = 'width:100%;height:100%;display:block;';
+      viewerEl.appendChild(renderer.domElement);
+
+      scene.add(new THREE.AmbientLight(0xffffff, 1.2));
+      const dl = new THREE.DirectionalLight(0xffffff, 1.5);
+      dl.position.set(1, 2, 3); scene.add(dl);
+      const fl = new THREE.DirectionalLight(0xaaaaff, 0.8);
+      fl.position.set(-2, 1, -2); scene.add(fl);
+
+      const controls = new OrbitControls(camera, renderer.domElement);
+      controls.enableDamping  = true;
+      controls.dampingFactor  = 0.05;
+      controls.minDistance    = 0.5;
+      controls.maxDistance    = 8;
+      controls.enableZoom     = false;
+
+      new GLTFLoader().load(`/wow-assets/mo3/${glbId}.glb`, (gltf) => {
+        const model = gltf.scene;
+        model.rotation.x = -Math.PI / 2;
+        const mat = new THREE.MeshStandardMaterial({ color: 0xc8a078, roughness: 0.6, metalness: 0.05, side: THREE.DoubleSide });
+        model.traverse(child => { if (child.isMesh) child.material = mat; });
+        scene.add(model);
+        const box    = new THREE.Box3().setFromObject(model);
+        const center = box.getCenter(new THREE.Vector3());
+        const size   = box.getSize(new THREE.Vector3());
+        controls.target.copy(center);
+        camera.position.set(center.x, center.y, center.z + size.length() * 1.3);
+        controls.update();
+        let active = true;
+        (function animate() {
+          if (!active) return;
+          requestAnimationFrame(animate);
+          controls.update();
+          renderer.render(scene, camera);
+        })();
+        viewerEl._destroy3d = () => { active = false; renderer.dispose(); };
+      });
+    } catch(e) {
+      console.warn('[3D] Three.js fallback failed:', e?.message || e);
+      if (toggle) toggle.remove();
+    }
+  };
 }
 
 window.toggle3DViewer = function(safeId) {
@@ -133,6 +145,8 @@ window.toggle3DViewer = function(safeId) {
   if (img) img.style.display = show3d ? 'none' : '';
   v3.style.display = show3d ? 'block' : 'none';
   if (btn) btn.textContent = show3d ? '🖼️ Portrait' : '🔮 3D';
+  // Déclenche l'init au premier affichage (viewer visible = taille correcte pour WebGL)
+  if (show3d && v3._initViewer) requestAnimationFrame(() => v3._initViewer());
 };
 
 // ── Gestion des onglets (Talents / BiS / Rotation)
