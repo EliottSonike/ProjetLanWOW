@@ -58,7 +58,7 @@ async function load3DModel(viewerId, portraitId, charData, meta) {
         await new Promise(r => setTimeout(r, 600));
         const _newGlobals = Object.keys(window).filter(k => !_winBefore.has(k) && k.length > 1);
         console.log('[3D] Globals après viewer-live:', _newGlobals.join(', ') || '(aucun)');
-        const WMVClass = window.WowModelViewer || window.WMV || window.modelViewer;
+        const WMVClass = window.ZamModelViewer || window.WowModelViewer || window.WMV;
         console.log('[3D] WMVClass:', typeof WMVClass, 'jQuery:', typeof window.jQuery);
         if (WMVClass && window.jQuery) {
           const raceGender = (charData.race || 7) * 2 - 1 + (charData.gender || 0);
@@ -121,7 +121,7 @@ async function load3DModel(viewerId, portraitId, charData, meta) {
         const center = box.getCenter(new THREE.Vector3());
         const size   = box.getSize(new THREE.Vector3());
         controls.target.copy(center);
-        camera.position.set(center.x, center.y, center.z - size.length() * 1.3);
+        camera.position.set(center.x + size.length() * 1.3, center.y, center.z);
         controls.update();
         let active = true;
         (function animate() {
