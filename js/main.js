@@ -16,7 +16,7 @@ function loadScript(src) {
   });
 }
 
-// GLB model map: race ID (number) ou nom de race (string) → fileId
+// GLB fallback : uniquement pour gnome (seul modèle converti)
 const RACE_GLB = { 7: 900914 };
 const RACE_NAME_GLB = { Gnome: 900914, gnome: 900914, GNOME: 900914 };
 
@@ -25,16 +25,18 @@ async function load3DModel(viewerId, portraitId, charData, meta) {
   const toggle   = document.getElementById('toggle3d-' + portraitId.replace('pf-', ''));
   if (!viewerEl) return;
 
-  const race  = charData?.race;
-  const raceN = meta?.race || '';
-  const glbId = RACE_GLB[race] || RACE_NAME_GLB[raceN] || RACE_NAME_GLB[raceN.trim()];
-  if (!glbId) return;
+  // wotlk5 viewer fonctionne pour toutes les races avec customizationOptions
+  const hasWotlk5 = (charData?.customizationOptions?.length ?? 0) > 0;
 
-  try {
-    const check = await fetch(`/wow-assets/mo3/${glbId}.glb`, { method: 'HEAD' });
-    if (!check.ok) return;
-  } catch(e) { return; }
+  // Three.js fallback uniquement pour gnome (GLB disponible)
+  const glbId = RACE_GLB[charData?.race] || RACE_NAME_GLB[meta?.race || ''];
+  let hasGlb = false;
+  if (!hasWotlk5 && glbId) {
+    try { hasGlb = (await fetch(`/wow-assets/mo3/${glbId}.glb`, {method:'HEAD'})).ok; }
+    catch {}
+  }
 
+  if (!hasWotlk5 && !hasGlb) return;
   if (toggle) toggle.style.display = 'inline-flex';
 
   // Lazy init : déclenché au premier clic 3D (viewer visible, taille correcte)
@@ -90,7 +92,8 @@ async function load3DModel(viewerId, portraitId, charData, meta) {
       }
     }
 
-    // ── Fallback : Three.js + GLB + texture
+    // ── Fallback Three.js (uniquement si GLB gnome disponible)
+    if (!glbId) return;
     try {
       const THREE             = await import('https://esm.sh/three@0.160.0');
       const { GLTFLoader }    = await import('https://esm.sh/three@0.160.0/examples/jsm/loaders/GLTFLoader.js');
