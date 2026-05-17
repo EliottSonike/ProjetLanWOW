@@ -311,23 +311,46 @@ a:hover { color: var(--gold-light); }
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.5rem;
-  padding: 1.2rem;
+  gap: 0;
+  padding: 0;
   background: var(--bg-card);
   border: 1px solid var(--border);
   border-radius: var(--radius);
   color: var(--text);
   text-align: center;
-  transition: border-color 0.2s, transform 0.15s;
+  transition: border-color 0.2s, transform 0.15s, box-shadow 0.2s;
+  overflow: hidden;
 }
 
 .strat-card:hover {
   border-color: var(--gold-dark);
-  transform: translateY(-2px);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 32px rgba(0,0,0,.5), 0 0 0 1px var(--gold-dark);
   color: var(--text);
 }
 
+.strat-card-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.8rem 1rem 1rem;
+}
+
 .strat-icon { font-size: 2rem; }
+
+.strat-icon img {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+.strat-card:hover .strat-icon img {
+  transform: scale(1.05);
+}
 
 .strat-name {
   font-size: 0.95rem;
@@ -377,7 +400,7 @@ a:hover { color: var(--gold-light); }
 ═══════════════════════════════════════════════════════ */
 .hero-landing {
   position: relative;
-  min-height: calc(100vh - 56px);
+  min-height: auto;
   display: flex;
   align-items: center;
   justify-content: center;
