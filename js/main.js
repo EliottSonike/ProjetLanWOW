@@ -53,19 +53,19 @@ async function load3DModel(viewerId, portraitId, charData, meta) {
           await loadScript('https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js');
           await new Promise(r => setTimeout(r, 100));
         }
-        const _winBefore = new Set(Object.keys(window));
         await loadScript('/wow-assets/viewer/viewer-live.min.js');
-        await new Promise(r => setTimeout(r, 600));
-        const _newGlobals = Object.keys(window).filter(k => !_winBefore.has(k) && k.length > 1);
-        console.log('[3D] Globals après viewer-live:', _newGlobals.join(', ') || '(aucun)');
+        await new Promise(r => setTimeout(r, 500));
         const WMVClass = window.ZamModelViewer || window.WowModelViewer || window.WMV;
-        console.log('[3D] WMVClass:', typeof WMVClass, 'jQuery:', typeof window.jQuery);
         if (WMVClass && window.jQuery) {
+          const rect = viewerEl.getBoundingClientRect();
+          const W = rect.width  > 0 ? rect.width  : 210;
+          const H = rect.height > 0 ? rect.height : 380;
           const raceGender = (charData.race || 7) * 2 - 1 + (charData.gender || 0);
-          new WMVClass({
+          await new WMVClass({
             type: 2,
             contentPath: '/wow-assets-live/',
             container: window.jQuery('#' + viewerId),
+            aspect: W / H,
             models: {
               id: raceGender,
               type: 16,
@@ -151,7 +151,7 @@ window.toggle3DViewer = function(safeId) {
   v3.style.display = show3d ? 'block' : 'none';
   if (btn) btn.textContent = show3d ? '🖼️ Portrait' : '🔮 3D';
   // Déclenche l'init au premier affichage (viewer visible = taille correcte pour WebGL)
-  if (show3d && v3._initViewer) requestAnimationFrame(() => v3._initViewer());
+  if (show3d && v3._initViewer) setTimeout(() => v3._initViewer(), 100);
 };
 
 // ── Gestion des onglets (Talents / BiS / Rotation)
