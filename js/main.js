@@ -92,7 +92,6 @@ async function load3DModel(viewerId, portraitId, charData, meta) {
             },
             mount: { type: WMV.Wow?.Types?.NPC || 8, id: 0 },
           });
-          viewerEl.addEventListener('wheel', e => e.preventDefault(), { passive: false });
           return;
         }
       } catch(e) {
@@ -129,7 +128,6 @@ async function load3DModel(viewerId, portraitId, charData, meta) {
       controls.dampingFactor  = 0.05;
       controls.minDistance    = 0.5;
       controls.maxDistance    = 8;
-      controls.enableZoom     = false;
 
       // Pré-charger la texture gnome (UVs présents dans le GLB)
       const texLoader = new THREE.TextureLoader();
