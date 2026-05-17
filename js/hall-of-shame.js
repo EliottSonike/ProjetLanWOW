@@ -5,7 +5,7 @@
   var PLAYERS = [
     { name: 'Alban',   cls: 'warlock', spec: 'Affliction' },
     { name: 'Eliott',  cls: 'mage',    spec: 'Feu' },
-    { name: 'Fabien',  cls: 'unknown', spec: '?' },
+    { name: 'Fabien',  cls: 'hunter',  spec: 'Précision' },
     { name: 'Maël',    cls: 'paladin', spec: 'Protection' },
     { name: 'Tristan', cls: 'paladin', spec: 'Holy' }
   ];
