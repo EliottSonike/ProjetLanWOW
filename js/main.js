@@ -41,7 +41,56 @@ async function load3DModel(viewerId, portraitId, charData, meta) {
   viewerEl._initViewer = async () => {
     delete viewerEl._initViewer;
 
-    // ── Three.js + GLB + texture
+    // ── Priorité : viewer wotlk5.com (modèles WotLK légers, bonnes textures)
+    if (charData?.customizationOptions?.length) {
+      try {
+        if (!window.jQuery) {
+          await loadScript('https://code.jquery.com/jquery-3.7.1.min.js');
+          await new Promise(r => setTimeout(r, 100));
+        }
+        await loadScript('/wow-assets/viewer/viewer-wotlk5.min.js');
+        await new Promise(r => setTimeout(r, 500));
+        const WMV = window.ZamModelViewer;
+        if (WMV && window.jQuery) {
+          if (!window.WH) window.WH = {};
+          if (typeof window.WH.debug !== 'function') window.WH.debug = () => {};
+          if (typeof window.WH.log   !== 'function') window.WH.log   = () => {};
+          const raceNames = ['','human','orc','dwarf','nightelf','scourge','tauren','gnome','troll','','bloodelf','draenei'];
+          const genderNames = ['male', 'female'];
+          const modelId = (raceNames[charData.race] || 'gnome') + (genderNames[charData.gender] || 'male');
+          const rect = viewerEl.getBoundingClientRect();
+          const W = rect.width > 0 ? rect.width : 210;
+          const H = rect.height > 0 ? rect.height : 380;
+          await new WMV({
+            type: 2,
+            contentPath: '/wow-assets-wotlk5/',
+            container: window.jQuery('#' + viewerId),
+            aspect: W / H,
+            hd: true,
+            charCustomization: {
+              race: charData.race,
+              gender: charData.gender,
+              options: charData.customizationOptions,
+              sheathMain: -1,
+              sheathOff: -1,
+            },
+            cls: charData.class,
+            items: (charData.characterModelItems || []).filter(i => i[1] !== -1),
+            models: {
+              type: WMV.Wow?.Types?.CHARACTER || 16,
+              id: modelId,
+            },
+            mount: { type: WMV.Wow?.Types?.NPC || 8, id: 0 },
+          });
+          viewerEl.addEventListener('wheel', e => e.preventDefault(), { passive: false });
+          return;
+        }
+      } catch(e) {
+        console.warn('[3D] wotlk5 viewer failed:', e?.message || e);
+      }
+    }
+
+    // ── Fallback : Three.js + GLB + texture
     try {
       const THREE             = await import('https://esm.sh/three@0.160.0');
       const { GLTFLoader }    = await import('https://esm.sh/three@0.160.0/examples/jsm/loaders/GLTFLoader.js');

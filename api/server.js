@@ -207,6 +207,27 @@ app.get('/wow-assets/viewer/viewer.min.js', async (req, res) => {
   }
 });
 
+// ── viewer wotlk5.com (modèles WotLK légers, pas d'OOM, bonnes textures) ──
+const VIEWER_WOTLK5_URL = 'https://wotlk5.com/armory/js/viewer.min.js';
+let viewerWotlk5Cache = null, viewerWotlk5CacheTime = 0;
+app.get('/wow-assets/viewer/viewer-wotlk5.min.js', async (req, res) => {
+  try {
+    const now = Date.now();
+    if (!viewerWotlk5Cache || now - viewerWotlk5CacheTime > 3600000) {
+      const r = await fetch(VIEWER_WOTLK5_URL);
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      const code = await r.text();
+      viewerWotlk5Cache = PAKO_PATCH + '\n' + code;
+      viewerWotlk5CacheTime = now;
+      console.log('✅ viewer-wotlk5.min.js cached (' + Math.round(code.length/1024) + ' KB)');
+    }
+    res.setHeader('Content-Type', 'application/javascript');
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate');
+    res.send(viewerWotlk5Cache);
+  } catch(e) { res.status(502).send('// Error: ' + e.message); }
+});
+
 // ── viewer LIVE (character type, textures composées, format retail) ──
 let viewerLiveCache = null;
 let viewerLiveCacheTime = 0;
