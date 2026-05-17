@@ -74,7 +74,7 @@ async function load3DModel(viewerId, portraitId, charData, meta) {
       // Pré-charger la texture gnome (UVs présents dans le GLB)
       const texLoader = new THREE.TextureLoader();
       const gnomeTex = await new Promise(resolve => {
-        texLoader.load('/wow-assets/textures/3550825.webp',
+        texLoader.load('/wow-assets/textures/4531003.webp',
           tex => { tex.flipY = false; resolve(tex); },
           undefined,
           () => resolve(null)
