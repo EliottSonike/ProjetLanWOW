@@ -48,14 +48,14 @@ async function load3DModel(viewerId, portraitId, charData, meta) {
           await loadScript('https://code.jquery.com/jquery-3.7.1.min.js');
           await new Promise(r => setTimeout(r, 50));
         }
-        await loadScript('/wow-assets/viewer/viewer.min.js');
+        await loadScript('/wow-assets/viewer/viewer-live.min.js');
         await new Promise(r => setTimeout(r, 300));
 
         if (window.WowModelViewer && window.jQuery) {
           const raceGender = (charData.race || 7) * 2 - 1 + (charData.gender || 0);
           new window.WowModelViewer({
             type: 2,
-            contentPath: '/wow-assets/',
+            contentPath: '/wow-assets-live/',
             container: window.jQuery('#' + viewerId),
             models: {
               id: raceGender,
@@ -63,10 +63,6 @@ async function load3DModel(viewerId, portraitId, charData, meta) {
               charCustomization: { options: charData.customizationOptions },
               items: charData.characterModelItems || []
             },
-            dataEnv: 'classic',
-            env: 'classic',
-            gameDataEnv: 'classic',
-            hd: false,
           });
           viewerEl.addEventListener('wheel', e => e.preventDefault(), { passive: false });
           return;

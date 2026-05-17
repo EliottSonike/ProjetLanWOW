@@ -66,7 +66,8 @@ function auth(req, res, next) {
 }
 
 // ── viewer.min.js patché (pako inflate fallback raw deflate) ─────────
-const VIEWER_URL = 'https://wow.zamimg.com/modelviewer/classic/viewer/viewer.min.js';
+const VIEWER_URL      = 'https://wow.zamimg.com/modelviewer/classic/viewer/viewer.min.js';
+const VIEWER_LIVE_URL = 'https://wow.zamimg.com/modelviewer/live/viewer/viewer.min.js';
 const PAKO_PATCH = `
 ;(function(){
   // Patch 1: pako inflate → raw deflate fallback (wotlk5 mo3 format)
@@ -201,6 +202,29 @@ app.get('/wow-assets/viewer/viewer.min.js', async (req, res) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate');
     res.send(viewerCache);
+  } catch(e) {
+    res.status(502).send('// Error: ' + e.message);
+  }
+});
+
+// ── viewer LIVE (character type, textures composées, format retail) ──
+let viewerLiveCache = null;
+let viewerLiveCacheTime = 0;
+app.get('/wow-assets/viewer/viewer-live.min.js', async (req, res) => {
+  try {
+    const now = Date.now();
+    if (!viewerLiveCache || now - viewerLiveCacheTime > 3600000) {
+      const r = await fetch(VIEWER_LIVE_URL);
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      const code = await r.text();
+      viewerLiveCache = PAKO_PATCH + '\n' + code;
+      viewerLiveCacheTime = now;
+      console.log('✅ viewer-live.min.js cached (' + Math.round(code.length/1024) + ' KB)');
+    }
+    res.setHeader('Content-Type', 'application/javascript');
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate');
+    res.send(viewerLiveCache);
   } catch(e) {
     res.status(502).send('// Error: ' + e.message);
   }
