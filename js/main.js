@@ -463,7 +463,7 @@ function initArmory() {
     </div>`;
   }
 
-  const CACHE_TTL = 2 * 60 * 60 * 1000; // 2h — perso WotLK5 change rarement
+  const CACHE_TTL = 30 * 60 * 1000; // 30 min — se rafraîchit pendant une session de raid
 
   async function doFetch() {
     const cacheAge = raw ? Date.now() - JSON.parse(raw).timestamp : Infinity;
