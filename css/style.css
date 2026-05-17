@@ -4391,7 +4391,7 @@ body[data-class="deathknight"]{ --class-accent: var(--deathknight);--class-glow:
 /* ── Carte ── */
 .swag-card {
   position: relative;
-  width: 220px;
+  width: 185px;
   background: linear-gradient(160deg, rgba(255,255,255,0.03) 0%, transparent 60%), var(--bg-card);
   border-radius: 18px;
   border: 1px solid rgba(var(--cc), 0.25);
@@ -4407,7 +4407,7 @@ body[data-class="deathknight"]{ --class-accent: var(--deathknight);--class-glow:
 }
 
 .swag-card--center {
-  width: 260px;
+  width: 215px;
   border-color: rgba(var(--cc), 0.4);
   background: linear-gradient(160deg, rgba(var(--cc), 0.05) 0%, transparent 60%), var(--bg-card);
 }
@@ -4453,8 +4453,8 @@ body[data-class="deathknight"]{ --class-accent: var(--deathknight);--class-glow:
 }
 
 .swag-portrait {
-  width: 110px;
-  height: 110px;
+  width: 94px;
+  height: 94px;
   border-radius: 50%;
   border: 2px solid rgba(var(--cc), 0.5);
   box-shadow: 0 0 18px rgba(var(--cc), 0.28), inset 0 0 12px rgba(0,0,0,0.4);
