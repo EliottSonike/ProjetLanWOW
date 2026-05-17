@@ -216,7 +216,27 @@ app.get('/wow-assets/viewer/viewer-live.min.js', async (req, res) => {
     if (!viewerLiveCache || now - viewerLiveCacheTime > 3600000) {
       const r = await fetch(VIEWER_LIVE_URL);
       if (!r.ok) throw new Error('HTTP ' + r.status);
-      const code = await r.text();
+      let code = await r.text();
+      // Mêmes patches rn bounds-safe que le viewer classic (wotlk5 mo3 = 25 sections vs 35 attendues)
+      const rnPatches = [
+        ['getUint32(){var t=this.buffer.getUint32(this.position,!0);return this.position+=4,t}',
+         'getUint32(){if(this.position+4>this.buffer.byteLength)return this.position+=4,0;var t=this.buffer.getUint32(this.position,!0);return this.position+=4,t}'],
+        ['getInt32(){var t=this.buffer.getInt32(this.position,!0);return this.position+=4,t}',
+         'getInt32(){if(this.position+4>this.buffer.byteLength)return this.position+=4,0;var t=this.buffer.getInt32(this.position,!0);return this.position+=4,t}'],
+        ['getFloat(){var t=this.buffer.getFloat32(this.position,!0);return this.position+=4,t}',
+         'getFloat(){if(this.position+4>this.buffer.byteLength)return this.position+=4,0;var t=this.buffer.getFloat32(this.position,!0);return this.position+=4,t}'],
+        ['getUint16(){var t=this.buffer.getUint16(this.position,!0);return this.position+=2,t}',
+         'getUint16(){if(this.position+2>this.buffer.byteLength)return this.position+=2,0;var t=this.buffer.getUint16(this.position,!0);return this.position+=2,t}'],
+        ['getUint8(){var t=this.buffer.getUint8(this.position);return this.position+=1,t}',
+         'getUint8(){if(this.position+1>this.buffer.byteLength)return this.position+=1,0;var t=this.buffer.getUint8(this.position);return this.position+=1,t}'],
+      ];
+      let rnOk = 0;
+      for (const [target, replacement] of rnPatches) {
+        const prev = code;
+        code = code.replace(target, replacement);
+        if (code !== prev) rnOk++;
+      }
+      console.log(`✅ viewer-live patches rn (${rnOk}/5 méthodes)`);
       viewerLiveCache = PAKO_PATCH + '\n' + code;
       viewerLiveCacheTime = now;
       console.log('✅ viewer-live.min.js cached (' + Math.round(code.length/1024) + ' KB)');
