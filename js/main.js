@@ -53,13 +53,16 @@ async function load3DModel(viewerId, portraitId, charData, meta) {
           await loadScript('https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js');
           await new Promise(r => setTimeout(r, 100));
         }
+        const _winBefore = new Set(Object.keys(window));
         await loadScript('/wow-assets/viewer/viewer-live.min.js');
-        await new Promise(r => setTimeout(r, 500));
-
-        console.log('[3D] WMV:', typeof window.WowModelViewer, 'jQuery:', typeof window.jQuery, 'el:', !!document.getElementById(viewerId));
-        if (window.WowModelViewer && window.jQuery) {
+        await new Promise(r => setTimeout(r, 600));
+        const _newGlobals = Object.keys(window).filter(k => !_winBefore.has(k) && k.length > 1);
+        console.log('[3D] Globals après viewer-live:', _newGlobals.join(', ') || '(aucun)');
+        const WMVClass = window.WowModelViewer || window.WMV || window.modelViewer;
+        console.log('[3D] WMVClass:', typeof WMVClass, 'jQuery:', typeof window.jQuery);
+        if (WMVClass && window.jQuery) {
           const raceGender = (charData.race || 7) * 2 - 1 + (charData.gender || 0);
-          new window.WowModelViewer({
+          new WMVClass({
             type: 2,
             contentPath: '/wow-assets-live/',
             container: window.jQuery('#' + viewerId),
@@ -111,7 +114,6 @@ async function load3DModel(viewerId, portraitId, charData, meta) {
       new GLTFLoader().load(`/wow-assets/mo3/${glbId}.glb`, (gltf) => {
         const model = gltf.scene;
         model.rotation.x = -Math.PI / 2; // WoW Z-up → Three.js Y-up
-        model.rotation.y = Math.PI;       // face caméra (WoW +Y → Three.js -Z → retourner)
         const mat = new THREE.MeshStandardMaterial({ color: 0xc8a078, roughness: 0.6, metalness: 0.05, side: THREE.DoubleSide });
         model.traverse(child => { if (child.isMesh) child.material = mat; });
         scene.add(model);
@@ -119,7 +121,7 @@ async function load3DModel(viewerId, portraitId, charData, meta) {
         const center = box.getCenter(new THREE.Vector3());
         const size   = box.getSize(new THREE.Vector3());
         controls.target.copy(center);
-        camera.position.set(center.x, center.y, center.z + size.length() * 1.3);
+        camera.position.set(center.x, center.y, center.z - size.length() * 1.3);
         controls.update();
         let active = true;
         (function animate() {
