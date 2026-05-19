@@ -10,28 +10,29 @@ const RotationVisual = (function () {
   ================================================================ */
   const ROTATIONS = {
 
-    /* ── Mage Feu ─────────────────────────────────────────────── */
+    /* ── Mage Frostfire Bolt ──────────────────────────────────── */
     'mage-fire': {
-      label: 'Mage Feu — Rotation',
-      color: '#f4511e',
-      glow:  'rgba(244,81,30,0.4)',
+      label: 'Mage Frostfire — Rotation',
+      color: '#5ec8f0',
+      glow:  'rgba(94,200,240,0.4)',
       phases: [
         {
           name: 'Ouverture',
           steps: [
-            { icon: ICON('ability_mage_livingbomb'),   name: 'Living Bomb',    priority: 1, proc: false, note: 'Appliquer en premier · maintenir en permanence' },
-            { icon: ICON('spell_fire_soulburn'),        name: 'Combustion',     priority: 2, proc: false, note: 'CD offensif · activer dès le début du combat' },
-            { icon: ICON('spell_fire_firebolt02'),      name: 'Fireball',       priority: 3, proc: false, note: 'Sort principal · spam en boucle' },
+            { icon: ICON('ability_mage_livingbomb'),        name: 'Living Bomb',      priority: 1, proc: false, note: 'Appliquer en premier · maintenir en permanence' },
+            { icon: ICON('spell_frost_icyveins'),           name: 'Icy Veins',        priority: 2, proc: false, note: '+20% haste 20s · activer sur pull · reset avec Cold Snap' },
+            { icon: ICON('spell_fire_soulburn'),            name: 'Combustion',        priority: 3, proc: false, note: 'CD offensif · chaque crit = +10% crit Feu' },
+            { icon: ICON('spell_frost_frostfirebolt02'),   name: 'Frostfire Bolt',   priority: 4, proc: false, note: 'Sort principal (Feu + Givre) · spam en boucle' },
           ]
         },
         {
           name: 'Combat',
           steps: [
-            { icon: ICON('ability_mage_livingbomb'),   name: 'Living Bomb',    priority: 1, proc: false, note: 'Réappliquer si expiré' },
-            { icon: ICON('ability_mage_hotstreak'),     name: 'Pyroblast!',     priority: 2, proc: true,  note: '🔥 PROC Hot Streak → cast instantané · PRIORITÉ ABSOLUE' },
-            { icon: ICON('spell_fire_firebolt02'),      name: 'Fireball',       priority: 3, proc: false, note: 'Filler principal' },
-            { icon: ICON('spell_fire_flamebolt'),       name: 'Fire Blast',     priority: 4, proc: false, note: 'Instant · pour déclencher Hot Streak' },
-            { icon: ICON('spell_fire_sear'),            name: 'Scorch',         priority: 5, proc: false, note: 'En déplacement seulement · maintenir le debuff' },
+            { icon: ICON('ability_mage_livingbomb'),        name: 'Living Bomb',      priority: 1, proc: false, note: 'Réappliquer si expiré · priorité absolue' },
+            { icon: ICON('ability_mage_hotstreak'),         name: 'Pyroblast!',       priority: 2, proc: true,  note: '🔥 PROC Hot Streak → cast instantané · ne jamais retarder' },
+            { icon: ICON('spell_frost_frostfirebolt02'),   name: 'Frostfire Bolt',   priority: 3, proc: false, note: 'Filler principal · bénéficie d\'Ice Shards + Ignite' },
+            { icon: ICON('spell_fire_flamebolt'),           name: 'Fire Blast',       priority: 4, proc: false, note: 'Instant · enchaîner les crits pour Hot Streak' },
+            { icon: ICON('spell_fire_sear'),                name: 'Scorch',           priority: 5, proc: false, note: 'En déplacement seulement · FFB ne se cast pas en mouvement' },
           ]
         }
       ]
