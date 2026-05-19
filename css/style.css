@@ -1340,12 +1340,16 @@ body[data-class="deathknight"]{ --class-accent: var(--deathknight);--class-glow:
   border-radius: 8px;
   overflow: hidden;
   border: 1px solid var(--border);
+  aspect-ratio: 2 / 1;
+  background: var(--bg-black);
 }
 
 .talent-tree-img img {
   display: block;
   width: 100%;
-  height: auto;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
   cursor: zoom-in;
   transition: opacity 0.2s;
 }
