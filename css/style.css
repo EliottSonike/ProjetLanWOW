@@ -4481,7 +4481,7 @@ body[data-class="deathknight"]{ --class-accent: var(--deathknight);--class-glow:
 }
 
 .swag-card--center {
-  width: 215px;
+  width: 185px;
   border-color: rgba(var(--cc), 0.4);
   background: linear-gradient(160deg, rgba(var(--cc), 0.05) 0%, transparent 60%), var(--bg-card);
 }
@@ -4543,8 +4543,8 @@ body[data-class="deathknight"]{ --class-accent: var(--deathknight);--class-glow:
 }
 
 .swag-portrait--lg {
-  width: 104px;
-  height: 104px;
+  width: 94px;
+  height: 94px;
 }
 
 .swag-card:hover .swag-portrait {
