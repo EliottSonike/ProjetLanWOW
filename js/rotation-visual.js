@@ -47,11 +47,11 @@ const RotationVisual = (function () {
         {
           name: 'Ouverture',
           steps: [
-            { icon: ICON('spell_shadow_burningspirit'),            name: 'Life Tap',          priority: 1, proc: true,  note: '💜 Pre-pull · active le buff Glyph of Life Tap (+20% Esprit en SP 40s)' },
+            { icon: ICON('spell_shadow_lifetap'),                  name: 'Life Tap',          priority: 1, proc: true,  note: '💜 Pre-pull · active le buff Glyph of Life Tap (+20% Esprit en SP 40s)' },
             { icon: ICON('spell_shadow_abominationexplosion'),     name: 'Corruption',        priority: 2, proc: false, note: 'DoT principal · jamais réappliquer manuellement (Everlasting Affliction)' },
             { icon: ICON('ability_warlock_haunt'),                 name: 'Haunt',             priority: 3, proc: false, note: '+20% dégâts sur tous vos DoTs · activer dès Corruption posé' },
             { icon: ICON('spell_shadow_unstableaffliction_3'),    name: 'Unstable Affliction', priority: 4, proc: false, note: 'DoT puissant 15s · maintenir en permanence' },
-            { icon: ICON('spell_shadow_curseofachimonde'),        name: 'Curse of Agony',    priority: 5, proc: false, note: 'Malédiction principale · ou Curse of Elements si absent du raid' },
+            { icon: ICON('spell_shadow_curse'),                    name: 'Curse of Agony',    priority: 5, proc: false, note: 'Malédiction principale · ou Curse of Elements si absent du raid' },
             { icon: ICON('spell_shadow_shadowbolt'),              name: 'Shadow Bolt',       priority: 6, proc: false, note: 'Filler spam · refresh Corruption via Everlasting Affliction' },
           ]
         },
@@ -60,8 +60,8 @@ const RotationVisual = (function () {
           steps: [
             { icon: ICON('ability_warlock_haunt'),                 name: 'Haunt',             priority: 1, proc: false, note: '⚡ Sur cooldown (15s) · priorité absolue · +20% DoTs' },
             { icon: ICON('spell_shadow_unstableaffliction_3'),    name: 'Unstable Affliction', priority: 2, proc: false, note: 'Réappliquer avant expiration · ne jamais laisser tomber' },
-            { icon: ICON('spell_shadow_curseofachimonde'),        name: 'Curse of Agony',    priority: 3, proc: false, note: 'Réappliquer avant expiration · ne jamais laisser tomber' },
-            { icon: ICON('spell_shadow_burningspirit'),           name: 'Life Tap',          priority: 4, proc: true,  note: '💜 BUFF Glyph of Life Tap · maintenir en permanence (expire 40s)' },
+            { icon: ICON('spell_shadow_curse'),                    name: 'Curse of Agony',    priority: 3, proc: false, note: 'Réappliquer avant expiration · ne jamais laisser tomber' },
+            { icon: ICON('spell_shadow_lifetap'),                  name: 'Life Tap',          priority: 4, proc: true,  note: '💜 BUFF Glyph of Life Tap · maintenir en permanence (expire 40s)' },
             { icon: ICON('spell_shadow_shadowbolt'),              name: 'Shadow Bolt',       priority: 5, proc: false, note: 'Filler · refresh Corruption · spam entre les DoTs' },
           ]
         }
@@ -79,17 +79,17 @@ const RotationVisual = (function () {
           steps: [
             { icon: ICON('ability_paladin_judgementsofthejust'), name: 'Judgment',               priority: 1, proc: false, note: '9s CD · génère menace · applique debuff' },
             { icon: ICON('ability_paladin_shieldofvengeance'),   name: 'Shield of Righteousness', priority: 2, proc: false, note: '6s CD · dégâts Block Value · menace élevée' },
-            { icon: ICON('spell_holy_blessingofprotection'),     name: 'Holy Shield',             priority: 3, proc: false, note: '9s CD · +30% chance de bloquer · maintenir actif' },
+            { icon: ICON('ability_paladin_holyshield'),          name: 'Holy Shield',             priority: 3, proc: false, note: '9s CD · +30% chance de bloquer · maintenir actif' },
             { icon: ICON('ability_paladin_hammeroftherighteous'),'name': 'Hammer of the Righteous', priority: 4, proc: false, note: '6s CD · AoE 3 cibles · essentiel sur packs' },
-            { icon: ICON('spell_holy_innerfire'),                name: 'Consecration',            priority: 5, proc: false, note: '9s CD · AoE sol · menace passive' },
+            { icon: ICON('spell_holy_consecration'),             name: 'Consecration',            priority: 5, proc: false, note: '9s CD · AoE sol · menace passive' },
             { icon: ICON('spell_holy_avengersshield'),           name: "Avenger's Shield",        priority: 6, proc: false, note: '15s CD · hors 969 · caser entre les GCDs' },
           ]
         },
         {
           name: 'CDs défensifs',
           steps: [
-            { icon: ICON('spell_holy_greaterblessingofsalvation'), name: 'Divine Protection', priority: 1, proc: false, note: '-50% tous dégâts 10s · CD 1 min · pics de dégâts' },
-            { icon: ICON('spell_holy_sealofblood'),               name: 'Divine Guardian',   priority: 2, proc: false, note: '-30% dégâts raid 6s · communiquer avec le heal' },
+            { icon: ICON('spell_holy_divineprotection'),           name: 'Divine Protection', priority: 1, proc: false, note: '-50% tous dégâts 10s · CD 1 min · pics de dégâts' },
+            { icon: ICON('ability_paladin_divineguardian'),       name: 'Divine Guardian',   priority: 2, proc: false, note: '-30% dégâts raid 6s · communiquer avec le heal' },
             { icon: ICON('ability_paladin_layonhands'),           name: 'Lay on Hands',      priority: 3, proc: false, note: 'Soin total · CD 20 min · urgences seulement' },
           ]
         }
@@ -135,7 +135,7 @@ const RotationVisual = (function () {
           name: 'Setup',
           steps: [
             { icon: ICON('ability_paladin_beaconoflight'),          name: 'Beacon of Light',     priority: 1, proc: false, note: 'Sur le tank · soins transmis automatiquement' },
-            { icon: ICON('spell_holy_powerwordshield'),             name: 'Sacred Shield',       priority: 2, proc: false, note: 'Sur la cible la plus à risque · proc FoL réduit' },
+            { icon: ICON('ability_paladin_sacredshield'),           name: 'Sacred Shield',       priority: 2, proc: false, note: 'Sur la cible la plus à risque · proc FoL réduit' },
             { icon: ICON('ability_paladin_judgementsofthejust'),   name: 'Judgment of Light',   priority: 3, proc: false, note: '+15% haste via Judgements of the Pure · rafraîchir toutes ~50s' },
           ]
         },
@@ -143,8 +143,8 @@ const RotationVisual = (function () {
           name: 'Soin en combat',
           steps: [
             { icon: ICON('spell_holy_searinglight'),               name: 'Holy Shock',              priority: 1, proc: false, note: 'Sur CD · si crit → FoL instantané disponible' },
-            { icon: ICON('spell_holy_flashheal'),                  name: 'Flash of Light (instant)', priority: 2, proc: true,  note: '✨ PROC Infusion of Light → cast instantané · ne pas rater' },
-            { icon: ICON('spell_holy_flashheal'),                  name: 'Flash of Light',          priority: 3, proc: false, note: 'Sort principal · rapide et économique en mana' },
+            { icon: ICON('spell_holy_flashoflight'),               name: 'Flash of Light (instant)', priority: 2, proc: true,  note: '✨ PROC Infusion of Light → cast instantané · ne pas rater' },
+            { icon: ICON('spell_holy_flashoflight'),               name: 'Flash of Light',          priority: 3, proc: false, note: 'Sort principal · rapide et économique en mana' },
             { icon: ICON('spell_holy_holybolt'),                   name: 'Holy Light',              priority: 4, proc: false, note: 'Soin massif · coûteux · réserver aux urgences' },
           ]
         }
