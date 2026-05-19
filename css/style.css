@@ -4841,47 +4841,47 @@ h1, h2, h3,
   .tabs-nav { overflow-x: auto; white-space: nowrap; }
 
   /* ── Paperdoll / BiS / Armory ── */
-  .wow-paperdoll { padding: 0.6rem 0.4rem; }
+  .wow-paperdoll { padding: 0.5rem !important; }
 
-  /* Grid : portrait pleine largeur en haut, items côte à côte en bas */
+  /* Grid : portrait pleine largeur (ligne 1), deux colonnes d'items (ligne 2) */
   .paperdoll-main {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: auto auto;
-    gap: 6px;
+    display: grid !important;
+    grid-template-areas: "portrait portrait" "left right" !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 5px !important;
   }
-  .paperdoll-center {
-    grid-column: 1 / -1;
-    grid-row: 1;
-  }
-  .paperdoll-col:first-child { grid-column: 1; grid-row: 2; }
-  .paperdoll-col:last-child  { grid-column: 2; grid-row: 2; }
+  .paperdoll-center         { grid-area: portrait !important; }
+  .paperdoll-col:first-child { grid-area: left !important; }
+  .paperdoll-col:last-child  { grid-area: right !important; }
 
-  /* Portrait compact en ligne */
+  /* Portrait compact horizontal */
   .paperdoll-char {
-    width: 100%;
-    flex-direction: row;
-    padding: 8px 12px;
-    gap: 12px;
-    justify-content: center;
-    align-items: center;
+    width: 100% !important;
+    max-width: 100% !important;
+    flex-direction: row !important;
+    padding: 8px 10px !important;
+    gap: 10px !important;
+    justify-content: flex-start !important;
+    align-items: center !important;
   }
-  .paperdoll-char-portrait { width: 64px !important; height: 64px !important; }
-  .portrait-frame img      { width: 64px !important; height: 64px !important; }
-  .paperdoll-char-name     { font-size: 0.9rem; }
+  .paperdoll-char-portrait   { width: 56px !important; height: 56px !important; }
+  .portrait-frame img        { width: 56px !important; height: 56px !important; }
+  .paperdoll-char-name       { font-size: 0.85rem !important; }
+  .paperdoll-char-spec       { font-size: 0.7rem !important; }
+  .paperdoll-char-phase      { font-size: 0.65rem !important; }
 
-  /* Slots : icône + label miniature */
-  .equip-slot       { flex-direction: row; align-items: center; gap: 6px; min-height: 36px; }
-  .equip-slot-icon  { width: 34px; height: 34px; flex-shrink: 0; border-radius: 3px; }
-  .equip-slot-label { font-size: 0.58rem; color: var(--text-muted); white-space: nowrap; }
-  .slot-link        { font-size: 0.58rem; line-height: 1.3; }
+  /* Slots : icône à gauche + label slot à droite */
+  .equip-slot        { flex-direction: row !important; align-items: center !important; gap: 5px; min-height: 32px; }
+  .equip-slot-icon   { width: 30px !important; height: 30px !important; flex-shrink: 0 !important; border-radius: 3px !important; }
+  .equip-slot-label  { font-size: 0.55rem !important; max-width: none !important; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; flex: 1; min-width: 0; }
 
-  /* Armes en bas */
-  .paperdoll-bottom { flex-wrap: wrap; gap: 6px; }
-  .paperdoll-bottom .equip-slot { flex-direction: column; }
-  .paperdoll-bottom .equip-slot-icon { width: 42px; height: 42px; }
+  /* Armes en bas — garder en colonne */
+  .paperdoll-bottom  { flex-wrap: wrap !important; gap: 8px !important; justify-content: center !important; }
+  .paperdoll-bottom .equip-slot       { flex-direction: column !important; }
+  .paperdoll-bottom .equip-slot-icon  { width: 40px !important; height: 40px !important; }
+  .paperdoll-bottom .equip-slot-label { font-size: 0.55rem !important; max-width: 44px !important; text-align: center; }
 
   /* Viewer 3D */
-  .viewer3d { width: 140px !important; height: 240px !important; }
-  .portrait-frame.is-3d { width: 150px !important; height: 250px !important; }
+  .viewer3d { width: 130px !important; height: 220px !important; }
+  .portrait-frame.is-3d { width: 140px !important; height: 230px !important; }
 }
