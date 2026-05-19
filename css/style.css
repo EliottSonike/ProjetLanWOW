@@ -1356,6 +1356,23 @@ body[data-class="deathknight"]{ --class-accent: var(--deathknight);--class-glow:
 
 .talent-tree-img img:hover { opacity: 0.9; }
 
+.talent-tree-iframe {
+  margin: 1rem 0 0.5rem;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  width: 100%;
+  height: 480px;
+  background: #1a1e2e;
+}
+
+.talent-tree-iframe iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
 .talent-points {
   font-size: 0.85rem;
   color: var(--text-muted);
