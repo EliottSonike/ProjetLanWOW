@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
@@ -53,37 +53,64 @@
 
     <div class="content-card">
       <h3>Build — Précision 7/57/7</h3>
-      <a class="talent-link" href="https://wotlk.evowow.com/?talent#cZVgGoztRRsMcRbukbxsb0x" target="_blank" rel="noopener">
-        🔗 Voir le build sur Evowow
-      </a>
-      <div class="talent-tree-img">
-        <img src="../assets/img/talent-fabien.png" alt="Arbre de talents Précision 7/57/7"
-             onerror="this.parentElement.style.display='none'">
+      <div class="talent-tree-iframe">
+        <div class="ttif-header">
+          <span class="ttif-title">⚔️ Arbre de Talents Interactif</span>
+          <a href="https://www.wowhead.com/wotlk/talent-calc/hunter/502-035335131030013233035031051-5000002_001qg011xjs21qft31rhf41rge51rga" target="_blank" rel="noopener" class="ttif-link">↗ Wowhead</a>
+        </div>
+        <iframe src="https://www.wowhead.com/wotlk/talent-calc/embed/hunter/502-035335131030013233035031051-5000002_001qg011xjs21qft31rhf41rge51rga" frameborder="0" scrolling="no" title="Arbre de talents Chasseur Précision"></iframe>
       </div>
       <p class="talent-points">Points : 7 Bête · 57 Précision · 7 Survie</p>
       <div class="talent-note">
-        Build standard Chasseur Précision PvE pour ICC. Le cœur tourne autour de <strong>Tir de Chimère</strong> et <strong>Tir Constant amélioré</strong>. Les 7 points en Bête donnent Suivi amélioré (+5% dégâts). Les 7 points en Survie apportent Coups létaux (+5% crit).
+        Build standard Chasseur Précision (Marksmanship) PvE pour ICC. Tourne autour de <strong>Chimera Shot</strong> et du rythme <strong>2× Steady Shot → Aimed Shot</strong> (proc Improved Steady Shot). Les 7 points en Bête donnent Improved Aspect of the Hawk. Les 7 en Survie apportent Hunter vs. Wild (+AP) et Hunting Party (regen mana groupe).
       </div>
     </div>
 
     <div class="content-card">
-      <h3>Talents clés</h3>
+      <h3>Talents Bête — 7 pts</h3>
       <ul style="padding-left:1.2rem; display:flex; flex-direction:column; gap:0.5rem; font-size:0.88rem; color:var(--text-muted);">
-        <li><strong style="color:var(--gold-light)">Tir de Chimère</strong> — Sort signature. Refresh le Venin du Serpent automatiquement + gros dégâts. CD : 10s.</li>
-        <li><strong style="color:var(--gold-light)">Tir Constant amélioré</strong> — Après 2 Tirs Constants, le prochain Tir Visé/Chimère/Arcane est 20% plus puissant.</li>
-        <li><strong style="color:var(--gold-light)">Maître Tireur</strong> — Réduit le coût en focus de Tir Visé. Permet de spam plus de sorts instants.</li>
-        <li><strong style="color:var(--gold-light)">Flèche Sauvage</strong> — Passif : 20% de chance de tir bonus gratuit après chaque Tir Constant.</li>
-        <li><strong style="color:var(--gold-light)">Tir Silencieux</strong> — Interrupt ranged à 24m. Indispensable pour les casters en raid.</li>
+        <li><strong style="color:var(--gold-light)">Improved Aspect of the Hawk 5/5</strong> — Vos attaques ont 10% de chance d'augmenter votre vitesse de tir de 15% pendant 12s. Proc fréquent en combat.</li>
+        <li><strong style="color:var(--gold-light)">Focused Fire 2/2</strong> — +2% crit quand votre familier est actif · Kill Command donne +20% dégâts familier.</li>
+      </ul>
+    </div>
+
+    <div class="content-card">
+      <h3>Talents Précision — 57 pts</h3>
+      <ul style="padding-left:1.2rem; display:flex; flex-direction:column; gap:0.5rem; font-size:0.88rem; color:var(--text-muted);">
+        <li><strong style="color:var(--gold-light)">Lethal Shots 5/5</strong> — +5% crit sur tous les tirs à distance. Passif essentiel.</li>
+        <li><strong style="color:var(--gold-light)">Careful Aim 3/3</strong> — +2/3 de votre Intellect en Puissance d'attaque à distance. Synergise avec les potions de Wild Magic.</li>
+        <li><strong style="color:var(--gold-light)">Improved Hunter's Mark 5/5</strong> — Hunter's Mark donne +550 PA à distance à tous les DPS physiques du groupe. Buff raid crucial.</li>
+        <li><strong style="color:var(--gold-light)">Mortal Shots 5/5</strong> — +30% aux dégâts des coups critiques à distance. Multiplicateur massif.</li>
+        <li><strong style="color:var(--gold-light)">Aimed Shot 1/1</strong> — Tir puissant (3s de cast), réduit les soins reçus par la cible de 50% pendant 10s.</li>
+        <li><strong style="color:var(--gold-light)">Rapid Killing 2/2</strong> — Kill Shot réduit le CD de Rapid Fire. Accélère le burst sur execute phase.</li>
+        <li><strong style="color:var(--gold-light)">Silencing Shot 1/1</strong> — Interrupt à distance (20s CD), off-GCD. Sort gratuit entre les tirs normaux.</li>
+        <li><strong style="color:var(--gold-light)">Improved Steady Shot 3/3</strong> — Après 2 Steady Shots consécutifs, votre prochain Aimed Shot, Chimera Shot ou Arcane Shot inflige +20% de dégâts. Cœur du rythme de rotation.</li>
+        <li><strong style="color:var(--gold-light)">Readiness 1/1</strong> — Reset immédiat de tous les CDs de Chasseur. Permet un double Rapid Fire par combat.</li>
+        <li><strong style="color:var(--gold-light)">Chimera Shot 1/1</strong> — Sort signature. Inflige de gros dégâts directs ET refresh automatiquement Venin du Serpent. CD : 10s (9s avec glyph).</li>
+      </ul>
+    </div>
+
+    <div class="content-card">
+      <h3>Talents Survie — 7 pts</h3>
+      <ul style="padding-left:1.2rem; display:flex; flex-direction:column; gap:0.5rem; font-size:0.88rem; color:var(--text-muted);">
+        <li><strong style="color:var(--gold-light)">Hunter vs. Wild 5/5</strong> — +7.5% de vos HP totaux ajoutés en Puissance d'attaque. Excellent scaling avec le gear.</li>
+        <li><strong style="color:var(--gold-light)">Hunting Party 2/3</strong> — 20% de chance par coup de mêlée de restaurer 1% de mana à tout le groupe. Buff raid utile.</li>
       </ul>
     </div>
 
     <div class="content-card">
       <h3>Glyphes</h3>
+      <div style="margin-bottom:0.5rem;font-size:0.78rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.08em;">Majeurs</div>
+      <ul style="padding-left:1.2rem; display:flex; flex-direction:column; gap:0.4rem; font-size:0.88rem; color:var(--text-muted); margin-bottom:0.8rem;">
+        <li><strong style="color:var(--gold-light)">Glyph of Steady Shot</strong> — +10% de dégâts sur Steady Shot quand Venin du Serpent est actif sur la cible. Glyph n°1 obligatoire.</li>
+        <li><strong style="color:var(--gold-light)">Glyph of Chimera Shot</strong> — Réduit le CD de Chimera Shot de 1s (9s au lieu de 10s). Plus de Chimera Shots par minute = plus de DPS.</li>
+        <li><strong style="color:var(--gold-light)">Glyph of Serpent Sting</strong> — Augmente la durée de Venin du Serpent de 6s. Réduit le nombre de réapplications nécessaires.</li>
+      </ul>
+      <div style="margin-bottom:0.5rem;font-size:0.78rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.08em;">Mineurs</div>
       <ul style="padding-left:1.2rem; display:flex; flex-direction:column; gap:0.4rem; font-size:0.88rem; color:var(--text-muted);">
-        <li><strong style="color:var(--gold-light)">Glyphe de Tir Constant</strong> — +10% dégâts quand Venin du Serpent est actif.</li>
-        <li><strong style="color:var(--gold-light)">Glyphe de Tir de Chimère</strong> — Réduit le CD de 1s (9s au lieu de 10s).</li>
-        <li><strong style="color:var(--gold-light)">Glyphe de Tir Mortel</strong> — Si Tir Mortel ne tue pas, le CD est reset.</li>
-        <li><strong style="color:var(--gold-light)">Glyphe mineur — Revivification</strong> — Réduit le coût en mana du rez en combat.</li>
+        <li><strong style="color:var(--gold-light)">Glyph of Feign Death</strong> — Réduit le CD de Feign Death de 5s. Utile pour reset l'aggro rapidement.</li>
+        <li><strong style="color:var(--gold-light)">Glyph of Revive Pet</strong> — Supprime le pushback lors du cast de Revive Pet en combat.</li>
+        <li><strong style="color:var(--gold-light)">Glyph of Mend Pet</strong> — Mend Pet a 5% de chance de supprimer un effet debuff du familier à chaque tick.</li>
       </ul>
     </div>
 
@@ -213,83 +240,114 @@
       <div class="rotation-list">
         <div class="rotation-step">
           <span class="step-num">Pre</span>
-          <span class="step-skill">Flèche de Traqueur</span>
-          <span class="step-desc">— 2s avant le pull si possible</span>
+          <span class="step-skill">Hunter's Mark</span>
+          <span class="step-desc">— Appliquer avant le pull · +110 PA à distance pour tout le groupe</span>
+        </div>
+        <div class="rotation-step">
+          <span class="step-num">Pre</span>
+          <span class="step-skill">Misdirection → Tank</span>
+          <span class="step-desc">— Redirige les 3 prochains tirs vers le tank · évite l'aggro au pull</span>
         </div>
         <div class="rotation-step">
           <span class="step-num">1.</span>
           <span class="step-skill">Venin du Serpent</span>
-          <span class="step-desc">— Appliquer immédiatement (DoT principal)</span>
+          <span class="step-desc">— Appliquer immédiatement · Chimera Shot le refreshera automatiquement ensuite</span>
         </div>
         <div class="rotation-step">
           <span class="step-num">2.</span>
-          <span class="step-skill">Tir de Chimère</span>
-          <span class="step-desc">— Refresh automatique Venin + gros dégâts</span>
+          <span class="step-skill">Rapid Fire + Trinkets</span>
+          <span class="step-desc">— Activer tous les CDs offensifs dès le début · aligner avec les procs de Deathbringer's Will</span>
         </div>
         <div class="rotation-step">
           <span class="step-num">3.</span>
-          <span class="step-skill">Tir Visé</span>
-          <span class="step-desc">— Si buff Tir Constant amélioré actif</span>
+          <span class="step-skill">Chimera Shot</span>
+          <span class="step-desc">— Premier grand sort, refresh Venin du Serpent + gros dégâts directs</span>
         </div>
         <div class="rotation-step">
           <span class="step-num">4.</span>
-          <span class="step-skill">Tir Rapide + Trinkets</span>
-          <span class="step-desc">— Activer les CDs offensifs sur le pull</span>
+          <span class="step-skill">Aimed Shot</span>
+          <span class="step-desc">— Immédiatement après Chimera Shot · -50% healing sur la cible pendant 10s</span>
         </div>
       </div>
     </div>
 
     <div class="content-card">
-      <h3>Rotation en combat (Priorité)</h3>
+      <h3>Priorités en combat</h3>
       <div class="rotation-list">
         <div class="rotation-step">
           <span class="step-num">1.</span>
-          <span class="step-skill">Tir Mortel</span>
-          <span class="step-desc">— Si la cible est &lt;20% — priorité absolue</span>
+          <span class="step-skill">Kill Shot</span>
+          <span class="step-desc">— Cible sous 20% HP · priorité absolue · reset du CD si la cible survit</span>
         </div>
         <div class="rotation-step">
           <span class="step-num">2.</span>
-          <span class="step-skill">Tir de Chimère</span>
-          <span class="step-desc">— Sur cooldown (9-10s), votre sort le plus puissant</span>
+          <span class="step-skill">Chimera Shot</span>
+          <span class="step-desc">— Sur cooldown (9s) · refresh Venin du Serpent automatiquement · votre sort le plus fort</span>
         </div>
         <div class="rotation-step">
           <span class="step-num">3.</span>
-          <span class="step-skill">Tir Visé</span>
-          <span class="step-desc">— Si buff Tir Constant amélioré actif (2 Steady Shots consécutifs)</span>
+          <span class="step-skill">Aimed Shot</span>
+          <span class="step-desc">— Sur cooldown · si le buff Improved Steady Shot est actif, +20% de dégâts bonus</span>
         </div>
         <div class="rotation-step">
           <span class="step-num">4.</span>
-          <span class="step-skill">Tir Arcane</span>
-          <span class="step-desc">— Filler instant si Chimère et Visé sont en CD</span>
+          <span class="step-skill">Arcane Shot</span>
+          <span class="step-desc">— Filler instant si Chimera et Aimed sont en CD · aussi pour consommer le buff ISS</span>
         </div>
         <div class="rotation-step">
           <span class="step-num">5.</span>
-          <span class="step-skill">Tir Constant</span>
-          <span class="step-desc">— Spam de base, génère le buff +20% (x2 = proc Tir Visé amélioré)</span>
+          <span class="step-skill">Steady Shot × 2</span>
+          <span class="step-desc">— Spam de base · 2 consécutifs = proc Improved Steady Shot (+20% prochain special)</span>
         </div>
       </div>
       <div class="rotation-note">
-        🏹 Règle d'or : Chimère passe TOUJOURS avant Tir Visé. Venin du Serpent est automatiquement refreshé par Chimère — ne jamais le ré-appliquer manuellement.
+        🏹 Rythme ISS : <strong>Steady Shot → Steady Shot → Aimed Shot (buff +20%)</strong>. Ne jamais réappliquer Venin du Serpent manuellement — Chimera Shot le refresh. Chimera Shot passe TOUJOURS avant Aimed Shot.
       </div>
     </div>
 
     <div class="content-card">
-      <h3>Cooldowns et Pet</h3>
+      <h3>Cooldowns et Familier</h3>
       <div class="rotation-list">
         <div class="rotation-step">
           <span class="step-num">CD</span>
-          <span class="step-skill">Tir Rapide</span>
-          <span class="step-desc">— Haste +40% pendant 20s (5 min CD) · Aligner avec les procs de Deathbringer's Will</span>
+          <span class="step-skill">Rapid Fire</span>
+          <span class="step-desc">— +40% vitesse d'attaque 20s · sur cooldown · aligner avec les procs de trinkets</span>
         </div>
         <div class="rotation-step">
           <span class="step-num">CD</span>
-          <span class="step-skill">Détresse</span>
-          <span class="step-desc">— Transfert d'aggro vers le tank en cas d'urgence</span>
+          <span class="step-skill">Readiness</span>
+          <span class="step-desc">— Reset TOUS les CDs de Chasseur · permet un 2ème Rapid Fire par combat · utiliser dès que RF expire</span>
+        </div>
+        <div class="rotation-step">
+          <span class="step-num">CD</span>
+          <span class="step-skill">Silencing Shot</span>
+          <span class="step-desc">— Interrupt off-GCD · cast pendant un Steady Shot sans perdre de DPS</span>
         </div>
         <div class="rotation-step">
           <span class="step-num">Pet</span>
           <span class="step-skill">Loup (Hurlement de Meute)</span>
-          <span class="step-desc">— +5% crit de mêlée pour le raid · Mode Assistance, toujours actif</span>
+          <span class="step-desc">— +5% crit de mêlée pour tout le groupe · mode Assistance · priorité absolue sur le choix du familier</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="content-card">
+      <h3>Multi-cibles (AoE)</h3>
+      <div class="rotation-list">
+        <div class="rotation-step">
+          <span class="step-num">1.</span>
+          <span class="step-skill">Multi-Shot</span>
+          <span class="step-desc">— AoE instant sur toutes les cibles dans un cône · spam si 3+ ennemis groupés</span>
+        </div>
+        <div class="rotation-step">
+          <span class="step-num">2.</span>
+          <span class="step-skill">Venin du Serpent</span>
+          <span class="step-desc">— Appliquer sur chaque cible si seulement 2-3 ennemis</span>
+        </div>
+        <div class="rotation-step">
+          <span class="step-num">3.</span>
+          <span class="step-skill">Volley</span>
+          <span class="step-desc">— Canal AoE sur une zone · utile sur les gros packs statiques</span>
         </div>
       </div>
     </div>

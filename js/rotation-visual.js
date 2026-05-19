@@ -105,21 +105,21 @@ const RotationVisual = (function () {
         {
           name: 'Ouverture',
           steps: [
-            { icon: ICON('ability_hunter_markofthehunter'),  name: "Hunter's Mark",  priority: 1, proc: false, note: 'Avant le pull · debuff +110 PA contre la cible' },
+            { icon: ICON('ability_hunter_markofthehunter'),  name: "Hunter's Mark",    priority: 1, proc: false, note: 'Avant le pull · +110 PA à distance pour tout le groupe' },
             { icon: ICON('ability_hunter_serpentsting'),     name: 'Venin du Serpent', priority: 2, proc: false, note: 'DoT principal · refreshé automatiquement par Chimera Shot' },
-            { icon: ICON('ability_hunter_rapidfire'),        name: 'Tir Rapide',     priority: 3, proc: false, note: '+40% vitesse d\'attaque 20s · activer sur pull' },
-            { icon: ICON('ability_hunter_chimerashot2'),     name: 'Tir de Chimère', priority: 4, proc: false, note: 'Sort signature · CD 9-10s · sort le plus puissant' },
-            { icon: ICON('ability_hunter_aimedshot'),        name: 'Tir Visé',       priority: 5, proc: false, note: 'Si buff Tir Constant amélioré actif (x2 Steady Shot)' },
+            { icon: ICON('ability_hunter_rapidfire'),        name: 'Rapid Fire',       priority: 3, proc: false, note: '+40% vitesse d\'attaque 20s · activer sur pull avec trinkets' },
+            { icon: ICON('ability_hunter_chimerashot2'),     name: 'Chimera Shot',     priority: 4, proc: false, note: 'Sort signature · CD 9s · refresh Venin du Serpent' },
+            { icon: ICON('ability_hunter_aimedshot'),        name: 'Aimed Shot',       priority: 5, proc: false, note: '-50% soins reçus par la cible · immédiatement après Chimera' },
           ]
         },
         {
           name: 'Priorités combat',
           steps: [
-            { icon: ICON('ability_hunter_assassinate2'),     name: 'Tir Mortel',     priority: 1, proc: true,  note: '💀 Cible < 20% HP · PRIORITÉ ABSOLUE · reset si manqué' },
-            { icon: ICON('ability_hunter_chimerashot2'),     name: 'Tir de Chimère', priority: 2, proc: false, note: 'Sur cooldown (9s) · refresh Venin du Serpent' },
-            { icon: ICON('ability_hunter_aimedshot'),        name: 'Tir Visé',       priority: 3, proc: true,  note: '⚡ PROC Improved Steady Shot → +20% dégâts · ne pas rater' },
-            { icon: ICON('ability_impalingbolt'),            name: 'Tir Arcane',     priority: 4, proc: false, note: 'Instant filler si Chimère/Visé en CD' },
-            { icon: ICON('ability_hunter_steadyshot'),       name: 'Tir Constant',   priority: 5, proc: false, note: 'Spam de base · 2 consécutifs → proc Tir Visé amélioré' },
+            { icon: ICON('ability_hunter_assassinate2'),     name: 'Kill Shot',        priority: 1, proc: true,  note: '💀 Cible < 20% HP · PRIORITÉ ABSOLUE · reset CD si cible survit' },
+            { icon: ICON('ability_hunter_chimerashot2'),     name: 'Chimera Shot',     priority: 2, proc: false, note: 'Sur cooldown (9s) · refresh Venin du Serpent automatiquement' },
+            { icon: ICON('ability_hunter_aimedshot'),        name: 'Aimed Shot',       priority: 3, proc: true,  note: '⚡ Si buff Improved Steady Shot actif → +20% dégâts · ne pas rater' },
+            { icon: ICON('ability_impalingbolt'),            name: 'Arcane Shot',      priority: 4, proc: false, note: 'Filler instant si Chimera/Aimed en CD' },
+            { icon: ICON('ability_hunter_steadyshot'),       name: 'Steady Shot × 2', priority: 5, proc: false, note: '2 consécutifs → proc Improved Steady Shot (+20% prochain special)' },
           ]
         }
       ]
