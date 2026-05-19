@@ -3,10 +3,10 @@
 (function () {
 
   const ROLES = {
-    Fripon:   { role: 'dps',  class: 'warlock', icon: '🧙' },
+    Alban:   { role: 'dps',  class: 'warlock', icon: '🧙' },
     Eliott:  { role: 'dps',  class: 'mage',    icon: '🔥' },
     Fabien:  { role: 'dps',  class: '',         icon: '⚔️' },
-    Gredin:    { role: 'tank', class: 'paladin',  icon: '🛡️' },
+    Maël:    { role: 'tank', class: 'paladin',  icon: '🛡️' },
     Tristan: { role: 'heal', class: 'paladin',  icon: '💚' },
   };
 

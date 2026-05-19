@@ -25,7 +25,7 @@
     OS: 0xff4500, EoE: 0x00bfff, VoA: 0x808080,
   };
 
-  const PLAYERS = ['Fripon','Eliott','Fabien','Gredin','Tristan'];
+  const PLAYERS = ['Alban','Eliott','Fabien','Maël','Tristan'];
 
   /* ── Éléments DOM ─────────────────────────────────────────── */
   const sel = id => document.getElementById(id);

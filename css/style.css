@@ -1993,7 +1993,7 @@ body[data-class="deathknight"]{ --class-accent: var(--deathknight);--class-glow:
   .bm-svg-wrap { flex: none; width: 100%; border-right: none; border-bottom: 1px solid var(--border); }
 }
 
-/* — Gobelins de Fripon (mini-jeu) — */
+/* — Gobelins de Alban (mini-jeu) — */
 .goblin-army {
   position: fixed;
   bottom: 0;
@@ -4667,6 +4667,26 @@ h1, h2, h3,
 /* ═══════════════════════════════════════════════════════
    MOBILE — hamburger + responsive 768px
 ═══════════════════════════════════════════════════════ */
+
+/* ── Nom du personnage WoW (sous le prénom du joueur) ── */
+.swag-perso {
+  font-size: 0.72rem;
+  color: var(--gold);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-family: 'Cinzel', serif;
+  margin: -0.1rem 0 0.1rem;
+  opacity: 0.85;
+}
+.char-perso-name {
+  font-size: 0.8rem;
+  color: var(--gold);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-family: 'Cinzel', serif;
+  margin: 0.1rem 0 0.3rem;
+  opacity: 0.8;
+}
 
 /* Hamburger — caché sur desktop */
 .nav-hamburger {

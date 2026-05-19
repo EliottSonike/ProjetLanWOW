@@ -18,8 +18,8 @@
   ];
 
   const LEFT_ICONS = [
-    { file: 'classes-warlock-affliction.webp', name: 'Fripon' },
-    { file: 'classes-paladin-protection.webp', name: 'Gredin' },
+    { file: 'classes-warlock-affliction.webp', name: 'Alban' },
+    { file: 'classes-paladin-protection.webp', name: 'Maël' },
   ];
 
   const RIGHT_ICONS = [

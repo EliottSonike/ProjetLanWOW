@@ -3,10 +3,10 @@
   var HOS;
 
   var PLAYERS = [
-    { name: 'Fripon',   cls: 'warlock', spec: 'Affliction' },
+    { name: 'Alban',   cls: 'warlock', spec: 'Affliction' },
     { name: 'Eliott',  cls: 'mage',    spec: 'Feu' },
     { name: 'Fabien',  cls: 'hunter',  spec: 'Précision' },
-    { name: 'Gredin',    cls: 'paladin', spec: 'Protection' },
+    { name: 'Maël',    cls: 'paladin', spec: 'Protection' },
     { name: 'Tristan', cls: 'paladin', spec: 'Holy' }
   ];
 
