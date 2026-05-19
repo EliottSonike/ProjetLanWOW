@@ -4823,4 +4823,49 @@ h1, h2, h3,
   .chars-grid { grid-template-columns: 1fr 1fr; }
   .char-page-header { flex-direction: column; text-align: center; }
   .tabs-nav { overflow-x: auto; white-space: nowrap; }
+
+  /* ── Paperdoll / BiS / Armory ── */
+  .wow-paperdoll { padding: 0.6rem 0.4rem; }
+
+  /* Grid : portrait pleine largeur en haut, items côte à côte en bas */
+  .paperdoll-main {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
+    gap: 6px;
+  }
+  .paperdoll-center {
+    grid-column: 1 / -1;
+    grid-row: 1;
+  }
+  .paperdoll-col:first-child { grid-column: 1; grid-row: 2; }
+  .paperdoll-col:last-child  { grid-column: 2; grid-row: 2; }
+
+  /* Portrait compact en ligne */
+  .paperdoll-char {
+    width: 100%;
+    flex-direction: row;
+    padding: 8px 12px;
+    gap: 12px;
+    justify-content: center;
+    align-items: center;
+  }
+  .paperdoll-char-portrait { width: 64px !important; height: 64px !important; }
+  .portrait-frame img      { width: 64px !important; height: 64px !important; }
+  .paperdoll-char-name     { font-size: 0.9rem; }
+
+  /* Slots : icône + label miniature */
+  .equip-slot       { flex-direction: row; align-items: center; gap: 6px; min-height: 36px; }
+  .equip-slot-icon  { width: 34px; height: 34px; flex-shrink: 0; border-radius: 3px; }
+  .equip-slot-label { font-size: 0.58rem; color: var(--text-muted); white-space: nowrap; }
+  .slot-link        { font-size: 0.58rem; line-height: 1.3; }
+
+  /* Armes en bas */
+  .paperdoll-bottom { flex-wrap: wrap; gap: 6px; }
+  .paperdoll-bottom .equip-slot { flex-direction: column; }
+  .paperdoll-bottom .equip-slot-icon { width: 42px; height: 42px; }
+
+  /* Viewer 3D */
+  .viewer3d { width: 140px !important; height: 240px !important; }
+  .portrait-frame.is-3d { width: 150px !important; height: 250px !important; }
 }
