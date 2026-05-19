@@ -47,20 +47,22 @@ const RotationVisual = (function () {
         {
           name: 'Ouverture',
           steps: [
-            { icon: ICON('spell_shadow_curseofachimonde'),         name: 'Curse of Elements', priority: 1, proc: false, note: 'Debuff raid · 1 seul warlock l\'applique' },
-            { icon: ICON('spell_shadow_abominationexplosion'),     name: 'Corruption',        priority: 2, proc: false, note: 'Auto-refresh via Shadow Bolt (Everlasting Affliction)' },
-            { icon: ICON('ability_warlock_haunt'),                  name: 'Haunt',             priority: 3, proc: false, note: '+20% dégâts sur vos DoTs · maintenir en permanence' },
-            { icon: ICON('spell_shadow_unstableaffliction_3'),     name: 'Unstable Affliction', priority: 4, proc: false, note: 'DoT puissant · durée 15s' },
-            { icon: ICON('spell_shadow_shadowbolt'),               name: 'Shadow Bolt',       priority: 5, proc: false, note: 'Filler · refresh Corruption automatiquement' },
+            { icon: ICON('spell_shadow_burningspirit'),            name: 'Life Tap',          priority: 1, proc: true,  note: '💜 Pre-pull · active le buff Glyph of Life Tap (+20% Esprit en SP 40s)' },
+            { icon: ICON('spell_shadow_abominationexplosion'),     name: 'Corruption',        priority: 2, proc: false, note: 'DoT principal · jamais réappliquer manuellement (Everlasting Affliction)' },
+            { icon: ICON('ability_warlock_haunt'),                 name: 'Haunt',             priority: 3, proc: false, note: '+20% dégâts sur tous vos DoTs · activer dès Corruption posé' },
+            { icon: ICON('spell_shadow_unstableaffliction_3'),    name: 'Unstable Affliction', priority: 4, proc: false, note: 'DoT puissant 15s · maintenir en permanence' },
+            { icon: ICON('spell_shadow_curseofachimonde'),        name: 'Curse of Agony',    priority: 5, proc: false, note: 'Malédiction principale · ou Curse of Elements si absent du raid' },
+            { icon: ICON('spell_shadow_shadowbolt'),              name: 'Shadow Bolt',       priority: 6, proc: false, note: 'Filler spam · refresh Corruption via Everlasting Affliction' },
           ]
         },
         {
-          name: 'Priorités continues',
+          name: 'Priorités combat',
           steps: [
-            { icon: ICON('ability_warlock_haunt'),                  name: 'Haunt',             priority: 1, proc: false, note: '⚡ GCD le plus prioritaire · réappliquer dès expiration' },
-            { icon: ICON('spell_shadow_unstableaffliction_3'),     name: 'Unstable Affliction', priority: 2, proc: false, note: 'Réappliquer avant expiration' },
-            { icon: ICON('spell_shadow_burningspirit'),            name: 'Life Tap',           priority: 3, proc: true,  note: '💜 BUFF 20% SP pendant 40s · maintenir en permanence' },
-            { icon: ICON('spell_shadow_shadowbolt'),               name: 'Shadow Bolt',       priority: 4, proc: false, note: 'Filler · refresh Corruption' },
+            { icon: ICON('ability_warlock_haunt'),                 name: 'Haunt',             priority: 1, proc: false, note: '⚡ Sur cooldown (15s) · priorité absolue · +20% DoTs' },
+            { icon: ICON('spell_shadow_unstableaffliction_3'),    name: 'Unstable Affliction', priority: 2, proc: false, note: 'Réappliquer avant expiration · ne jamais laisser tomber' },
+            { icon: ICON('spell_shadow_curseofachimonde'),        name: 'Curse of Agony',    priority: 3, proc: false, note: 'Réappliquer avant expiration · ne jamais laisser tomber' },
+            { icon: ICON('spell_shadow_burningspirit'),           name: 'Life Tap',          priority: 4, proc: true,  note: '💜 BUFF Glyph of Life Tap · maintenir en permanence (expire 40s)' },
+            { icon: ICON('spell_shadow_shadowbolt'),              name: 'Shadow Bolt',       priority: 5, proc: false, note: 'Filler · refresh Corruption · spam entre les DoTs' },
           ]
         }
       ]

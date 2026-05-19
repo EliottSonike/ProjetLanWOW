@@ -242,64 +242,90 @@
       <h3>Opener</h3>
       <div class="rotation-list">
         <div class="rotation-step">
+          <span class="step-num">Pre</span>
+          <span class="step-skill">Life Tap</span>
+          <span class="step-desc">— 1s avant le pull pour activer le buff Glyph of Life Tap (+20% Esprit en SP pendant 40s)</span>
+        </div>
+        <div class="rotation-step">
           <span class="step-num">1.</span>
           <span class="step-skill">Corruption</span>
-          <span class="step-desc">— Appliquer immédiatement (Everlasting Affliction le maintient via Shadow Bolt)</span>
+          <span class="step-desc">— DoT principal à appliquer en premier. Everlasting Affliction le maintient automatiquement.</span>
         </div>
         <div class="rotation-step">
           <span class="step-num">2.</span>
           <span class="step-skill">Haunt</span>
-          <span class="step-desc">— Dès que Corruption est posé, +20% dégâts sur tous vos DoTs</span>
+          <span class="step-desc">— +20% dégâts sur tous vos DoTs · activer dès que Corruption est posé</span>
         </div>
         <div class="rotation-step">
           <span class="step-num">3.</span>
           <span class="step-skill">Unstable Affliction</span>
-          <span class="step-desc">— DoT puissant, maintenir en permanence</span>
+          <span class="step-desc">— DoT puissant 15s · maintenir en permanence</span>
         </div>
         <div class="rotation-step">
           <span class="step-num">4.</span>
           <span class="step-skill">Curse of Agony</span>
-          <span class="step-desc">— Malédiction principale, maintenir en permanence</span>
+          <span class="step-desc">— Malédiction principale · maintenir en permanence (ou Curse of Elements si absent du raid)</span>
         </div>
         <div class="rotation-step">
           <span class="step-num">5.</span>
           <span class="step-skill">Shadow Bolt</span>
-          <span class="step-desc">— Filler, refresh Corruption via Everlasting Affliction</span>
+          <span class="step-desc">— Filler spam · refresh Corruption via Everlasting Affliction</span>
         </div>
       </div>
     </div>
 
     <div class="content-card">
-      <h3>Rotation en combat (Priorité)</h3>
+      <h3>Priorités en combat</h3>
       <div class="rotation-list">
         <div class="rotation-step">
           <span class="step-num">1.</span>
           <span class="step-skill">Haunt</span>
-          <span class="step-desc">— Sur cooldown (15s), priorité absolue — c'est votre plus gros DPS</span>
+          <span class="step-desc">— Sur cooldown (15s) · priorité absolue · +20% dégâts DoTs</span>
         </div>
         <div class="rotation-step">
           <span class="step-num">2.</span>
           <span class="step-skill">Unstable Affliction</span>
-          <span class="step-desc">— Maintenir, ne jamais laisser expirer</span>
+          <span class="step-desc">— Réappliquer avant expiration · ne jamais laisser tomber</span>
         </div>
         <div class="rotation-step">
           <span class="step-num">3.</span>
           <span class="step-skill">Curse of Agony</span>
-          <span class="step-desc">— Maintenir, ne jamais laisser expirer</span>
+          <span class="step-desc">— Réappliquer avant expiration · ne jamais laisser tomber</span>
         </div>
         <div class="rotation-step">
           <span class="step-num">4.</span>
-          <span class="step-skill">Shadow Bolt</span>
-          <span class="step-desc">— Spam filler entre les DoTs (maintient Corruption via Everlasting)</span>
+          <span class="step-skill">Life Tap</span>
+          <span class="step-desc">— Dès que le buff Glyph of Life Tap expire (toutes les 40s) · maintenir le buff +SP en permanence</span>
         </div>
         <div class="rotation-step">
           <span class="step-num">5.</span>
-          <span class="step-skill">Life Tap</span>
-          <span class="step-desc">— Dès que le mana baisse, donne un buff +Spell Power via Glyph</span>
+          <span class="step-skill">Shadow Bolt</span>
+          <span class="step-desc">— Filler entre les DoTs · refresh Corruption via Everlasting Affliction</span>
         </div>
       </div>
       <div class="rotation-note">
-        ðŸ”® Ne jamais réappliquer Corruption manuellement — Shadow Bolt le refresh via Everlasting Affliction. Vérifier que Haunt est toujours actif avant de cast UA ou CoA.
+        🔮 Ne jamais réappliquer Corruption manuellement — Shadow Bolt le refresh automatiquement. Life Tap n'est pas seulement pour la mana : le buff Glyph of Life Tap doit être actif en permanence.
+      </div>
+    </div>
+
+    <div class="content-card">
+      <h3>Cooldowns et Familier</h3>
+      <div class="rotation-list">
+        <div class="rotation-step">
+          <span class="step-num">Pet</span>
+          <span class="step-skill">Felhunter</span>
+          <span class="step-desc">— Buff passif intellect · Devour Magic pour dispell · Spell Lock interrupt</span>
+        </div>
+        <div class="rotation-step">
+          <span class="step-num">CD</span>
+          <span class="step-skill">Trinkets actifs</span>
+          <span class="step-desc">— Sur pull avec Haunt actif pour la fenêtre de burst maximale</span>
+        </div>
+        <div class="rotation-step">
+          <span class="step-num">CD</span>
+          <span class="step-skill">Drain Soul</span>
+          <span class="step-desc">— Cible sous 25% HP · remplace Shadow Bolt en fin de combat pour Soul Shards</span>
+        </div>
       </div>
     </div>
 
@@ -309,33 +335,12 @@
         <div class="rotation-step">
           <span class="step-num">1.</span>
           <span class="step-skill">Seed of Corruption</span>
-          <span class="step-desc">— Sur chaque cible si le groupe est groupé (explosion en AoE)</span>
+          <span class="step-desc">— Sur chaque cible groupée · explosion AoE massive quand la cible subit 1 644 dégâts</span>
         </div>
         <div class="rotation-step">
           <span class="step-num">2.</span>
           <span class="step-skill">DoTs individuels</span>
-          <span class="step-desc">— Si seulement 2-3 cibles, DoTs sur chaque est plus rentable</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="content-card">
-      <h3>Pet et CDs</h3>
-      <div class="rotation-list">
-        <div class="rotation-step">
-          <span class="step-num">Pet</span>
-          <span class="step-skill">Felhunter</span>
-          <span class="step-desc">— Buff Spell Power intellect passif · Interrupt en cas d'urgence</span>
-        </div>
-        <div class="rotation-step">
-          <span class="step-num">CD</span>
-          <span class="step-skill">Metamorphosis</span>
-          <span class="step-desc">— Non utilisé en Affliction (spé Démo). Pas dans ce build.</span>
-        </div>
-        <div class="rotation-step">
-          <span class="step-num">CD</span>
-          <span class="step-skill">Trinkets actifs</span>
-          <span class="step-desc">— Sur pull avec Haunt pour la fenêtre de burst maximale</span>
+          <span class="step-desc">— Si 2-3 cibles seulement · Corruption + UA sur chacune est plus rentable</span>
         </div>
       </div>
     </div>
