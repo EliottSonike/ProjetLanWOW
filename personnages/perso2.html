@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Eliott — Mage Feu · LAN Du Swag</title>
+  <title>Eliott — Mage Frostfire · LAN Du Swag</title>
   <link rel="stylesheet" href="../css/style.css">
   <script src="../js/layout.js"></script>
 </head>
@@ -23,7 +23,7 @@
       <div class="char-page-title">
         <h1>Eliott</h1>
         <div class="class-label mage">Mage</div>
-        <div class="spec-label">Feu · Niveau 80</div>
+        <div class="spec-label">Frostfire · Niveau 80</div>
       </div>
     </div>
 
@@ -39,38 +39,51 @@
     <section id="talents" class="tab-panel">
 
       <div class="content-card">
-        <h3>Build — Feu 0/53/18</h3>
-        <a class="talent-link" href="https://wotlk.evowow.com/?talent#of0bZbxbZcGbc" target="_blank" rel="noopener">
-          🔗 Voir le build sur Evowow
+        <h3>Build — Frostfire Bolt 0/53/18</h3>
+        <a class="talent-link" href="https://www.wowhead.com/wotlk/guide/classes/mage/fire/dps-talent-builds-glyphs-pve#pure-single-target-fire-mage-18-53-0" target="_blank" rel="noopener">
+          🔗 Voir le build sur Wowhead
         </a>
-        <div class="talent-tree-img">
-          <img src="../assets/img/talent-eliott.png" alt="Arbre de talents Mage Feu" data-src="https://wotlk.evowow.com/?talent#of0bZbxbZcGbc"
-               onerror="this.parentElement.style.display='none'">
-        </div>
         <p class="talent-points">Points : 0 Arcane · 53 Feu · 18 Givre</p>
         <div class="talent-note">
-          Build standard Mage Feu PvE. Le givre est pris uniquement pour <strong>Winter's Chill</strong> (debuff crit sur la cible) — indispensable si personne d'autre ne l'applique dans le groupe.
+          Build <strong>Frostfire Bolt (FFB)</strong> — Frostfire Bolt remplace Fireball comme sort principal. Il est à la fois Feu et Givre, ce qui le rend plus puissant : il bénéficie du talent <em>Precision</em> (+6% hit au lieu de 3%), d'<em>Ice Shards</em> (crits givre à 200%), et de <em>Piercing Ice</em> (+6% dégâts). Cap de hit plus facile à atteindre, meilleure efficacité mana, AoE supérieure au build TTW.
         </div>
       </div>
 
       <div class="content-card">
-        <h3>Talents clés</h3>
+        <h3>Talents Feu — 53 pts</h3>
         <ul style="padding-left:1.2rem; display:flex; flex-direction:column; gap:0.5rem; font-size:0.88rem; color:var(--text-muted);">
-          <li><strong style="color:var(--gold-light)">Hot Streak</strong> — Deux crits consécutifs → Pyroblast instantané. Cœur du DPS Feu.</li>
-          <li><strong style="color:var(--gold-light)">Living Bomb</strong> — DoT qui explose à la fin. Maintenir en permanence sur la cible.</li>
-          <li><strong style="color:var(--gold-light)">Pyromaniac</strong> — +15% dégâts si 3+ cibles brûlent. Boost énorme sur multi-cibles.</li>
-          <li><strong style="color:var(--gold-light)">Combustion</strong> — Chaque crit donne un stack de +10% crit feu. CD offensif majeur.</li>
-          <li><strong style="color:var(--gold-light)">Improved Scorch</strong> — Applique <em>Fire Vulnerability</em> : +5% dégâts feu par stack (5 stacks max = +25%). À maintenir en permanence.</li>
+          <li><strong style="color:var(--gold-light)">Improved Fireball 5/5</strong> — Réduit le cast de Frostfire Bolt de 0,5s. Indispensable.</li>
+          <li><strong style="color:var(--gold-light)">Ignite 5/5</strong> — Chaque crit laisse un DoT à 40% des dégâts. Énorme sur FFB qui crit souvent.</li>
+          <li><strong style="color:var(--gold-light)">Incineration 3/3</strong> — +9% crit sur Frostfire Bolt, Fire Blast, Scorch.</li>
+          <li><strong style="color:var(--gold-light)">Fire Power 5/5</strong> — +10% à tous les dégâts de feu. Talent passif majeur.</li>
+          <li><strong style="color:var(--gold-light)">Pyromaniac 3/3</strong> — +15% dégâts si 3+ cibles sont en feu. Excellent en AoE.</li>
+          <li><strong style="color:var(--gold-light)">Hot Streak 3/3</strong> — 2 crits consécutifs → Pyroblast instantané. Cœur du DPS.</li>
+          <li><strong style="color:var(--gold-light)">Burnout 5/5</strong> — +50% dégâts des crits (coûte de la mana). Synergise avec Ice Shards.</li>
+          <li><strong style="color:var(--gold-light)">Combustion 1/1</strong> — Chaque crit = +10% crit feu (stack). CD offensif majeur.</li>
+          <li><strong style="color:var(--gold-light)">Molten Fury 2/2</strong> — +12% dégâts quand la cible est sous 35%. Execute phase.</li>
+          <li><strong style="color:var(--gold-light)">Living Bomb 1/1</strong> — DoT + explosion. Maintenir en permanence sur la cible.</li>
+        </ul>
+      </div>
+
+      <div class="content-card">
+        <h3>Talents Givre — 18 pts</h3>
+        <ul style="padding-left:1.2rem; display:flex; flex-direction:column; gap:0.5rem; font-size:0.88rem; color:var(--text-muted);">
+          <li><strong style="color:var(--gold-light)">Precision 3/3</strong> — +3% hit sur tous les sorts. Frostfire Bolt étant Givre ET Feu, il bénéficie de <em>6% hit total</em> → cap de hit à <strong>289 hit rating</strong> au lieu de 446.</li>
+          <li><strong style="color:var(--gold-light)">Ice Shards 5/5</strong> — Les crits de sorts Givre font 200% de dégâts (+100%). Frostfire Bolt bénéficie pleinement de ce talent.</li>
+          <li><strong style="color:var(--gold-light)">Piercing Ice 3/3</strong> — +6% à tous les dégâts de givre. S'applique à Frostfire Bolt.</li>
+          <li><strong style="color:var(--gold-light)">Ice Floes 3/3</strong> — Réduit le CD des sorts Givre (Icy Veins, Cold Snap). Qualité de vie.</li>
+          <li><strong style="color:var(--gold-light)">Frostbite 3/3</strong> — Filler pour atteindre les talents plus profonds. Snare occasionnel.</li>
         </ul>
       </div>
 
       <div class="content-card">
         <h3>Glyphes</h3>
         <ul style="padding-left:1.2rem; display:flex; flex-direction:column; gap:0.4rem; font-size:0.88rem; color:var(--text-muted);">
-          <li><strong style="color:var(--gold-light)">Glyphe de Boule de feu</strong> — +5% crit sur Fireball. Glyphe n°1 obligatoire.</li>
-          <li><strong style="color:var(--gold-light)">Glyphe de Bombe vivante</strong> — +3% crit sur Living Bomb.</li>
-          <li><strong style="color:var(--gold-light)">Glyphe de Combustion</strong> — +10s de durée sur Combustion.</li>
-          <li><strong style="color:var(--gold-light)">Glyphe mineur — Slow Fall</strong> — Qualité de vie, plus besoin de reagent.</li>
+          <li><strong style="color:var(--gold-light)">Glyphe de Bombe de givre-feu</strong> — +5% dégâts sur Frostfire Bolt, +3% crit. Glyphe n°1 obligatoire pour FFB.</li>
+          <li><strong style="color:var(--gold-light)">Glyphe de Bombe vivante</strong> — +3% crit sur Living Bomb. Toujours indispensable.</li>
+          <li><strong style="color:var(--gold-light)">Glyphe d'Armure de magma</strong> — +20% du mana régénéré par Molten Armor converti en crit. Remplace Combustion.</li>
+          <li><strong style="color:var(--gold-light)">Glyphe mineur — Intelligence des arcanes</strong> — Durée +1h, qualité de vie.</li>
+          <li><strong style="color:var(--gold-light)">Glyphe mineur — Slow Fall</strong> — Plus besoin de reagent.</li>
         </ul>
       </div>
 
@@ -218,33 +231,36 @@
     <section id="rotation" class="tab-panel">
 
       <div class="content-card">
-        <h3>Priorités de base</h3>
+        <h3>Priorités de base — Single Target</h3>
         <div class="rotation-list">
           <div class="rotation-step">
             <span class="step-num">1.</span>
             <span class="step-skill">Living Bomb</span>
-            <span class="step-desc">— Maintenir en permanence sur la cible (DoT + explosion)</span>
+            <span class="step-desc">— Maintenir en permanence sur la cible (DoT + explosion finale)</span>
           </div>
           <div class="rotation-step">
             <span class="step-num">2.</span>
             <span class="step-skill">Pyroblast!</span>
-            <span class="step-desc">— Dès que Hot Streak proc (instant) — priorité absolue</span>
+            <span class="step-desc">— Dès que Hot Streak proc (instant) — priorité absolue, ne jamais retarder</span>
           </div>
           <div class="rotation-step">
             <span class="step-num">3.</span>
-            <span class="step-skill">Fireball</span>
-            <span class="step-desc">— Sort principal, spam en permanence</span>
+            <span class="step-skill">Frostfire Bolt</span>
+            <span class="step-desc">— Sort principal, remplace Fireball. Spam en permanence. Bénéficie d'Ice Shards + Ignite.</span>
           </div>
           <div class="rotation-step">
             <span class="step-num">4.</span>
             <span class="step-skill">Fire Blast</span>
-            <span class="step-desc">— Filler instant entre les casts / pour déclencher Hot Streak</span>
+            <span class="step-desc">— Instant entre les casts pour enchaîner les crits et déclencher Hot Streak</span>
           </div>
           <div class="rotation-step">
             <span class="step-num">5.</span>
             <span class="step-skill">Scorch</span>
-            <span class="step-desc">— En déplacement uniquement, maintenir le debuff Improved Scorch</span>
+            <span class="step-desc">— En déplacement uniquement (FFB ne se cast pas en mouvement)</span>
           </div>
+        </div>
+        <div class="rotation-note">
+          ❄️🔥 Frostfire Bolt bénéficie à la fois des multiplicateurs Feu (Ignite, Burnout) et Givre (Ice Shards) — chaque crit est particulièrement dévastateur.
         </div>
       </div>
 
@@ -254,21 +270,26 @@
           <div class="rotation-step">
             <span class="step-num">CD</span>
             <span class="step-skill">Combustion</span>
-            <span class="step-desc">— Utiliser sur pull, chaque crit = +10% crit. Stack vite avec Fireball.</span>
+            <span class="step-desc">— Sur pull ou après un Pyroblast!. Chaque crit = +10% crit Feu. Empile vite avec FFB.</span>
+          </div>
+          <div class="rotation-step">
+            <span class="step-num">CD</span>
+            <span class="step-skill">Icy Veins</span>
+            <span class="step-desc">— +20% haste de cast pendant 20s. Disponible grâce à Ice Floes. Utiliser sur pull.</span>
           </div>
           <div class="rotation-step">
             <span class="step-num">CD</span>
             <span class="step-skill">Mirror Image</span>
-            <span class="step-desc">— Utiliser tôt, génère de la menace sur les copies (pas sur vous).</span>
+            <span class="step-desc">— Tôt dans le fight pour dump de la menace. 3 copies castent FFB.</span>
           </div>
           <div class="rotation-step">
             <span class="step-num">CD</span>
-            <span class="step-skill">Presence of Mind</span>
-            <span class="step-desc">— Si pris : prochain sort instantané — à combiner avec Pyroblast pour burst.</span>
+            <span class="step-skill">Cold Snap</span>
+            <span class="step-desc">— Reset le CD d'Icy Veins. Permet un second usage dans les fights longs.</span>
           </div>
         </div>
         <div class="rotation-note">
-          🔥 Fenêtre de burst idéale : <strong>Combustion → Pyroblast! (Hot Streak) → Fire Blast → Fireball</strong>. Le but est d'enchaîner les crits pour maintenir Combustion et les procs Hot Streak.
+          ❄️ Fenêtre de burst idéale : <strong>Icy Veins + Combustion → Pyroblast! (Hot Streak) → Fire Blast → Frostfire Bolt</strong>. Cold Snap pour doubler Icy Veins sur les phases clés.
         </div>
       </div>
 
@@ -278,23 +299,26 @@
           <div class="rotation-step">
             <span class="step-num">1.</span>
             <span class="step-skill">Living Bomb</span>
-            <span class="step-desc">— Sur chaque cible si possible (max 3 en WotLK)</span>
+            <span class="step-desc">— Sur chaque cible si possible (explosions simultanées = burst massif)</span>
           </div>
           <div class="rotation-step">
             <span class="step-num">2.</span>
             <span class="step-skill">Flamestrike</span>
-            <span class="step-desc">— AoE au sol sur les packs</span>
+            <span class="step-desc">— AoE au sol sur les packs. FFB améliore aussi Flamestrike via World in Flames.</span>
           </div>
           <div class="rotation-step">
             <span class="step-num">3.</span>
-            <span class="step-skill">Dragon's Breath</span>
-            <span class="step-desc">— Cône de feu devant vous, bon burst AoE</span>
+            <span class="step-skill">Blizzard</span>
+            <span class="step-desc">— FFB build = meilleur Blizzard que TTW grâce à Ice Shards (+100% crit dmg givre).</span>
           </div>
           <div class="rotation-step">
             <span class="step-num">4.</span>
-            <span class="step-skill">Blast Wave</span>
-            <span class="step-desc">— AoE circulaire autour de vous</span>
+            <span class="step-skill">Dragon's Breath</span>
+            <span class="step-desc">— Cône de feu frontal, bon burst AoE rapproché</span>
           </div>
+        </div>
+        <div class="rotation-note">
+          🌀 L'AoE du FFB est supérieure au build TTW grâce à Ice Shards sur Blizzard et aux explosions de Living Bomb en chaîne.
         </div>
       </div>
 
