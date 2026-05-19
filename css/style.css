@@ -1398,7 +1398,7 @@ body[data-class="deathknight"]{ --class-accent: var(--deathknight);--class-glow:
 .talent-tree-iframe iframe {
   display: block;
   width: 100%;
-  height: 1070px;
+  height: 1200px;
   border: none;
 }
 
