@@ -1993,7 +1993,7 @@ body[data-class="deathknight"]{ --class-accent: var(--deathknight);--class-glow:
   .bm-svg-wrap { flex: none; width: 100%; border-right: none; border-bottom: 1px solid var(--border); }
 }
 
-/* — Gobelins d'Alban (mini-jeu) — */
+/* — Gobelins de Fripon (mini-jeu) — */
 .goblin-army {
   position: fixed;
   bottom: 0;
@@ -4662,4 +4662,95 @@ h1, h2, h3,
 @keyframes wowToastBar {
   from { transform: scaleX(1); }
   to   { transform: scaleX(0); }
+}
+
+/* ═══════════════════════════════════════════════════════
+   MOBILE — hamburger + responsive 768px
+═══════════════════════════════════════════════════════ */
+
+/* Hamburger — caché sur desktop */
+.nav-hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 44px;
+  height: 44px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  gap: 5px;
+  flex-shrink: 0;
+}
+.nav-hamburger span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--gold);
+  border-radius: 2px;
+  transition: transform 0.25s, opacity 0.25s;
+}
+.site-header.nav-open .nav-hamburger span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.site-header.nav-open .nav-hamburger span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.site-header.nav-open .nav-hamburger span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+@media (max-width: 768px) {
+  /* Layout */
+  .container { padding: 1.5rem 1rem; }
+
+  /* Header */
+  .site-header { padding: 0.75rem 1rem 0; }
+  .header-inner { flex-wrap: wrap; padding-bottom: 0.5rem; }
+  .header-brand { flex: 1; min-width: 0; }
+  .site-logo { height: 36px; }
+  .site-name { height: 28px; }
+
+  /* Afficher hamburger, cacher nav desktop */
+  .nav-hamburger { display: flex; }
+  .main-nav { display: none; }
+  .nav-discord { display: none; }
+
+  /* Menu ouvert */
+  .site-header.nav-open .main-nav {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    border-top: 1px solid var(--border);
+    padding: 0.25rem 0;
+    gap: 0;
+    margin-top: 0.25rem;
+  }
+  .site-header.nav-open .main-nav a {
+    padding: 0.85rem 1rem;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    border-left: 2px solid transparent;
+    font-size: 1rem;
+    letter-spacing: 0.02em;
+  }
+  .site-header.nav-open .main-nav a:hover,
+  .site-header.nav-open .main-nav a.active {
+    border-left-color: var(--gold);
+    background: rgba(200,169,110,0.06);
+    border-bottom-color: rgba(255,255,255,0.05);
+  }
+  .site-header.nav-open .nav-discord {
+    display: flex;
+    width: fit-content;
+    margin: 0.75rem auto;
+    justify-content: center;
+  }
+
+  /* Hero landing — cards 2 par ligne */
+  .hero-nav-cards { gap: 0.75rem; }
+  .hero-nav-card { min-width: calc(50% - 0.4rem); padding: 1rem 1.25rem; }
+  .hnc-icon { font-size: 1.6rem; }
+
+  /* Toast adapté mobile */
+  .wow-toast { min-width: min(300px, 90vw); max-width: 90vw; }
+
+  /* Grilles diverses */
+  .chars-grid { grid-template-columns: 1fr 1fr; }
+  .char-page-header { flex-direction: column; text-align: center; }
+  .tabs-nav { overflow-x: auto; white-space: nowrap; }
 }

@@ -8,6 +8,7 @@
   /* ── 1. CURSOR TRAIL ─────────────────────────────────────────── */
   (function cursorTrail() {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    if ('ontouchstart' in window || navigator.maxTouchPoints > 0) return;
 
     const COLORS = ['#c8a96e', '#ffd700', '#fffbe0', '#f0c040', '#e8d48c', '#fff8c0'];
     const MAX = 22;

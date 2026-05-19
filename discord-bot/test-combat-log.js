@@ -26,7 +26,7 @@ const DIFF     = 14;   // custom 5-man
 // Personnages → sort principal, dégâts moyens, intervalle (sec), type
 const SPECS = {
   Krapule: { spell:'Fireball',               dmg:19500, interval:2.8, type:'dmg'  },
-  Alban:   { spell:'Shadow Bolt',            dmg:16000, interval:3.0, type:'dmg'  },
+  Fripon:   { spell:'Shadow Bolt',            dmg:16000, interval:3.0, type:'dmg'  },
   Fabien:  { spell:'Aimed Shot',             dmg:13500, interval:2.5, type:'dmg'  },
   Mael:    { spell:'Shield of Righteousness',dmg:7800,  interval:3.5, type:'tank' },
   Filou:   { spell:'Holy Light',             hps:27000, interval:2.3, type:'heal' },
@@ -76,15 +76,15 @@ function generateFight(startMs, durationMs, success) {
     }
   }
 
-  // Mort d'Alban (sur le kill uniquement) — Stonegrip 3s avant la fin
+  // Mort d'Fripon (sur le kill uniquement) — Stonegrip 3s avant la fin
   if (success === 1) {
     const deathT = endMs - 3000;
     events.push({ t: deathT, line:
-      `${ts(deathT)}  SPELL_DAMAGE,0x2,"${BOSS}",0x40A,0x0,0x5,Alban,0x512,0x0,` +
+      `${ts(deathT)}  SPELL_DAMAGE,0x2,"${BOSS}",0x40A,0x0,0x5,Fripon,0x512,0x0,` +
       `58965,"Stonegrip",1,480000,350000,1,0,0,0,nil,nil,nil`
     });
     events.push({ t: deathT + 300, line:
-      `${ts(deathT+300)}  UNIT_DIED,0x2,"${BOSS}",0x40A,0x0,0x5,Alban,0x512,0x0,42,nil`
+      `${ts(deathT+300)}  UNIT_DIED,0x2,"${BOSS}",0x40A,0x0,0x5,Fripon,0x512,0x0,42,nil`
     });
   }
 
@@ -100,7 +100,7 @@ const now = Date.now();
 
 console.log(`\n🎮 Simulation — ${RAID} (${BOSS})`);
 console.log('   Wipe  : 2 min de combat');
-console.log('   Kill  : 4 min de combat, 1 mort (Alban — Stonegrip)');
+console.log('   Kill  : 4 min de combat, 1 mort (Fripon — Stonegrip)');
 console.log('   Boss  : 1st kill\n');
 
 // Wipe — 2 min

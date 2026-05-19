@@ -22,7 +22,7 @@
 
   <div class="roster-grid">
 
-    <!-- Alban — Warlock Affliction -->
+    <!-- Fripon — Warlock Affliction -->
     <div class="swag-wrap">
       <a href="personnages/perso1.html" class="swag-card" data-class="warlock">
         <div class="swag-glow"></div>
@@ -30,10 +30,10 @@
         <div class="swag-portrait">
           <img src="assets/img/classes-warlock-affliction.webp" alt="Démoniste Affliction">
         </div>
-        <div class="swag-name">Alban</div>
+        <div class="swag-name">Fripon</div>
         <div class="swag-class">Démoniste · Affliction</div>
         <div class="swag-sep"></div>
-        <div class="swag-stat" data-p="Alban"></div>
+        <div class="swag-stat" data-p="Fripon"></div>
       </a>
     </div>
 
@@ -52,7 +52,7 @@
       </a>
     </div>
 
-    <!-- Maël — Paladin Protection (centre / featured) -->
+    <!-- Gredin — Paladin Protection (centre / featured) -->
     <div class="swag-wrap swag-wrap--center">
       <a href="personnages/perso4.html" class="swag-card swag-card--center" data-class="paladin">
         <div class="swag-glow"></div>
@@ -60,10 +60,10 @@
         <div class="swag-portrait swag-portrait--lg">
           <img src="assets/img/classes-paladin-protection.webp" alt="Paladin Protection">
         </div>
-        <div class="swag-name">Maël</div>
+        <div class="swag-name">Gredin</div>
         <div class="swag-class">Paladin · Protection</div>
         <div class="swag-sep"></div>
-        <div class="swag-stat" data-p="Maël"></div>
+        <div class="swag-stat" data-p="Gredin"></div>
       </a>
     </div>
 
@@ -180,7 +180,7 @@
   });
 
   // ── Stats live depuis l'API ──────────────────────────────────────────
-  const ROLES = { Alban: 'dps', Eliott: 'dps', Fabien: 'dps', Maël: 'tank', Tristan: 'heal' };
+  const ROLES = { Fripon: 'dps', Eliott: 'dps', Fabien: 'dps', Gredin: 'tank', Tristan: 'heal' };
   const fmtK = n => n >= 1000 ? (n / 1000).toFixed(1) + 'k' : String(Math.round(n));
 
   fetch('/api/stats').then(r => r.json()).then(stats => {

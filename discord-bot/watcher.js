@@ -13,7 +13,7 @@
     "webhookUrl":   "https://discord.com/api/webhooks/...",
     "apiUrl":       "https://lansduswag.site/api",   ← URL de l'API
     "apiSecret":    "ton_secret",
-    "players":      ["Alban","Eliott","Fabien","Maël","Tristan"],
+    "players":      ["Fripon","Eliott","Fabien","Gredin","Tristan"],
     "characterMap": { "Krapule":"Eliott", "Filou":"Tristan" }
   }
 */
@@ -36,7 +36,7 @@ const WOW      = cfg.wowPath.replace(/\\/g, '/');
 const WEBHOOK  = cfg.webhookUrl;
 const API_URL  = (cfg.apiUrl  || 'http://localhost:3001/api').replace(/\/$/, '');
 const API_KEY  = cfg.apiSecret || 'changeme';
-const PLAYERS  = cfg.players  || ['Alban','Eliott','Fabien','Maël','Tristan'];
+const PLAYERS  = cfg.players  || ['Fripon','Eliott','Fabien','Gredin','Tristan'];
 const CHAR_MAP = cfg.characterMap || {};
 
 const SCREENSHOTS = path.join(WOW, 'Screenshots');
@@ -211,7 +211,7 @@ function findScreenshot(ts) {
 
 // ── Rôles joueurs pour les icônes Discord ────────────────────────────
 const PLAYER_ROLES = cfg.playerRoles || {
-  Alban:'dps', Eliott:'dps', Fabien:'dps', Maël:'tank', Tristan:'heal'
+  Fripon:'dps', Eliott:'dps', Fabien:'dps', Gredin:'tank', Tristan:'heal'
 };
 const ROLE_ICON = { dps:'⚔️', tank:'🛡️', heal:'💚' };
 

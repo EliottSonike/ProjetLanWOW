@@ -1,4 +1,4 @@
 window.RAID_STATS = {
-  players: ['Alban', 'Eliott', 'Fabien', 'Maël', 'Tristan'],
+  players: ['Fripon', 'Eliott', 'Fabien', 'Gredin', 'Tristan'],
   sessions: []
 };

@@ -40,6 +40,7 @@ const Layout = (function () {
       '\n      <div class="header-logo"><img src="' + b + 'assets/img/icons8-world-of-warcraft-48.png" alt="LOGO" class="site-logo"></div>' +
       '\n      <h1 class="site-title"><img src="' + b + 'assets/img/LanDuSwag.png" alt="LAN Du Swag" class="site-name"></h1>' +
       '\n    </a>' +
+      '\n    <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>' +
       '\n    <nav class="main-nav">' +
       '\n      <a href="' + b + 'swaggeurs.html"' + sw + '>Swaggeurs</a>' +
       '\n      <a href="' + b + 'carte.html"' + sc + '>Carte des Raids</a>' +
@@ -61,6 +62,22 @@ const Layout = (function () {
       '\n  </div>' +
       '\n</header>'
     );
+
+    document.addEventListener('DOMContentLoaded', function() {
+      var btn = document.getElementById('nav-hamburger');
+      var hdr = document.querySelector('.site-header');
+      if (!btn || !hdr) return;
+      btn.addEventListener('click', function() {
+        hdr.classList.toggle('nav-open');
+        btn.setAttribute('aria-expanded', hdr.classList.contains('nav-open').toString());
+      });
+      document.addEventListener('click', function(e) {
+        if (hdr.classList.contains('nav-open') && !hdr.contains(e.target)) {
+          hdr.classList.remove('nav-open');
+          btn.setAttribute('aria-expanded', 'false');
+        }
+      });
+    });
   }
 
   function footer(cfg) {
