@@ -1362,7 +1362,7 @@ body[data-class="deathknight"]{ --class-accent: var(--deathknight);--class-glow:
   overflow: hidden;
   border: 1px solid var(--gold-dark);
   width: 100%;
-  height: 1240px; /* hauteur fixe pour forcer tous les navigateurs */
+  height: 800px;
   background: #181818;
   box-shadow:
     0 0 0 1px rgba(200,169,110,.1),
@@ -1370,6 +1370,18 @@ body[data-class="deathknight"]{ --class-accent: var(--deathknight);--class-glow:
     0 0 30px rgba(200,169,110,.06);
   display: flex;
   flex-direction: column;
+  position: relative;
+}
+
+/* Fondu bas pour masquer le vide éventuel */
+.talent-tree-iframe::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 60px;
+  background: linear-gradient(to bottom, transparent, #181818);
+  pointer-events: none;
+  z-index: 2;
 }
 
 .ttif-header {
@@ -1402,7 +1414,7 @@ body[data-class="deathknight"]{ --class-accent: var(--deathknight);--class-glow:
   display: block;
   width: 100%;
   flex: 1;
-  min-height: 1200px;
+  height: 760px;
   border: none;
 }
 
