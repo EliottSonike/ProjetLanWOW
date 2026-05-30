@@ -446,7 +446,7 @@ process.on('unhandledRejection', (reason) => {
 });
 
 // ── Start + graceful shutdown ─────────────────────────────────────────
-const server = app.listen(PORT, () => {
+const server = app.listen(PORT, '127.0.0.1', () => {
   console.log(`🚀 LAN Du Swag API — port ${PORT}`);
   console.log(`   GET  /api/progression`);
   console.log(`   GET  /api/stats`);
