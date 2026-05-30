@@ -13,22 +13,63 @@
     (ou via PM2 : pm2 start server.js --name lan-api)
 */
 
-const express = require('express');
-const cors    = require('cors');
-const fs      = require('fs');
-const path    = require('path');
-const vm      = require('vm');
-const zlib    = require('zlib');
+const express    = require('express');
+const cors       = require('cors');
+const helmet     = require('helmet');
+const rateLimit  = require('express-rate-limit');
+const fs         = require('fs');
+const path       = require('path');
+const vm         = require('vm');
+const zlib       = require('zlib');
 
+// ── Config ────────────────────────────────────────────────────────────
 const PORT   = process.env.PORT   || 3001;
 const SECRET = process.env.SECRET;
 if (!SECRET) { console.error('❌  Variable SECRET non définie — arrêt du serveur.'); process.exit(1); }
 const DATA   = path.join(__dirname, 'data');
 const STATIC = path.join(__dirname, '..', 'data');
 
+const VIEWER_LIVE_URL = 'https://wow.zamimg.com/modelviewer/live/viewer/viewer.min.js';
+
+const PAKO_PATCH = `function patchPako(obj,depth){
+    if(depth>4||!obj||typeof obj!=='object'||obj.__pakoPatched)return;
+    if(obj.inflate&&obj.inflateRaw&&obj.Inflate){
+      obj.__pakoPatched=true;
+      var orig=obj.inflate.bind(obj);
+      obj.inflate=function(d,o){
+        try{return orig(d,o);}
+        catch(e){try{return obj.inflateRaw(d,o||{});}catch(e2){return d instanceof Uint8Array?d:new Uint8Array(0);}}
+      };
+      console.log('[PATCH] pako inflate patched');
+    }
+    Object.keys(obj).forEach(function(k){try{patchPako(obj[k],depth+1);}catch(e){}});
+  }
+  setTimeout(function(){patchPako(window,0);},50);`;
+
+// ── App setup ─────────────────────────────────────────────────────────
 const app = express();
-app.use(cors());
+
+app.use(helmet());
+
+const ALLOWED_ORIGINS = [
+  'https://lansduswag.site',
+  'https://www.lansduswag.site',
+  /^http:\/\/localhost(:\d+)?$/,
+];
+app.use(cors({
+  origin(origin, cb) {
+    if (!origin) return cb(null, true); // same-origin / curl
+    const ok = ALLOWED_ORIGINS.some(o => o instanceof RegExp ? o.test(origin) : o === origin);
+    cb(ok ? null : Object.assign(new Error('CORS'), { status: 403 }), ok);
+  },
+}));
+
 app.use(express.json({ limit: '2mb' }));
+
+// ── Rate limits ───────────────────────────────────────────────────────
+const readLimit  = rateLimit({ windowMs: 60_000, max: 60,  standardHeaders: true, legacyHeaders: false });
+const proxyLimit = rateLimit({ windowMs: 60_000, max: 30,  standardHeaders: true, legacyHeaders: false });
+const writeLimit = rateLimit({ windowMs: 60_000, max: 20,  standardHeaders: true, legacyHeaders: false });
 
 // ── Data helpers ──────────────────────────────────────────────────────
 function load(name, def) {
@@ -76,7 +117,6 @@ app.get('/wow-assets/viewer/viewer-wotlk5.min.js', (req, res) => {
       console.log('✅ viewer-wotlk5.min.js chargé depuis filesystem (' + Math.round(raw.length/1024) + ' KB)');
     }
     res.setHeader('Content-Type', 'application/javascript');
-    res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate');
     res.send(viewerWotlk5Cache);
   } catch(e) {
@@ -132,7 +172,6 @@ app.get('/wow-assets/viewer/viewer-live.min.js', async (req, res) => {
       console.log('✅ viewer-live.min.js cached (' + Math.round(code.length/1024) + ' KB)');
     }
     res.setHeader('Content-Type', 'application/javascript');
-    res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate');
     res.send(viewerLiveCache);
   } catch(e) {
@@ -144,8 +183,9 @@ app.get('/wow-assets/viewer/viewer-live.min.js', async (req, res) => {
 // Le format wotlk5 (116-byte header) a la section 'm' (bounding box)
 // pointant sur de la data incorrecte → floats NaN → frustum dégénéré → tout transparent.
 // On décompresse, patch les 14 floats, recompresse et cache.
-const MO3_DIR  = path.join(__dirname, '..', 'wow-assets', 'mo3');
-const mo3Cache = {};
+const MO3_DIR   = path.join(__dirname, '..', 'wow-assets', 'mo3');
+const MO3_MAX   = 200; // entrées max en mémoire
+const mo3Cache  = new Map();
 const GNOME_BBOX = [-0.5, 0, -0.5, 0.5, 2.0, 0.5, 1.3,
                     -0.5, 0, -0.5, 0.5, 2.0, 0.5, 1.3]; // 14 floats
 
@@ -161,14 +201,13 @@ async function getMo3Raw(id) {
   return buf;
 }
 
-app.get('/wow-assets/mo3/:id([0-9]+).mo3', async (req, res) => {
+app.get('/wow-assets/mo3/:id([0-9]+).mo3', proxyLimit, async (req, res) => {
   const id = req.params.id;
   const headers = {
-    'Content-Type':              'application/octet-stream',
-    'Access-Control-Allow-Origin': '*',
-    'Cache-Control':             'public, max-age=86400',
+    'Content-Type':  'application/octet-stream',
+    'Cache-Control': 'public, max-age=86400',
   };
-  if (mo3Cache[id]) { res.set(headers); return res.send(mo3Cache[id]); }
+  if (mo3Cache.has(id)) { res.set(headers); return res.send(mo3Cache.get(id)); }
 
   let raw;
   try { raw = await getMo3Raw(id); }
@@ -181,13 +220,13 @@ app.get('/wow-assets/mo3/:id([0-9]+).mo3', async (req, res) => {
       zlibOff = i; break;
     }
   }
-  if (zlibOff === -1) { mo3Cache[id] = raw; res.set(headers); return res.send(raw); }
+  if (zlibOff === -1) { mo3CacheSet(id, raw); res.set(headers); return res.send(raw); }
 
   const mDataOff = raw.readUInt32LE(76); // section m offset in decompressed data
 
   let decompressed;
   try { decompressed = zlib.inflateSync(raw.slice(zlibOff)); }
-  catch { mo3Cache[id] = raw; res.set(headers); return res.send(raw); }
+  catch { mo3CacheSet(id, raw); res.set(headers); return res.send(raw); }
 
   // Patch bounding box if floats are NaN or ~0
   const f0 = decompressed.readFloatLE(mDataOff);
@@ -203,19 +242,24 @@ app.get('/wow-assets/mo3/:id([0-9]+).mo3', async (req, res) => {
   raw.copy(newBuf, 0, 0, zlibOff);
   newZlib.copy(newBuf, zlibOff);
 
-  mo3Cache[id] = newBuf;
+  mo3CacheSet(id, newBuf);
   res.set(headers);
   res.send(newBuf);
 });
 
+function mo3CacheSet(id, buf) {
+  if (mo3Cache.size >= MO3_MAX) mo3Cache.delete(mo3Cache.keys().next().value); // evict oldest
+  mo3Cache.set(id, buf);
+}
+
 // ── GET ───────────────────────────────────────────────────────────────
-app.get('/api/health',      (_, res) => res.json({ ok: true, ts: Date.now() }));
-app.get('/api/progression', (_, res) => res.json(load('progression.json', {})));
-app.get('/api/stats',       (_, res) => res.json(load('stats.json', {})));
-app.get('/api/shame',       (_, res) => res.json(load('shame.json', {})));
+app.get('/api/health',      readLimit, (_, res) => res.json({ ok: true, ts: Date.now() }));
+app.get('/api/progression', readLimit, (_, res) => res.json(load('progression.json', {})));
+app.get('/api/stats',       readLimit, (_, res) => res.json(load('stats.json', {})));
+app.get('/api/shame',       readLimit, (_, res) => res.json(load('shame.json', {})));
 
 // ── Proxy assets 3D viewer wotlk5.com (mo3, meta…) ──────────────────
-app.get('/api/wow-asset/*', async (req, res) => {
+app.get('/api/wow-asset/*', proxyLimit, async (req, res) => {
   const assetPath = req.params[0];
   try {
     const url = `https://wotlk5.com/armory/data/${assetPath}`;
@@ -228,7 +272,6 @@ app.get('/api/wow-asset/*', async (req, res) => {
     });
     if (!r.ok) return res.status(r.status).end();
     const buf = await r.arrayBuffer();
-    res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Content-Type', r.headers.get('content-type') || 'application/octet-stream');
     res.setHeader('Cache-Control', 'public, max-age=86400');
     res.send(Buffer.from(buf));
@@ -240,14 +283,21 @@ app.get('/api/wow-asset/*', async (req, res) => {
 // ── Proxy armory wotlk5.com (contourne CORS) — cache 5 min ──────────
 const armoryCache = new Map();
 const ARMORY_CACHE_TTL = 5 * 60 * 1000;
-app.get('/api/armory', async (req, res) => {
+
+setInterval(() => {
+  const now = Date.now();
+  for (const [key, val] of armoryCache) {
+    if (now - val.ts >= ARMORY_CACHE_TTL) armoryCache.delete(key);
+  }
+}, ARMORY_CACHE_TTL).unref();
+
+app.get('/api/armory', proxyLimit, async (req, res) => {
   const { realm, char } = req.query;
   if (!realm || !char) return res.status(400).json({ error: 'realm et char requis' });
   const key = `${realm}|${char}`;
   const cached = armoryCache.get(key);
   if (cached && Date.now() - cached.ts < ARMORY_CACHE_TTL) {
     res.setHeader('Content-Type', 'text/html');
-    res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('X-Cache', 'HIT');
     return res.send(cached.html);
   }
@@ -257,7 +307,6 @@ app.get('/api/armory', async (req, res) => {
     const html = await r.text();
     armoryCache.set(key, { html, ts: Date.now() });
     res.setHeader('Content-Type', 'text/html');
-    res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('X-Cache', 'MISS');
     res.send(html);
   } catch(e) {
@@ -266,7 +315,7 @@ app.get('/api/armory', async (req, res) => {
 });
 
 // ── POST /api/kill ────────────────────────────────────────────────────
-app.post('/api/kill', auth, (req, res) => {
+app.post('/api/kill', writeLimit, auth, (req, res) => {
   const kill = req.body;
   if (!kill?.boss) return res.status(400).json({ error: 'boss manquant' });
 
@@ -283,7 +332,7 @@ app.post('/api/kill', auth, (req, res) => {
 });
 
 // ── POST /api/reset (admin) ───────────────────────────────────────────
-app.post('/api/reset', auth, (req, res) => {
+app.post('/api/reset', writeLimit, auth, (req, res) => {
   const target = req.body?.target || 'all';
   if (target === 'all' || target === 'progression') {
     const prog = load('progression.json', {});
@@ -384,10 +433,34 @@ function updateShame(kill) {
   save('shame.json', hos);
 }
 
-app.listen(PORT, () => {
+// ── Global error handler ──────────────────────────────────────────────
+// eslint-disable-next-line no-unused-vars
+app.use((err, req, res, _next) => {
+  if (err.status === 403 || err.message === 'CORS') return res.status(403).json({ error: 'CORS policy' });
+  console.error('❌ Unhandled error:', err.message);
+  res.status(500).json({ error: 'Internal server error' });
+});
+
+process.on('unhandledRejection', (reason) => {
+  console.error('❌ Unhandled rejection:', reason);
+});
+
+// ── Start + graceful shutdown ─────────────────────────────────────────
+const server = app.listen(PORT, () => {
   console.log(`🚀 LAN Du Swag API — port ${PORT}`);
   console.log(`   GET  /api/progression`);
   console.log(`   GET  /api/stats`);
   console.log(`   GET  /api/shame`);
   console.log(`   POST /api/kill  (Bearer auth)`);
 });
+
+function shutdown(signal) {
+  console.log(`\n${signal} reçu — arrêt propre...`);
+  server.close(() => {
+    console.log('✅ Serveur arrêté');
+    process.exit(0);
+  });
+  setTimeout(() => process.exit(1), 5000).unref();
+}
+process.on('SIGTERM', () => shutdown('SIGTERM'));
+process.on('SIGINT',  () => shutdown('SIGINT'));
