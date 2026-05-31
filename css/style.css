@@ -4587,9 +4587,12 @@ body[data-class="deathknight"]{ --class-accent: var(--deathknight);--class-glow:
   font-size: 0.62rem;
   color: rgba(var(--cc), 0.9);
   font-weight: 600;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
-  white-space: nowrap;
+  white-space: nowrap !important;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
 }
 
 .swag-sep {
