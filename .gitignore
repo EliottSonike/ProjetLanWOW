@@ -9,3 +9,4 @@ discord-bot/pending.json
 discord-bot/node_modules/
 api/node_modules/
 api/data/
+api/.env

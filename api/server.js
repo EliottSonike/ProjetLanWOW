@@ -1,17 +1,15 @@
 'use strict';
 
-/*
-  LAN Du Swag — API
-  ──────────────────
-  Variables d'environnement :
-    PORT   = port d'écoute       (défaut : 3001)
-    SECRET = clé d'auth du POST  (défaut : changeme — à changer en prod !)
-
-  Démarrage serveur Ubuntu :
-    cd api && npm install
-    SECRET=monSecret PORT=3001 node server.js
-    (ou via PM2 : pm2 start server.js --name lan-api)
-*/
+// Charge api/.env si présent (évite d'exposer les vars dans ps aux)
+try {
+  const lines = require('fs').readFileSync(require('path').join(__dirname, '.env'), 'utf8').split('\n');
+  for (const line of lines) {
+    const eq = line.indexOf('=');
+    if (eq < 1 || line.trim().startsWith('#')) continue;
+    const k = line.slice(0, eq).trim(), v = line.slice(eq + 1).trim();
+    if (k && !(k in process.env)) process.env[k] = v;
+  }
+} catch { /* pas de .env, on continue */ }
 
 const express    = require('express');
 const cors       = require('cors');
