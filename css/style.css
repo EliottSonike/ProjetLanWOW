@@ -4710,15 +4710,17 @@ body[data-class="deathknight"]{ --class-accent: var(--deathknight);--class-glow:
   inset: 0;
   border-radius: inherit;
   background: linear-gradient(108deg,
-    transparent 35%,
-    rgba(255,255,255,0.10) 50%,
-    transparent 65%
+    transparent 30%,
+    rgba(200,169,110,0.20) 48%,
+    rgba(255,240,180,0.15) 50%,
+    rgba(200,169,110,0.12) 52%,
+    transparent 70%
   );
   background-size: 250% 100%;
   background-position: 200% 0;
-  transition: background-position 0.65s ease;
+  transition: background-position 0.7s ease;
   pointer-events: none;
-  mix-blend-mode: overlay;
+  mix-blend-mode: screen;
   z-index: 1;
 }
 

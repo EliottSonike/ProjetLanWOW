@@ -31,7 +31,7 @@
       const col = COLORS[Math.floor(Math.random() * COLORS.length)];
       const dx  = (Math.random() - 0.5) * 14;
 
-      if (Math.random() < 0.18) {
+      if (Math.random() < 0.30) {
         /* rune symbol */
         const rune = RUNES[Math.floor(Math.random() * RUNES.length)];
         const fs   = 9 + Math.random() * 9;
@@ -220,19 +220,19 @@
       'rgba(255,215,0,',
       'rgba(255,248,200,',
       'rgba(232,212,140,',
-      'rgba(180,140,80,',
+      'rgba(255,200,80,',
     ];
-    const COUNT = 40;
+    const COUNT = 55;
 
     const particles = Array.from({ length: COUNT }, () => ({
       x:       Math.random() * (window.innerWidth  || 1200),
       y:       Math.random() * (window.innerHeight || 800),
-      vy:      -(0.15 + Math.random() * 0.45),
-      vx:      (Math.random() - 0.5) * 0.12,
-      r:       0.4 + Math.random() * 1.8,
-      alpha:   0.08 + Math.random() * 0.22,
+      vy:      -(0.2 + Math.random() * 0.6),
+      vx:      (Math.random() - 0.5) * 0.15,
+      r:       1.2 + Math.random() * 2.4,
+      alpha:   0.25 + Math.random() * 0.45,
       phase:   Math.random() * Math.PI * 2,
-      speed:   0.008 + Math.random() * 0.018,
+      speed:   0.01 + Math.random() * 0.02,
       col:     COLS[Math.floor(Math.random() * COLS.length)],
     }));
 
