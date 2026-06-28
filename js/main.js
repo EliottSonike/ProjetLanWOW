@@ -393,32 +393,33 @@ async function fetchArmoryData(charName, realm) {
   let html;
 
   const proxies = [
-    (u, c, r) => `/api/armory?realm=${encodeURIComponent(r)}&char=${encodeURIComponent(c)}`,
-    u => `https://api.allorigins.win/get?url=${encodeURIComponent(u)}`,
-    u => `https://corsproxy.io/?${encodeURIComponent(u)}`,
+    { make: (u, c, r) => `/api/armory?realm=${encodeURIComponent(r)}&char=${encodeURIComponent(c)}`, timeout: 5000 },
+    { make: u => `https://api.allorigins.win/get?url=${encodeURIComponent(u)}`, timeout: 10000 },
+    { make: u => `https://corsproxy.io/?${encodeURIComponent(u)}`, timeout: 10000 },
   ];
+
+  function fetchWithTimeout(url, ms) {
+    const ctrl = new AbortController();
+    const id = setTimeout(() => ctrl.abort(), ms);
+    return fetch(url, { signal: ctrl.signal }).finally(() => clearTimeout(id));
+  }
 
   // Essai direct d'abord
   try {
-    const r = await fetch(armoryUrl);
+    const r = await fetchWithTimeout(armoryUrl, 5000);
     if (!r.ok) throw new Error('HTTP ' + r.status);
     html = await r.text();
   } catch {
-    // Essai des proxies un par un (5s pour /api/armory, 10s pour les publics)
-    for (let i = 0; i < proxies.length; i++) {
-      const makeProxy = proxies[i];
-      const ms   = i === 0 ? 5000 : 10000;
-      const ctrl = new AbortController();
-      const tid  = setTimeout(() => ctrl.abort(), ms);
+    // Essai des proxies un par un
+    for (const { make, timeout } of proxies) {
       try {
-        const r = await fetch(makeProxy(armoryUrl, charName, realm), { signal: ctrl.signal });
-        clearTimeout(tid);
+        const r = await fetchWithTimeout(make(armoryUrl, charName, realm), timeout);
         if (!r.ok) throw new Error('HTTP ' + r.status);
         const ct = r.headers.get('content-type') || '';
         html = ct.includes('json') ? (await r.json()).contents : await r.text();
         if (html && html.includes('charData')) break;
         html = null;
-      } catch { clearTimeout(tid); html = null; }
+      } catch { html = null; }
     }
     if (!html) throw new Error('Tous les proxies ont échoué');
   }

@@ -4622,7 +4622,136 @@ body[data-class="deathknight"]{ --class-accent: var(--deathknight);--class-glow:
 }
 .viewer3d-toggle:hover { background: rgba(198,165,90,.25); }
 
-/* ── Animation scroll CSS pure (remplace AOS) ───────────────────── */
+/* ═══════════════════════════════════════════════════════
+   WOW EFFECTS — Loot Beam · Screen Flash · Card Shimmer · SCT Crit
+═══════════════════════════════════════════════════════ */
+
+/* ── Loot Beam ── */
+@keyframes loot-beam-rise {
+  0%   { opacity: 0; transform: translateX(-50%) scaleY(0); transform-origin: bottom; }
+  12%  { opacity: 1; transform: translateX(-50%) scaleY(1); transform-origin: bottom; }
+  80%  { opacity: 1; transform: translateX(-50%) scaleY(1); transform-origin: bottom; }
+  100% { opacity: 0; transform: translateX(-50%) scaleY(1); transform-origin: bottom; }
+}
+@keyframes loot-beam-wide {
+  0%   { opacity: 0; }
+  12%  { opacity: 1; }
+  80%  { opacity: 1; }
+  100% { opacity: 0; }
+}
+.loot-beam {
+  position: fixed;
+  bottom: 0;
+  width: 3px;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 9995;
+  transform: translateX(-50%) scaleY(0);
+  transform-origin: bottom;
+  background: linear-gradient(to top,
+    rgba(255,215,0,1)   0%,
+    rgba(255,180,0,0.8) 25%,
+    rgba(255,140,0,0.4) 60%,
+    transparent         100%
+  );
+  filter: blur(1px);
+  animation: loot-beam-rise 2.2s ease-out forwards;
+}
+.loot-beam::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  left: -10px;
+  width: 24px;
+  background: linear-gradient(to top,
+    rgba(255,215,0,0.35) 0%,
+    rgba(255,180,0,0.12) 40%,
+    transparent          80%
+  );
+  filter: blur(6px);
+  animation: loot-beam-wide 2.2s ease-out forwards;
+}
+.loot-beam::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,215,0,0.8) 0%, rgba(255,140,0,0.3) 50%, transparent 100%);
+  filter: blur(4px);
+  animation: loot-beam-wide 2.2s ease-out forwards;
+}
+
+/* ── Screen edge flash ── */
+@keyframes screen-flash-anim {
+  0%   { opacity: 0; }
+  20%  { opacity: 1; }
+  100% { opacity: 0; }
+}
+.screen-flash {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9994;
+  box-shadow: inset 0 0 120px var(--flash-color, rgba(255,165,0,0.55));
+  animation: screen-flash-anim 0.75s ease-out forwards;
+}
+
+/* ── Content card hover shimmer ── */
+.content-card {
+  position: relative;
+}
+.content-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(108deg,
+    transparent 35%,
+    rgba(255,255,255,0.10) 50%,
+    transparent 65%
+  );
+  background-size: 250% 100%;
+  background-position: 200% 0;
+  transition: background-position 0.65s ease;
+  pointer-events: none;
+  mix-blend-mode: overlay;
+  z-index: 1;
+}
+
+/* ── Glitch hover sur les noms de boss (Retro-Futurism) ── */
+@keyframes glitch-color {
+  0%,100% { text-shadow: none; transform: translate(0); }
+  15%     { text-shadow: -3px 0 #f44336, 3px 0 #00bcd4; transform: translate(-1px, 0); }
+  30%     { text-shadow: 3px 0 #f44336, -3px 0 #00bcd4; transform: translate(1px, 0); }
+  45%     { text-shadow: -2px 1px #f44336; transform: translate(-1px, 1px); }
+  60%     { text-shadow: 2px -1px #00bcd4; transform: translate(1px, -1px); }
+  75%     { text-shadow: -1px 0 #f44336, 1px 0 #00bcd4; transform: translate(0); }
+}
+.boss-card-header:hover .boss-name,
+.boss-card-header:hover h3 {
+  animation: glitch-color 0.5s steps(1) 1;
+}
+
+/* ── SCT Crit variant ── */
+@keyframes sct-crit {
+  0%   { opacity:0;   transform:translateX(-50%) scale(0.5) translateY(0); }
+  15%  { opacity:1;   transform:translateX(-50%) scale(1.4) translateY(-6px); }
+  40%  { opacity:1;   transform:translateX(-50%) scale(1.1) translateY(-22px); }
+  100% { opacity:0;   transform:translateX(-50%) scale(0.8) translateY(-70px); }
+}
+.sct-crit {
+  position: fixed; pointer-events: none; z-index: 9998;
+  font-family: 'Cinzel', serif; font-weight: 700; font-size: 1.6rem;
+  white-space: nowrap; transform: translateX(-50%);
+  text-shadow: 0 0 20px currentColor, 0 0 40px currentColor, 0 2px 8px rgba(0,0,0,1);
+  animation: sct-crit 1.5s cubic-bezier(0.22,1,0.36,1) forwards;
+}
+
+/* ── Animation scroll CSS pure (scroll-reveal via JS Intersection Observer) ── */
 @keyframes fadeInUp {
   from { opacity: 0; transform: translateY(24px); }
   to   { opacity: 1; transform: translateY(0); }
@@ -4631,8 +4760,19 @@ body[data-class="deathknight"]{ --class-accent: var(--deathknight);--class-glow:
   from { opacity: 0; transform: scale(0.88); }
   to   { opacity: 1; transform: scale(1); }
 }
+/* Les cartes sont invisibles par défaut — JS déclenche l'animation au scroll */
 .content-card {
-  animation: fadeInUp 0.5s cubic-bezier(.22,1,.36,1) both;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s cubic-bezier(.22,1,.36,1), transform 0.5s cubic-bezier(.22,1,.36,1),
+              box-shadow 0.25s ease;
+}
+.content-card.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.content-card:hover {
+  box-shadow: 0 6px 28px rgba(0,0,0,0.5), 0 0 16px rgba(200,169,110,0.08);
 }
 
 /* ═══════════════════════════════════════════════════════

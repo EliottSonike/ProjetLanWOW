@@ -2,6 +2,7 @@
 
 /* ================================================================
    WOW EFFECTS — Cursor Trail · Scrolling Combat Text · Loot Beam
+                 Screen Flash · Ambient Sparkles
 ================================================================ */
 (function () {
 
@@ -11,7 +12,8 @@
     if ('ontouchstart' in window || navigator.maxTouchPoints > 0) return;
 
     const COLORS = ['#c8a96e', '#ffd700', '#fffbe0', '#f0c040', '#e8d48c', '#fff8c0'];
-    const MAX = 22;
+    const RUNES  = ['✦', '⚡', '★', '◈', '✸', '❋', '⋆', '✴', '⟡', '✵'];
+    const MAX    = 24;
     let idx = 0, lx = -999, ly = -999;
 
     const dots = Array.from({ length: MAX }, () => {
@@ -25,26 +27,50 @@
       if (Math.hypot(e.clientX - lx, e.clientY - ly) < 5) return;
       lx = e.clientX; ly = e.clientY;
 
-      const d    = dots[idx++ % MAX];
-      const size = 3 + Math.random() * 7;
-      const col  = COLORS[Math.floor(Math.random() * COLORS.length)];
-      const dx   = (Math.random() - 0.5) * 14;
-      const dy   = -(8 + Math.random() * 12);
+      const d   = dots[idx++ % MAX];
+      const col = COLORS[Math.floor(Math.random() * COLORS.length)];
+      const dx  = (Math.random() - 0.5) * 14;
 
-      d.style.cssText = `
-        position:fixed;pointer-events:none;z-index:9997;border-radius:50%;
-        width:${size}px;height:${size}px;
-        left:${e.clientX - size / 2}px;top:${e.clientY - size / 2}px;
-        background:radial-gradient(circle at 38% 38%, #fff 0%, ${col} 45%, transparent 80%);
-        box-shadow:0 0 ${size * 1.5}px ${col};
-        opacity:.9;
-        transition:opacity .5s ease, transform .5s ease;
-        transform:translate(0,0) scale(1);
-        will-change:opacity,transform;
-      `;
-      d.getBoundingClientRect(); /* force reflow */
-      d.style.opacity   = '0';
-      d.style.transform = `translate(${dx}px,${dy}px) scale(0.05)`;
+      if (Math.random() < 0.18) {
+        /* rune symbol */
+        const rune = RUNES[Math.floor(Math.random() * RUNES.length)];
+        const fs   = 9 + Math.random() * 9;
+        const rot  = (Math.random() - 0.5) * 160;
+        d.textContent = rune;
+        d.style.cssText = `
+          position:fixed;pointer-events:none;z-index:9997;border-radius:0;
+          font-size:${fs}px;line-height:1;
+          color:${col};
+          left:${e.clientX - fs * 0.5}px;top:${e.clientY - fs * 0.5}px;
+          text-shadow:0 0 8px ${col},0 0 18px ${col};
+          opacity:.9;
+          transition:opacity .65s ease,transform .65s ease;
+          transform:translate(0,0) scale(1) rotate(0deg);
+          will-change:opacity,transform;
+        `;
+        d.getBoundingClientRect();
+        d.style.opacity   = '0';
+        d.style.transform = `translate(${dx}px,-${18 + Math.random() * 22}px) scale(0.1) rotate(${rot}deg)`;
+      } else {
+        /* dot */
+        const size = 3 + Math.random() * 7;
+        const dy   = -(8 + Math.random() * 12);
+        d.textContent = '';
+        d.style.cssText = `
+          position:fixed;pointer-events:none;z-index:9997;border-radius:50%;
+          width:${size}px;height:${size}px;
+          left:${e.clientX - size * 0.5}px;top:${e.clientY - size * 0.5}px;
+          background:radial-gradient(circle at 38% 38%,#fff 0%,${col} 45%,transparent 80%);
+          box-shadow:0 0 ${size * 1.5}px ${col};
+          opacity:.9;
+          transition:opacity .5s ease,transform .5s ease;
+          transform:translate(0,0) scale(1);
+          will-change:opacity,transform;
+        `;
+        d.getBoundingClientRect();
+        d.style.opacity   = '0';
+        d.style.transform = `translate(${dx}px,${dy}px) scale(0.05)`;
+      }
     });
   })();
 
@@ -74,19 +100,20 @@
       hard:  ['Danger!', 'WIPE incoming!', 'Il rage!', 'Dispersez-vous!', 'RUN!'],
       btn:   ['POSTÉ!', 'GG!', 'Let\'s go!', 'YEET!', 'SWAG!'],
       roll:  ['Roll lancé!', 'Que le RNG décide!', 'Bonne chance!'],
+      kill:  ['KILL CONFIRMED!', 'LOOT TIME!', 'BOSS DOWN!', 'GG WP!', 'RAID CLEAR!'],
     };
 
     function pick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
 
-    function fire(x, y, text, color) {
+    function fire(x, y, text, color, crit) {
       const el = document.createElement('div');
-      el.className = 'sct-el';
+      el.className = crit ? 'sct-crit' : 'sct-el';
       el.textContent = text;
       el.style.left  = x + 'px';
       el.style.top   = (y - 10) + 'px';
       el.style.color = color;
       document.body.appendChild(el);
-      setTimeout(() => el.remove(), 1450);
+      setTimeout(() => el.remove(), crit ? 1600 : 1450);
     }
 
     document.addEventListener('click', e => {
@@ -101,10 +128,13 @@
         return;
       }
 
-      /* Kill tracker / RNG buttons */
+      /* Kill tracker */
       if (e.target.matches('#kt-submit, #kt-submit *')) {
-        fire(e.clientX, e.clientY - 20, pick(MSGS.btn), '#ffd700'); return;
+        fire(e.clientX, e.clientY - 30, pick(MSGS.kill), '#ffd700', true);
+        setTimeout(() => fire(e.clientX + 60, e.clientY, pick(MSGS.btn), '#ffd700'), 200);
+        return;
       }
+      /* RNG / misc buttons */
       if (e.target.matches('#roll-btn, #roll-btn *')) {
         fire(e.clientX, e.clientY - 20, pick(MSGS.roll), '#c8a96e'); return;
       }
@@ -112,6 +142,126 @@
         fire(e.clientX, e.clientY - 20, pick(MSGS.btn), '#9945ff'); return;
       }
     });
+  })();
+
+
+  /* ── 3. LOOT BEAM ────────────────────────────────────────────── */
+  function fireLootBeam(x) {
+    const beam = document.createElement('div');
+    beam.className = 'loot-beam';
+    beam.style.left = x + 'px';
+    document.body.appendChild(beam);
+    setTimeout(() => beam.remove(), 2400);
+  }
+
+
+  /* ── 4. SCREEN EDGE FLASH ────────────────────────────────────── */
+  function fireScreenFlash(color) {
+    const el = document.createElement('div');
+    el.className = 'screen-flash';
+    el.style.setProperty('--flash-color', color || 'rgba(255,165,0,0.5)');
+    document.body.appendChild(el);
+    setTimeout(() => el.remove(), 800);
+  }
+
+
+  /* ── 5. HOOK KILL SUBMIT → loot beam + flash ─────────────────── */
+  document.addEventListener('click', e => {
+    if (e.target.matches('#kt-submit, #kt-submit *')) {
+      const x = e.clientX;
+      setTimeout(() => fireLootBeam(x), 120);
+      setTimeout(() => fireScreenFlash('rgba(255,215,0,0.4)'), 60);
+    }
+  });
+
+
+  /* ── 6. SCROLL-REVEAL (Intersection Observer) ───────────────── */
+  (function scrollReveal() {
+    const cards = document.querySelectorAll('.content-card');
+    if (!cards.length) return;
+
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        const el = entry.target;
+        setTimeout(() => el.classList.add('is-visible'), +(el.dataset.revealDelay || 0));
+        io.unobserve(el);
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+
+    cards.forEach((card, i) => {
+      card.dataset.revealDelay = Math.min((i % 4) * 80, 240);
+      io.observe(card);
+    });
+  })();
+
+
+  /* ── 7. AMBIENT SPARKLES ─────────────────────────────────────── */
+  (function ambientSparkles() {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    const canvas = document.createElement('canvas');
+    canvas.style.cssText =
+      'position:fixed;inset:0;pointer-events:none;z-index:1;opacity:1;';
+    document.body.insertBefore(canvas, document.body.firstChild);
+
+    const ctx = canvas.getContext('2d');
+    let W, H;
+
+    function resize() {
+      W = canvas.width  = window.innerWidth;
+      H = canvas.height = window.innerHeight;
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    const COLS = [
+      'rgba(200,169,110,',
+      'rgba(255,215,0,',
+      'rgba(255,248,200,',
+      'rgba(232,212,140,',
+      'rgba(180,140,80,',
+    ];
+    const COUNT = 40;
+
+    const particles = Array.from({ length: COUNT }, () => ({
+      x:       Math.random() * (window.innerWidth  || 1200),
+      y:       Math.random() * (window.innerHeight || 800),
+      vy:      -(0.15 + Math.random() * 0.45),
+      vx:      (Math.random() - 0.5) * 0.12,
+      r:       0.4 + Math.random() * 1.8,
+      alpha:   0.08 + Math.random() * 0.22,
+      phase:   Math.random() * Math.PI * 2,
+      speed:   0.008 + Math.random() * 0.018,
+      col:     COLS[Math.floor(Math.random() * COLS.length)],
+    }));
+
+    let raf;
+    function animate() {
+      ctx.clearRect(0, 0, W, H);
+      for (const p of particles) {
+        p.y     += p.vy;
+        p.x     += p.vx;
+        p.phase += p.speed;
+        if (p.y < -4)  { p.y = H + 4; p.x = Math.random() * W; }
+        if (p.x < -4)  p.x = W + 4;
+        if (p.x > W + 4) p.x = -4;
+
+        const a = p.alpha * (0.5 + 0.5 * Math.sin(p.phase));
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = p.col + a.toFixed(3) + ')';
+        ctx.fill();
+      }
+      raf = requestAnimationFrame(animate);
+    }
+
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) cancelAnimationFrame(raf);
+      else animate();
+    });
+
+    animate();
   })();
 
 })();
