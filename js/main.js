@@ -404,16 +404,21 @@ async function fetchArmoryData(charName, realm) {
     if (!r.ok) throw new Error('HTTP ' + r.status);
     html = await r.text();
   } catch {
-    // Essai des proxies un par un
-    for (const makeProxy of proxies) {
+    // Essai des proxies un par un (5s pour /api/armory, 10s pour les publics)
+    for (let i = 0; i < proxies.length; i++) {
+      const makeProxy = proxies[i];
+      const ms   = i === 0 ? 5000 : 10000;
+      const ctrl = new AbortController();
+      const tid  = setTimeout(() => ctrl.abort(), ms);
       try {
-        const r = await fetch(makeProxy(armoryUrl, charName, realm));
+        const r = await fetch(makeProxy(armoryUrl, charName, realm), { signal: ctrl.signal });
+        clearTimeout(tid);
         if (!r.ok) throw new Error('HTTP ' + r.status);
         const ct = r.headers.get('content-type') || '';
         html = ct.includes('json') ? (await r.json()).contents : await r.text();
         if (html && html.includes('charData')) break;
         html = null;
-      } catch { html = null; }
+      } catch { clearTimeout(tid); html = null; }
     }
     if (!html) throw new Error('Tous les proxies ont échoué');
   }
