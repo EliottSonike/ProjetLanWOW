@@ -177,6 +177,8 @@
 
   /* ── 6. SCROLL-REVEAL (Intersection Observer) ───────────────── */
   (function scrollReveal() {
+    /* Seules les cartes déjà dans le DOM au chargement sont animées.
+       Les cartes injectées dynamiquement (armory, live-data) restent visibles normalement. */
     const cards = document.querySelectorAll('.content-card');
     if (!cards.length) return;
 
@@ -190,6 +192,7 @@
     }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
 
     cards.forEach((card, i) => {
+      card.classList.add('will-animate');
       card.dataset.revealDelay = Math.min((i % 4) * 80, 240);
       io.observe(card);
     });

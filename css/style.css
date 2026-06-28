@@ -4762,14 +4762,17 @@ body[data-class="deathknight"]{ --class-accent: var(--deathknight);--class-glow:
   from { opacity: 0; transform: scale(0.88); }
   to   { opacity: 1; transform: scale(1); }
 }
-/* Les cartes sont invisibles par défaut — JS déclenche l'animation au scroll */
+/* Cartes visibles par défaut — seules celles marquées .will-animate sont cachées au scroll */
 .content-card {
+  transition: box-shadow 0.25s ease;
+}
+.content-card.will-animate {
   opacity: 0;
   transform: translateY(20px);
   transition: opacity 0.5s cubic-bezier(.22,1,.36,1), transform 0.5s cubic-bezier(.22,1,.36,1),
               box-shadow 0.25s ease;
 }
-.content-card.is-visible {
+.content-card.will-animate.is-visible {
   opacity: 1;
   transform: translateY(0);
 }
