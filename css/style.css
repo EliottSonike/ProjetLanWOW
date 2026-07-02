@@ -5136,36 +5136,41 @@ body::after {
    Spring curves · Smooth expand · Fade tabs · Press feedback
 ═══════════════════════════════════════════════════════ */
 
-/* ── 1. Rideau de transition WoW ── */
+/* ── 1. Portail de transition WoW (cercle depuis le point de clic) ── */
 #wow-curtain {
   position: fixed;
   inset: 0;
   z-index: 99995;
   pointer-events: none;
-  transform: translateX(-101%);
+  clip-path: circle(0% at var(--cx, 50%) var(--cy, 50%));
   background:
-    radial-gradient(ellipse 55% 55% at 50% 50%, rgba(25,10,45,0.95) 0%, transparent 100%),
-    linear-gradient(135deg, #050810 0%, #090920 50%, #060510 100%);
-  will-change: transform;
+    radial-gradient(circle at var(--cx, 50%) var(--cy, 50%),
+      rgba(255,240,150,0.60) 0%,
+      rgba(200, 80, 20,0.35) 7%,
+      rgba( 70, 15,110,0.90) 18%,
+      rgba( 12,  8, 28,0.97) 40%,
+      #050810 100%
+    );
+  will-change: clip-path;
 }
 
-/* Bord doré lumineux (bord droit pendant l'entrée) */
+/* Stries lumineuses diagonales sur la surface du portail */
 #wow-curtain::after {
   content: '';
-  position: absolute;
-  right: 0; top: 0; bottom: 0;
-  width: 3px;
-  background: linear-gradient(180deg,
-    transparent 0%,
-    var(--gold) 25%,
-    #fff8c0 50%,
-    var(--gold) 75%,
-    transparent 100%
+  position: absolute; inset: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    -52deg,
+    transparent 0px,
+    transparent 55px,
+    rgba(200,169,110,0.025) 55px,
+    rgba(200,169,110,0.025) 110px
   );
-  box-shadow:
-    0 0 18px rgba(200,169,110,0.95),
-    0 0 50px rgba(200,169,110,0.5),
-    0 0 90px rgba(200,169,110,0.2);
+  animation: wc-streaks 2.6s linear infinite;
+}
+@keyframes wc-streaks {
+  from { transform: translateX(0)     translateY(0); }
+  to   { transform: translateX(110px) translateY(110px); }
 }
 
 /* Rune centrale */
@@ -5174,54 +5179,78 @@ body::after {
   position: absolute;
   top: 50%; left: 50%;
   transform: translate(-50%, -50%) scale(0);
-  font-size: 5rem;
+  font-size: 5.5rem;
   color: var(--gold);
   text-shadow:
-    0 0 30px rgba(200,169,110,0.9),
-    0 0 70px rgba(200,169,110,0.5),
-    0 0 120px rgba(200,169,110,0.2);
+    0 0 25px rgba(200,169,110,1),
+    0 0 55px rgba(200,169,110,0.75),
+    0 0 110px rgba(200,169,110,0.35),
+    0 0 200px rgba(140, 60,220,0.25);
   opacity: 0;
 }
 
 /* === ANIMATIONS === */
 
-/* Entrée rideau (quitter la page) */
-@keyframes wc-enter {
-  from { transform: translateX(-101%); }
-  to   { transform: translateX(0); }
+/* Entrée (quitter la page) : portail s'ouvre depuis le point de clic */
+@keyframes wc-circle-in {
+  from { clip-path: circle(  0% at var(--cx, 50%) var(--cy, 50%)); }
+  to   { clip-path: circle(160% at var(--cx, 50%) var(--cy, 50%)); }
 }
 @keyframes wc-rune-appear {
-  0%   { opacity: 0;   transform: translate(-50%, -50%) scale(0.4) rotate(-15deg); }
-  55%  { opacity: 1;   transform: translate(-50%, -50%) scale(1.1) rotate(3deg); }
-  100% { opacity: 0.7; transform: translate(-50%, -50%) scale(1)   rotate(0deg); }
+  0%   { opacity: 0;   transform: translate(-50%, -50%) scale(0.3) rotate(-20deg); }
+  50%  { opacity: 1;   transform: translate(-50%, -50%) scale(1.15) rotate(5deg); }
+  100% { opacity: 0.8; transform: translate(-50%, -50%) scale(1)    rotate(0deg); }
 }
 
 #wow-curtain.wc-entering {
-  animation: wc-enter 0.36s cubic-bezier(0.65, 0, 0.85, 0) forwards;
+  animation: wc-circle-in 0.42s cubic-bezier(0.55, 0, 0.85, 0) forwards;
 }
 #wow-curtain.wc-entering::before {
-  animation: wc-rune-appear 0.36s ease-out 0.08s forwards;
+  animation: wc-rune-appear 0.42s ease-out 0.06s forwards;
 }
 
-/* Départ rideau (arrivée sur nouvelle page) */
-@keyframes wc-leave {
-  from { transform: translateX(0); }
-  to   { transform: translateX(101%); }
+/* Départ (arrivée sur nouvelle page) : portail se referme */
+@keyframes wc-circle-out {
+  from { clip-path: circle(160% at var(--cx, 50%) var(--cy, 50%)); }
+  to   { clip-path: circle(  0% at var(--cx, 50%) var(--cy, 50%)); }
 }
 @keyframes wc-rune-leave {
-  0%   { opacity: 0.7; transform: translate(-50%, -50%) scale(1); }
-  40%  { opacity: 1;   transform: translate(-50%, -50%) scale(1.08); }
-  100% { opacity: 0;   transform: translate(-50%, -50%) scale(0.5) rotate(10deg); }
+  0%   { opacity: 0.8; transform: translate(-50%, -50%) scale(1); }
+  45%  { opacity: 1;   transform: translate(-50%, -50%) scale(1.12); }
+  100% { opacity: 0;   transform: translate(-50%, -50%) scale(0.4) rotate(15deg); }
 }
 
 #wow-curtain.wc-leaving {
-  transform: translateX(0); /* start couvrant */
-  animation: wc-leave 0.44s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: wc-circle-out 0.46s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 #wow-curtain.wc-leaving::before {
-  opacity: 0.7;
+  opacity: 0.8;
   transform: translate(-50%, -50%) scale(1);
-  animation: wc-rune-leave 0.3s ease-in forwards;
+  animation: wc-rune-leave 0.28s ease-in forwards;
+}
+
+/* ── 1b. Zoom carte sur pin cliqué ── */
+.raid-map-img {
+  transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+              filter    0.55s ease;
+}
+.raid-map-img.zooming-to-pin {
+  filter: brightness(1.35) saturate(1.4);
+}
+
+@keyframes pin-ring-expand {
+  0%   { transform: translate(-50%, -50%) scale(1);  opacity: 1; }
+  100% { transform: translate(-50%, -50%) scale(8);  opacity: 0; }
+}
+.pin-zoom-ring {
+  position: absolute;
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 50;
+  border: 2px solid #ffd700;
+  box-shadow: 0 0 12px #ffd700, 0 0 28px rgba(255,215,0,0.5);
+  animation: pin-ring-expand 0.55s ease-out forwards;
 }
 
 /* ── 2. Boss card — smooth expand/collapse ── */

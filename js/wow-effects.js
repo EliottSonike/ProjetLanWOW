@@ -5,26 +5,33 @@
                  Screen Flash · Ambient Sparkles · Page Transition
 ================================================================ */
 
-/* ── 0. RIDEAU DE TRANSITION WoW ────────────────────────────────
+/* ── 0. PORTAIL DE TRANSITION WoW ───────────────────────────────
    Fonctionnement :
-   - Clic lien interne : rideau glisse depuis la gauche (couvre) → navigate
-   - Nouvelle page     : rideau déjà en place (sessionStorage) → glisse droite
+   - Clic lien interne : portail circulaire s'ouvre depuis le point de clic
+   - Nouvelle page     : portail se referme au même point (via sessionStorage)
+   - Carte des raids   : _wowCurtainNav() appelé après zoom du pin
    ─────────────────────────────────────────────────────────────── */
 (function pageCurtain() {
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-  const DURATION_EXIT  = 360;  /* ms — rideau couvre l'écran avant navigation */
-  const ENTER_DELAY    = 80;   /* ms — pause avant de dévoiler la nouvelle page */
-  const SK             = 'wow-curtain-nav';  /* clé sessionStorage */
+  const DURATION_EXIT = 420;  /* ms — portail couvre l'écran avant navigation */
+  const ENTER_DELAY   = 80;   /* ms — pause avant de dévoiler la nouvelle page */
+  const SK            = 'wow-curtain-nav';
 
-  /* ── Créer le rideau ── */
   const curtain = document.createElement('div');
   curtain.id = 'wow-curtain';
 
-  /* Si on vient d'une navigation interne → couvrir dès l'insertion (avant le paint) */
+  /* Si on vient d'une navigation interne → couvrir immédiatement */
   const fromNav = sessionStorage.getItem(SK);
   if (fromNav) {
-    curtain.style.transform = 'translateX(0)';  /* couvre immédiatement */
+    let navData = null;
+    try { navData = JSON.parse(fromNav); } catch {}
+    const ncx = navData && navData.x != null ? navData.x + 'px' : '50%';
+    const ncy = navData && navData.y != null ? navData.y + 'px' : '50%';
+    curtain.style.setProperty('--cx', ncx);
+    curtain.style.setProperty('--cy', ncy);
+    /* Couvre l'écran avant le premier paint (override clip-path CSS) */
+    curtain.style.clipPath = 'circle(160% at ' + ncx + ' ' + ncy + ')';
     sessionStorage.removeItem(SK);
   }
   document.body.insertBefore(curtain, document.body.firstChild);
@@ -33,13 +40,24 @@
   if (fromNav) {
     requestAnimationFrame(() => {
       setTimeout(() => {
-        curtain.style.transform = '';        /* laisser CSS gérer */
-        curtain.classList.add('wc-leaving'); /* animation de départ vers droite */
+        curtain.classList.add('wc-leaving'); /* animation couvre→découvre */
       }, ENTER_DELAY);
     });
   }
 
-  /* ── Clic sur un lien interne → rideau en avant puis navigate ── */
+  /* ── API publique pour la carte (zoom pin → portail) ── */
+  window._wowCurtainNav = function(href, cx, cy) {
+    curtain.style.setProperty('--cx', cx != null ? cx + 'px' : '50%');
+    curtain.style.setProperty('--cy', cy != null ? cy + 'px' : '50%');
+    curtain.style.clipPath = '';                        /* clear inline override */
+    curtain.classList.remove('wc-entering', 'wc-leaving');
+    void curtain.offsetWidth;                           /* force reflow → circle(0%) */
+    sessionStorage.setItem(SK, JSON.stringify({ x: cx, y: cy }));
+    curtain.classList.add('wc-entering');
+    setTimeout(function() { window.location.href = href; }, DURATION_EXIT);
+  };
+
+  /* ── Clic lien interne → portail depuis le point de clic ── */
   document.addEventListener('click', e => {
     const link = e.target.closest('a[href]');
     if (!link || link.target === '_blank') return;
@@ -48,7 +66,6 @@
     try {
       const url = new URL(link.href, window.location.href);
       if (url.origin !== window.location.origin) return;
-      /* Ignorer les ancres (#) et les liens vers la même page */
       if (url.pathname === window.location.pathname
           && url.search === window.location.search) return;
       href = url.href;
@@ -56,12 +73,14 @@
 
     e.preventDefault();
 
-    /* Réinitialiser si une animation précédente tourne encore */
+    const cx = e.clientX;
+    const cy = e.clientY;
+    curtain.style.setProperty('--cx', cx + 'px');
+    curtain.style.setProperty('--cy', cy + 'px');
+    curtain.style.clipPath = '';                        /* clear inline override */
     curtain.classList.remove('wc-entering', 'wc-leaving');
-    curtain.style.transform = 'translateX(-101%)';
-    void curtain.offsetWidth;                       /* force reflow */
-
-    sessionStorage.setItem(SK, '1');               /* signal pour la prochaine page */
+    void curtain.offsetWidth;                           /* force reflow → circle(0%) */
+    sessionStorage.setItem(SK, JSON.stringify({ x: cx, y: cy }));
     curtain.classList.add('wc-entering');
     setTimeout(() => { window.location.href = href; }, DURATION_EXIT);
   });
