@@ -2,8 +2,72 @@
 
 /* ================================================================
    WOW EFFECTS — Cursor Trail · Scrolling Combat Text · Loot Beam
-                 Screen Flash · Ambient Sparkles
+                 Screen Flash · Ambient Sparkles · Page Transition
 ================================================================ */
+
+/* ── 0. RIDEAU DE TRANSITION WoW ────────────────────────────────
+   Fonctionnement :
+   - Clic lien interne : rideau glisse depuis la gauche (couvre) → navigate
+   - Nouvelle page     : rideau déjà en place (sessionStorage) → glisse droite
+   ─────────────────────────────────────────────────────────────── */
+(function pageCurtain() {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  const DURATION_EXIT  = 360;  /* ms — rideau couvre l'écran avant navigation */
+  const ENTER_DELAY    = 80;   /* ms — pause avant de dévoiler la nouvelle page */
+  const SK             = 'wow-curtain-nav';  /* clé sessionStorage */
+
+  /* ── Créer le rideau ── */
+  const curtain = document.createElement('div');
+  curtain.id = 'wow-curtain';
+
+  /* Si on vient d'une navigation interne → couvrir dès l'insertion (avant le paint) */
+  const fromNav = sessionStorage.getItem(SK);
+  if (fromNav) {
+    curtain.style.transform = 'translateX(0)';  /* couvre immédiatement */
+    sessionStorage.removeItem(SK);
+  }
+  document.body.insertBefore(curtain, document.body.firstChild);
+
+  /* Après insertion : si on vient d'une navigation → animer le retrait */
+  if (fromNav) {
+    requestAnimationFrame(() => {
+      setTimeout(() => {
+        curtain.style.transform = '';        /* laisser CSS gérer */
+        curtain.classList.add('wc-leaving'); /* animation de départ vers droite */
+      }, ENTER_DELAY);
+    });
+  }
+
+  /* ── Clic sur un lien interne → rideau en avant puis navigate ── */
+  document.addEventListener('click', e => {
+    const link = e.target.closest('a[href]');
+    if (!link || link.target === '_blank') return;
+
+    let href;
+    try {
+      const url = new URL(link.href, window.location.href);
+      if (url.origin !== window.location.origin) return;
+      /* Ignorer les ancres (#) et les liens vers la même page */
+      if (url.pathname === window.location.pathname
+          && url.search === window.location.search) return;
+      href = url.href;
+    } catch { return; }
+
+    e.preventDefault();
+
+    /* Réinitialiser si une animation précédente tourne encore */
+    curtain.classList.remove('wc-entering', 'wc-leaving');
+    curtain.style.transform = 'translateX(-101%)';
+    void curtain.offsetWidth;                       /* force reflow */
+
+    sessionStorage.setItem(SK, '1');               /* signal pour la prochaine page */
+    curtain.classList.add('wc-entering');
+    setTimeout(() => { window.location.href = href; }, DURATION_EXIT);
+  });
+})();
+
+
 (function () {
 
   /* ── 1. CURSOR TRAIL ─────────────────────────────────────────── */

@@ -5136,16 +5136,92 @@ body::after {
    Spring curves · Smooth expand · Fade tabs · Press feedback
 ═══════════════════════════════════════════════════════ */
 
-/* ── 1. Cross-document page transition (Chrome 126+) ── */
-@view-transition { navigation: auto; }
-::view-transition-old(root) {
-  animation: vt-out 0.18s ease-in forwards;
+/* ── 1. Rideau de transition WoW ── */
+#wow-curtain {
+  position: fixed;
+  inset: 0;
+  z-index: 99995;
+  pointer-events: none;
+  transform: translateX(-101%);
+  background:
+    radial-gradient(ellipse 55% 55% at 50% 50%, rgba(25,10,45,0.95) 0%, transparent 100%),
+    linear-gradient(135deg, #050810 0%, #090920 50%, #060510 100%);
+  will-change: transform;
 }
-::view-transition-new(root) {
-  animation: page-fadein 0.32s cubic-bezier(0.22,1,0.36,1) forwards;
+
+/* Bord doré lumineux (bord droit pendant l'entrée) */
+#wow-curtain::after {
+  content: '';
+  position: absolute;
+  right: 0; top: 0; bottom: 0;
+  width: 3px;
+  background: linear-gradient(180deg,
+    transparent 0%,
+    var(--gold) 25%,
+    #fff8c0 50%,
+    var(--gold) 75%,
+    transparent 100%
+  );
+  box-shadow:
+    0 0 18px rgba(200,169,110,0.95),
+    0 0 50px rgba(200,169,110,0.5),
+    0 0 90px rgba(200,169,110,0.2);
 }
-@keyframes vt-out {
-  to { opacity: 0; transform: translateY(-6px); }
+
+/* Rune centrale */
+#wow-curtain::before {
+  content: '⚔';
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  font-size: 5rem;
+  color: var(--gold);
+  text-shadow:
+    0 0 30px rgba(200,169,110,0.9),
+    0 0 70px rgba(200,169,110,0.5),
+    0 0 120px rgba(200,169,110,0.2);
+  opacity: 0;
+}
+
+/* === ANIMATIONS === */
+
+/* Entrée rideau (quitter la page) */
+@keyframes wc-enter {
+  from { transform: translateX(-101%); }
+  to   { transform: translateX(0); }
+}
+@keyframes wc-rune-appear {
+  0%   { opacity: 0;   transform: translate(-50%, -50%) scale(0.4) rotate(-15deg); }
+  55%  { opacity: 1;   transform: translate(-50%, -50%) scale(1.1) rotate(3deg); }
+  100% { opacity: 0.7; transform: translate(-50%, -50%) scale(1)   rotate(0deg); }
+}
+
+#wow-curtain.wc-entering {
+  animation: wc-enter 0.36s cubic-bezier(0.65, 0, 0.85, 0) forwards;
+}
+#wow-curtain.wc-entering::before {
+  animation: wc-rune-appear 0.36s ease-out 0.08s forwards;
+}
+
+/* Départ rideau (arrivée sur nouvelle page) */
+@keyframes wc-leave {
+  from { transform: translateX(0); }
+  to   { transform: translateX(101%); }
+}
+@keyframes wc-rune-leave {
+  0%   { opacity: 0.7; transform: translate(-50%, -50%) scale(1); }
+  40%  { opacity: 1;   transform: translate(-50%, -50%) scale(1.08); }
+  100% { opacity: 0;   transform: translate(-50%, -50%) scale(0.5) rotate(10deg); }
+}
+
+#wow-curtain.wc-leaving {
+  transform: translateX(0); /* start couvrant */
+  animation: wc-leave 0.44s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+#wow-curtain.wc-leaving::before {
+  opacity: 0.7;
+  transform: translate(-50%, -50%) scale(1);
+  animation: wc-rune-leave 0.3s ease-in forwards;
 }
 
 /* ── 2. Boss card — smooth expand/collapse ── */
@@ -5238,5 +5314,5 @@ button[type="submit"]:active,
 @media (prefers-reduced-motion: reduce) {
   .boss-card-body { transition: none !important; }
   .tab-panel.active { animation: none; }
-  ::view-transition-old(root), ::view-transition-new(root) { animation: none; }
+  #wow-curtain { display: none !important; }
 }
