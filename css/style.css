@@ -5047,7 +5047,7 @@ body::before {
   inset: 0;
   pointer-events: none;
   z-index: 9988;
-  background: radial-gradient(ellipse 85% 85% at 50% 50%, transparent 55%, rgba(0,0,0,0.5) 100%);
+  background: radial-gradient(ellipse 80% 80% at 50% 50%, transparent 45%, rgba(0,0,0,0.7) 100%);
 }
 
 /* ── CRT Scanlines ── */
@@ -5060,9 +5060,9 @@ body::after {
   background: repeating-linear-gradient(
     0deg,
     transparent,
-    transparent 3px,
-    rgba(0,0,0,0.055) 3px,
-    rgba(0,0,0,0.055) 4px
+    transparent 2px,
+    rgba(0,0,0,0.12) 2px,
+    rgba(0,0,0,0.12) 3px
   );
 }
 @media (prefers-reduced-motion: reduce) {
@@ -5231,15 +5231,22 @@ body::after {
   overflow: hidden;
   max-height: 0;
   opacity: 0;
+  /* padding doit être 0 sinon il "déborde" de max-height:0 */
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
   border-top: 1px solid transparent;
   transition:
     max-height    0.40s cubic-bezier(0.22, 1, 0.36, 1),
-    opacity       0.24s ease-out,
+    opacity       0.26s ease-out,
+    padding-top   0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    padding-bottom 0.35s cubic-bezier(0.22, 1, 0.36, 1),
     border-color  0.15s ease;
 }
 .boss-card.open .boss-card-body {
   max-height: 2800px;
   opacity: 1;
+  padding-top: 1.2rem !important;
+  padding-bottom: 1.2rem !important;
   border-top-color: var(--border);
 }
 
