@@ -5034,3 +5034,99 @@ h1, h2, h3,
   .viewer3d { width: 130px !important; height: 220px !important; }
   .portrait-frame.is-3d { width: 140px !important; height: 230px !important; }
 }
+
+/* ═══════════════════════════════════════════════════════
+   AMÉLIORATIONS VISUELLES — Retro-Futurism + Neon Glow
+   (UI/UX Pro Max · Magic MCP)
+═══════════════════════════════════════════════════════ */
+
+/* ── Vignette de page ── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9988;
+  background: radial-gradient(ellipse 85% 85% at 50% 50%, transparent 55%, rgba(0,0,0,0.5) 100%);
+}
+
+/* ── CRT Scanlines ── */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9989;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 3px,
+    rgba(0,0,0,0.055) 3px,
+    rgba(0,0,0,0.055) 4px
+  );
+}
+@media (prefers-reduced-motion: reduce) {
+  body::before, body::after { display: none; }
+}
+
+/* ── Shimmer hover trigger (manquait) ── */
+.content-card:hover::before {
+  background-position: -100% 0;
+}
+.content-card:hover {
+  box-shadow:
+    0 8px 32px rgba(0,0,0,0.6),
+    0 0 0 1px rgba(200,169,110,0.28),
+    0 0 24px rgba(200,169,110,0.10);
+  border-color: rgba(200,169,110,0.32);
+  transition: box-shadow 0.35s ease, border-color 0.35s ease;
+}
+
+/* ── Hero nav cards — hover neon renforcé ── */
+.hero-nav-card:hover {
+  background: rgba(197,155,59,0.13);
+  border-color: var(--gold);
+  transform: translateY(-5px) scale(1.02);
+  box-shadow:
+    0 12px 40px rgba(197,155,59,0.28),
+    0 0 0 1px rgba(200,169,110,0.6),
+    0 0 32px rgba(197,155,59,0.15),
+    inset 0 1px 0 rgba(255,220,100,0.1);
+}
+
+/* ── Boss card — glow quand ouvert ── */
+.boss-card.open {
+  border-color: rgba(200,169,110,0.38);
+  box-shadow: 0 0 24px rgba(200,169,110,0.08), 0 4px 20px rgba(0,0,0,0.4);
+}
+.boss-card-header:hover {
+  background: linear-gradient(90deg, rgba(200,169,110,0.07) 0%, rgba(30,34,53,0.9) 100%) !important;
+}
+
+/* ── Strat cards — neon hover ── */
+.strat-card:hover {
+  border-color: rgba(200,169,110,0.50) !important;
+  box-shadow:
+    0 10px 36px rgba(0,0,0,0.5),
+    0 0 0 1px rgba(200,169,110,0.32),
+    0 0 24px rgba(200,169,110,0.10) !important;
+}
+
+/* ── Section title ornement — glow ── */
+.section-title::after {
+  filter: drop-shadow(0 0 4px rgba(200,169,110,0.3));
+}
+
+/* ── Nav active link — lueur ── */
+.main-nav a.active {
+  text-shadow: 0 0 16px rgba(200,169,110,0.7);
+}
+
+/* ── Ambient overlay — couleur renforcée ── */
+.ambient-overlay {
+  background:
+    radial-gradient(ellipse 65% 55% at 10% 15%,  rgba(80, 35, 160, 0.22) 0%, transparent 70%),
+    radial-gradient(ellipse 55% 45% at 90% 85%,  rgba(140, 55, 20, 0.18) 0%, transparent 65%),
+    radial-gradient(ellipse 45% 40% at 80% 10%,  rgba(20, 50, 130, 0.14) 0%, transparent 65%),
+    radial-gradient(ellipse 35% 30% at 50% 100%, rgba(60, 20, 100, 0.16) 0%, transparent 60%) !important;
+}

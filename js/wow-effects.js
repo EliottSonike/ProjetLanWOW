@@ -199,7 +199,45 @@
   })();
 
 
-  /* ── 7. AMBIENT SPARKLES ─────────────────────────────────────── */
+  /* ── 7. HERO PARALLAX ───────────────────────────────────────── */
+  (function heroParallax() {
+    const hero    = document.querySelector('.hero-landing');
+    const content = document.querySelector('.hero-content');
+    if (!hero || !content) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    if ('ontouchstart' in window) return;
+
+    let cx = window.innerWidth  / 2;
+    let cy = window.innerHeight / 2;
+    let tx = 0, ty = 0, mx = cx, my = cy;
+    let raf;
+
+    hero.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+    hero.addEventListener('mouseleave', () => { mx = cx; my = cy; });
+    window.addEventListener('resize', () => {
+      cx = window.innerWidth / 2; cy = window.innerHeight / 2;
+    });
+
+    function tick() {
+      /* lerp toward mouse position offset from center */
+      tx += ((mx - cx) - tx) * 0.06;
+      ty += ((my - cy) - ty) * 0.06;
+      const dx = tx / cx, dy = ty / cy;
+      /* move hero-content (no existing CSS transform — safe to set directly) */
+      content.style.transform = `translate(${dx * 10}px, ${dy * 6}px)`;
+      raf = requestAnimationFrame(tick);
+    }
+
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) cancelAnimationFrame(raf);
+      else tick();
+    });
+
+    tick();
+  })();
+
+
+  /* ── 8. AMBIENT SPARKLES ─────────────────────────────────────── */
   (function ambientSparkles() {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
