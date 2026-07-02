@@ -5130,3 +5130,113 @@ body::after {
     radial-gradient(ellipse 45% 40% at 80% 10%,  rgba(20, 50, 130, 0.14) 0%, transparent 65%),
     radial-gradient(ellipse 35% 30% at 50% 100%, rgba(60, 20, 100, 0.16) 0%, transparent 60%) !important;
 }
+
+/* ═══════════════════════════════════════════════════════
+   TRANSITIONS & ANIMATIONS — UI/UX Pro Max
+   Spring curves · Smooth expand · Fade tabs · Press feedback
+═══════════════════════════════════════════════════════ */
+
+/* ── 1. Cross-document page transition (Chrome 126+) ── */
+@view-transition { navigation: auto; }
+::view-transition-old(root) {
+  animation: vt-out 0.18s ease-in forwards;
+}
+::view-transition-new(root) {
+  animation: page-fadein 0.32s cubic-bezier(0.22,1,0.36,1) forwards;
+}
+@keyframes vt-out {
+  to { opacity: 0; transform: translateY(-6px); }
+}
+
+/* ── 2. Boss card — smooth expand/collapse ── */
+/* Remplace display:none/block par max-height + opacity */
+.boss-card-body {
+  display: block !important;
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  border-top: 1px solid transparent;
+  transition:
+    max-height    0.40s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity       0.24s ease-out,
+    border-color  0.15s ease;
+}
+.boss-card.open .boss-card-body {
+  max-height: 2800px;
+  opacity: 1;
+  border-top-color: var(--border);
+}
+
+/* ── 3. Tab panels — fade-in on activation ── */
+@keyframes tab-fadein {
+  from { opacity: 0; transform: translateY(7px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.tab-panel.active {
+  animation: tab-fadein 0.22s cubic-bezier(0.22,1,0.36,1);
+}
+
+/* ── 4. Hero nav cards — spring hover (remplace transition:all) ── */
+.hero-nav-card {
+  transition:
+    background-color 0.22s ease-out,
+    border-color     0.22s ease-out,
+    transform        0.30s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow       0.28s ease-out;
+}
+
+/* ── 5. Strat cards — spring hover ── */
+.strat-card {
+  transition:
+    border-color 0.25s ease-out,
+    transform    0.28s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow   0.25s ease-out;
+}
+
+/* ── 6. Content cards — spring hover ── */
+.content-card {
+  transition:
+    border-color 0.3s ease-out,
+    box-shadow   0.3s ease-out;
+}
+
+/* ── 7. Nav underline — spring ── */
+.main-nav a::after {
+  transition:
+    width  0.24s cubic-bezier(0.22, 1, 0.36, 1),
+    left   0.24s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ── 8. Buttons — press scale feedback ── */
+.kt-submit:active,
+button[type="submit"]:active,
+.tab-btn:active,
+.hero-nav-card:active,
+.bm-phase-btn:active {
+  transform: scale(0.96);
+  transition: transform 0.08s ease-in !important;
+}
+
+/* ── 9. Boss collapse arrow — spring rotation ── */
+.boss-collapse-arrow {
+  transition: transform 0.32s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ── 10. Char icons — spring hover ── */
+.char-icon {
+  transition:
+    border-color 0.22s ease-out,
+    box-shadow   0.22s ease-out,
+    transform    0.28s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.char-icon:hover {
+  transform: scale(1.08);
+  border-color: var(--gold);
+  box-shadow: 0 0 14px rgba(200,169,110,0.4);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .boss-card-body { transition: none !important; }
+  .tab-panel.active { animation: none; }
+  ::view-transition-old(root), ::view-transition-new(root) { animation: none; }
+}
