@@ -5136,58 +5136,19 @@ body::after {
    Spring curves · Smooth expand · Fade tabs · Press feedback
 ═══════════════════════════════════════════════════════ */
 
-/* ── 1. Portail de transition WoW (cercle depuis le point de clic) ── */
+/* ── 1. Transition de page (cercle depuis le point de clic) ── */
 #wow-curtain {
   position: fixed;
   inset: 0;
   z-index: 99995;
   pointer-events: none;
   clip-path: circle(0% at var(--cx, 50%) var(--cy, 50%));
-  background:
-    radial-gradient(circle at var(--cx, 50%) var(--cy, 50%),
-      rgba(255,240,150,0.60) 0%,
-      rgba(200, 80, 20,0.35) 7%,
-      rgba( 70, 15,110,0.90) 18%,
-      rgba( 12,  8, 28,0.97) 40%,
-      #050810 100%
-    );
+  background: #060810;
   will-change: clip-path;
 }
 
-/* Stries lumineuses diagonales sur la surface du portail */
-#wow-curtain::after {
-  content: '';
-  position: absolute; inset: 0;
-  pointer-events: none;
-  background: repeating-linear-gradient(
-    -52deg,
-    transparent 0px,
-    transparent 55px,
-    rgba(200,169,110,0.025) 55px,
-    rgba(200,169,110,0.025) 110px
-  );
-  animation: wc-streaks 2.6s linear infinite;
-}
-@keyframes wc-streaks {
-  from { transform: translateX(0)     translateY(0); }
-  to   { transform: translateX(110px) translateY(110px); }
-}
-
-/* Rune centrale */
-#wow-curtain::before {
-  content: '⚔';
-  position: absolute;
-  top: 50%; left: 50%;
-  transform: translate(-50%, -50%) scale(0);
-  font-size: 5.5rem;
-  color: var(--gold);
-  text-shadow:
-    0 0 25px rgba(200,169,110,1),
-    0 0 55px rgba(200,169,110,0.75),
-    0 0 110px rgba(200,169,110,0.35),
-    0 0 200px rgba(140, 60,220,0.25);
-  opacity: 0;
-}
+#wow-curtain::after  { display: none; }
+#wow-curtain::before { display: none; }
 
 /* === ANIMATIONS === */
 
