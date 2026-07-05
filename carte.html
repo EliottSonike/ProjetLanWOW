@@ -171,32 +171,32 @@
 
 <script>Layout.footer({ baseUrl: '' });</script>
 
-<!-- Zoom sur le pin cliqué avant le portail de transition -->
 <script>
 document.addEventListener('DOMContentLoaded', function () {
   var container = document.querySelector('.raid-map-container');
   var img = container && container.querySelector('.raid-map-img');
 
+  function resetZoom() {
+    if (!img) return;
+    img.style.transform = '';
+    img.style.transformOrigin = '';
+    img.classList.remove('zooming-to-pin');
+  }
+  /* Réinitialise le zoom si la navigation est annulée (ex: beforeunload refusé) */
+  window.addEventListener('pageshow', resetZoom);
+
   document.querySelectorAll('.rpp-link').forEach(function (link) {
     link.addEventListener('click', function (e) {
       e.preventDefault();
-      e.stopPropagation(); /* empêche le portail générique de se déclencher aussi */
+      e.stopPropagation();
 
       var href = link.href;
-      var pin  = link.closest('[style*="left"]'); /* .raid-pin avec position absolue */
+      var pin  = link.closest('.raid-pin');
 
-      /* Coordonnées viewport du pin (centre du dot) pour l'origine du portail */
-      var source = pin || link;
-      var r  = source.getBoundingClientRect();
-      var cx = Math.round(r.left + r.width  / 2);
-      var cy = Math.round(r.top  + r.height / 2);
-
-      /* Zoom sur l'image de la carte si le pin a une position explicite */
-      if (img && pin && pin.style.left) {
+      if (img && pin && pin.style.left && pin.style.top) {
         var ox = pin.style.left;
         var oy = pin.style.top;
 
-        /* Anneau doré expansif au point du pin */
         var ring = document.createElement('div');
         ring.className = 'pin-zoom-ring';
         ring.style.left = ox;
@@ -204,16 +204,15 @@ document.addEventListener('DOMContentLoaded', function () {
         container.appendChild(ring);
         setTimeout(function () { ring.remove(); }, 700);
 
-        /* Zoom de l'image vers le pin */
         img.style.transformOrigin = ox + ' ' + oy;
         img.style.transform = 'scale(3.6)';
         img.classList.add('zooming-to-pin');
       }
 
-      /* 160 ms après le début du zoom, ouvrir le portail depuis ce point */
+      /* 160ms laisse le zoom démarrer avant que le fondu ne recouvre la carte */
       setTimeout(function () {
         if (window._wowCurtainNav) {
-          window._wowCurtainNav(href, cx, cy);
+          window._wowCurtainNav(href);
         } else {
           window.location.href = href;
         }

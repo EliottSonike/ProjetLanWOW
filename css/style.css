@@ -5152,11 +5152,11 @@ body::after {
 #wow-curtain.wc-leaving  { opacity: 1; animation: wc-fade-out 0.28s ease forwards; }
 
 /* ── 1b. Zoom carte sur pin cliqué ── */
-.raid-map-img {
+.raid-map-container .raid-map-img {
   transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1),
               filter    0.55s ease;
 }
-.raid-map-img.zooming-to-pin {
+.raid-map-container .raid-map-img.zooming-to-pin {
   filter: brightness(1.35) saturate(1.4);
 }
 

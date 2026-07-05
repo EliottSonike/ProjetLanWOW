@@ -35,18 +35,19 @@
     });
   }
 
-  /* API pour la carte : zoom pin → fade avant navigation */
-  window._wowCurtainNav = function(href) {
+  function triggerCurtain(href) {
     curtain.classList.remove('wc-entering', 'wc-leaving');
     curtain.style.opacity = '';
     void curtain.offsetWidth;
     sessionStorage.setItem(SK, '1');
     curtain.classList.add('wc-entering');
-    setTimeout(function() { window.location.href = href; }, DURATION_EXIT);
-  };
+    setTimeout(() => { window.location.href = href; }, DURATION_EXIT);
+  }
+
+  window._wowCurtainNav = triggerCurtain;
 
   /* Pas de listener sur la carte — le zoom gère la transition */
-  if (window.location.pathname.replace(/.*\//, '') === 'carte.html') return;
+  if (window.location.pathname.endsWith('carte.html')) return;
 
   document.addEventListener('click', e => {
     const link = e.target.closest('a[href]');
@@ -62,12 +63,7 @@
     } catch { return; }
 
     e.preventDefault();
-    curtain.classList.remove('wc-entering', 'wc-leaving');
-    curtain.style.opacity = '';
-    void curtain.offsetWidth;
-    sessionStorage.setItem(SK, '1');
-    curtain.classList.add('wc-entering');
-    setTimeout(() => { window.location.href = href; }, DURATION_EXIT);
+    triggerCurtain(href);
   });
 })();
 
