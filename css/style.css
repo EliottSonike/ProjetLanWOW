@@ -5136,59 +5136,20 @@ body::after {
    Spring curves · Smooth expand · Fade tabs · Press feedback
 ═══════════════════════════════════════════════════════ */
 
-/* ── 1. Transition de page (cercle depuis le point de clic) ── */
+/* ── 1. Transition de page — fondu noir simple ── */
 #wow-curtain {
   position: fixed;
   inset: 0;
   z-index: 99995;
   pointer-events: none;
-  clip-path: circle(0% at var(--cx, 50%) var(--cy, 50%));
   background: #060810;
-  will-change: clip-path;
+  opacity: 0;
 }
+@keyframes wc-fade-in  { from { opacity: 0; } to { opacity: 1; } }
+@keyframes wc-fade-out { from { opacity: 1; } to { opacity: 0; } }
 
-#wow-curtain::after  { display: none; }
-#wow-curtain::before { display: none; }
-
-/* === ANIMATIONS === */
-
-/* Entrée (quitter la page) : portail s'ouvre depuis le point de clic */
-@keyframes wc-circle-in {
-  from { clip-path: circle(  0% at var(--cx, 50%) var(--cy, 50%)); }
-  to   { clip-path: circle(160% at var(--cx, 50%) var(--cy, 50%)); }
-}
-@keyframes wc-rune-appear {
-  0%   { opacity: 0;   transform: translate(-50%, -50%) scale(0.3) rotate(-20deg); }
-  50%  { opacity: 1;   transform: translate(-50%, -50%) scale(1.15) rotate(5deg); }
-  100% { opacity: 0.8; transform: translate(-50%, -50%) scale(1)    rotate(0deg); }
-}
-
-#wow-curtain.wc-entering {
-  animation: wc-circle-in 0.42s cubic-bezier(0.55, 0, 0.85, 0) forwards;
-}
-#wow-curtain.wc-entering::before {
-  animation: wc-rune-appear 0.42s ease-out 0.06s forwards;
-}
-
-/* Départ (arrivée sur nouvelle page) : portail se referme */
-@keyframes wc-circle-out {
-  from { clip-path: circle(160% at var(--cx, 50%) var(--cy, 50%)); }
-  to   { clip-path: circle(  0% at var(--cx, 50%) var(--cy, 50%)); }
-}
-@keyframes wc-rune-leave {
-  0%   { opacity: 0.8; transform: translate(-50%, -50%) scale(1); }
-  45%  { opacity: 1;   transform: translate(-50%, -50%) scale(1.12); }
-  100% { opacity: 0;   transform: translate(-50%, -50%) scale(0.4) rotate(15deg); }
-}
-
-#wow-curtain.wc-leaving {
-  animation: wc-circle-out 0.46s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-#wow-curtain.wc-leaving::before {
-  opacity: 0.8;
-  transform: translate(-50%, -50%) scale(1);
-  animation: wc-rune-leave 0.28s ease-in forwards;
-}
+#wow-curtain.wc-entering { animation: wc-fade-in  0.20s ease forwards; }
+#wow-curtain.wc-leaving  { opacity: 1; animation: wc-fade-out 0.28s ease forwards; }
 
 /* ── 1b. Zoom carte sur pin cliqué ── */
 .raid-map-img {

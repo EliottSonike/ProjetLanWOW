@@ -5,59 +5,49 @@
                  Screen Flash · Ambient Sparkles · Page Transition
 ================================================================ */
 
-/* ── 0. PORTAIL DE TRANSITION WoW ───────────────────────────────
-   Fonctionnement :
-   - Clic lien interne : portail circulaire s'ouvre depuis le point de clic
-   - Nouvelle page     : portail se referme au même point (via sessionStorage)
-   - Carte des raids   : _wowCurtainNav() appelé après zoom du pin
+/* ── 0. TRANSITION DE PAGE — fondu noir simple ──────────────────
+   - Toutes les pages : fade noir 200ms avant navigation
+   - Carte des raids  : pas de fade général (zoom pin gère tout)
    ─────────────────────────────────────────────────────────────── */
 (function pageCurtain() {
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-  const DURATION_EXIT = 420;  /* ms — portail couvre l'écran avant navigation */
-  const ENTER_DELAY   = 80;   /* ms — pause avant de dévoiler la nouvelle page */
+  const DURATION_EXIT = 220;
+  const ENTER_DELAY   = 50;
   const SK            = 'wow-curtain-nav';
 
   const curtain = document.createElement('div');
   curtain.id = 'wow-curtain';
 
-  /* Si on vient d'une navigation interne → couvrir immédiatement */
   const fromNav = sessionStorage.getItem(SK);
   if (fromNav) {
-    let navData = null;
-    try { navData = JSON.parse(fromNav); } catch {}
-    const ncx = navData && navData.x != null ? navData.x + 'px' : '50%';
-    const ncy = navData && navData.y != null ? navData.y + 'px' : '50%';
-    curtain.style.setProperty('--cx', ncx);
-    curtain.style.setProperty('--cy', ncy);
-    /* Couvre l'écran avant le premier paint (override clip-path CSS) */
-    curtain.style.clipPath = 'circle(160% at ' + ncx + ' ' + ncy + ')';
+    curtain.style.opacity = '1';   /* couvre immédiatement avant le premier paint */
     sessionStorage.removeItem(SK);
   }
   document.body.insertBefore(curtain, document.body.firstChild);
 
-  /* Après insertion : si on vient d'une navigation → animer le retrait */
   if (fromNav) {
     requestAnimationFrame(() => {
       setTimeout(() => {
-        curtain.classList.add('wc-leaving'); /* animation couvre→découvre */
+        curtain.style.opacity = '';
+        curtain.classList.add('wc-leaving');
       }, ENTER_DELAY);
     });
   }
 
-  /* ── API publique pour la carte (zoom pin → portail) ── */
-  window._wowCurtainNav = function(href, cx, cy) {
-    curtain.style.setProperty('--cx', cx != null ? cx + 'px' : '50%');
-    curtain.style.setProperty('--cy', cy != null ? cy + 'px' : '50%');
-    curtain.style.clipPath = '';                        /* clear inline override */
+  /* API pour la carte : zoom pin → fade avant navigation */
+  window._wowCurtainNav = function(href) {
     curtain.classList.remove('wc-entering', 'wc-leaving');
-    void curtain.offsetWidth;                           /* force reflow → circle(0%) */
-    sessionStorage.setItem(SK, JSON.stringify({ x: cx, y: cy }));
+    curtain.style.opacity = '';
+    void curtain.offsetWidth;
+    sessionStorage.setItem(SK, '1');
     curtain.classList.add('wc-entering');
     setTimeout(function() { window.location.href = href; }, DURATION_EXIT);
   };
 
-  /* ── Clic lien interne → portail depuis le point de clic ── */
+  /* Pas de listener sur la carte — le zoom gère la transition */
+  if (window.location.pathname.replace(/.*\//, '') === 'carte.html') return;
+
   document.addEventListener('click', e => {
     const link = e.target.closest('a[href]');
     if (!link || link.target === '_blank') return;
@@ -72,15 +62,10 @@
     } catch { return; }
 
     e.preventDefault();
-
-    const cx = e.clientX;
-    const cy = e.clientY;
-    curtain.style.setProperty('--cx', cx + 'px');
-    curtain.style.setProperty('--cy', cy + 'px');
-    curtain.style.clipPath = '';                        /* clear inline override */
     curtain.classList.remove('wc-entering', 'wc-leaving');
-    void curtain.offsetWidth;                           /* force reflow → circle(0%) */
-    sessionStorage.setItem(SK, JSON.stringify({ x: cx, y: cy }));
+    curtain.style.opacity = '';
+    void curtain.offsetWidth;
+    sessionStorage.setItem(SK, '1');
     curtain.classList.add('wc-entering');
     setTimeout(() => { window.location.href = href; }, DURATION_EXIT);
   });
