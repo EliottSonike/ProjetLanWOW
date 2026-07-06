@@ -5136,20 +5136,6 @@ body::after {
    Spring curves · Smooth expand · Fade tabs · Press feedback
 ═══════════════════════════════════════════════════════ */
 
-/* ── 1. Transition de page — fondu noir simple ── */
-#wow-curtain {
-  position: fixed;
-  inset: 0;
-  z-index: 99995;
-  pointer-events: none;
-  background: #060810;
-  opacity: 0;
-}
-@keyframes wc-fade-in  { from { opacity: 0; } to { opacity: 1; } }
-@keyframes wc-fade-out { from { opacity: 1; } to { opacity: 0; } }
-
-#wow-curtain.wc-entering { animation: wc-fade-in  0.20s ease forwards; }
-#wow-curtain.wc-leaving  { opacity: 1; animation: wc-fade-out 0.28s ease forwards; }
 
 /* ── 1b. Zoom carte sur pin cliqué ── */
 .raid-map-container .raid-map-img {

@@ -5,68 +5,6 @@
                  Screen Flash · Ambient Sparkles · Page Transition
 ================================================================ */
 
-/* ── 0. TRANSITION DE PAGE — fondu noir simple ──────────────────
-   - Toutes les pages : fade noir 200ms avant navigation
-   - Carte des raids  : pas de fade général (zoom pin gère tout)
-   ─────────────────────────────────────────────────────────────── */
-(function pageCurtain() {
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-
-  const DURATION_EXIT = 220;
-  const ENTER_DELAY   = 50;
-  const SK            = 'wow-curtain-nav';
-
-  const curtain = document.createElement('div');
-  curtain.id = 'wow-curtain';
-
-  const fromNav = sessionStorage.getItem(SK);
-  if (fromNav) {
-    curtain.style.opacity = '1';   /* couvre immédiatement avant le premier paint */
-    sessionStorage.removeItem(SK);
-  }
-  document.body.insertBefore(curtain, document.body.firstChild);
-
-  if (fromNav) {
-    requestAnimationFrame(() => {
-      setTimeout(() => {
-        curtain.style.opacity = '';
-        curtain.classList.add('wc-leaving');
-      }, ENTER_DELAY);
-    });
-  }
-
-  function triggerCurtain(href) {
-    curtain.classList.remove('wc-entering', 'wc-leaving');
-    curtain.style.opacity = '';
-    void curtain.offsetWidth;
-    sessionStorage.setItem(SK, '1');
-    curtain.classList.add('wc-entering');
-    setTimeout(() => { window.location.href = href; }, DURATION_EXIT);
-  }
-
-  window._wowCurtainNav = triggerCurtain;
-
-  /* Pas de listener sur la carte — le zoom gère la transition */
-  if (window.location.pathname.endsWith('carte.html')) return;
-
-  document.addEventListener('click', e => {
-    const link = e.target.closest('a[href]');
-    if (!link || link.target === '_blank') return;
-
-    let href;
-    try {
-      const url = new URL(link.href, window.location.href);
-      if (url.origin !== window.location.origin) return;
-      if (url.pathname === window.location.pathname
-          && url.search === window.location.search) return;
-      href = url.href;
-    } catch { return; }
-
-    e.preventDefault();
-    triggerCurtain(href);
-  });
-})();
-
 
 (function () {
 
