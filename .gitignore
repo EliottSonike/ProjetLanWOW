@@ -10,3 +10,10 @@ discord-bot/node_modules/
 api/node_modules/
 api/data/
 api/.env
+
+# wrangler files
+.wrangler
+.dev.vars*
+!.dev.vars.example
+.env*
+!.env.example
